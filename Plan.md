@@ -89,6 +89,7 @@ Was gibt es da? Firebase?
 
 Rants abspeichern und in eigener View mit Id darstellen lassen
 
+Client seitig die Calls mit fetch, wie im Buch.
 
 TODO
 ====
