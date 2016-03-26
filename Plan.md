@@ -38,6 +38,10 @@ Lesson 1: Hello World
 
 Aufgabe: Detail-Ansicht erstellen
 
+Vorgehen:
+* Sehr schnell mit Hello-World-Code anfangen und den erklären
+* Teilnehmer sehr schnell zum Praxis-Teil bringen (innerhalb von 15 Minuten wenn möglich)
+
 * Vorgabe:
   * npm Projekt
   * CSS und Rahmen als React-Komponente, die das nutzen (React Komponente ansonsten leer)
@@ -50,10 +54,11 @@ Aufgabe: Detail-Ansicht erstellen
   * die IDE kennen lernen
   * ein erstes React Programm zum laufen bringen
 
-Lesson 2: Komponentenhierarchien
---------------------------------
+Lesson 2: Komponentenhierarchien und Interaktion
+------------------------------------------------
 
 * Aufgabe
+  * Knopf einbauen
   * Input-Komponente aus der Detail-View herausziehen
   * Detail hält weiterhin State
   * gibt den State und Update-Callback als Property nach unten
@@ -95,4 +100,6 @@ TODO
 * Beispiel-Code für jeden Schritt
 * Workspace mit Build-Umgebung
 * Folien
-
+* Erstes Beispiel in den Folien weiter reduziehen
+  * Nur Eingabe und Darstellung
+  * Keine Knöpfe und keine refs
