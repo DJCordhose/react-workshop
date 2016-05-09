@@ -54,6 +54,42 @@
 
 <div class="reveal">
 
+<!--Vorbereitung für die Teilnehmer-->
+<!-- - Bringen Sie ein Laptop mit, auf dem Sie Software installieren können-->
+<!-- - npm, node v4 (https://nodejs.org/en/download/) und git müssen-->
+<!--mindestens installiert sein-->
+<!-- - Wir empfehlen entweder WebStorm-->
+<!--(https://www.jetbrains.com/webstorm/download/, 'free 30-day trial'`-->
+<!--reicht) oder Visual Studio Code-->
+<!--(https://code.visualstudio.com/Download), jeweils die aktuellste-->
+<!--Version-->
+<!-- - Eine Woche vor der enterJs dieses Repository von github klonen:-->
+<!--https://github.com/DJCordhose/react-workshop-->
+<!-- - Es wird dann auf oberster Ebene eine package.json liegen-->
+<!-- - Dort mit `npm install` alle Abhängigkeiten installieren-->
+
+<!--Agenda-->
+<!--ab 10 Uhr Registrierung und Begrüßungskaffee-->
+
+<!--11 Uhr: Beginn-->
+
+<!-- - React Grundlagen und Build-Prozess-->
+
+<!--12:30 - 13:30 Uhr Mittagessen-->
+
+<!-- - Komponentenhierarchien und Interaktionen-->
+
+<!--15:00 - 15:15 Uhr Kaffeepause-->
+
+<!-- - Testen-->
+<!-- - React Router-->
+
+<!--16:45 - 17 Uhr: kleine Kaffeepause-->
+
+<!-- - Remote-Calls gegen Server-->
+
+<!--ca. 18 Uhr: Ende    -->
+
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
         <section>
@@ -69,21 +105,38 @@
             <p><small><a href="http://bit.ly/1UgnAH4">http://bit.ly/1UgnAH4</a></small></p>
 
         </section>
-                <section id="react">
-                    <h2>React</h2>
-                    <ul>
-                        <li class="fragment">Framework für Facebook und viele andere
-                        <li class="fragment">Komponenten kapseln Template und Logik
-                        <li class="fragment">Abstraktion vom DOM: <em>f(model) -> UI</em>
-                        <li class="fragment">Minimales API
-                        <li class="fragment">Templates sind einfach JavaScript
-                        <li class="fragment">Templates können HTML artige JSX-Syntax enthalten
-                        <li class="fragment">Ein-Weg-Data-Binding: Zustandsänderungen stellen Komponente neu dar
-                        <li class="fragment">Kann im Browser und auf dem Server rendern
-                        <!--<li class="fragment">wird für komplette Anwendung typischerweise mit React Router und einem Flux-Framework gekoppelt-->
-                        <!--<li class="fragment">viel Inspiration aus der funktionalen Ecke (Immutable, pure functions, stateless)-->
-                    </ul>
-                </section>
+
+        <section>
+            <h2>Inhalt</h2>
+            <ul>
+                <li><a href="#/t1">Teil I: React Grundlagen und Build-Prozess</a>
+                <li><a href="#/t2">Teil II: Komponentenhierarchien und Interaktionen</a>
+                <li><a href="#/t3">Teil III: Testen</a>
+                <li><a href="#/t4">Teil IV: React Router</a>
+                <li><a href="#/t5">Teil V: Remote-Calls gegen Server</a>
+            </ul>
+        </section>
+
+        <section id="t1">
+            <h1>Teil I</h1>
+            <h2>React Grundlagen und Build-Prozess</h2>
+        </section>
+
+        <section id="react">
+            <h2>React</h2>
+            <ul>
+                <li class="fragment">Framework für Facebook und viele andere
+                <li class="fragment">Komponenten kapseln Template und Logik
+                <li class="fragment">Abstraktion vom DOM: <em>f(model) -> UI</em>
+                <li class="fragment">Minimales API
+                <li class="fragment">Templates sind einfach JavaScript
+                <li class="fragment">Templates können HTML artige JSX-Syntax enthalten
+                <li class="fragment">Ein-Weg-Data-Binding: Zustandsänderungen stellen Komponente neu dar
+                <li class="fragment">Kann im Browser und auf dem Server rendern
+                <!--<li class="fragment">wird für komplette Anwendung typischerweise mit React Router und einem Flux-Framework gekoppelt-->
+                <!--<li class="fragment">viel Inspiration aus der funktionalen Ecke (Immutable, pure functions, stateless)-->
+            </ul>
+        </section>
 
                 <section>
                     <h3>Hello World React</h3>
@@ -265,8 +318,14 @@ util.displayInPage('Hello, World');
    </code></pre>
                     </section>
 
-                    <section>
-                        <h2>Neuerungen und Verbesserungen</h2>
+
+        <section id="t2">
+            <h1>Teil II</h1>
+            <h2>Komponentenhierarchien und Interaktionen</h2>
+        </section>
+
+        <section>
+                        <h2>Neuerungen und Verbesserungen in ES6</h2>
                     </section>
                     <section>
                         <h3>Template Literals</h3>
@@ -418,7 +477,7 @@ console.log(array2);
                     </section>
 
                 <section>
-                    <h2>Verbesserungen bei Funktionen</h2>
+                    <h2>Verbesserungen bei Funktionen in ES6</h2>
                 </section>
             <section>
                 <h3>Arrow Functions</h3>
@@ -462,6 +521,20 @@ const obj = {
 obj.methodOfObj();
 </code></pre>
             </section>
+
+        <section id="t3">
+            <h1>Teil III</h1>
+            <h2>Testen</h2>
+        </section>
+        <section id="t4">
+            <h1>Teil IV</h1>
+            <h2>React Router</h2>
+        </section>
+        <section id="t5">
+            <h1>Teil V</h1>
+            <h2>Remote-Calls gegen Server</h2>
+        </section>
+
         <section>
             <h2>Promises</h2>
         </section>
