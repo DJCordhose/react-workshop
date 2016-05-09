@@ -80,8 +80,8 @@
                         <li class="fragment">Templates können HTML artige JSX-Syntax enthalten
                         <li class="fragment">Ein-Weg-Data-Binding: Zustandsänderungen stellen Komponente neu dar
                         <li class="fragment">Kann im Browser und auf dem Server rendern
-                        <li class="fragment">wird für komplette Anwendung typischerweise mit React Router und einem Flux-Framework gekoppelt
-                        <li class="fragment">viel Inspiration aus der funktionalen Ecke (Immutable, pure functions, stateless)
+                        <!--<li class="fragment">wird für komplette Anwendung typischerweise mit React Router und einem Flux-Framework gekoppelt-->
+                        <!--<li class="fragment">viel Inspiration aus der funktionalen Ecke (Immutable, pure functions, stateless)-->
                     </ul>
                 </section>
 
@@ -89,12 +89,16 @@
                     <h3>Hello World React</h3>
 <pre><code data-trim contenteditable>class HelloMessage extends React.Component {
   render() {
-    return <div>
-            &lt;input value={this.state.greeting} ref="in"
-                   onChange={this.updateModel.bind(this)} />
-            <p>{this.state.greeting}, World</p>
-            &lt;button onClick={this.reset.bind(this)}>Clear&lt;/button>
-        </div>;
+    return (&lt;div>
+            &lt;input ref={input => this.input = input}
+                   onChange={event => this.updateModel(event)}
+                   value={this.state.greeting} />
+            &lt;p>{this.state.greeting}, World&lt;/p>
+            &lt;button
+                onClick={() => this.reset()}>
+                Clear
+            &lt;/button>
+        &lt;/div>);
   }</code></pre>
 <pre class="fragment"><code contenteditable class="javascript">  constructor(props) {
     this.state = {greeting: this.props.greeting};
@@ -104,7 +108,7 @@
   }
   reset() {
     this.setState({greeting: ""});
-    this.refs.in.focus();
+    this.input.focus();
   }
 }</code></pre>
                 </section>
@@ -125,6 +129,34 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
 </code></pre>
                     <a target="_blank" href="code/react/public/index.html">Run</a>
                 </section>
+
+    <section>
+      <section>
+          <h2>Übung: React Hello-World</h2>
+          <h3>Mache die mit den Werkzeugen vertraut und schreibe deine erste React-Komponente</h3>
+      </section>
+      <section>
+          <h3>Schritt #1: Tool-Chain starten</h3>
+          <p>Nutze das workspace-Verzeichnis in diesem Repository</p>
+          <p>Hier ist eine Tool-Chain mit Webpack und Babel vorbereitet</p>
+          <ul>
+              <li><code>cd workspace</code>
+              <li>Evtl. dafür einen Proxy konfigurieren <a target="_blank" href="http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/">http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/</a></li>
+              <li><code>npm install</code>
+              <li><code>npm run webpack</code>
+              <li><code>public/index.html</code> im Browser öffnen
+              <li>Wenn auf der Seite 'Hello, World' steht, ist alles gut
+          </ul>
+      </section>
+      <section>
+          <h3>Schritt #2: Deine erste React-Komponente</h3>
+          <ul>
+              <li>Ersetze die statische Seite mit der React-Komponente aus dem vorherigen Beispiel
+              <li>Importiere <em>react</em> und <em>react-dom</em>
+          </ul>
+      </section>
+    </section>
+
         <section>
             <h3>JavaScript vs ECMAScript 6 vs ES6 vs ECMAScript 2015</h3>
             <ul>
