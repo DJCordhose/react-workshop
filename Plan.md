@@ -54,8 +54,8 @@ Vorgehen:
   * die IDE kennen lernen
   * ein erstes React Programm zum laufen bringen
 
-Lesson 2: Komponentenhierarchien und Interaktion
-------------------------------------------------
+Lesson 2: Komponentenhierarchien und Interaktionen
+--------------------------------------------------
 
 * Aufgabe
   * Knopf einbauen
