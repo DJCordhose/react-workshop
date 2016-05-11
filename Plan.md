@@ -77,6 +77,11 @@ Lesson n-1: React Router
   * Master (Hello World)
   * Detail
 
+ODER
+
+* Master-Detail bereits oben
+* Nur zwei Routen, einmal für admin, einmal für Grüße
+
 Optionale Lesson n: Call gegen generisches REST-API
 ---------------------------------------------------
 
