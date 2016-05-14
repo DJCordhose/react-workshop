@@ -10,6 +10,6 @@ module.exports = {
             {test: /\.js$/, exclude: /node_modules/,  loader: 'babel'}
         ]
     },
-    devtool: 'source-map'
+    devtool: 'inline-source-map'
 
 };
