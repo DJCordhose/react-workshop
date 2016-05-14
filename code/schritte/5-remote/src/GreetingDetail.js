@@ -23,11 +23,18 @@ export default class GreetingDetail extends React.Component {
     }
     constructor(props) {
         super(props);
-        const {name, greeting} = this.props.greeting;
-        this.state = {
-            name,
-            greeting
-        };
+        if (this.props.greeting) {
+            const {name, greeting} = this.props.greeting;
+            this.state = {
+                name,
+                greeting
+            };
+        } else {
+            this.state = {
+                name: "",
+                greeting: ""
+            };
+        }
     }
     reset() {
         this.setState({name: '', greeting: ''});
@@ -47,6 +54,6 @@ export default class GreetingDetail extends React.Component {
     }
 }
 GreetingDetail.propTypes = {
-    greeting: PropTypes.object.isRequired,
+    greeting: PropTypes.object,
     onAdd: PropTypes.func.isRequired
 }
