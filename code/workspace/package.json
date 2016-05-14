@@ -1,9 +1,10 @@
 {
-  "name": "react-workshop-workspace",
+  "name": "react-workshop",
   "version": "1.0.0",
   "description": "",
   "scripts": {
     "clean": "rm -rf dist/ public/dist/",
-    "webpack": "webpack --watch"
+    "webpack": "../../node_modules/.bin/webpack --watch",
+    "devserver": "../../node_modules/.bin/webpack-dev-server --content-base public/"
   }
 }

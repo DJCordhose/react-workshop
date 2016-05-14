@@ -16,6 +16,9 @@ let currentId = 0;
 const MODE_MASTER = 'MODE_MASTER';
 const MODE_DETAIL = 'MODE_DETAIL';
 
+const BACKEND_URL = 'https://gruss.firebaseio.com/rest/';
+const path = 'greetings';
+
 export default class GreetingController extends React.Component {
     render() {
         const {mode, greetings, currentGreeting} = this.state;
@@ -48,9 +51,7 @@ export default class GreetingController extends React.Component {
     // admin: https://gruss.firebaseio.com/
     //  curl 'https://gruss.firebaseio.com/rest/greetings.json'
     _loadFromServer() {
-        const BACKEND_URL = 'https://gruss.firebaseio.com/rest/';
-        const path = 'greetings.json';
-        const url = `${BACKEND_URL}${path}`;
+        const url = `${BACKEND_URL}${path}.json`;
 
         return fetch(url)
             .then(response => response.json())
@@ -69,9 +70,7 @@ export default class GreetingController extends React.Component {
 
     // curl -X PUT -d '[{ "id": 1, "name": "Oma", "greeting": "Hiho"}, {"id": 2, "name": "Opa"}]' 'https://gruss.firebaseio.com/rest/greetings.json'
     _saveToServer() {
-        const BACKEND_URL = 'https://gruss.firebaseio.com/rest/';
-        const path = 'greetings.json';
-        const url = `${BACKEND_URL}${path}`;
+        const url = `${BACKEND_URL}${path}.json`;
 
         return fetch(url,{
             method: 'PUT',

@@ -11,7 +11,7 @@ const mountNode = document.getElementById('mount');
 const router = <Router history={hashHistory }>
     <Route path="/" component={Layout}>
         <IndexRoute component={GreetingController} />
-        <Route path="greet" component={GreetingDisplay} />
+        <Route path="greet/:id" component={GreetingDisplay} />
     </Route>
 </Router>;
 

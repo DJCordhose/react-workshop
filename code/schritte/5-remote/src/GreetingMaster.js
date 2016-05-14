@@ -6,7 +6,7 @@ export default function GreetingMaster(props) {
     const body = greetings.map(greeting => <tr key={greeting.id}>
         <td>{greeting.name}</td>
         <td>{greeting.greeting}</td>
-        <td><Link to={`/greet?name=${greeting.name}&greeting=${greeting.greeting}`}>Link</Link></td>
+        <td><Link to={`/greet/${greeting.id}`}>Link</Link></td>
     </tr>);
     return (
         <div>
