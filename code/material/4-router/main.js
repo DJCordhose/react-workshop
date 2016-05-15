@@ -10,7 +10,7 @@ const mountNode = document.getElementById('mount');
 const router = <Router history={hashHistory }>
     <Route path="/" component={Layout}>
         <IndexRoute component={GreetingController} />
-        <Route path="greet" component={GreetingDisplay} />
+        {/* Hier eine Route auf GreetingDisplay einfügen. Darin den übergebenen Gruß darstellen.  */}
     </Route>
 </Router>;
 

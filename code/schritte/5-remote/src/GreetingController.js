@@ -12,15 +12,14 @@ const path = 'greetings';
 
 export default class GreetingController extends React.Component {
     render() {
-        const {mode, greetings, currentGreeting} = this.state;
+        const {mode, greetings} = this.state;
         return (
             <div>
                 {mode === MODE_MASTER ? 
                     <GreetingMaster greetings={greetings}
                         onAdd={() => this.enterAdd()}
                     /> :
-                    <GreetingDetail greeting={currentGreeting}
-                                    onAdd={(greeting) => this.addGreeting(greeting)}
+                    <GreetingDetail onAdd={(greeting) => this.addGreeting(greeting)}
                     />
                 }
             </div>);
@@ -30,7 +29,6 @@ export default class GreetingController extends React.Component {
         const sampleGreetings = [];
         this.state = {
             greetings: sampleGreetings,
-            currentGreeting: sampleGreetings[0],
             mode: MODE_MASTER
         };
     }
@@ -63,7 +61,7 @@ export default class GreetingController extends React.Component {
     _saveToServer() {
         const url = `${BACKEND_URL}${path}.json`;
 
-        return fetch(url,{
+        return fetch(url, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',

@@ -119,17 +119,36 @@
         <section>
             <h2>Inhalt</h2>
             <ul>
-                <li><a href="#/t1">Teil I: React Grundlagen und Build-Prozess</a>
-                <li><a href="#/t2">Teil II: Komponentenhierarchien und Interaktionen</a>
+                <li><a href="#/t0">Teil 0: React-Einführung und Build-Prozess</a>
+                <li><a href="#/t1">Teil I: React-Komponenten und ES6 Grundlagen</a>
+                <li><a href="#/t2">Teil II: Komponentenhierarchien</a>
                 <li><a href="#/t3">Teil III: Testen</a>
                 <li><a href="#/t4">Teil IV: React Router</a>
                 <li><a href="#/t5">Teil V: Remote-Calls gegen Server</a>
             </ul>
         </section>
+        <section>
+            <h3>Plan</h3>
+            <ul>
+                <li>11:00 - 11:30: Teil 0
+                <li>11:30 - 12:30: Stoff für Teil 1 (viel wegen ES6)
+                <li><em>12:30 - 13:30: Mittagessen</em>
+                <li>13:30 - 14:00: Übung für Teil 1
+                <li>14:00 - 14:30: Stoff für Teil 2
+                <li>14:30 - 15:00: Übung für Teil 2
+                <li><em>15:00 - 15:15: Kaffeepause</em>
+                <li>15:15 - 15:45: Stoff für Teil 3 (optional mit kleiner Übung)
+                <li>15:45 - 16:15: Stoff für Teil 4
+                <li>16:15 - 16:45: Übung für Teil 4
+                <li><em>16:45 - 17:00: kleine Kaffeepause</em>
+                <li>17:00 - 17:30: Gemeinsame Entwicklung von Teil 5
+                <li>17:30 - max. 18:00: Ausblick/Fragen/Abschluss
+            </ul>
+        </section>
 
-        <section id="t1">
-            <h1>Teil I</h1>
-            <h2>React Grundlagen und Build-Prozess</h2>
+        <section id="t0">
+            <h1>Teil 0</h1>
+            <h2>React-Einführung und Build-Prozess</h2>
         </section>
 
         <section id="react">
@@ -195,7 +214,7 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
 
     <section>
       <section>
-          <h2>Übung: React Hello-World</h2>
+          <h2>Übung 0: React Hello-World</h2>
           <h3>Mache die mit den Werkzeugen vertraut und schreibe deine erste React-Komponente</h3>
       </section>
       <section>
@@ -203,9 +222,9 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
           <p>Nutze das workspace-Verzeichnis in diesem Repository</p>
           <p>Hier ist eine Tool-Chain mit Webpack und Babel vorbereitet</p>
           <ul>
-              <li><code>cd workspace</code>
               <li>Evtl. dafür einen Proxy konfigurieren <a target="_blank" href="http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/">http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/</a></li>
-              <li><code>npm install</code>
+              <li><code>npm install</code> (auf oberster Ebene)
+              <li><code>cd code/workspace</code>
               <li><code>npm run webpack</code>
               <li><code>public/index.html</code> im Browser öffnen
               <li>Wenn auf der Seite 'Hello, World' steht, ist alles gut
@@ -220,19 +239,24 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
       </section>
     </section>
 
-        <section id="t2">
-            <h1>Teil II</h1>
-            <h2>Komponentenhierarchien und Interaktionen</h2>
+        <section id="t1">
+            <h1>Teil I</h1>
+            <h2>React-Komponenten und ES6 Grundlagen</h2>
         </section>
-        <!--// ES6 requirements-->
-<!--// let, const-->
-<!--// classes-->
-<!--// export, import-->
-<!--// (property destructuring)-->
-<!--// arrow functions-->
 
+        <section>
+            <h3>Themen</h3>
+            <ul>
+                <li>ES6 Grundlagen
+                <li>Rendering<em style="color: red"> (TODO)</em>
+                <li>Events<em style="color: red"> (TODO)</em>
+                <li>Properties und Zustand<em style="color: red"> (TODO)</em>
+                <li>PropTypes<em style="color: red"> (TODO)</em>
+                <li>Refs<em style="color: red"> (TODO)</em>
+            </ul>
+        </section>
 
-                <section>
+        <section>
             <h3>JavaScript vs ECMAScript 6 vs ES6 vs ECMAScript 2015</h3>
             <ul>
                 <li class="fragment">ECMAScript ist der Standard und JavaScript ist die Implementierung
@@ -247,7 +271,6 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
     <section>
         <h3>Neue Spracheigenschaften</h3>
             <h4 class="fragment"><em>keine</em> statischen Typen</h4>
-
             <ul>
             <li class="fragment">Module
             <li class="fragment">Klassen
@@ -339,31 +362,28 @@ display('Hello, World');
 util.displayInPage('Hello, World');
    </code></pre>
                     </section>
-
-
-
         <!--<section>-->
                         <!--<h2>Neuerungen und Verbesserungen in ES6</h2>-->
                     <!--</section>-->
-                    <!--<section>-->
-                        <!--<h3>Template Literals</h3>-->
-          <!--<p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings">-->
-         <!--String-Literale mit Lücken-->
-    <!--</a>-->
-    <!--</p>-->
+                    <section>
+                        <h3>Template Literals</h3>
+          <p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings">
+         String-Literale mit Lücken
+    </a>
+    </p>
 
-   <!--<pre><code class="javascript" contenteditable>const person = 'Oma';-->
-<!--const language = 'Haskell';-->
+   <pre><code class="javascript" contenteditable>const person = 'Oma';
+const language = 'Haskell';
 
-<!--console.log(`${person} programs-->
-<!--${10 * 1024 * 1024} lines of code-->
-<!--in ${language}.`);-->
-<!--// Output:-->
-<!--// Oma programs-->
-<!--// 10485760 lines of code-->
-<!--// in Haskell.-->
-<!--</code></pre>-->
-                    <!--</section>-->
+console.log(`${person} programs
+${10 * 1024 * 1024} lines of code
+in ${language}.`);
+// Output:
+// Oma programs
+// 10485760 lines of code
+// in Haskell.
+</code></pre>
+                    </section>
                     <!--<section>-->
                       <!--<h3>Tagged Template Literals</h3>-->
           <!--<p><a target="_blank" href="http://exploringjs.com/es6/ch_template-literals.html#_tagged-templates">-->
@@ -386,7 +406,6 @@ util.displayInPage('Hello, World');
 <!--</code></pre>-->
 
                     <!--</section>-->
-
 
                     <section>
                         <h3>Destructuring von Objekten</h3>
@@ -540,16 +559,54 @@ obj.methodOfObj();
 </code></pre>
             </section>
 
-      <!--Das hier wohl weg lassen, sondern vorgeben  -->
+    <section>
       <section>
-          <h2>Übung: Master-View</h2>
-          <h3>Erstelle eine React-Komponente, die eine Liste von Grüßen darstellt</h3>
+          <h2>Übung 1: Detail-Ansicht für unsere Gruß-Anwendung</h2>
+          <h3>Erzeuge eine Komponenten mit der man einen Namen und eine Grußformel eingeben kann</h3>
       </section>
+      <section>
+          <h3>Schritte</h3>
+          <h4>Erweitere deine erste React-Komponente im workspace-Ordner</h4>
+          <ul>
+              <li>benenne deine Komponente in <code>GreetingDetail</code> um
+              <li>du brauchst zwei Eingabefelder, die <code>name</code> und <code>greeting</code> im Zustand der Komponente setzen
+              <li>für etwas Styling kopiere das Material in <code>code/material/1-detail</code> in deinen public-Ordner
+          </ul>
+      </section>
+    </section>
 
-        <!--Master View vorgeben und Detail View nur erweitern lassen von Schritt 1-->
+
+        <section id="t2">
+            <h1>Teil II</h1>
+            <h2>Komponentenhierarchien</h2>
+            <h3>Komplette Anwendung aus Komponenten bauen</h3>
+        </section>
+
         <section>
-            <h2>Übung: Controller</h2>
-            <h3>Erstelle eine React-Komponente, die die Child-Views (Master und Detail) zu einer Anwendung zusammen fügt</h3>
+            <h3>Themen</h3>
+            <ul>
+                <li>Komponenten als Funktion<em style="color: red"> (TODO)</em>
+                <li>Darstellung von Listen und Keys<em style="color: red"> (TODO)</em>
+                <li>Architektur-Idee: Controller-Komponente und View-Komponente<em style="color: red"> (TODO)</em>
+                <li>Durchreichen vom Properties und Callbacks<em style="color: red"> (TODO)</em>
+            </ul>
+        </section>
+
+        <section>
+            <section>
+                <h2>Übung 2: Eine komplette Anwendung zusammen setzen</h2>
+                <h3>Füge deinen Detail-View und einen Master-View über eine Controller-Komponente zusammen</h3>
+            </section>
+            <section>
+                <h3>Schritte</h3>
+                <ul>
+                    <li>kopiere das Material aus <code>code/material/2-hierarchy</code> in deinen src-Ordner
+                    <li>erweitere im <code>GreetingController</code> die render-Methode, so dass dein Detail-View ebenfalls angezeigt wird, wenn der Benutzer den Add-Button klickt
+                    <li>dort gibt es bereits einen Kommentar, der dir die richtige Stelle anzeigt und weitere Details enthält
+                    <li>übergib einen Callback der <code>addGreeting</code> nutzt
+                    <li>im deinem <code>GreetingDetail</code> brauchst du einen neuen Knopf, der mit dem neuen Gruß den Callback aufruft
+                </ul>
+            </section>
         </section>
 
         <section id="t3">
@@ -568,7 +625,32 @@ obj.methodOfObj();
             <h2>React Router</h2>
         </section>
 
-        <!--http://localhost:63342/react-workshop/code/schritte/2-hierarchy/public/index.html#greet?name=Nils&greeting=Huhu-->
+        <section>
+            <h3>Themen</h3>
+            <ul>
+                <li><code>Route</code> und <code>IndexRoute</code> <em style="color: red"> (TODO)</em>
+                <li>Nested routes und das <code>children</code>-Property<em style="color: red"> (TODO)</em>
+                <li>history<em style="color: red"> (TODO)</em>
+                <li>Links<em style="color: red"> (TODO)</em>
+                <li><code>location</code> und <code>param</code> Property und <code>componentWillReceiveProps</code> <em style="color: red"> (TODO)</em>
+            </ul>
+        </section>
+
+        <section>
+            <section>
+                <h2>Übung 4: Die Anwendung und Admin- und Nutzer-Ansicht unterteilen</h2>
+                <h3>Erstelle eine Route für den bestehenden Admin-Teil und binde eine Nutzer-Ansicht ein, die den Gruß darstellt</h3>
+            </section>
+            <section>
+                <h3>Schritte</h3>
+                <ul>
+                    <li>kopiere das Material aus <code>code/material/4-router</code> in deinen src-Ordner
+                    <li><code>GreetingMaster</code> enthält Links auf darzustellende Grüße
+                    <li>füge in <code>main.js</code> eine Route auf <code>GreetingDisplay</code> hinzu
+                    <li>fülle <code>GreetingDisplay</code> so dass sie einen solchen Gruß darstellt mit den vom Router übergebenen Parametern ausgibt
+                </ul>
+            </section>
+        </section>
 
         <section>
             <h2>Übung: React Router</h2>
@@ -581,11 +663,54 @@ obj.methodOfObj();
             <h2>Remote-Calls gegen Server</h2>
         </section>
 
-        <!--Idee: gemeinsam Live entwickeln und dabei die Punkte herausarbeiten-->
-        <!-- - wie macht man das laden und speichern technisch: fetch vorgeben-->
-        <!-- - wie funktioniert asynchrones?-->
-        <!-- - wo lädt man die Daten eigentlich: live cycle methoden-->
-        <!-- - was macht man mit der id?-->
+        <section>
+            <section>
+                <h2>Übung 5: Laden und Speichern der Daten von/auf einem Server</h2>
+                <h3>Entwickelt gemeinsam mit den Workshop-Leitern eine Version, die die Grüße über eine id darstellen kann</h3>
+            </section>
+
+            <!--Idee: gemeinsam Live entwickeln und dabei die Punkte herausarbeiten-->
+            <!-- - wie macht man das laden und speichern technisch: fetch vorgeben-->
+            <!-- - wie funktioniert asynchrones?-->
+            <!-- - wo lädt man die Daten eigentlich: live cycle methoden-->
+            <!-- - was macht man mit der id?-->
+            <section>
+                <h3>Herausforderungen</h3>
+                <ul>
+                    <li>Wo speichern wir?
+                    <li>Wie machen wir das Laden und Speichern technisch?
+                    <li>Wie funktioniert asynchrones in React?
+                    <li>Wo steht der Code zum Laden der Grüße?
+                </ul>
+            </section>
+
+            <section>
+                <h3>Material: Firebase</h3>
+                <ul>
+                    <li><code>https://gruss.firebaseio.com/</code>: Admin-Interface der Firebase DB
+                    <li><code>curl 'https://gruss.firebaseio.com/rest/greetings.json'</code> greetings holen
+                    <li><code>curl -X PUT -d '[{ "id": 1, "name": "Oma", "greeting": "Hiho"}, {"id": 2, "name": "Opa"}]' 'https://gruss.firebaseio.com/rest/greetings.json'</code> greetings speichern
+                    <li><code>curl 'https://gruss.firebaseio.com/rest/greetings.json?orderBy="id"&equalTo=3'</code> greeting über id laden
+                </ul>
+            </section>
+            <section>
+                <h3>Material: fetch</h3>
+<pre><code class="javascript" contenteditable data-trim>
+fetch(url, {
+    method: 'PUT',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+})
+.then(response => response.json())
+.then(json => /* ... */)
+.catch(ex => console.error('request failed', ex));
+</code></pre>
+            </section>
+        </section>
+
 
         <!--<section>-->
             <!--<h2>Optionale Übung: Remote Calls</h2>-->
@@ -593,7 +718,7 @@ obj.methodOfObj();
         <!--</section>-->
 
         <section>
-            <h2>Promises</h2>
+            <h2>Optional: Promises</h2>
         </section>
                 <section>
                         <h3>fetch</h3>
