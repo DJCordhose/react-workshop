@@ -4,15 +4,6 @@ import GreetingDetail from './GreetingDetail';
 
 let currentId = 0;
 
-// ES6 requirements
-// let, const
-// classes
-// export
-// property destructuring
-// arrow methods
-// Object.assign
-// enhanced object literals []
-
 const MODE_MASTER = 'MODE_MASTER';
 const MODE_DETAIL = 'MODE_DETAIL';
 
@@ -99,23 +90,4 @@ export default class GreetingController extends React.Component {
             mode: MODE_MASTER
         }, () => this._saveToServer());
     }
-
-    changeGreeting(greetingWithChanges) {
-        const {greetings} = this.state;
-        const greetingToBeChanged = greetings.find((greeting) => greeting.id === greetingWithChanges.id);
-        if (greetingToBeChanged) {
-            Object.assign(greetingToBeChanged, greetingWithChanges);
-            this.setState({greetings});
-        }
-    }
-
-    deleteGreeting(greetingToBeDeleted) {
-        const {greetings} = this.state;
-        const indexToBeDeleted = greetings.findIndex((greeting) => greeting.id === greetingToBeDeleted.id);
-        if (indexToBeDeleted !== -1) {
-            greetings.splice(indexToBeDeleted, 1);
-            this.setState({greetings});
-        }
-    }
-
 }

@@ -35,4 +35,4 @@ export default class GreetingDetail extends React.Component {
 }
 GreetingDetail.propTypes = {
     greeting: PropTypes.object
-}
+};

@@ -220,7 +220,19 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
       </section>
     </section>
 
-        <section>
+        <section id="t2">
+            <h1>Teil II</h1>
+            <h2>Komponentenhierarchien und Interaktionen</h2>
+        </section>
+        <!--// ES6 requirements-->
+<!--// let, const-->
+<!--// classes-->
+<!--// export, import-->
+<!--// (property destructuring)-->
+<!--// arrow functions-->
+
+
+                <section>
             <h3>JavaScript vs ECMAScript 6 vs ES6 vs ECMAScript 2015</h3>
             <ul>
                 <li class="fragment">ECMAScript ist der Standard und JavaScript ist die Implementierung
@@ -329,33 +341,29 @@ util.displayInPage('Hello, World');
                     </section>
 
 
-        <section id="t2">
-            <h1>Teil II</h1>
-            <h2>Komponentenhierarchien und Interaktionen</h2>
-        </section>
 
-        <section>
-                        <h2>Neuerungen und Verbesserungen in ES6</h2>
-                    </section>
-                    <section>
-                        <h3>Template Literals</h3>
-          <p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings">
-         String-Literale mit Lücken
-    </a>
-    </p>
+        <!--<section>-->
+                        <!--<h2>Neuerungen und Verbesserungen in ES6</h2>-->
+                    <!--</section>-->
+                    <!--<section>-->
+                        <!--<h3>Template Literals</h3>-->
+          <!--<p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings">-->
+         <!--String-Literale mit Lücken-->
+    <!--</a>-->
+    <!--</p>-->
 
-   <pre><code class="javascript" contenteditable>const person = 'Oma';
-const language = 'Haskell';
+   <!--<pre><code class="javascript" contenteditable>const person = 'Oma';-->
+<!--const language = 'Haskell';-->
 
-console.log(`${person} programs
-${10 * 1024 * 1024} lines of code
-in ${language}.`);
-// Output:
-// Oma programs
-// 10485760 lines of code
-// in Haskell.
-</code></pre>
-                    </section>
+<!--console.log(`${person} programs-->
+<!--${10 * 1024 * 1024} lines of code-->
+<!--in ${language}.`);-->
+<!--// Output:-->
+<!--// Oma programs-->
+<!--// 10485760 lines of code-->
+<!--// in Haskell.-->
+<!--</code></pre>-->
+                    <!--</section>-->
                     <!--<section>-->
                       <!--<h3>Tagged Template Literals</h3>-->
           <!--<p><a target="_blank" href="http://exploringjs.com/es6/ch_template-literals.html#_tagged-templates">-->
@@ -400,60 +408,60 @@ console.log(`city=${city}`);
 //city=Hamburg
 </code></pre>
                     </section>
-                    <section>
-                        <h3>Destructuring bei Parametern</h3>
-   <pre><code class="javascript" contenteditable>const person = {
-  name: 'Olli',
-  address: {
-    city: 'Hamburg'
-  },
-  email: 'oliver.zeigermann@gmail.com'
-};</code></pre>
-   <pre class="fragment"><code class="javascript" contenteditable data-trim>
-function print({email: contact}) {
-    console.log(`contact=${contact}`);
-}
-print(person);
-// contact=oliver.zeigermann@gmail.com
-</code></pre>
-   <pre class="fragment"><code class="javascript" contenteditable data-trim>
-function g({name: x, y, z=10}) {
-  console.log(`x=${x}`); // x=olli
-  console.log(`y=${y}`); // y=undefined
-  console.log(`z=${z}`); // z=10
-}
-g({ name: 'olli' });
-</code></pre>
-                    </section>
-                    <section>
-                        <h3>Destructuring bei Arrays</h3>
-   <pre><code class="javascript" contenteditable>const [a, b] = [1, 2];
-console.log(`a=${a}`);
-// a=1
-console.log(`b=${b}`);
-// b=2
-</code></pre>
-   <pre class="fragment"><code class="javascript" contenteditable data-trim>
-const [, b] = [1, 2];
-console.log(`b=${b}`);
-//b=2
-</code></pre>
-                    </section>
-                    <section>
-                        <h3>Erweiterte Objekt-Literale</h3>
-   <pre><code class="javascript" contenteditable>const name = 'Oma';
-const person = {
-    // ES5: name: name
-    name,
-    // ES5: toString: function()
-    toString() {
-        return this.name;
-    }
-};
-console.log(person.name); // Oma
-console.log(person.toString()); // Oma
-   </code></pre>
-                    </section>
+                    <!--<section>-->
+                        <!--<h3>Destructuring bei Parametern</h3>-->
+   <!--<pre><code class="javascript" contenteditable>const person = {-->
+  <!--name: 'Olli',-->
+  <!--address: {-->
+    <!--city: 'Hamburg'-->
+  <!--},-->
+  <!--email: 'oliver.zeigermann@gmail.com'-->
+<!--};</code></pre>-->
+   <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>-->
+<!--function print({email: contact}) {-->
+    <!--console.log(`contact=${contact}`);-->
+<!--}-->
+<!--print(person);-->
+<!--// contact=oliver.zeigermann@gmail.com-->
+<!--</code></pre>-->
+   <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>-->
+<!--function g({name: x, y, z=10}) {-->
+  <!--console.log(`x=${x}`); // x=olli-->
+  <!--console.log(`y=${y}`); // y=undefined-->
+  <!--console.log(`z=${z}`); // z=10-->
+<!--}-->
+<!--g({ name: 'olli' });-->
+<!--</code></pre>-->
+                    <!--</section>-->
+                    <!--<section>-->
+                        <!--<h3>Destructuring bei Arrays</h3>-->
+   <!--<pre><code class="javascript" contenteditable>const [a, b] = [1, 2];-->
+<!--console.log(`a=${a}`);-->
+<!--// a=1-->
+<!--console.log(`b=${b}`);-->
+<!--// b=2-->
+<!--</code></pre>-->
+   <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>-->
+<!--const [, b] = [1, 2];-->
+<!--console.log(`b=${b}`);-->
+<!--//b=2-->
+<!--</code></pre>-->
+                    <!--</section>-->
+                    <!--<section>-->
+                        <!--<h3>Erweiterte Objekt-Literale</h3>-->
+   <!--<pre><code class="javascript" contenteditable>const name = 'Oma';-->
+<!--const person = {-->
+    <!--// ES5: name: name-->
+    <!--name,-->
+    <!--// ES5: toString: function()-->
+    <!--toString() {-->
+        <!--return this.name;-->
+    <!--}-->
+<!--};-->
+<!--console.log(person.name); // Oma-->
+<!--console.log(person.toString()); // Oma-->
+   <!--</code></pre>-->
+                    <!--</section>-->
                     <!--<section>-->
                         <!--<h3>for..of</h3>-->
           <!--<p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">-->
@@ -471,24 +479,24 @@ console.log(person.toString()); // Oma
 <!--</code></pre>-->
                     <!--</section>-->
 
-    <section>
-                        <h3>Spread-Operator</h3>
-          <p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">
-          Alles was 'iterable' ist kann in einzelne Parameter transformiert werden
-    </a>
-    </p>
-   <pre><code class="javascript" contenteditable>const array1 = ['Olli', 'how are you'];
-const array2 = ['Hi', ...array1, '?'];
-console.log(array2);
-// => ["Hi", "Olli", "how are you", "?"]
-</code></pre>
-   <pre class="fragment"><code class="javascript" contenteditable>console.log(...array1);
-</code></pre>
-                    </section>
+    <!--<section>-->
+                        <!--<h3>Spread-Operator</h3>-->
+          <!--<p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">-->
+          <!--Alles was 'iterable' ist kann in einzelne Parameter transformiert werden-->
+    <!--</a>-->
+    <!--</p>-->
+   <!--<pre><code class="javascript" contenteditable>const array1 = ['Olli', 'how are you'];-->
+<!--const array2 = ['Hi', ...array1, '?'];-->
+<!--console.log(array2);-->
+<!--// => ["Hi", "Olli", "how are you", "?"]-->
+<!--</code></pre>-->
+   <!--<pre class="fragment"><code class="javascript" contenteditable>console.log(...array1);-->
+<!--</code></pre>-->
+                    <!--</section>-->
 
-                <section>
-                    <h2>Verbesserungen bei Funktionen in ES6</h2>
-                </section>
+                <!--<section>-->
+                    <!--<h2>Verbesserungen bei Funktionen in ES6</h2>-->
+                <!--</section>-->
             <section>
                 <h3>Arrow Functions</h3>
 <pre><code class="javascript" contenteditable>const displayInPage = (text) => {
@@ -498,23 +506,23 @@ console.log(array2);
 <pre class="fragment"><code class="javascript" contenteditable>const displayInPage = text => document.body.innerHTML += `${text}<br>`;
 </code></pre>
             </section>
-                <section>
-                    <h3>Default Parameter</h3>
-<pre><code class="javascript" contenteditable>const displayInPage = (text = '\n') =>
-    console.log(text);</code></pre>
-<pre class="fragment"><code class="javascript" contenteditable>displayInPage();
-</code></pre>
-                </section>
-                <section>
-                    <h3>Rest-Parameters</h3>
-<pre><code class="javascript" contenteditable>const displayInPage = (...texts) =>
-    texts.forEach(text => console.log(text));
-</code></pre>
-<pre class="fragment"><code class="javascript" contenteditable>displayInPage('Hi', 'Folks');
-// Hi
-// Folks
-</code></pre>
-                </section>
+                <!--<section>-->
+                    <!--<h3>Default Parameter</h3>-->
+<!--<pre><code class="javascript" contenteditable>const displayInPage = (text = '\n') =>-->
+    <!--console.log(text);</code></pre>-->
+<!--<pre class="fragment"><code class="javascript" contenteditable>displayInPage();-->
+<!--</code></pre>-->
+                <!--</section>-->
+                <!--<section>-->
+                    <!--<h3>Rest-Parameters</h3>-->
+<!--<pre><code class="javascript" contenteditable>const displayInPage = (...texts) =>-->
+    <!--texts.forEach(text => console.log(text));-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code class="javascript" contenteditable>displayInPage('Hi', 'Folks');-->
+<!--// Hi-->
+<!--// Folks-->
+<!--</code></pre>-->
+                <!--</section>-->
 
                 <section>
                     <h3>Lexcial Binding to this</h3>
@@ -531,7 +539,6 @@ const obj = {
 obj.methodOfObj();
 </code></pre>
             </section>
-
 
       <!--Das hier wohl weg lassen, sondern vorgeben  -->
       <section>
