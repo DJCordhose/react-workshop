@@ -5,6 +5,8 @@
   "scripts": {
     "clean": "../../../node_modules/.bin/rimraf -rf dist/ public/dist/",
     "webpack": "../../../node_modules/.bin/webpack --watch",
-    "devserver": "../../../node_modules/.bin/webpack-dev-server --content-base public/"
+    "devserver": "../../../node_modules/.bin/webpack-dev-server --content-base public/",
+    "test": "../../../node_modules/.bin/mocha ./test --compilers js:babel-register --recursive",
+    "test:watch": "npm test -- --watch"
   }
 }

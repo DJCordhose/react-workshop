@@ -62,23 +62,4 @@ export default class GreetingController extends React.Component {
             mode: MODE_MASTER
         });
     }
-
-    // changeGreeting(greetingWithChanges) {
-    //     const {greetings} = this.state;
-    //     const greetingToBeChanged = greetings.find((greeting) => greeting.id === greetingWithChanges.id);
-    //     if (greetingToBeChanged) {
-    //         Object.assign(greetingToBeChanged, greetingWithChanges);
-    //         this.setState({greetings});
-    //     }
-    // }
-    //
-    // deleteGreeting(greetingToBeDeleted) {
-    //     const {greetings} = this.state;
-    //     const indexToBeDeleted = greetings.findIndex((greeting) => greeting.id === greetingToBeDeleted.id);
-    //     if (indexToBeDeleted !== -1) {
-    //         greetings.splice(indexToBeDeleted, 1);
-    //         this.setState({greetings});
-    //     }
-    // }
-
 }
