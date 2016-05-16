@@ -47,6 +47,9 @@ export default class GreetingDetail extends React.Component {
     }
 }
 GreetingDetail.propTypes = {
-    greeting: PropTypes.object.isRequired,
+    greeting: PropTypes.shape({
+      name: React.PropTypes.string.isRequired,
+      greeting: React.PropTypes.string.isRequired
+    }),
     onAdd: PropTypes.func.isRequired
-}
+};
