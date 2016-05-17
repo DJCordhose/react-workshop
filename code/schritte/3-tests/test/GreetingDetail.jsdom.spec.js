@@ -12,7 +12,7 @@ const greeting = {
 
 const noop = () => { }
 
-describe.only('GreetingDetail with JSDOM', () => {
+describe('GreetingDetail with JSDOM', () => {
     jsdom();
     it('properly renders into Document', () => {
         const component = ReactTestUtils.renderIntoDocument(
