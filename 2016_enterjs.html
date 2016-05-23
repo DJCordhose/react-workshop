@@ -626,14 +626,131 @@ obj.methodOfObj();
         </section>
 
         <section>
+            <h2>API-Reference</h2>
+            <p><a href="https://github.com/reactjs/react-router/blob/master/docs/API.md" target="_blank">
+                https://github.com/reactjs/react-router/blob/master/docs/API.md
+            </a>
+            </p>
+        </section>
+
+        <section>
             <h3>Themen</h3>
             <ul>
-                <li><code>Route</code> und <code>IndexRoute</code> <em style="color: red"> (TODO)</em>
-                <li>Nested routes und das <code>children</code>-Property<em style="color: red"> (TODO)</em>
-                <li>history<em style="color: red"> (TODO)</em>
+                <li><code>Route</code> und <code>IndexRoute</code>
+                <li>history
+                <li>Nested routes und das <code>children</code>-Property
                 <li>Links<em style="color: red"> (TODO)</em>
                 <li><code>location</code> und <code>param</code> Property und <code>componentWillReceiveProps</code> <em style="color: red"> (TODO)</em>
             </ul>
+        </section>
+
+        <section>
+            <h3>Router, Route, IndexRoute, Redirect</h3>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+import { Router, Route, Redirect, IndexRoute, hashHistory }
+    from 'react-router';
+
+const routes = &lt;Router history={hashHistory}>
+  &lt;Redirect from="/vote" to="/votes"/>
+  &lt;Route path="/" component={Layout}>
+    &lt;IndexRoute component={VotePage}/>
+    &lt;Route path="votes/:id" component={SingleVotePage}/>
+    &lt;Route path="login(/:redirect)" component={LoginPage}/>
+    &lt;Route path="compose" component={VoteComposerPage} onEnter={requireAuth}/>
+    &lt;Route path="*" component={NoMatchPage}/>
+  &lt;/Route>
+&lt;/Router>;
+</code></pre>
+        </section>
+
+        <section>
+            <h3>Router</h3>
+            <ul class="fragment">
+                <li>Echte React-Komponente</li>
+                <li>Top-Level-Komponente, entscheidet anhand der history, was dargestellt wird</li>
+                <li>hat Routen als Kinder</li>
+            </ul>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+const routes = &lt;Router history={hashHistory}>
+...
+&lt;/Router>;
+</code></pre>
+        </section>
+
+        <section>
+            <h3>History</h3>
+            <ul class="fragment">
+                <li>kommt aus dem <a target="_blank" href="https://github.com/mjackson/history">history</a>-Projekt</li>
+                <li>Abstraktion der History des Browsers</li>
+                <li>kann zur Navigation genutzt werden</li>
+                <li>liefert aktuelle URL mundgerecht an den Router</li>
+                <li><code>hashHistory</code> codiert Pfad in angehängten Hash (#/vote)
+                <li><code>browserHistory</code> codiert Pfad direkt in URL (/vote)
+            </ul>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+// Push a new entry onto the history stack.
+history.push('/home')
+
+// Replace the current entry on the history stack.
+history.replace('/profile')
+</code></pre>
+        </section>
+
+        <section>
+            <h3>Route</h3>
+            <ul class="fragment">
+                <li>Konfigurations-Komponente</li>
+                <li>welche Komponente soll bei welcher URL darstellt werden</li>
+                <li>können verschachtelt werden (nested)</li>
+                <li>Matching der URL mit Konfiguration ergibt einen Pfad</li>
+                <li>Alle Komponenten des Pfads werden dargestellt</li>
+            </ul>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+// plain match (containing nested routes)
+&lt;Route path="/" component={Layout}>
+    // id is passed as parameter to component
+    &lt;Route path="votes/:id" component={SingleVotePage}/> /
+    // redirect is optional
+    &lt;Route path="login(/:redirect)" component={LoginPage}/>
+    // onEnter and onExit possible as hooks
+    &lt;Route path="compose" component={VoteComposerPage}
+        onEnter={requireAuth}/>
+    // wildcard
+    &lt;Route path="*" component={NoMatchPage}/>
+&lt;/Route>
+</code></pre>
+        </section>
+
+        <section>
+            <h3>IndexRoute und Redirect</h3>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+  // /vote redirects to /votes
+&lt;Redirect from="/vote" to="/votes"/>
+&lt;Route path="/" component={Layout}>
+  // will be rendered additionally when path is just /
+  &lt;IndexRoute component={VotePage}/>
+  // ...
+&lt;/Route>
+</code></pre>
+        </section>
+
+        <section>
+            <h3>Nested Routes und children</h3>
+            <ul class="fragment">
+                <li>Router rendert den gematchten Komponenten-Pfad als seine Unterkomponenten
+                <li>Unterkomponenten werden als <code>children</code> in den <code>props</code> übergeben
+                <li><code>children</code> kann grundsätzlich eine oder mehrere Komponenten sein
+                <li>beim Router ist es immer nur eine Komponente
+            </ul>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+export default function Layout(props) {
+    return <div>
+        <h1>Greetings</h1>
+        {props.children}
+    </div>;
+}
+</code></pre>
+
         </section>
 
         <section>
@@ -651,12 +768,6 @@ obj.methodOfObj();
                 </ul>
             </section>
         </section>
-
-        <section>
-            <h2>Übung: React Router</h2>
-            <h3>Erstelle eine View, die einen Gruß mit einer bestimmten id anzeigt</h3>
-        </section>
-
 
         <section id="t5">
             <h1>Teil V</h1>
