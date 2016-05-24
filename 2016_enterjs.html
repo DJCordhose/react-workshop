@@ -242,6 +242,7 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
         <section id="t1">
             <h1>Teil I</h1>
             <h2>React-Komponenten und ES6 Grundlagen</h2>
+            <a href="code/schritte/1-detail/public/index.html" target="_blank">Ziel-Anwendung</a>
         </section>
 
         <section>
@@ -580,6 +581,7 @@ obj.methodOfObj();
             <h1>Teil II</h1>
             <h2>Komponentenhierarchien</h2>
             <h3>Komplette Anwendung aus Komponenten bauen</h3>
+            <a href="code/schritte/2-hierarchy/public/index.html" target="_blank">Ziel-Anwendung</a>
         </section>
 
         <section>
@@ -623,6 +625,7 @@ obj.methodOfObj();
         <section id="t4">
             <h1>Teil IV</h1>
             <h2>React Router</h2>
+            <a href="code/schritte/4-router/public/index.html" target="_blank">Ziel-Anwendung</a>
         </section>
 
         <section>
@@ -639,8 +642,8 @@ obj.methodOfObj();
                 <li><code>Route</code> und <code>IndexRoute</code>
                 <li>history
                 <li>Nested routes und das <code>children</code>-Property
-                <li>Links<em style="color: red"> (TODO)</em>
-                <li><code>location</code> und <code>param</code> Property und <code>componentWillReceiveProps</code> <em style="color: red"> (TODO)</em>
+                <li>Links
+                <li><code>location</code> und <code>param</code> Property und <code>componentWillReceiveProps</code>
             </ul>
         </section>
 
@@ -750,7 +753,32 @@ export default function Layout(props) {
     </div>;
 }
 </code></pre>
+        </section>
 
+            <section>
+                <h3>Link</h3>
+                <ul class="fragment">
+                    <li>Echte React-Komponente</li>
+                    <li>Ein Link auf eine Route</li>
+                    <li>wird als <code>a</code>-Element gerendert</li>
+                    <li>hat zudem einen Click-Handler, der den Default verhindert und das history-Objekt updated</li>
+                    <li>weiß, ob die Route auf die sie verweist, aktiv ist</li>
+                </ul>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+&lt;Link to={`/votes/${vote.id}`} activeClassName='active'>
+  <h1 className="Title">{vote.title}</h1>
+&lt;/Link>
+</code></pre>
+        </section>
+
+        <section>
+            <h3>Datenübergabe an Routen</h3>
+            <p>Der Router übergibt den zu rendernden Routen Daten als Properties</p>
+            <ul class="fragment">
+                <li>Property <code>location</code>: enthält <code>pathname</code> und <code>query</code></li>
+                <li>Property <code>params</code>: die dynamischen Segmente der Route (z.B. <code>id</code>)</li>
+                <li>Lifecycle-Methode <code>componentWillReceiveProps</code>: wird mit neuen Properties aufgerufen, wenn sich die Route geändert hat
+            </ul>
         </section>
 
         <section>
@@ -772,6 +800,7 @@ export default function Layout(props) {
         <section id="t5">
             <h1>Teil V</h1>
             <h2>Remote-Calls gegen Server</h2>
+            <a href="code/schritte/5-remote/public/index.html" target="_blank">Ziel-Anwendung</a>
         </section>
 
         <section>
