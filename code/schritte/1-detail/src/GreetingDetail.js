@@ -33,6 +33,3 @@ export default class GreetingDetail extends React.Component {
         this.setState({[name]: value});
     }
 }
-GreetingDetail.propTypes = {
-    greeting: PropTypes.object
-};

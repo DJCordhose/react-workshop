@@ -252,9 +252,15 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
                 <li>Rendering<em style="color: red"> (TODO)</em>
                 <li>Events<em style="color: red"> (TODO)</em>
                 <li>Properties und Zustand<em style="color: red"> (TODO)</em>
-                <li>PropTypes<em style="color: red"> (TODO)</em>
                 <li>Refs<em style="color: red"> (TODO)</em>
             </ul>
+        </section>
+
+        <section>
+            <h2>ES6-Referenz</h2>
+            <p><a href="http://exploringjs.com/es6/" target="_blank">
+                http://exploringjs.com/es6/
+            </a>
         </section>
 
         <section>
@@ -585,13 +591,115 @@ obj.methodOfObj();
         </section>
 
         <section>
+            <h2>Referenz</h2>
+            <p><a href="https://facebook.github.io/react/docs" target="_blank">
+                https://facebook.github.io/react/docs
+            </a>
+            </p>
+        </section>
+
+        <section>
             <h3>Themen</h3>
             <ul>
-                <li>Komponenten als Funktion<em style="color: red"> (TODO)</em>
-                <li>Darstellung von Listen und Keys<em style="color: red"> (TODO)</em>
-                <li>Architektur-Idee: Controller-Komponente und View-Komponente<em style="color: red"> (TODO)</em>
-                <li>Durchreichen vom Properties und Callbacks<em style="color: red"> (TODO)</em>
+                <li>Komponenten als Funktion
+                <li>Darstellung von Listen und Keys
+                <li>Architektur-Idee: Controller-Komponente und View-Komponente
+                <li>Durchreichen von Zustand und Callbacks
+                <li>PropTypes
             </ul>
+        </section>
+
+            <section>
+                <h3>Komponenten als Funktion</h3>
+                <ul class="fragment">
+                    <li>Komponente ist eine einfache Funktion</li>
+                    <li>entspricht der render-Methode</li>
+                    <li>Properties werden als Parameter übergeben</li>
+                    <li>Zurzeit nur ohne Zustand und ohne Lifecycle-Methoden</li>
+                </ul>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+function Layout(props) {
+  return (
+      <div className="Main">
+        <div className="Container">
+          {props.children}
+        </div>
+      </div>
+  );
+}
+</code></pre>
+        </section>
+
+            <section>
+                <h3>Listen und Keys</h3>
+                <ul class="fragment">
+                    <li>JSX bietet nichts für Listen
+                    <li>Ausgabe typischerweise über <code>Array.map</code>
+                    <li>Elemente einer Liste brauchen einen eindeutigen key
+                </ul>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+const greetings = [{
+    id: 0,
+    name: 'Olli',
+    greeting: 'Huhu'
+},
+{
+    id: 1,
+    name: 'Oma',
+    greeting: 'Hallo'
+}
+];
+const body = greetings.map(greeting =>
+    &lt;tr key={greeting.id}>
+        &lt;td>{greeting.name}</td>
+        &lt;td>{greeting.greeting}</td>
+    &lt;/tr>);
+</code></pre>
+        </section>
+
+        <section>
+            <h3>Controller und Child-Views</h3>
+            <img src="controller.jpg" height="600">
+        </section>
+
+        <section>
+            <h3>Durchreichen vom Zustand und Callbacks</h3>
+            <ul class="fragment">
+                <li>Funktioniert beides über Properties
+                <li>Auf der Typ kann angegeben werden
+                <li>Fehlende / falsche Properties führen zu Laufzeitfehlern
+            </ul>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+class GreetingController extends React.Component {
+    render() {
+        const {greetings} = this.state;
+        return (
+            <div>
+                &lt;GreetingMaster greetings={greetings}
+                    onAdd={() => this.setState({mode: MODE_DETAIL})}
+            </div>);
+    }
+    // ...
+}
+</code></pre>
+        </section>
+
+        <section>
+            <h3>PropTypes</h3>
+                <ul class="fragment">
+                    <li>Eine Komponente kann deklarieren, welche Properties sie erwartet
+                    <li>Auf der Typ kann angegeben werden
+                    <li>Fehlende / falsche Properties führen zu Laufzeitfehlern
+                </ul>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+GreetingDetail.propTypes = {
+    greeting: PropTypes.shape({
+      name: React.PropTypes.string.isRequired,
+      greeting: React.PropTypes.string.isRequired
+    }),
+    onAdd: PropTypes.func.isRequired
+};
+</code></pre>
         </section>
 
         <section>
