@@ -249,10 +249,9 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
             <h3>Themen</h3>
             <ul>
                 <li>ES6 Grundlagen
-                <li>Rendering<em style="color: red"> (TODO)</em>
-                <li>Events<em style="color: red"> (TODO)</em>
-                <li>Properties und Zustand<em style="color: red"> (TODO)</em>
-                <li>Refs<em style="color: red"> (TODO)</em>
+                <li>Rendering
+                <li>Properties und Zustand
+                <li>Refs
             </ul>
         </section>
 
@@ -276,7 +275,7 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
             </ul>
         </section>
     <section>
-        <h3>Neue Spracheigenschaften</h3>
+        <h3>ES6: Neue Spracheigenschaften</h3>
             <h4 class="fragment"><em>keine</em> statischen Typen</h4>
             <ul>
             <li class="fragment">Module
@@ -289,7 +288,7 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
         </ul>
     </section>
         <section>
-            <h3>Gesprengte Klippe #1: Lexikalisches Scoping</h3>
+            <h3>ES6: Gesprengte Klippe #1: Lexikalisches Scoping</h3>
             <pre><code class="javascript" contenteditable>{
   // no hoisting
   console.log(a);
@@ -304,7 +303,7 @@ console.log(a);
 // => ReferenceError: a is not defined</code></pre>
         </section>
         <section>
-            <h3>Gesprengte Klippe #2: Klassen</h3>
+            <h3>ES6: Gesprengte Klippe #2: Klassen</h3>
                 <pre class="fragment"><code class="javascript" contenteditable>class Person {
     constructor(name) {
         this._name = name;
@@ -327,11 +326,119 @@ console.log(programmer.code());
 console.log(programmer instanceof Programmer); // true
 console.log(programmer instanceof Person); // true</code></pre>
          </section>
+
+            <section>
+                <h3>ES6: Arrow Functions</h3>
+<pre><code class="javascript" contenteditable>const displayInPage = (text) => {
+   return document.body.innerHTML +=
+       `${text}<br>`;
+};</code></pre>
+<pre class="fragment"><code class="javascript" contenteditable>const displayInPage = text => document.body.innerHTML += `${text}<br>`;
+</code></pre>
+            </section>
+                <!--<section>-->
+                    <!--<h3>Default Parameter</h3>-->
+<!--<pre><code class="javascript" contenteditable>const displayInPage = (text = '\n') =>-->
+    <!--console.log(text);</code></pre>-->
+<!--<pre class="fragment"><code class="javascript" contenteditable>displayInPage();-->
+<!--</code></pre>-->
+                <!--</section>-->
+                <!--<section>-->
+                    <!--<h3>Rest-Parameters</h3>-->
+<!--<pre><code class="javascript" contenteditable>const displayInPage = (...texts) =>-->
+    <!--texts.forEach(text => console.log(text));-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code class="javascript" contenteditable>displayInPage('Hi', 'Folks');-->
+<!--// Hi-->
+<!--// Folks-->
+<!--</code></pre>-->
+                <!--</section>-->
+
+                <section>
+                    <h3>ES6: Lexcial Binding an this bei Arrow-Functions</h3>
+<pre><code class="javascript" contenteditable>
+const obj = {
+    methodOfObj: function () {
+      console.log(`In Method: ${obj === this}`); // true
+        ['1', '2', '3'].forEach( e => {
+           console.log(`In Loop: ${obj === this}`); // true
+        });
+    }
+};
+
+obj.methodOfObj();
+</code></pre>
+            </section>
+
+            <section>
+                <h3>React: Rendering</h3>
+                <ul class="fragment">
+                    <li>Jede React-Komponente braucht eine render-Methode</li>
+                    <li>wird aufgrerufen beim ersten Rendering und wenn sich der Zustand ändert</li>
+                    <li>kann HTML artige JSX-Syntax nutzen</li>
+                    <li>JSX kann pures JavaScript in geschweiften Klammern enthalten (<code>{}</code>)
+                </ul>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+class GreetingDetail extends React.Component {
+    render() {
+        return (
+            <div>
+                &lt;input ref={input => this.input = input}
+                       onChange={event => this.updateModel(event.target.value)}
+                       value={this.state.greeting} />
+                <p>{this.state.greeting}, World</p>
+            </div>);
+    }
+    // ...
+}
+</code></pre>
+        </section>
+        <section>
+            <h3>ES6: Erweiterte Objekt-Literale</h3>
+   <pre><code class="javascript" contenteditable>const name = 'Oma';
+const person = {
+    // ES5: name: name
+    name,
+    // ES5: toString: function()
+    toString() {
+        return this.name;
+    }
+};
+console.log(person.name); // Oma
+console.log(person.toString()); // Oma
+   </code></pre>
+        </section>
+
+           <section>
+                <h3>React: Rendering #2</h3>
+                <ul class="fragment">
+                    <li>DOM-Events werden in React-Events verpackt
+                    <li>Es gibt keine automatische Bindung an Modelle
+                </ul>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+class GreetingDetail extends React.Component {
+    render() {
+        return (
+            <div>
+                &lt;input ref={input => this.input = input}
+                       onChange={event => this.updateModel(event.target.value)}
+                       value={this.state.greeting} />
+                <p>{this.state.greeting}, World</p>
+            </div>);
+    }
+    updateModel(greeting) {
+        this.setState({greeting});
+    }
+    // ...
+}
+</code></pre>
+        </section>
+
                     <section>
-                        <h2>Module, Importe und Exporte</h2>
+                        <h2>ES6: Module, Importe und Exporte</h2>
                     </section>
                     <section>
-                        <h3>Export einer einzigen Klasse</h3>
+                        <h3>ES6: Export einer einzigen Klasse</h3>
    <pre><code class="javascript" contenteditable>// Person.js
 class Person {
   // ...
@@ -340,7 +447,7 @@ export default Person;
    </code></pre>
                     </section>
                     <section>
-                        <h3>Import</h3>
+                        <h3>ES6: Import</h3>
    <pre><code class="javascript" contenteditable>// Programmer.js
 import Person from './Person';
 
@@ -350,7 +457,7 @@ export default class Programmer extends Person {
    </code></pre>
                     </section>
                     <section>
-                        <h3>Benannte Exporte</h3>
+                        <h3>ES6: Benannte Exporte</h3>
    <pre><code class="javascript" contenteditable data-trim>// util.js
 export function displayInPage(text) {
     document.body.innerHTML +=
@@ -373,7 +480,7 @@ util.displayInPage('Hello, World');
                         <!--<h2>Neuerungen und Verbesserungen in ES6</h2>-->
                     <!--</section>-->
                     <section>
-                        <h3>Template Literals</h3>
+                        <h3>ES6: Template Literals</h3>
           <p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings">
          String-Literale mit Lücken
     </a>
@@ -415,7 +522,7 @@ in ${language}.`);
                     <!--</section>-->
 
                     <section>
-                        <h3>Destructuring von Objekten</h3>
+                        <h3>ES6: Destructuring von Objekten</h3>
    <pre><code class="javascript" contenteditable>const person = {
   name: 'Olli',
   address: {
@@ -523,50 +630,56 @@ console.log(`city=${city}`);
                 <!--<section>-->
                     <!--<h2>Verbesserungen bei Funktionen in ES6</h2>-->
                 <!--</section>-->
-            <section>
-                <h3>Arrow Functions</h3>
-<pre><code class="javascript" contenteditable>const displayInPage = (text) => {
-   return document.body.innerHTML +=
-       `${text}<br>`;
-};</code></pre>
-<pre class="fragment"><code class="javascript" contenteditable>const displayInPage = text => document.body.innerHTML += `${text}<br>`;
-</code></pre>
-            </section>
-                <!--<section>-->
-                    <!--<h3>Default Parameter</h3>-->
-<!--<pre><code class="javascript" contenteditable>const displayInPage = (text = '\n') =>-->
-    <!--console.log(text);</code></pre>-->
-<!--<pre class="fragment"><code class="javascript" contenteditable>displayInPage();-->
-<!--</code></pre>-->
-                <!--</section>-->
-                <!--<section>-->
-                    <!--<h3>Rest-Parameters</h3>-->
-<!--<pre><code class="javascript" contenteditable>const displayInPage = (...texts) =>-->
-    <!--texts.forEach(text => console.log(text));-->
-<!--</code></pre>-->
-<!--<pre class="fragment"><code class="javascript" contenteditable>displayInPage('Hi', 'Folks');-->
-<!--// Hi-->
-<!--// Folks-->
-<!--</code></pre>-->
-                <!--</section>-->
 
-                <section>
-                    <h3>Lexcial Binding to this</h3>
-<pre><code class="javascript" contenteditable>
-const obj = {
-    methodOfObj: function () {
-      console.log(`In Method: ${obj === this}`); // true
-        ['1', '2', '3'].forEach( e => {
-           console.log(`In Loop: ${obj === this}`); // true
-        });
+        <section>
+            <h3>React: Properties und Zustand</h3>
+            <ul class="fragment">
+                <li>Properties werden von außen über den Konstruktor übergeben
+                <li>Zustand ist eine innere Eigentschaft der Komponente
+                <li>Beide können an Unterkomponenten übergeben werden
+                <li>Zustand veränderlich über <code>this.setState()</code>
+            </ul>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+class GreetingDetail extends React.Component {
+    constructor(props) {
+        super(props);
+        const {name, greeting} = this.props.greeting || {};
+        this.state = {
+            name,
+            greeting
+        };
     }
-};
-
-obj.methodOfObj();
+    updateModel(event) {
+        this.setState({greeting: event.target.value});
+    }
+   // ...
+}
 </code></pre>
-            </section>
+        </section>
+        <section>
+            <h3>React: Refs</h3>
+            <ul class="fragment">
+                <li>Beim rendern kann man an eine Referenz des unterliegenden DOMs kommen
+                <li>die DOM-Referenz kann einer Funktion übergeben werden
+                <li>Diese Referenz kann man z.B. als Member-Variable speichern
+            </ul>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+class HelloMessage extends React.Component {
+    render() {
+        return (
+            <div>
+                &lt;input ref={input => this.input = input} />
+                &lt;button
+                    onClick={() => this.input.focus()}>
+                    Focus
+                &lt;/button>
+            </div>);
+    }
+}
+</code></pre>
+        </section>
 
-    <section>
+        <section>
       <section>
           <h2>Übung 1: Detail-Ansicht für unsere Gruß-Anwendung</h2>
           <h3>Erzeuge eine Komponenten mit der man einen Namen und eine Grußformel eingeben kann</h3>
