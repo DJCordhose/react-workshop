@@ -1,5 +1,9 @@
 const fs = require('fs');
-const SEP = require('path').sep;
+const os = require('os');
+
+
+
+const SEP = os.platform() === 'win32' ? '\\\\' : '/';
 
 // TODO could be dynamic
 const DIRS = [
