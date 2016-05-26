@@ -27,7 +27,7 @@ const processPackageJsonInDirectory = dir => {
     
     // path.sep
     const newContent = content.replace(/\.\.\//g, `..${SEP}`)
-        .replace(/\/\.bin\//g, `${SEP}bin${SEP}`)
+        .replace(/\/\.bin\//g, `${SEP}.bin${SEP}`)
     
     fs.writeFileSync(`${packageJsonFileName}`, newContent);
 }
