@@ -1,11 +1,15 @@
 const fs = require('fs');
 const SEP = require('path').sep;
 
+// TODO could be dynamic
 const DIRS = [
     'code/hello_world',
     'code/schritte/1-detail',
     'code/schritte/2-hierarchy',
-    'code/schritte/3-tests'
+    'code/schritte/3-tests',
+    'code/schritte/4-router',
+    'code/schritte/5-remote',
+    'code/workspace'
 ];
 
 const processPackageJsonInDirectory = dir => {
@@ -20,7 +24,8 @@ const processPackageJsonInDirectory = dir => {
     // path.sep
     const newContent = content.replace(/\.\.\//g, `..${SEP}`)
         .replace(/\/\.bin\//g, `${SEP}bin${SEP}`)
-    fs.writeFileSync(`${dir}/${packageJsonFileName}`, newContent);
+    
+    fs.writeFileSync(`${packageJsonFileName}`, newContent);
 }
 
 DIRS.forEach(processPackageJsonInDirectory);
