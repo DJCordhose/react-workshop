@@ -17,7 +17,7 @@ const sampleGreetings = [
     }
 ];
 
-describe('GreetingMaster', () => {
+describe('GreetingMaster with SHALLOW RENDERING', () => {
     it('properly renders', () => {
         const renderer = ReactTestUtils.createRenderer();
         renderer.render(

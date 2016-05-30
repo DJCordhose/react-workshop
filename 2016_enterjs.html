@@ -215,15 +215,16 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
     <section>
       <section>
           <h2>Übung 0: React Hello-World</h2>
-          <h3>Mache die mit den Werkzeugen vertraut und schreibe deine erste React-Komponente</h3>
+          <h3>Mache dich mit den Werkzeugen vertraut und schreibe deine erste React-Komponente</h3>
       </section>
       <section>
           <h3>Schritt #1: Tool-Chain starten</h3>
-          <p>Nutze das workspace-Verzeichnis in diesem Repository</p>
+          <p>Nutze das <code>workspace</code>-Verzeichnis in diesem Repository</p>
           <p>Hier ist eine Tool-Chain mit Webpack und Babel vorbereitet</p>
           <ul>
               <li>Evtl. dafür einen Proxy konfigurieren <a target="_blank" href="http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/">http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/</a></li>
               <li><code>npm install</code> (auf oberster Ebene)
+              <li><code>node setup</code> (auf oberser Ebene)
               <li><code>cd code/workspace</code>
               <li><code>npm run webpack</code>
               <li><code>public/index.html</code> im Browser öffnen
@@ -772,15 +773,13 @@ const body = greetings.map(greeting =>
 
         <section>
             <h3>Controller und Child-Views</h3>
-            <img src="controller.jpg" height="600">
+            <img src="controller.png" height="600" style="border:0;box-shadow:0 0 0 0">
         </section>
 
         <section>
             <h3>Durchreichen vom Zustand und Callbacks</h3>
             <ul class="fragment">
                 <li>Funktioniert beides über Properties
-                <li>Auf der Typ kann angegeben werden
-                <li>Fehlende / falsche Properties führen zu Laufzeitfehlern
             </ul>
 <pre class="fragment"><code class="javascript" contenteditable data-trim>
 class GreetingController extends React.Component {
@@ -801,7 +800,7 @@ class GreetingController extends React.Component {
             <h3>PropTypes</h3>
                 <ul class="fragment">
                     <li>Eine Komponente kann deklarieren, welche Properties sie erwartet
-                    <li>Auf der Typ kann angegeben werden
+                    <li>Auch der Typ kann angegeben werden
                     <li>Fehlende / falsche Properties führen zu Laufzeitfehlern
                 </ul>
 <pre class="fragment"><code class="javascript" contenteditable data-trim>
@@ -836,6 +835,17 @@ GreetingDetail.propTypes = {
             <h1>Teil III</h1>
             <h2>Testen</h2>
         </section>
+        
+        <!--<section>
+            <h2>Was testen?</h2>
+            <ul>
+                <li>Rendern</li>
+                <li>Verhalten</li>
+                <li>Interaktion mit DOM</li>
+                <li>Interaktion mit Browser</li>
+                </ul>
+                
+        </section>-->
 
         <!--Master View wäre gutes Beispiel für shallow rendering-->
 
@@ -1040,7 +1050,7 @@ export default function Layout(props) {
                 <ul>
                     <li>Wo speichern wir?
                     <li>Wie machen wir das Laden und Speichern technisch?
-                    <li>Wie funktioniert asynchrones in React?
+                    <li>Wie funktioniert asynchrone Verarbeitung in React?
                     <li>Wo steht der Code zum Laden der Grüße?
                 </ul>
             </section>
@@ -1104,7 +1114,7 @@ return fetch(url)
         1000)
 );
 </code></pre>
-    <pre><code class="javascript" contenteditable>promise1.then(value => console.log(value));
+    <pre><code class="javascript" contenteditable>promise.then(value => console.log(value));
 // Output after 1 second: Result from promise
 </code></pre>
                     </section>
