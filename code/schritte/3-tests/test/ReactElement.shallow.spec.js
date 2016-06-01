@@ -25,6 +25,11 @@ class OuterComponent extends React.Component {
 }
 
 
+function SimpleComponent() {
+    return <div className='simple'>Lalala</div>;
+}
+
+
 
 describe('SHALLOW RENDERING', () => {
     it('properly renders', () => {
@@ -62,6 +67,18 @@ describe('SHALLOW RENDERING', () => {
         // expect(inner.props.children).toEqual(
         //     <div className='inner'><MostInnerComponent /></div>
         // );
+    });
+    
+    it('renders function component', () => {
+        const renderer = ReactTestUtils.createRenderer();
+
+        renderer.render(
+            <SimpleComponent />
+        );
+        
+        const tree = renderer.getRenderOutput();
+        expect(tree.type).toBe('div');
+        expect(tree.props.className).toBe('simple');
     });
 
   
