@@ -43,7 +43,7 @@ describe('GreetingDetail with SHALLOW RENDERING', () => {
         expect(greetingAdded).toEqual({ name: 'Klaus-Dieter', greeting: 'Good morning' });
     });
 
-    it('renders', () => {
+    it('renders two inputs and two buttons', () => {
         const renderer = ReactTestUtils.createRenderer();
         renderer.render(
             <GreetingDetail greeting={greeting} />

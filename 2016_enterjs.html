@@ -837,15 +837,14 @@ GreetingDetail.propTypes = {
         </section>
         
         <section>
-            <h2>Was testen? (Einordnung)</h2>
+            <h2>Was testen wir überhaupt?</h2>
             <ul>
-                <li>Logik (Services etc) React-unabhängig</li>
-                <li>Rendern (wird meine Greeting-Liste für ein Satz von Greetings korrekt dargestellt)</li>
-                <li>Interaktion (Funktionieren meine Event-Listener korrekt)</li>
-                <li>Verhalten im Browser (z.B. korrekte Darstellung, Browser-spezifisches JavaScript, Arbeiten mit history, Titelzeile, Scrollbars etc)</li>
+                <li class="fragment">UI-unabhängige Logik (React-unabhängig)</li>
+                <li class="fragment">Rendern (wird meine Greeting-Liste für ein Satz von Greetings korrekt dargestellt)</li>
+                <li class="fragment">Interaktionen (Funktionieren meine Event-Listener korrekt)</li>
+                <li class="fragment">Verhalten im Browser (z.B. korrekte Darstellung, Browser-spezifisches JavaScript, Arbeiten mit history, Titelzeile, Scrollbars etc)</li>
                 </ul>
         </section>
-        
         
         <section>
             <h2>React Test Utils</h2>
@@ -908,6 +907,26 @@ expect(rows).toEqual([
 ]);
 </code></pre>
             </section>
+            
+                    <section>
+            <h2>Shallow Rendering: Callbacks aufrufen</h2>
+            <pre class="fragment"><code class="javascript" contenteditable data-trim>
+// Ausgangssituation
+const nameInput = tree.props.children;
+expect(nameInput.props.value).toEqual('Lemmy');
+</code></pre>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+const changeEvent = { target: { value: 'Klaus-Dieter' } };
+nameInput.props.onChange(changeEvent);
+</code></pre>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+const updatedTree = renderer.getRenderOutput();
+
+const updatedNameInput = updatedTree.props.children;
+expect(updatedNameInput.props.value).toEqual('Klaus-Dieter');
+        </code></pre>
+            </section>
+
 
         <section>
             <h2>Variante 2: Rendering ins DOM</h2>
