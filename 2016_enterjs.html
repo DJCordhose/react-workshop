@@ -962,7 +962,7 @@ expect(clearButton.value).toEqual('');
         </section>
         
         <section>
-            <h2>Testen: Stichworte TODO</h2>
+            <h2>Testen</h2>
             <ul>
             <li>React-Anwendungen sind sehr gut testbar, auch ohne Browser
             <li>Ausblick/Alternativen:
@@ -971,6 +971,30 @@ expect(clearButton.value).toEqual('');
                 <a href="https://github.com/bruderstein/unexpected-react" target="_blank">unexpected react</a></li>
             </ul>
             </section>
+            
+            <section>
+                <section>
+                    <h2>Übung 3: Eine React-Komponente testen</h2>
+                    <h3>Stelle sicher, dass in der Komponente GreetingDetail das Klicken des Save-Buttons funktioniert:</h3>
+                    <ol>
+                        <li>Der übergebene Event-Handler sollte aufgerufen werden</li>
+                        <li>Dem Event-Handler muss mit einem Objekt aufgerufen werden, das dem eingegebenen Greeting entspricht</li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>Schritte</h3>
+                    <ul>
+                        <li>kopiere das Material aus <code>code/material/3-test</code> in deinen src-Ordner</li>
+                        <li>Verwende den Shallow Renderer um die <code>GreetingDetail</code>-Komponente zu rendern
+                        <li>Suche in der gerenderten Komponente den <code>Save</code> Button
+                        <li>"Klicke" den Save Button</li>
+                        <li>Stelle sicher, dass die übergebene <code>onAdd</code>-Callback Funktion aufgerufen wurde</li>
+                        <li>Test kann mit <code>npm run test:watch</code> ausgeführt werden (reagiert auf Code-Änderungen)</ul>
+                </section>
+
+            </section>
+                
+                
         
 
         <!--Master View wäre gutes Beispiel für shallow rendering-->
