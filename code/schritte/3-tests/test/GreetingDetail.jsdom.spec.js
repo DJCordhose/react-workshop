@@ -44,7 +44,7 @@ describe('GreetingDetail with JSDOM', () => {
         expect(nameInput.value).toEqual('');
         expect(clearButton.value).toEqual('');
     });
-    
+
     it('onAdd callback is called with new greeting', () => {
         let greetingAdded;
         function onAddHandler(newGreeting) {
@@ -53,22 +53,34 @@ describe('GreetingDetail with JSDOM', () => {
         const component = ReactTestUtils.renderIntoDocument(
             <GreetingDetail greeting={greeting} onAdd={onAddHandler}  />
         );
-        
+
         const [nameInput, greetingInput] = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'input');
         nameInput.value = 'Klaus-Dieter';
         ReactTestUtils.Simulate.change(nameInput);
-        
+
         greetingInput.value = 'Good morning';
         ReactTestUtils.Simulate.change(greetingInput);
-        
+
         const [, saveButton] = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'button');
         ReactTestUtils.Simulate.click(saveButton);
-        
+
         expect(greetingAdded.name).toEqual('Klaus-Dieter');
         expect(greetingAdded.greeting).toEqual('Good morning');
 
     });
 
-    // const buttons = ReactTestUtils.findAllInRenderedTree(component, candidate => candidate instanceof HTMLButtonElement && candidate.textContent === 'Clear');
-    // console.log('buttons', buttons);
+    it('onAdd callback is called with unchanged greeting', () => {
+        let greetingAdded;
+        function onAddHandler(newGreeting) {
+            greetingAdded = newGreeting;
+        }
+        const component = ReactTestUtils.renderIntoDocument(
+            <GreetingDetail greeting={greeting} onAdd={onAddHandler}  />
+        );
+
+        const saveButton = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[1];
+        ReactTestUtils.Simulate.click(saveButton);
+        
+        expect(greetingAdded).toEqual(greeting);
+    });
 });
