@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
+  "scripts": {
+    "setup": "node setup.js"
+  },
   "devDependencies": {
     "babel-core": "^6.1.21",
     "babel-loader": "^6.1.0",
