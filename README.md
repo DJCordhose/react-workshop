@@ -32,7 +32,7 @@ npm run setup
 
 # Termine
 
-* [EnterJS](https://www.enterjs.de/abstracts.html#worksop-react) in Darmstadt am 14. Juni 2016 (ausverkauft)
+* [EnterJS](https://www.enterjs.de/abstracts.html#worksop-react) in Darmstadt am 14. Juni 2016 (ausverkauft). Folien [hier](http://djcordhose.github.io/react-workshop/2016_enterjs.html#/).
 
 
 # Interesse an React Workshops, Schulungen oder Coaching?
