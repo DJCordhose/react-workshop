@@ -734,7 +734,7 @@ class GreetingDetail extends React.Component {
             <h3>Render Zyklus</h3>
             <img src="event-zustand-render.png" height="600" style="border:0;box-shadow:0 0 0 0">
         </section>
-        
+
         <section>
             <h3>React: Refs</h3>
             <ul class="fragment">
@@ -805,7 +805,7 @@ class HelloMessage extends React.Component {
                 <h3>Komponenten als Funktion</h3>
                 <ul class="fragment">
                     <li>Komponente ist eine einfache Funktion</li>
-                    <li>entspricht der render-Methode</li>
+                    <li>entspricht der <code>render</code>-Methode</li>
                     <li>Properties werden als Parameter übergeben</li>
                     <li>Zurzeit nur ohne Zustand und ohne Lifecycle-Methoden</li>
                 </ul>
@@ -871,8 +871,27 @@ class GreetingController extends React.Component {
     }
     // ...
 }
-</code></pre>
-        </section>
+    </code></pre>
+    </section>
+    <section>
+        <h3>Properties übergeben mit Object-Spread</h3>
+        <ul class="fragment">
+                <li>Übergibt <b>alle</b> Eigenschaften eines Objektes als individuelle Properties</li> 
+        </ul>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
+class GreetingController extends React.Component { 
+
+    const greeting = { name: 'Klaus', greeting: 'Hello' };
+
+    render() {
+        return &lt;GreetingDetail {...greeting} />
+
+        // entspricht:
+        // &lt;GreetingDetail name='Klaus' greeting='Hello' />
+    }
+}
+        </code></pre>
+    </section>
 
         <section>
             <h3>PropTypes</h3>
