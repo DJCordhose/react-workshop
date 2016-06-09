@@ -105,7 +105,7 @@
         <section>
             <h1>React Workshop</h1>
             <p>
-                <small>Nils Hartmann / <a href="http://twitter.com/nilshartmann">@nilshartmann</a>
+                <small><a href="http://nilshartmann.net">Nils Hartmann</a> / <a href="http://twitter.com/nilshartmann">@nilshartmann</a>
                 </small>
             </p>
             <p>
@@ -158,13 +158,18 @@
                 <li class="fragment">Komponenten kapseln Template und Logik
                 <li class="fragment">Abstraktion vom DOM: <em>f(model) -> UI</em>
                 <li class="fragment">Minimales API
-                <li class="fragment">Templates sind einfach JavaScript
-                <li class="fragment">Templates können HTML artige JSX-Syntax enthalten
-                <li class="fragment">Ein-Weg-Data-Binding: Zustandsänderungen stellen Komponente neu dar
+                <li class="fragment">Templates werden in JavaScript geschrieben
+                <li class="fragment">Templates können HTML-artige Syntax enthalten (JSX)
+                <li class="fragment">Ein-Weg-Data-Binding: Zustandsänderungen stellen Komponente <b>komplett</b> neu dar
                 <li class="fragment">Kann im Browser und auf dem Server rendern
                 <!--<li class="fragment">wird für komplette Anwendung typischerweise mit React Router und einem Flux-Framework gekoppelt-->
                 <!--<li class="fragment">viel Inspiration aus der funktionalen Ecke (Immutable, pure functions, stateless)-->
             </ul>
+        </section>
+
+        <section>
+            <h3>Hello World React</h3>
+                <a target="_blank" href="code/hello_world/public/index.html">Demo</a>
         </section>
 
                 <section>
@@ -198,20 +203,41 @@
                     <h3>Aufruf</h3>
 <pre><code data-trim contenteditable>
 // index.html
-&lt;body>
-  <div id="mount"></div>
-&lt;/body>
+&lt;html>
+  &lt;body>
+    <div id="mount"></div>
+  &lt;/body>
+  &lt;script src="dist/main.js">&lt;/script>
+&lt;/html>
 </code></pre>
 <pre class="fragment"><code data-trim contenteditable class="javascript">
 // main.js
 import HelloMessage from './HelloMessage';
 
-var mountNode = document.getElementById('mount');
+const mountNode = document.getElementById('mount');
 ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
 </code></pre>
                     <a target="_blank" href="code/hello_world/public/index.html">Run</a>
                 </section>
 
+
+    <section>
+        <h2>Buildprozess</h2>
+        <ul>
+            <li>ES6- und JSX-Code muss nach ECMAScript 5 übersetzt werden
+            <li>Typische Werkzeuge
+                <ul><li>Babel (Compiler)
+                    <li>Webpack (Bundler)
+                    <li>Webpack Dev Sever (HTTP Server mit Hot Reload)
+                    </ul>
+        </ul>
+    </section>
+     <section>
+        <h2>Webpack und Babel</h2>
+        <img src="webpack-und-babel.png" style="border:0;box-shadow:0 0 0 0"/>
+    </section>
+
+    </section>            
     <section>
       <section>
           <h2>Übung 0: React Hello-World</h2>
@@ -224,17 +250,17 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
           <ul>
               <li>Evtl. dafür einen Proxy konfigurieren <a target="_blank" href="http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/">http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/</a></li>
               <li><code>npm install</code> (auf oberster Ebene)
-              <li><code>node setup</code> (auf oberser Ebene)
+              <li><code>node setup</code> (auf oberster Ebene)
               <li><code>cd code/workspace</code>
               <li><code>npm run webpack</code>
-              <li><code>public/index.html</code> im Browser öffnen
+              <li>Öffne <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> im Browser 
               <li>Wenn auf der Seite 'Hello, World' steht, ist alles gut
           </ul>
       </section>
       <section>
           <h3>Schritt #2: Deine erste React-Komponente</h3>
           <ul>
-              <li>Ersetze die statische Seite mit der React-Komponente aus dem vorherigen Beispiel
+              <li>Ersetze die "statische" Komponente (HelloMessage) mit der React-Komponente aus dem vorherigen Beispiel (<code>code/hello_world</code>)
               <li>Importiere <em>react</em> und <em>react-dom</em>
           </ul>
       </section>
@@ -374,9 +400,9 @@ obj.methodOfObj();
             <section>
                 <h3>React: Rendering</h3>
                 <ul class="fragment">
-                    <li>Jede React-Komponente braucht eine render-Methode</li>
-                    <li>wird aufgrerufen beim ersten Rendering und wenn sich der Zustand ändert</li>
-                    <li>kann HTML artige JSX-Syntax nutzen</li>
+                    <li>Jede React-Komponente braucht eine <code>render</code>-Methode:</li>
+                    <li>wird aufgerufen beim ersten Rendering und wenn sich der Zustand ändert</li>
+                    <li>kann HTML-artige JSX-Syntax nutzen</li>
                     <li>JSX kann pures JavaScript in geschweiften Klammern enthalten (<code>{}</code>)
                 </ul>
 <pre class="fragment"><code class="xml" contenteditable data-trim>
