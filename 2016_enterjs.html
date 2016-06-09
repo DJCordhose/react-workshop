@@ -658,31 +658,83 @@ console.log(`city=${city}`);
                     <!--<h2>Verbesserungen bei Funktionen in ES6</h2>-->
                 <!--</section>-->
 
+
         <section>
             <h3>React: Properties und Zustand</h3>
             <ul class="fragment">
-                <li>Properties werden von außen über den Konstruktor übergeben
-                <li>Zustand ist eine innere Eigentschaft der Komponente
-                <li>Beide können an Unterkomponenten übergeben werden
-                <li>Zustand veränderlich über <code>this.setState()</code>
+                <li><b>Properties</b> werden der Komponente von <b>außen</b> übergeben (und nicht verändert)</li>
+                <li><b>Zustand (State)</b> ist eine <b>innere</b> Eigenschaft der Komponente (die verändert werden kann)</li>
+                <li>Beides sind Objekte mit Key-Value-Paaren</li>
+                <li>Beide können an Unterkomponenten übergeben werden</li>
             </ul>
+        </section>
+
+        <section>
+            <h3>Properties einer Komponente</h3>
+            <ul class="fragment">
+                <li>Properties werden von außen über den Konstruktor übergeben</li>
+                <li>Properties dürfen nicht verändert werden</li>
+                <li>Zugriff über <code>this.props</code></li>
+            </ul>
+            <pre class="fragment"><code class="javascript" contenteditable data-trim>
+class TitleComponent extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+      return &lt;h1>{this.props.title}&lt;/h1>
+    }
+   // ...
+}
+</code></pre>
 <pre class="fragment"><code class="javascript" contenteditable data-trim>
+  &lt;TitleComponent title='Hello World' />
+</pre></code>
+
+        </section>
+
+        <section>
+            <h3>Zustand einer Komponente</h3>
+            <ul class="fragment">
+                <li>Beispiel: Inhalt eines Eingabefelds</li>
+                <li>Werte üblicherweise immutable</li>
+                <li>Initialisieren im Konstruktor mit <code>this.state={}</code>
+                <li>Zustand <b>lesen</b> über <code>this.state</code>
+                <li>Zustand <b>setzen</b> über <code>this.setState()</code>
+                <ul><li>kein "reiner" Setter</li>
+                    <li>Führt alten und neuen Zustand zusammen</li>
+                    <li><b>Löst erneutes rendern der <i>gesamten</i> Komponente aus</b></li>
+                </ul>
+            </ul>
+            </section>
+
+            <section>
+                <h3>Beispiel: Zustand einer Komponente</h3>
+<pre><code class="javascript" contenteditable data-trim>
 class GreetingDetail extends React.Component {
     constructor(props) {
         super(props);
-        const {name, greeting} = this.props.greeting || {};
-        this.state = {
-            name,
-            greeting
-        };
+        this.state = { name: 'Klaus' };
     }
+
     updateModel(event) {
-        this.setState({greeting: event.target.value});
+        // Zustand ändern: Komponente wird neu gerendert
+        this.setState({name: event.target.value});
+    }
+
+    render() {
+        return &lt;input value={this.state.name} 
+            onChange={e => this.updateModel(e)} />
     }
    // ...
 }
 </code></pre>
         </section>
+        <section>
+            <h3>Render Zyklus</h3>
+            <img src="event-zustand-render.png" height="600" style="border:0;box-shadow:0 0 0 0">
+        </section>
+        
         <section>
             <h3>React: Refs</h3>
             <ul class="fragment">
