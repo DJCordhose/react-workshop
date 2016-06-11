@@ -970,13 +970,28 @@ GreetingDetail.propTypes = {
             <h2>Variante 1: Shallow Rendering</h2>
             <ul>
                 <li>Rendert <b>virtuellen DOM</b> (kein nativer DOM benötigt)</li>
-                <li>Ein Knoten im virtuellen u.a. DOM besteht aus:
+                <li>Ein Knoten im virtuellen DOM besteht u.a. aus:
                     <ul><li><code>type</code> (z.B. <code>div</code>)</li><li>props</code></li></ul>
                 </li>
                 <li>Über den virtuellen DOM kann man Properties abfragen und Callbacks aufrufen
-                <li>Rendert nur eine Hierarchieebene (shallow)
+                <li>Rendert nur <b>eine</b> Hierarchieebene (shallow)
             </ul>
             </section>
+        <section>
+            <h2>ReactElement</h2>
+            <p>Komponente</p>
+            <img src="react-element.png" style="border:0;box-shadow:0 0 0 0"/>
+            <div class="fragment">
+                <p style="margin-top:0px">natives HTML Element</p>
+                <img src="react-element-2.png" style="border:0;box-shadow:0 0 0 0"/>
+            </div>
+        </section>
+
+        <section>
+            <h2>ReactElement</h2>
+            <p>Children</p>
+            <img class="fragment" src="react-element-3.png" style="border:0;box-shadow:0 0 0 0"/>
+        </section>
         
         <section>
             <h2>Beispiel: Shallow Rendering</h2>
