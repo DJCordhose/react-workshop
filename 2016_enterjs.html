@@ -305,6 +305,7 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
         <h3>ES6: Neue Spracheigenschaften</h3>
             <h4 class="fragment"><em>keine</em> statischen Typen</h4>
             <ul>
+            <li class="fragment">Template Strings
             <li class="fragment">Module
             <li class="fragment">Klassen
             <li class="fragment">Destructuring (Pattern Matching)
@@ -314,6 +315,26 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
             <li class="fragment">Collection Types (Map, Set, WeakMap, WeakSet)
         </ul>
     </section>
+                    <section>
+                        <h3>ES6: Template Literals</h3>
+          <p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings">
+         String-Literale mit Lücken
+    </a>
+    </p>
+
+   <pre><code class="javascript" contenteditable>const person = 'Oma';
+const language = 'Haskell';
+
+console.log(`${person} programs
+${10 * 1024 * 1024} lines of code
+in ${language}.`);
+// Output:
+// Oma programs
+// 10485760 lines of code
+// in Haskell.
+</code></pre>
+                    </section>
+
         <section>
             <h3>ES6: Gesprengte Klippe #1: Lexikalisches Scoping</h3>
             <pre><code class="javascript" contenteditable>{
@@ -506,25 +527,7 @@ util.displayInPage('Hello, World');
         <!--<section>-->
                         <!--<h2>Neuerungen und Verbesserungen in ES6</h2>-->
                     <!--</section>-->
-                    <section>
-                        <h3>ES6: Template Literals</h3>
-          <p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings">
-         String-Literale mit Lücken
-    </a>
-    </p>
 
-   <pre><code class="javascript" contenteditable>const person = 'Oma';
-const language = 'Haskell';
-
-console.log(`${person} programs
-${10 * 1024 * 1024} lines of code
-in ${language}.`);
-// Output:
-// Oma programs
-// 10485760 lines of code
-// in Haskell.
-</code></pre>
-                    </section>
                     <!--<section>-->
                       <!--<h3>Tagged Template Literals</h3>-->
           <!--<p><a target="_blank" href="http://exploringjs.com/es6/ch_template-literals.html#_tagged-templates">-->
@@ -979,8 +982,11 @@ GreetingDetail.propTypes = {
             </section>
         <section>
             <h2>ReactElement</h2>
+            
+            <div class="fragment">
             <p>Komponente</p>
             <img src="react-element.png" style="border:0;box-shadow:0 0 0 0"/>
+            </div>
             <div class="fragment">
                 <p style="margin-top:0px">natives HTML Element</p>
                 <img src="react-element-2.png" style="border:0;box-shadow:0 0 0 0"/>
