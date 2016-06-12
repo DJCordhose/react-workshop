@@ -439,16 +439,17 @@ obj.methodOfObj();
                 </ul>
 <pre class="fragment"><code class="xml" contenteditable data-trim>
 class GreetingDetail extends React.Component {
-    render() {
-        return (
-            <div>
-                &lt;input ref={input => this.input = input}
-                       onChange={event => this.updateModel(event.target.value)}
-                       value={this.state.greeting} />
-                <p>{this.state.greeting}, World</p>
-            </div>);
-    }
-    // ...
+  render() {
+    return (
+      <div>
+        &lt;input ref={input => this.input = input}
+           onChange={event => this.updateModel(event.target.value)}
+           value={this.state.greeting} />
+        <p>{this.state.greeting}, World</p>
+      </div>
+    );
+  }
+  // ...
 }
 </code></pre>
         </section>
