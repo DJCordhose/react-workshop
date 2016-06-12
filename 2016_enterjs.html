@@ -158,14 +158,26 @@
                 <li class="fragment">Komponenten kapseln Template und Logik
                 <li class="fragment">Abstraktion vom DOM: <em>f(model) -> UI</em>
                 <li class="fragment">Minimales API
-                <li class="fragment">Templates werden in JavaScript geschrieben
-                <li class="fragment">Templates können HTML-artige Syntax enthalten (JSX)
                 <li class="fragment">Ein-Weg-Data-Binding: Zustandsänderungen stellen Komponente <b>komplett</b> neu dar
                 <li class="fragment">Kann im Browser und auf dem Server rendern
                 <!--<li class="fragment">wird für komplette Anwendung typischerweise mit React Router und einem Flux-Framework gekoppelt-->
                 <!--<li class="fragment">viel Inspiration aus der funktionalen Ecke (Immutable, pure functions, stateless)-->
             </ul>
         </section>
+
+        <section>
+            <h3>React Komponenten</h3>
+            <ul>
+                <li class="fragment">Werden als ES6 Klasse oder Funktion implementiert</code>
+                <li class="fragment">Keine Templatesprache (stattdessen JavaScript)</code>
+                <li class="fragment">Templates können HTML-artige Syntax enthalten (JSX)
+            </ul>
+            <pre class="fragment"><code data-trim contenteditable>class HelloMessage extends React.Component {
+  render() {
+    return &lt;h1 className='title'>Hello, World!&lt;/h1>
+  }
+}                
+</code></pre></section>
 
         <section>
             <h3>Hello World React</h3>
@@ -261,7 +273,6 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
           <h3>Schritt #2: Deine erste React-Komponente</h3>
           <ul>
               <li>Ersetze die "statische" Komponente (HelloMessage) mit der React-Komponente aus dem vorherigen Beispiel (<code>code/hello_world</code>)
-              <li>Importiere <em>react</em> und <em>react-dom</em>
           </ul>
       </section>
     </section>
@@ -445,23 +456,25 @@ class GreetingDetail extends React.Component {
                 <h3>React: Rendering #2</h3>
                 <ul class="fragment">
                     <li>DOM-Events werden in React-Events verpackt
+                    <li>React-Events haben weitgehend selbe API wie DOM-Events
                     <li>Es gibt keine automatische Bindung an Modelle
                 </ul>
 <pre class="fragment"><code class="xml" contenteditable data-trim>
 class GreetingDetail extends React.Component {
-    render() {
-        return (
-            <div>
-                &lt;input ref={input => this.input = input}
-                       onChange={event => this.updateModel(event.target.value)}
-                       value={this.state.greeting} />
-                <p>{this.state.greeting}, World</p>
-            </div>);
-    }
-    updateModel(greeting) {
-        this.setState({greeting});
-    }
-    // ...
+  render() {
+    return (
+      <div>
+        &lt;input ref={input => this.input = input}
+               onChange={event => this.updateModel(event.target.value)}
+               value={this.state.greeting} />
+        <p>{this.state.greeting}, World</p>
+      </div>
+    );
+  }
+  updateModel(greeting) {
+    this.setState({greeting});
+  }
+  // ...
 }
 </code></pre>
         </section>
@@ -699,7 +712,7 @@ class TitleComponent extends React.Component {
         <section>
             <h3>Zustand einer Komponente</h3>
             <ul class="fragment">
-                <li>Beispiel: Inhalt eines Eingabefelds</li>
+                <li>Beispiel: Inhalt eines Eingabefelds, Daten vom Server</li>
                 <li>Werte üblicherweise immutable</li>
                 <li>Initialisieren im Konstruktor mit <code>this.state={}</code>
                 <li>Zustand <b>lesen</b> über <code>this.state</code>
@@ -772,7 +785,7 @@ class HelloMessage extends React.Component {
           <ul>
               <li>benenne deine Komponente in <code>GreetingDetail</code> um
               <li>du brauchst zwei Eingabefelder, die <code>name</code> und <code>greeting</code> im Zustand der Komponente setzen
-              <li>für etwas Styling kopiere das Material in <code>code/material/1-detail</code> in deinen public-Ordner
+              <li>für etwas Styling kopiere das Material in <code>code/material/1-detail</code> in deinen <code>public</code>-Ordner
           </ul>
       </section>
     </section>
