@@ -347,7 +347,7 @@ in ${language}.`);
                     </section>
 
         <section>
-            <h3>ES6: Gesprengte Klippe #1: Lexikalisches Scoping</h3>
+            <h3>ES6: Lexikalisches Scoping</h3>
             <pre><code class="javascript" contenteditable>{
   // no hoisting
   console.log(a);
@@ -362,7 +362,7 @@ console.log(a);
 // => ReferenceError: a is not defined</code></pre>
         </section>
         <section>
-            <h3>ES6: Gesprengte Klippe #2: Klassen</h3>
+            <h3>ES6: Klassen</h3>
                 <pre class="fragment"><code class="javascript" contenteditable>class Person {
     constructor(name) {
         this._name = name;
@@ -531,12 +531,12 @@ export { displayInPage };
    <pre class="fragment"><code class="javascript" contenteditable data-trim>import {displayInPage} from "./util";
 displayInPage('Hello, World');
    </code></pre>
-   <pre class="fragment"><code class="javascript" contenteditable data-trim>import {displayInPage as display} from "./util";
-display('Hello, World');
-   </code></pre>
-   <pre class="fragment"><code class="javascript" contenteditable data-trim>import * as util from "./util";
-util.displayInPage('Hello, World');
-   </code></pre>
+   <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import {displayInPage as display} from "./util";-->
+<!--display('Hello, World');-->
+   <!--</code></pre>-->
+   <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import * as util from "./util";-->
+<!--util.displayInPage('Hello, World');-->
+   <!--</code></pre>-->
                     </section>
         <!--<section>-->
                         <!--<h2>Neuerungen und Verbesserungen in ES6</h2>-->
@@ -569,21 +569,18 @@ util.displayInPage('Hello, World');
                         <h3>ES6: Destructuring von Objekten</h3>
    <pre><code class="javascript" contenteditable>const person = {
   name: 'Olli',
-  address: {
-    city: 'Hamburg'
-  },
   email: 'oliver.zeigermann@gmail.com'
 };</code></pre>
-   <pre class="fragment"><code class="javascript" contenteditable>const {name, email: contact} = person;
+   <pre class="fragment"><code class="javascript" contenteditable>const {name, notThere} = person;
 console.log(`name=${name}`);
 // name=Olli
-console.log(`contact=${contact}`);
-// contact=oliver.zeigermann@gmail.com
+console.log(`notThere=${notThere}`);
+// notThere=undefined
 </code></pre>
-   <pre class="fragment"><code class="javascript" contenteditable>const {address: {city}} = person;
-console.log(`city=${city}`);
-//city=Hamburg
-</code></pre>
+   <!--<pre class="fragment"><code class="javascript" contenteditable>const {address: {city}} = person;-->
+<!--console.log(`city=${city}`);-->
+<!--//city=Hamburg-->
+<!--</code></pre>-->
                     </section>
                     <!--<section>-->
                         <!--<h3>Destructuring bei Parametern</h3>-->
@@ -921,6 +918,7 @@ class GreetingController extends React.Component {
                     <li>Eine Komponente kann deklarieren, welche Properties sie erwartet
                     <li>Auch der Typ kann angegeben werden
                     <li>Fehlende / falsche Properties führen zu Laufzeitfehlern
+                    <li><a href="" target="_blank">TODO: Mögliche Typen</a>
                 </ul>
 <pre class="fragment"><code class="javascript" contenteditable data-trim>
 GreetingDetail.propTypes = {
