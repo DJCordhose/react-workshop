@@ -18,5 +18,4 @@ const router = <Router history={hashHistory }>
     </Route>
 </Router>;
 
-
 ReactDOM.render(router, mountNode);

@@ -17,10 +17,9 @@ export default class GreetingController extends React.Component {
             <div>
                 {mode === MODE_MASTER ? 
                     <GreetingMaster greetings={greetings}
-                        onAdd={() => this.enterAdd()}
+                        onAdd={() => this.setState({mode: MODE_DETAIL})}
                     /> :
-                    <GreetingDetail onAdd={(greeting) => this.addGreeting(greeting)}
-                    />
+                    <GreetingDetail onAdd={(greeting) => this.addGreeting(greeting)} />
                 }
             </div>);
     }
@@ -71,12 +70,6 @@ export default class GreetingController extends React.Component {
         })
         .then(() => this._loadFromServer())
         .catch(ex => console.error('request failed', ex));
-    }
-
-    enterAdd() {
-        this.setState({
-            mode: MODE_DETAIL
-        });
     }
 
     addGreeting(greetingToBeAdded) {

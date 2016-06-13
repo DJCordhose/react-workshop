@@ -23,7 +23,7 @@ export default class GreetingDetail extends React.Component {
     }
     constructor(props) {
         super(props);
-        const {name, greeting} = this.props.greeting || {};
+        const {name, greeting} = this.props.greeting || {name: '', greeting: ''};
         this.state = {
             name,
             greeting
