@@ -103,6 +103,20 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
         <section>
+            <h3>React Workshop - Vorbereitung</h3>
+            <p>Falls noch nicht gemacht:</p>
+            <ol>
+                <li><code>git clone -b gh-pages https://github.com/DJCordhose/react-workshop.git</code></li>
+                <li>Im geklonten Verzeichnis: <code>npm install</code></li>
+                <li>Im geklonten Verzeichnis: <code>npm run setup</code></li>
+                <li>In <code>code/workspace</code> wechseln</li>
+                <li>Ausf&uuml;hren: <code>npm run devserver</code></li>
+                <li>Browser &ouml;ffnen: http://localhost:8080</li>
+            </ol>
+            <p>Folien: Im geklonten Verzeichnis <code>2016_enterjs.html</code>
+            </p>
+        </section>
+        <section>
             <h1>React Workshop</h1>
             <p>
                 <small><a href="http://nilshartmann.net">Nils Hartmann</a> / <a href="http://twitter.com/nilshartmann">@nilshartmann</a>
@@ -201,6 +215,7 @@
         &lt;/div>);
   }</code></pre>
 <pre class="fragment"><code contenteditable class="javascript">  constructor(props) {
+    super(props);
     this.state = {greeting: this.props.greeting};
   }
   updateModel(event) {
@@ -273,7 +288,8 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
       <section>
           <h3>Schritt #2: Deine erste React-Komponente</h3>
           <ul>
-              <li>Ersetze die "statische" Komponente (HelloMessage) mit der React-Komponente aus dem vorherigen Beispiel (<code>code/hello_world</code>)
+              <li>Ersetze die "statische" Komponente (HelloMessage) mit der React-Komponente aus dem vorherigen Beispiel aus den Folien
+              <li>Experimentiere mit der Anwendung, mache einige Änderungen
           </ul>
       </section>
     </section>
