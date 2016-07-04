@@ -38,7 +38,7 @@ npm run setup
 # Interesse an React Workshops, Schulungen oder Coaching?
 
 Wir bieten diesen Workshop unter anderem auch in einer mehrtägigen Variante oder auch individuelle Trainings und Beratung an.
-Wenn Du noch Unterstützung beim Einstieg in React oder der Entwicklung mit React hast, kannst Du uns gerne [kontaktieren](autoren@reactbuch.de). 
+Wenn Du noch Unterstützung beim Einstieg in React oder bei der Entwicklung mit React hast, kannst Du uns gerne [kontaktieren](autoren@reactbuch.de). Weitere Informationen zu unserem Workshop- und Beratungsangebot findest Du auch unter http://react-workshop.de.
  
 
 
