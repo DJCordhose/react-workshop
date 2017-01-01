@@ -74,20 +74,20 @@ Einführung in die Philosophie von React
 
 Abstract:
 
-Dieser Workshop führt dich in die Philosophie und Programmierung von
+Dieser Workshop führt dich in die Programmierung und Philosophie von
 React ein. Dabei wirst du sehen, wie React mit vielen bisher
 bestehenden Best-Practices bricht und warum das so ist. Wir werden uns
 daher viel Zeit für individuelle Fragestellungen und Übungen nehmen,
-um sicherzustellen, dass diese Grundlagen auch bei dir ankommen.
+um dir diese Grundlagen auch nachhaltig zu vermitteln.
 
 Am Ende es Workshops hast du eine Vorstellung davon, wie
 React-Anwendungen aufgebaut sind und wie du eine neue React-Anwendung
 beginnst. Du kannst ebenso einschätzen, was die Stärken und Schwächen
 von React sind.
 
-Inhaltlich wird du lernen, React-Komponenten zu entwicklen und daraus
-eine ganze Anwendung zu entwickeln. Wir zeigen dir, wie du
-Datenzugriffe auf einen Server machst kannst und wie der typische
+Inhaltlich wirst du lernen, React-Komponenten zu entwicklen und daraus
+eine ganze Anwendung zu bauen. Wir zeigen dir, wie du
+Datenzugriffe auf einen Server machen kannst und wie der typische
 Entwicklungsprozess mit Webpack und Babel aussieht.
 
 Ein kompletter Ausblick auf das React-Ökosystem schließt den Workshop ab, so dass du Orientierung für weitere Themen hast.
@@ -103,7 +103,7 @@ tatsächlich bei Null.
 
 Technische Voraussetzungen der Teilnehmer:
 
-Du brauchst ein Laptop, auf dem du Software installieren kannst und
+Du brauchst einen Laptop, auf dem du Software installieren kannst und
 das den Anforderungen moderner Software-Entwicklung gewachsen ist.
 Bitte installiere bereits node (https://nodejs.org), git
 (https://git-scm.com/downloads) und eine IDE. Wir empfehlen entweder
@@ -113,7 +113,54 @@ Geld ausgeben kannst, Webstorm
 oder IDEA (https://www.jetbrains.com/idea/). Als Browser empfehlen wir
 Chrome, es tut aber auch Firefox, Safari oder der aktuelle
 Edge-Browser von Microsoft.
--->
+
+Mögliche Agenda (grob, ohne Pausen):
+
+- Teil 1 (3 Stunden)
+  - Einführung in React
+  - Build-Prozess
+  - ES6-Grundlagen
+  - React Komponenten
+  - Komponentenhierarchien
+
+- Teil 2 (2 Stunden) Serverzugriffe
+ - Die fetch-Bibliothek
+ - ES6 Promises
+ - Lebenszyklus von React Komponenten
+
+
+- Teil 3 (3 Stunden): Redux
+ - Motivation: Trennung von UI und Logik, nachvollziehbarerer Datenfluss etc
+ - (Einführung Flux?)
+ - Einführung Redux / Redux im Überblick
+ - Action, Action Creator, Reducer
+ - Verbinden von Komponenten
+ - Store (mehrere Reducer)
+ - Middleware / Asynchrone Aufrufe mit thunk
+
+- Teil 4 (1 Stunde): Performance Optimierung
+ - Immutable / shouldComponentUpdate (Immutable ggf schon vorher)
+ - Prod-Build
+
+- Teil 5 (1 Stunde)
+ - Ausblick / Überblick über weiteres React Öko-System
+
+
+              <!--<li>11:00 - 11:30: Teil 0: React-Einführung und Build-Prozess-->
+  <!--<li>11:30 - 12:30: Teil 1: React-Komponenten, ES6 Grundlagen-->
+  <!--<li><em>12:30 - 13:30: Mittagessen</em>-->
+  <!--<li>13:30 - 14:00: Übung für Teil 1-->
+  <!--<li>14:00 - 14:30: Teil 2: Komponentenhierarchien-->
+  <!--<li>14:30 - 15:00: Übung für Teil 2-->
+  <!--<li><em>15:00 - 15:15: Kaffeepause</em>-->
+  <!--<li>15:15 - 15:45: Teil 3: Testen (optional mit kleiner Übung)-->
+  <!--<li>15:45 - 16:15: Teil 4: React Router-->
+  <!--<li>16:15 - 16:45: Übung für Teil 4-->
+  <!--<li><em>16:45 - 17:00: kleine Kaffeepause</em>-->
+  <!--<li>17:00 - 17:30: Teil 5: Remote-Calls gegen Server-->
+  <!--<li>17:30 - max. 18:00: Ausblick/Fragen/Abschluss-->
+
+  -->
 
 
     <!-- Any section element inside of this container is displayed as a slide -->
@@ -218,7 +265,7 @@ Edge-Browser von Microsoft.
   render() {
     return &lt;h1 className='title'>Hello, World!&lt;/h1>
   }
-}                
+}
 </code></pre></section>
 
         <section>
@@ -350,7 +397,7 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
         <img src="webpack-und-babel.png" style="border:0;box-shadow:0 0 0 0"/>
     </section>
 
-    </section>            
+    </section>
     <section>
       <section>
           <h2>Übung 0: React Hello-World</h2>
@@ -366,7 +413,7 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
               <li><code>node setup</code> (auf oberster Ebene)
               <li><code>cd code/workspace</code>
               <li><code>npm run devserver</code>
-              <li>Öffne <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> im Browser 
+              <li>Öffne <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> im Browser
               <li>Wenn auf der Seite 'Hello, World' steht, ist alles gut
           </ul>
       </section>
@@ -704,7 +751,7 @@ class GreetingDetail extends React.Component {
     }
 
     render() {
-        return &lt;input value={this.state.name} 
+        return &lt;input value={this.state.name}
             onChange={e => this.updateModel(e)} />
     }
    // ...
@@ -863,10 +910,10 @@ class GreetingController extends React.Component {
     <section>
         <h3>Properties übergeben mit Object-Spread</h3>
         <ul class="fragment">
-                <li>Übergibt <b>alle</b> Eigenschaften eines Objektes als individuelle Properties</li> 
+                <li>Übergibt <b>alle</b> Eigenschaften eines Objektes als individuelle Properties</li>
         </ul>
         <pre class="fragment"><code class="javascript" contenteditable data-trim>
-class GreetingController extends React.Component { 
+class GreetingController extends React.Component {
 
     const greeting = { name: 'Klaus', greeting: 'Hello' };
 
@@ -917,22 +964,22 @@ GreetingDetail.propTypes = {
             <section>
                 <h3>Architektur Beispiel-Anwendung</h3>
                 <img src="greeting-hierarchy.png" style="border:0;box-shadow:0 0 0 0"/>
-            </section> 
+            </section>
             <section>
                 <h3>GreetingMaster</h3>
                 <img src="greeting-master.png" style="border:0;box-shadow:0 0 0 0"/>
-            </section> 
+            </section>
             <section>
                 <h3>GreetingDetail</h3>
                 <img src="greeting-detail.png" style="border:0;box-shadow:0 0 0 0"/>
-            </section> 
+            </section>
         </section>
 
         <section id="t3">
             <h1>Teil III</h1>
             <h2>Testen</h2>
         </section>
-        
+
         <section>
             <h2>Was testen wir überhaupt?</h2>
             <ul>
@@ -942,7 +989,7 @@ GreetingDetail.propTypes = {
                 <li class="fragment"><b>Verhalten im Browser</b> (z.B. korrekte Darstellung, Browser-spezifisches JavaScript, Arbeiten mit history, Titelzeile, Scrollbars etc)</li>
                 </ul>
         </section>
-        
+
         <section>
             <h2>React Test Utils</h2>
             <ul>
@@ -953,7 +1000,7 @@ GreetingDetail.propTypes = {
                 <li>Shallow Renderer</li>
             </ul>
             </section>
-        
+
         <section>
             <h2>Variante 1: Shallow Rendering</h2>
             <ul>
@@ -967,7 +1014,7 @@ GreetingDetail.propTypes = {
             </section>
         <section>
             <h2>ReactElement</h2>
-            
+
             <div class="fragment">
             <p>Komponente</p>
             <img src="react-element.png" style="border:0;box-shadow:0 0 0 0"/>
@@ -983,12 +1030,12 @@ GreetingDetail.propTypes = {
             <p>Children</p>
             <img class="fragment" src="react-element-3.png" style="border:0;box-shadow:0 0 0 0"/>
         </section>
-        
+
         <section>
             <h2>Beispiel: Shallow Rendering</h2>
             <pre><code class="javascript" contenteditable data-trim>
 import ReactTestUtils from 'react-addons-test-utils';
-                
+
 const renderer = ReactTestUtils.createRenderer();
 
 renderer.render(
@@ -1024,7 +1071,7 @@ expect(rows).toEqual([
 ]);
 </code></pre>
             </section>
-            
+
                     <section>
             <h2>Shallow Rendering: Callbacks aufrufen</h2>
             <pre class="fragment"><code class="javascript" contenteditable data-trim>
@@ -1064,9 +1111,9 @@ const component = ReactTestUtils.renderIntoDocument(
         </pre>
         </code>
             <pre class="fragment"><code class="javascript" contenteditable data-trim>
-const [nameInput, greetingInput] = 
+const [nameInput, greetingInput] =
   ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'input');
-const [clearButton, saveButton] = 
+const [clearButton, saveButton] =
   ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'button');
         </pre>
         </code>
@@ -1077,18 +1124,18 @@ expect(clearButton.value).toEqual('');
         </pre>
         </code>
         </section>
-        
+
         <section>
             <h2>Testen</h2>
             <ul>
             <li>React-Anwendungen sind sehr gut testbar, auch ohne Browser
             <li>Ausblick/Alternativen:
-                <a href="https://github.com/airbnb/enzyme" target="_blank"> 
-                airbnb enzyme</a>,  
+                <a href="https://github.com/airbnb/enzyme" target="_blank">
+                airbnb enzyme</a>,
                 <a href="https://github.com/bruderstein/unexpected-react" target="_blank">unexpected react</a></li>
             </ul>
             </section>
-            
+
             <section>
                 <section>
                     <h2>Übung 3: Eine React-Komponente testen</h2>
@@ -1110,9 +1157,9 @@ expect(clearButton.value).toEqual('');
                 </section>
 
             </section>
-                
-                
-        
+
+
+
 
         <!--Master View wäre gutes Beispiel für shallow rendering-->
 
