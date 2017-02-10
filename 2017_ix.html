@@ -190,10 +190,10 @@ Ende gegen 16.30 Uhr
                 <li>Im geklonten Verzeichnis: <code>npm install</code></li>
                 <li>Im geklonten Verzeichnis: <code>npm run setup</code></li>
                 <li>In <code>code/workspace</code> wechseln</li>
-                <li>Ausf&uuml;hren: <code>npm run devserver</code></li>
-                <li>Browser &ouml;ffnen: http://localhost:8080</li>
+                <li>Ausführen: <code>npm start</code></li>
+                <li>Browser öffnen: http://localhost:8080</li>
             </ol>
-            <p>Folien: Im geklonten Verzeichnis <code>2016_enterjs.html</code>
+            <p>Folien: Im geklonten Verzeichnis <code>2017_ix.html</code>
             </p>
         </section>
         <section>
@@ -206,7 +206,7 @@ Ende gegen 16.30 Uhr
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </small>
             </p>
-            <p><small><a href="http://bit.ly/1UgnAH4">http://bit.ly/1UgnAH4</a></small></p>
+            <p><small><a href="http://bit.ly/react-ix">http://bit.ly/react-ix</a></small></p>
 
         </section>
 
@@ -216,7 +216,77 @@ Ende gegen 16.30 Uhr
                 <li><a href="#/t0">Teil 0: React-Einführung und Build-Prozess</a>
                 <li><a href="#/t1">Teil I: React-Komponenten und ES6 Grundlagen</a>
                 <li><a href="#/t2">Teil II: Komponentenhierarchien</a>
-                <li><a href="#/t5">Teil III: Remote-Calls gegen Server</a>
+                <li><a href="#/t3">Teil III: Remote-Calls gegen Server</a>
+<pre class="todo">
+- Server bauen und fertig mit ausliefern
+- Lösung umbauen
+- Ordentlich Übungsbeschreibung
+- Auf dem Server speichern
+  - Detail delegiert an Controller
+  - Controller macht Call mit neuem Gruß
+    - Zusatz: add-Button sperren (oder modalen Progress Spinner als neue Komponente)
+  - Server gibt id zurück
+  - Controller fügt in Liste Gruß und id ein
+- Zurück auf die Master-Seite
+</pre>
+
+                <li><a href="#/t4">Teil IV: Integration mit 3rd-Party Libs</a>
+<pre class="todo">
+- Von https://djcordhose.github.io/angular2-react/code/react/3-third-party-integration kopieren
+  - Eingabe ist Liste aller Grüße, Komponente aggregiert selbst
+- Erklären wie es funktioniert und was nvd3 braucht (dom node und css)
+- In Material vorbereiten
+- Folien und Erklärung aus https://djcordhose.github.io/angular2-react/2017.html übernehmen
+- Übung 1: Hinweg, Hinzufügen von Gruß updated Chart
+  - Pie Chart kommt rechts neben Liste
+- Beispiel für Rückweg bauen (wir selbst)
+  - Klicken auf Segment in Pie Chart filtert
+    - Aufgabe für uns: wie kriegt man den Click aus NVD3 mit?
+- Übung 2: Rückweg (optional bei Zeitnot)
+  - Filter in Controller bereits vorbereitet
+  - Code für Klick aus nvd3 bereits vorgeben
+    chart.pie.dispatch.on("elementClick", function(e) {
+        alert("You've clicked " + e.data.label);
+    });
+  - Aufgabe: Anbindung des Charts komplett bauen
+    - Callback reinreichen
+      - im Chart aufrufen
+      - im Controller verarbeiten
+</pre>
+                <li><a href="#/t5">Teil V: Redux</a>
+<pre>
+- Zähler als dritte Komponente vorgeben
+  - x (gefiltert)/y (insgesamt)
+- Einleitende Übung für Flux / Redux
+- Komplette Anwendung, damit klar ist, wie sie funktioniert
+  - keinen Code zeigen
+  - Herausforderungen
+    - Verteilte Logik
+       - Aggreation in Chart
+       - Filterung in Controller
+       - Counter
+       - Server Aufruf
+    - Sicher stellen, dass alle drei Darstellungen konsistent sind
+    - Controller ist Gottkomponente (mit aller Logic und allem State)
+    - Möglichkeiten diskutieren
+      - I: Smart-, Dumb-Komponent (wie gehabt)
+      - II: Event-Bus mit verteiltem State
+        - Wie wird
+    Setting: Auf einer Seite gibt es als Atome, tief in der Hierarchy Drop Down Menüs. Wenn man eines öffnet, sollen alle anderen geschlossen werden.
+    Sinn: Teilnehmer verstehen die Herausforderung wie Komponenten mit einander kommunizieren
+    Vorbereitung: Wir geben die Hierarchie auf einem Zettel (echtes Papier) vor und bringen ein paar Stifte mit.
+
+        Teilnehmer sollen skizzieren, wie man die Drop-Downs steuert.
+
+        Evtl.
+    vor der Redux Einführung? Um nicht so tolle Beispiele auch benennen zu
+    können? Als kleine Architektur-Übung zusammen?
+
+
+
+</pre>
+                <li><a href="#/t6">Teil VI: Performance</a>
+                <li><a href="#/t7">Teil VII: Ausblick</a>
             </ul>
         </section>
 
@@ -230,20 +300,6 @@ Ende gegen 16.30 Uhr
                 <li>Was in TODO.md steht
                 <li>Computed Properties erklären in Folie oder aus dem Beispiel herausnehmen
             </ul>
-<pre>
-Einleitende Übung für Flux / Redux
-Setting: Auf einer Seite gibt es als Atome, tief in der Hierarchy Drop Down Menüs. Wenn man eines öffnet, sollen alle anderen geschlossen werden.
-Sinn: Teilnehmer verstehen die Herausforderung wie Komponenten mit einander kommunizieren
-Vorbereitung: Wir geben die Hierarchie auf einem Zettel (echtes Papier) vor und bringen ein paar Stifte mit.
-
-    Teilnehmer sollen skizzieren, wie man die Drop-Downs steuert.
-
-    Evtl.
-vor der Redux Einführung? Um nicht so tolle Beispiele auch benennen zu
-können? Als kleine Architektur-Übung zusammen?
-
-
-</pre>
         </section>
         <!--<section>-->
             <!--<h3>Plan</h3>-->
@@ -370,21 +426,21 @@ console.log(programmer instanceof Person); // true</code></pre>
 </code></pre>
         </section>
 
-                <section>
-                    <h3>ES6: Lexcial Binding an this bei Arrow-Functions</h3>
-<pre><code class="javascript" contenteditable data-trim="">
-const obj = {
-    methodOfObj: function () {
-      console.log(`In Method: ${obj === this}`); // true
-        ['1', '2', '3'].forEach( e => {
-           console.log(`In Loop: ${obj === this}`); // true
-        });
-    }
-};
+                <!--<section>-->
+                    <!--<h3>ES6: Lexcial Binding an this bei Arrow-Functions</h3>-->
+<!--<pre><code class="javascript" contenteditable data-trim="">-->
+<!--const obj = {-->
+    <!--methodOfObj: function () {-->
+      <!--console.log(`In Method: ${obj === this}`); // true-->
+        <!--['1', '2', '3'].forEach( e => {-->
+           <!--console.log(`In Loop: ${obj === this}`); // true-->
+        <!--});-->
+    <!--}-->
+<!--};-->
 
-obj.methodOfObj();
-</code></pre>
-            </section>
+<!--obj.methodOfObj();-->
+<!--</code></pre>-->
+            <!--</section>-->
 
 
         </section>
@@ -440,7 +496,7 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
           <ul>
               <li>Evtl. dafür einen Proxy konfigurieren <a target="_blank" href="http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/">http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/</a></li>
               <li><code>npm install</code> (auf oberster Ebene)
-              <li><code>node setup</code> (auf oberster Ebene)
+              <li><code>npm run setup</code> (auf oberster Ebene)
               <li><code>cd code/workspace</code>
               <li><code>npm run devserver</code>
               <li>Öffne <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> im Browser
@@ -451,7 +507,12 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
           <h3>Schritt #2: Deine erste React-Komponente</h3>
           <ul>
               <li>Ersetze die "statische" Komponente (HelloMessage) mit der React-Komponente aus dem vorherigen Beispiel aus den Folien
-              <li>Experimentiere mit der Anwendung, mache einige Änderungen
+              <li>Experimentiere mit der Anwendung, mache einige Änderungen, wie z.B.
+                  <ul>
+                      <li>Alle Eingaben sollen in Großbuchstaben auftauchen
+                      <li>Gib irgendeine Rückmeldung wenn die Eingabe erfolgreich gelöscht wurde
+                  </ul>
+          </li>
           </ul>
       </section>
     </section>
@@ -1007,373 +1068,6 @@ GreetingDetail.propTypes = {
 
         <section id="t3">
             <h1>Teil III</h1>
-            <h2>Testen</h2>
-        </section>
-
-        <section>
-            <h2>Was testen wir überhaupt?</h2>
-            <ul>
-                <li class="fragment"><b>UI-unabhängige Logik</b> (React-unabhängig)</li>
-                <li class="fragment"><b>Rendern</b> (wird meine Greeting-Liste für ein Satz von Greetings korrekt dargestellt)</li>
-                <li class="fragment"><b>Interaktionen</b> (Funktionieren meine Event-Listener korrekt)</li>
-                <li class="fragment"><b>Verhalten im Browser</b> (z.B. korrekte Darstellung, Browser-spezifisches JavaScript, Arbeiten mit history, Titelzeile, Scrollbars etc)</li>
-                </ul>
-        </section>
-
-        <section>
-            <h2>React Test Utils</h2>
-            <ul>
-                <li>Doku: <a href="https://facebook.github.io/react/docs/test-utils.html">https://facebook.github.io/react/docs/test-utils.html</a></li>
-                <li>Eigenes npm Modul (<code>react-addons-test-utils</code>)</li>
-                <li>Verwendung mit jeder beliebigen Assertion-Bibliothek und Test-Runner</li>
-                <li>Hilfsfunktionen zum Suchen von Elementen und Komponenten im DOM</li>
-                <li>Shallow Renderer</li>
-            </ul>
-            </section>
-
-        <section>
-            <h2>Variante 1: Shallow Rendering</h2>
-            <ul>
-                <li>Rendert <b>virtuellen DOM</b> (kein nativer DOM benötigt)</li>
-                <li>Ein Knoten im virtuellen DOM besteht u.a. aus:
-                    <ul><li><code>type</code> (z.B. <code>div</code>)</li><li>props</code></li></ul>
-                </li>
-                <li>Über den virtuellen DOM kann man Properties abfragen und Callbacks aufrufen
-                <li>Rendert nur <b>eine</b> Hierarchieebene (shallow)
-            </ul>
-            </section>
-        <section>
-            <h2>ReactElement</h2>
-
-            <div class="fragment">
-            <p>Komponente</p>
-            <img src="react-element.png" style="border:0;box-shadow:0 0 0 0"/>
-            </div>
-            <div class="fragment">
-                <p style="margin-top:0px">natives HTML Element</p>
-                <img src="react-element-2.png" style="border:0;box-shadow:0 0 0 0"/>
-            </div>
-        </section>
-
-        <section>
-            <h2>ReactElement</h2>
-            <p>Children</p>
-            <img class="fragment" src="react-element-3.png" style="border:0;box-shadow:0 0 0 0"/>
-        </section>
-
-        <section>
-            <h2>Beispiel: Shallow Rendering</h2>
-            <pre><code class="javascript" contenteditable data-trim>
-import ReactTestUtils from 'react-addons-test-utils';
-
-const renderer = ReactTestUtils.createRenderer();
-
-renderer.render(
-    &lt;GreetingMaster greetings={sampleGreetings} /&gt;
-);
-
-const tree = renderer.getRenderOutput();
-// tree enthält virtuellen DOM
-        </pre>
-        </code>
-        </section>
-        <section>
-            <h2>Shallow Rendering: Assertions</h2>
-            <pre class="fragment"><code class="javascript" contenteditable data-trim>
-. . .
-const tree = renderer.getRenderOutput();
-</code></pre>
-            <pre class="fragment"><code class="javascript" contenteditable data-trim>
-expect(tree.type).toBe('div');
-expect(tree.props.children.length).toEqual(2); // table ~ button
-
-const table = tree.props.children[0];
-expect(table.type).toBe('table');
-
-const tbody = table.props.children[1];
-expect(tbody.type).toBe('tbody');
-</code></pre>
-            <pre class="fragment"><code class="javascript" contenteditable data-trim>
-const rows = tbody.props.children;
-expect(rows).toEqual([
-    &lt;tr key='1'&gt;&lt;td&gt;Olli&lt;/td&gt;&lt;td&gt;Huhu&lt;/td&gt;&lt;/tr&gt;,
-    &lt;tr key='2'&gt;&lt;td&gt;Oma&lt;/td&gt;&lt;td&gt;Hallo&lt;/td&gt;&lt;/tr&gt;
-]);
-</code></pre>
-            </section>
-
-                    <section>
-            <h2>Shallow Rendering: Callbacks aufrufen</h2>
-            <pre class="fragment"><code class="javascript" contenteditable data-trim>
-// Ausgangssituation
-const nameInput = tree.props.children;
-expect(nameInput.props.value).toEqual('Lemmy');
-</code></pre>
-<pre class="fragment"><code class="javascript" contenteditable data-trim>
-const changeEvent = { target: { value: 'Klaus-Dieter' } };
-nameInput.props.onChange(changeEvent);
-</code></pre>
-<pre class="fragment"><code class="javascript" contenteditable data-trim>
-const updatedTree = renderer.getRenderOutput();
-
-const updatedNameInput = updatedTree.props.children;
-expect(updatedNameInput.props.value).toEqual('Klaus-Dieter');
-        </code></pre>
-            </section>
-
-
-        <section>
-            <h2>Variante 2: Rendering ins DOM</h2>
-            <ul>
-                <li>benötigt natives DOM</li>
-                <li>DOM kann aus JSDOM kommen oder aus echtem Browser
-                <li>Rendert einen kompletten Baum
-                <li>Einfacher für Interaktionen, da nur Clicks ausgelöst werden müssen
-            </ul>
-            </section>
-
-        <section>
-            <h2>Beispiel: Rendering ins DOM</h2>
-            <pre class="fragment"><code class="javascript" contenteditable data-trim>
-const component = ReactTestUtils.renderIntoDocument(
-    &lt;GreetingDetail greeting={greeting} />
-);
-        </pre>
-        </code>
-            <pre class="fragment"><code class="javascript" contenteditable data-trim>
-const [nameInput, greetingInput] =
-  ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'input');
-const [clearButton, saveButton] =
-  ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'button');
-        </pre>
-        </code>
-            <pre class="fragment"><code class="javascript" contenteditable data-trim>
-ReactTestUtils.Simulate.click(clearButton);
-expect(nameInput.value).toEqual('');
-expect(clearButton.value).toEqual('');
-        </pre>
-        </code>
-        </section>
-
-        <section>
-            <h2>Testen</h2>
-            <ul>
-            <li>React-Anwendungen sind sehr gut testbar, auch ohne Browser
-            <li>Ausblick/Alternativen:
-                <a href="https://github.com/airbnb/enzyme" target="_blank">
-                airbnb enzyme</a>,
-                <a href="https://github.com/bruderstein/unexpected-react" target="_blank">unexpected react</a></li>
-            </ul>
-            </section>
-
-            <section>
-                <section>
-                    <h2>Übung 3: Eine React-Komponente testen</h2>
-                    <h3>Stelle sicher, dass in der Komponente GreetingDetail das Klicken des Save-Buttons funktioniert:</h3>
-                    <ol>
-                        <li>Der übergebene Event-Handler sollte aufgerufen werden</li>
-                        <li>Dem Event-Handler muss mit einem Objekt aufgerufen werden, das dem eingegebenen Greeting entspricht</li>
-                    </ol>
-                </section>
-                <section>
-                    <h3>Schritte</h3>
-                    <ul>
-                        <li>kopiere das Material aus <code>code/material/3-test</code> in deinen <code>src</code>-Ordner</li>
-                        <li>Verwende die React Test Utils um die <code>GreetingDetail</code>-Komponente zu rendern
-                        <li>Suche im gerenderten DOM den <code>Save</code> Button
-                        <li>"Klicke" den Save Button</li>
-                        <li>Stelle sicher, dass die übergebene <code>onAdd</code>-Callback Funktion aufgerufen wurde</li>
-                        <li>Test kann mit <code>npm run test:watch</code> ausgeführt werden (reagiert auf Code-Änderungen)</ul>
-                </section>
-
-            </section>
-
-
-
-
-        <!--Master View wäre gutes Beispiel für shallow rendering-->
-
-        <!--Identisches Beispiele für shallow rendering und jsdom rendering zeigen-->
-
-        <!--Macht eine Übung überhaupt Sinn? Wenn ja, was machen?-->
-
-        <section id="t4">
-            <h1>Teil IV</h1>
-            <h2>React Router</h2>
-            <a href="code/schritte/4-router/public/index.html" target="_blank">Ziel-Anwendung</a>
-        </section>
-
-        <section>
-            <h2>API-Reference</h2>
-            <p><a href="https://github.com/reactjs/react-router/blob/master/docs/API.md" target="_blank">
-                https://github.com/reactjs/react-router/blob/master/docs/API.md
-            </a>
-            </p>
-        </section>
-
-        <section>
-            <h3>Themen</h3>
-            <ul>
-                <li><code>Route</code> und <code>IndexRoute</code>
-                <li>history
-                <li>Nested routes und das <code>children</code>-Property
-                <li>Links
-                <li><code>location</code> und <code>param</code> Property und <code>componentWillReceiveProps</code>
-            </ul>
-        </section>
-
-        <section>
-            <h3>Router, Route, IndexRoute, Redirect</h3>
-<pre class="fragment"><code class="xml" contenteditable data-trim>
-import { Router, Route, Redirect, IndexRoute, hashHistory }
-    from 'react-router';
-
-const routes = &lt;Router history={hashHistory}>
-  &lt;Redirect from="/vote" to="/votes"/>
-  &lt;Route path="/" component={Layout}>
-    &lt;IndexRoute component={VotePage}/>
-    &lt;Route path="votes/:id" component={SingleVotePage}/>
-    &lt;Route path="login(/:redirect)" component={LoginPage}/>
-    &lt;Route path="compose" component={VoteComposerPage} onEnter={requireAuth}/>
-    &lt;Route path="*" component={NoMatchPage}/>
-  &lt;/Route>
-&lt;/Router>;
-</code></pre>
-        </section>
-
-        <section>
-            <h3>Router</h3>
-            <ul class="fragment">
-                <li>Echte React-Komponente</li>
-                <li>Top-Level-Komponente, entscheidet anhand der <b>history</b>, was dargestellt wird</li>
-                <li>hat Routen als Kinder</li>
-            </ul>
-<pre class="fragment"><code class="xml" contenteditable data-trim>
-const routes = &lt;Router history={hashHistory}>
-...
-&lt;/Router>;
-</code></pre>
-        </section>
-
-        <section>
-            <h3>History</h3>
-            <ul class="fragment">
-                <li>kommt aus dem <a target="_blank" href="https://github.com/mjackson/history">history</a>-Projekt</li>
-                <li>Abstraktion der History des Browsers</li>
-                <li>kann zur Navigation genutzt werden</li>
-                <li>liefert aktuelle URL mundgerecht an den Router</li>
-                <li><code>hashHistory</code> codiert Pfad in angehängten Hash (#/vote)
-                <li><code>browserHistory</code> codiert Pfad direkt in URL (/vote)
-            </ul>
-<pre class="fragment"><code class="javascript" contenteditable data-trim>
-// Push a new entry onto the history stack.
-history.push('/home')
-
-// Replace the current entry on the history stack.
-history.replace('/profile')
-</code></pre>
-        </section>
-
-        <section>
-            <h3>Route</h3>
-            <ul class="fragment">
-                <li>Konfigurations-Komponente</li>
-                <li>welche Komponente soll bei welcher URL darstellt werden</li>
-                <li>können verschachtelt werden (nested)</li>
-                <li>Matching der URL mit Konfiguration ergibt einen Pfad</li>
-                <li>Alle Komponenten des Pfads werden dargestellt</li>
-            </ul>
-<pre class="fragment"><code class="xml" contenteditable data-trim>
-// plain match (containing nested routes)
-&lt;Route path="/" component={Layout}>
-    // id is passed as parameter to component
-    &lt;Route path="votes/:id" component={SingleVotePage}/> /
-    // redirect is optional
-    &lt;Route path="login(/:redirect)" component={LoginPage}/>
-    // onEnter and onExit possible as hooks
-    &lt;Route path="compose" component={VoteComposerPage}
-        onEnter={requireAuth}/>
-    // wildcard
-    &lt;Route path="*" component={NoMatchPage}/>
-&lt;/Route>
-</code></pre>
-        </section>
-
-        <section>
-            <h3>IndexRoute und Redirect</h3>
-<pre class="fragment"><code class="xml" contenteditable data-trim>
-  // /vote redirects to /votes
-&lt;Redirect from="/vote" to="/votes"/>
-&lt;Route path="/" component={Layout}>
-  // will be rendered additionally when path is just /
-  &lt;IndexRoute component={VotePage}/>
-  // ...
-&lt;/Route>
-</code></pre>
-        </section>
-
-        <section>
-            <h3>Nested Routes und children</h3>
-            <ul class="fragment">
-                <li>Router rendert den gematchten Komponenten-Pfad als seine Unterkomponenten
-                <li>Unterkomponenten werden als <code>children</code> in den <code>props</code> übergeben
-                <li><code>children</code> kann grundsätzlich eine oder mehrere Komponenten sein
-                <li>beim Router ist es immer nur eine Komponente
-            </ul>
-<pre class="fragment"><code class="xml" contenteditable data-trim>
-export default function Layout(props) {
-    return <div>
-        <h1>Greetings</h1>
-        {props.children}
-    </div>;
-}
-</code></pre>
-        </section>
-
-            <section>
-                <h3>Link</h3>
-                <ul class="fragment">
-                    <li>Echte React-Komponente</li>
-                    <li>Ein Link auf eine Route</li>
-                    <li>wird als <code>a</code>-Element gerendert</li>
-                    <li>hat zudem einen Click-Handler, der den Default verhindert und das history-Objekt updated</li>
-                    <li>weiß, ob die Route auf die sie verweist, aktiv ist</li>
-                </ul>
-<pre class="fragment"><code class="xml" contenteditable data-trim>
-&lt;Link to={`/votes/${vote.id}`} activeClassName='active'>
-  <h1 className="Title">{vote.title}</h1>
-&lt;/Link>
-</code></pre>
-        </section>
-
-        <section>
-            <h3>Datenübergabe an Routen</h3>
-            <p>Der Router übergibt den zu rendernden Routen Daten als Properties</p>
-            <ul class="fragment">
-                <li>Property <code>location</code>: enthält <code>pathname</code> und <code>query</code></li>
-                <li>Property <code>params</code>: die dynamischen Segmente der Route (z.B. <code>id</code>)</li>
-                <li>Lifecycle-Methode <code>componentWillReceiveProps</code>: wird mit neuen Properties aufgerufen, wenn sich die Route geändert hat
-            </ul>
-        </section>
-
-        <section>
-            <section>
-                <h2>Übung 4: Die Anwendung und Admin- und Nutzer-Ansicht unterteilen</h2>
-                <h3>Erstelle eine Route für den bestehenden Admin-Teil und binde eine Nutzer-Ansicht ein, die den Gruß darstellt</h3>
-            </section>
-            <section>
-                <h3>Schritte</h3>
-                <ul>
-                    <li>kopiere das Material aus <code>code/material/4-router</code> in deinen src-Ordner
-                    <li><code>GreetingMaster</code> enthält Links auf darzustellende Grüße
-                    <li>füge in <code>main.js</code> eine Route auf <code>GreetingDisplay</code> hinzu
-                    <li>fülle <code>GreetingDisplay</code> so dass sie einen solchen Gruß darstellt mit den vom Router übergebenen Parametern ausgibt
-                </ul>
-            </section>
-        </section>
-
-        <section id="t5">
-            <h1>Teil V</h1>
             <h2>Remote-Calls gegen Server</h2>
             <a href="code/schritte/5-remote/public/index.html" target="_blank">Ziel-Anwendung</a>
         </section>
