@@ -175,9 +175,11 @@ Tag 2:
 Ende gegen 16.30 Uhr
 
 
+
   -->
 
-
+    <!--http://dpunkt.de/lecture.php?event_id=3536-->
+    
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
         <section>
@@ -221,14 +223,27 @@ Ende gegen 16.30 Uhr
         <section class="todo">
             <ul>
                 <li>Zeilennummern für Code Beispiele
-                <li>Teil 3 (Server) neu bauen mit express API (Daten in Memory halten)
+                <li>Teil 3 (Server) neu bauen mit express API (Daten in Memory halten), lokale Installation
                 <li>Upgrade auf neuestes React
-                <li>Upgrade auf Webpack 2 (optional)
+                <li>Upgrade auf Webpack 2
                 <li>Buildprozess mehr Folien</li>
                 <li>Was in TODO.md steht
                 <li>Computed Properties erklären in Folie oder aus dem Beispiel herausnehmen
             </ul>
+<pre>
+Einleitende Übung für Flux / Redux
+Setting: Auf einer Seite gibt es als Atome, tief in der Hierarchy Drop Down Menüs. Wenn man eines öffnet, sollen alle anderen geschlossen werden.
+Sinn: Teilnehmer verstehen die Herausforderung wie Komponenten mit einander kommunizieren
+Vorbereitung: Wir geben die Hierarchie auf einem Zettel (echtes Papier) vor und bringen ein paar Stifte mit.
 
+    Teilnehmer sollen skizzieren, wie man die Drop-Downs steuert.
+
+    Evtl.
+vor der Redux Einführung? Um nicht so tolle Beispiele auch benennen zu
+können? Als kleine Architektur-Übung zusammen?
+
+
+</pre>
         </section>
         <!--<section>-->
             <!--<h3>Plan</h3>-->
@@ -272,8 +287,8 @@ Ende gegen 16.30 Uhr
         <section>
             <h3>React Komponenten</h3>
             <ul>
-                <li class="fragment">Werden als ES6 Klasse oder Funktion implementiert</code>
-                <li class="fragment">Keine Templatesprache (stattdessen JavaScript)</code>
+                <li class="fragment">Werden als ES6 Klasse oder Funktion implementiert
+                <li class="fragment">Keine Templatesprache (stattdessen JavaScript)
                 <li class="fragment">Templates können HTML-artige Syntax enthalten (JSX)
             </ul>
             <pre class="fragment"><code data-trim contenteditable>class HelloMessage extends React.Component {
@@ -1533,10 +1548,11 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 - React Native
 - Neuer React Kern: https://github.com/acdlite/react-fiber-architecture
 - Router (falls noch nicht vorher passiert)
-- Jest (falls noch nicht vorher passiert)
+    - Jest (falls noch nicht vorher passiert)
 - Flux / Redux (falls noch nicht vorher passiert)
 - Server Side Rendering
 - GraphQL und Relay
+- Auth???? https://dzone.com/articles/adding-authentication-to-a-web-application-with-au?edition=261708&utm_source=Spotlight&utm_medium=email&utm_campaign=web%20dev%202017-01-05
             </pre>
         </section>
 
