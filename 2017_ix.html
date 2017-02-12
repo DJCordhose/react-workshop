@@ -231,6 +231,67 @@ Ende gegen 16.30 Uhr
 </pre>
 
                 <li><a href="#/t4">Teil IV: Integration mit 3rd-Party Libs</a>
+                <section>
+                    <section class="todo">
+<pre>1:1 Kopiert aus React/Angular-Talk: anpassen und übersetzen</pre>
+                    </section>
+
+                <section>
+                    <h2>3rd Party libraries?</h2>
+                    <div class="fragment">
+                    <p>There are a lot of 3rd party libraries around</p>
+                    <p>They are typically not written in the framework of your choice</p>
+                    </div>
+                    <div class="fragment">
+                        <p>Examples</p>
+                        <p><em>jQuery</em> and <em>jQuery</em> plugins like <em>Bootstrap</em></p>
+                        <p><em>d3</em> for interactive SVGs and more abstract charting libs like <em>nvd3</em></p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Our example: Distribution of boxes</h3>
+                    <a href="code/angular2/3-third-party-integration/dist" target="_blank">
+                        <img src="screenshot_3rd_party.png">
+                    </a>
+                    <p><em>nvd3</em> pie chart using <em>d3</em></p>
+                </section>
+
+                <section>
+                    <h3>Challenges</h3>
+                    <ol>
+                        <li>How to get access to the DOM node of the component?
+                        <li>How do we tell the framework that rendering is on us?
+                        <li>When exactly do we take over rendering?
+                        <li>How does the 3rd party lib still get updates from state changes?
+                    </ol>
+                </section>
+                <section>
+                    <h4>React Chart Component</h4>
+                    <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+class Chart extends React.Component {
+    render() {
+        // (1) we render an empty svg and remember the reference to the DOM node
+        return &lt;svg ref={c => this._chart = c}>&lt;/svg>
+    }
+    shouldComponentUpdate() {
+        // (2) once rendered react never renders again
+        return false;
+    }
+    componentDidMount() {
+        // (3) once rendered by react we create the nvd3 chart
+        const data = calculateDistributionData(this.props.positions);
+        createNvd3Chart(this._chart, data);
+    }
+    componentWillReceiveProps(nextProps) {
+        // (4) we still get updates of properties making it reactive
+        const data = calculateDistributionData(nextProps.positions);
+        updateNvd3Chart(this._chart, data);
+    }
+}
+               </code></pre>
+                </section>
+            </section>
 <pre class="todo">
 - Von https://djcordhose.github.io/angular2-react/code/react/3-third-party-integration kopieren
   - Eingabe sind Name-Wert Paare (Verantwortlichkeit und Wiederverwendbarkeit, Dumb-Component)

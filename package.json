@@ -10,7 +10,10 @@
   "devDependencies": {
     "babel-core": "^6.1.21",
     "babel-loader": "^6.1.0",
+    "babel-plugin-transform-class-properties": "^6.22.0",
     "babel-preset-es2015": "^6.1.18",
+    "babel-preset-es2016": "^6.22.0",
+    "babel-preset-es2017": "^6.22.0",
     "babel-preset-react": "^6.1.18",
     "babel-register": "^6.8.0",
     "chai": "^3.5.0",
@@ -28,8 +31,10 @@
   },
   "dependencies": {
     "body-parser": "^1.16.1",
+    "d3": "^3.5.17",
     "es6-promise": "^3.2.1",
     "express": "^4.14.1",
+    "nvd3": "^1.8.5",
     "react": "^15.0.2",
     "react-dom": "^15",
     "react-router": "^2.4.0",

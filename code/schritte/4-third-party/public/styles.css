@@ -1,0 +1,70 @@
+html {
+  margin: 2rem;
+  width: 100%;
+  color: #40434E;
+  background-color: #F2F2F2;
+  font-size: 1.2rem;
+}
+
+input {
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+button {
+  padding: 0.5rem;
+  margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+  background-color: #2980B9;
+  color: #E9E9E9;
+  border: 0;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #4995C7;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-bottom: 1px dotted #40434E;
+  padding-bottom: 0.5rem;
+}
+
+thead {
+  width: 100%;
+  color: #FEFFF2;
+  background-color: #EA6153;
+}
+
+th, td {
+  text-align: left;
+  font-weight: normal;
+  margin: 0;
+  padding: 0.5rem;
+  border: 0;
+}
+
+th {
+  background-color: #EA6153;
+}
+
+tr:nth-child(odd) {
+  background-color: #F6F6F6
+}
+
+tr:nth-child(even) {
+  background-color: #E9E9E9;
+}
+
+table ~ button {
+  margin-top: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+#mount {
+  width: 80%;
+  margin: 0 auto;
+  border: 1px solid #40434E;
+}
