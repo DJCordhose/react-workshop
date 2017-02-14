@@ -8,21 +8,28 @@ const MODE_DETAIL = 'MODE_DETAIL';
 const BACKEND_URL = 'http://localhost:7000/greetings';
 
 
-function saveToServer(greetingToBeSaved) {
+function saveToServer(greetingToBeSaved, onSuccess, onFailure) {
     // Three potential return "scenarios":
     // SCENARIO 1: Server responded, HTTP 201 => OK, as expected
     // SCENARIO 2: Server responded, HTTP != 201 => Server error (e.g. invalid data posted)
     // SCENARIO 3. Server does NOT respond at all (technical problems etc)
+    // SCENARIO 4: An error occurs during the response handling (=> catch-handler will be invoked)
 
     const handleServerResponse = response => response.json()
         .then(json => response.status === 201 ?
-            /* SCENARIO 1  */ {success: true, data: json}
+            /* SCENARIO 1 */ onSuccess(json)
             :
-            /* SCENARIO 2 */ {success: false, error: json.error}
+            /* SCENARIO 2 */ onFailure(json.error)
         );
 
     /* SCENARIO 3 */
-    const handleServerError = err => ({success: false, error: err.message});
+    const handleServerError = err => onFailure(err.message);
+
+    /* SCENARIO 4 */
+    const handleUnexpectedError = err => onFailure('Unexpected error: ' + err);
+
+    // just to provoke exception
+    const snafu = () => { throw new Error('SNAFU')};
 
     return fetch(BACKEND_URL, {
         method: 'POST',
@@ -31,7 +38,10 @@ function saveToServer(greetingToBeSaved) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(greetingToBeSaved)
-    }).then(handleServerResponse, handleServerError);
+    })
+        .then(handleServerResponse, handleServerError)
+        .catch(handleUnexpectedError)
+        ;
 }
 
 
@@ -76,7 +86,7 @@ export default class GreetingController extends React.Component {
 
 
     addGreeting(greetingToBeAdded) {
-        const _addNewGreeting = (newGreetingId) => {
+        const _addNewGreeting = newGreetingId => {
             const newGreeting = Object.assign({}, greetingToBeAdded, {id: newGreetingId});
             const newGreetings = this.state.greetings.concat(newGreeting);
             this.setState({
@@ -87,9 +97,9 @@ export default class GreetingController extends React.Component {
             return newGreeting;
         };
 
-        return saveToServer(greetingToBeAdded)
-            .then(result => result.success ? _addNewGreeting(result.id) : console.error('COULD NOT SAVE GREETING: ', result.error))
-            .catch(err => console.error('An Error occurred:', err));
+        const _reportError = err => console.error('COULD NOT SAVE GREETING: ', err);
+
+        return saveToServer(greetingToBeAdded, _addNewGreeting, _reportError);
     }
 }
 
