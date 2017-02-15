@@ -71,7 +71,7 @@ export default class GreetingController extends React.Component {
                     <GreetingMaster greetings={greetings}
                                     onAdd={() => this.setState({mode: MODE_DETAIL})}
                     /> :
-                    <GreetingDetail onAdd={(greeting) => this.addGreeting(greeting)}/>
+                    <GreetingDetail onAdd={(greeting) => this.saveGreeting(greeting)}/>
                 }
             </div>);
     }
@@ -85,10 +85,10 @@ export default class GreetingController extends React.Component {
     }
 
     componentDidMount() {
-        this._loadGreetings();
+        this.loadGreetings();
     }
 
-    _loadGreetings() {
+    loadGreetings() {
         return loadFromServer(
             greetings => this.setState({greetings}),
             err => console.error('LOADING GREETINGS FAILED:', err)
@@ -96,7 +96,7 @@ export default class GreetingController extends React.Component {
     }
 
 
-    addGreeting(greetingToBeAdded) {
+    saveGreeting(greetingToBeAdded) {
         const _addNewGreeting = newGreetingId => {
             const newGreeting = Object.assign({}, greetingToBeAdded, {id: newGreetingId});
             const newGreetings = this.state.greetings.concat(newGreeting);
