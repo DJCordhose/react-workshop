@@ -68,3 +68,25 @@ table ~ button {
   margin: 0 auto;
   border: 1px solid #40434E;
 }
+
+.Left {
+  width: 50%;
+  float: left;
+}
+
+.Right {
+  width: 50%;
+  float: left;
+}
+
+/* http://nicolasgallagher.com/micro-clearfix-hack */
+.Main:before,
+.Main:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+.Main:after {
+  clear: both;
+}
+
+

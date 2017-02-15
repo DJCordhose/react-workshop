@@ -29,8 +29,8 @@ export default class GreetingController extends React.Component {
         const filtered = filter ? greetings.filter(greeting => greeting.name === filter) : greetings;
 
         return (
-            <div>
-                <div>
+            <div className="Main">
+                <div className="Left">
                     {mode === MODE_MASTER ?
                         <GreetingMaster greetings={filtered}
                                         onAdd={() => this.setState({mode: MODE_DETAIL})}
@@ -38,7 +38,7 @@ export default class GreetingController extends React.Component {
                         <GreetingDetail onAdd={(greeting) => this.addGreeting(greeting)}/>
                     }
                 </div>
-                <div>
+                <div className="Right">
                     <Chart data={aggregatedGreetings} onSegmentSelected={filter => {
                         if (this.state.filter === filter) {
                             // reset filter when clicking again
