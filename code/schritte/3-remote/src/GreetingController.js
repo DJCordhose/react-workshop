@@ -97,7 +97,8 @@ export default class GreetingController extends React.Component {
 
 
     saveGreeting(greetingToBeAdded) {
-        const _addNewGreeting = newGreetingId => {
+        const _addNewGreeting = serverResponse => {
+            const newGreetingId = serverResponse.id;
             const newGreeting = Object.assign({}, greetingToBeAdded, {id: newGreetingId});
             const newGreetings = this.state.greetings.concat(newGreeting);
             this.setState({
