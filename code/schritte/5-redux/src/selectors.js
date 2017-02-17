@@ -1,5 +1,7 @@
 import {Greeting, ChartData} from './types'
 
+export const filterGreetings = (greetings: Array<Greeting>, filter: string) => filter ? greetings.filter(greeting => greeting.name === filter) : greetings;
+
 export function aggregateGreetings(greetings: Array<Greeting>): Array<ChartData> {
 
     // first create an object as map as it is easier to access
@@ -13,8 +15,8 @@ export function aggregateGreetings(greetings: Array<Greeting>): Array<ChartData>
         return data;
     }, {});
 
-    // then concert to data structure Chart expects
-
+    // then convert to data structure Chart expects
     const chartData = Object.entries(dataAsObjectMap).map(entry => ({label: entry[0], value: entry[1]}));
     return chartData;
 }
+
