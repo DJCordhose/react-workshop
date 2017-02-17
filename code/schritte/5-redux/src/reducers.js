@@ -1,11 +1,13 @@
 import {combineReducers} from 'redux';
 
-import {SET_GREETINGS, SET_FILTER} from './actions';
+import {SET_GREETINGS, ADD_GREETING, SET_FILTER, SET_MODE, MODE_MASTER} from './actions';
 
 function greetings(state = [], action) {
     switch (action.type) {
         case SET_GREETINGS:
             return action.greetings;
+        case ADD_GREETING:
+            return [...state, action.greeting];
         default:
             return state;
     }
@@ -14,7 +16,22 @@ function greetings(state = [], action) {
 function filter(state = null, action) {
     switch (action.type) {
         case SET_FILTER:
-            return action.filter;
+            const newFilter = action.filter;
+            if (state === newFilter) {
+                // reset filter when clicking again
+                return null;
+            } else {
+                return newFilter;
+            }
+        default:
+            return state;
+    }
+}
+
+function mode(state = MODE_MASTER, action) {
+    switch (action.type) {
+        case SET_MODE:
+            return action.mode;
         default:
             return state;
     }
@@ -22,5 +39,6 @@ function filter(state = null, action) {
 
 export const rootReducer = combineReducers({
     greetings,
-    filter
+    filter,
+    mode
 });

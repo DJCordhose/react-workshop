@@ -1,59 +1,42 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import GreetingMaster from './GreetingMaster';
 import GreetingDetail from './GreetingDetail';
 import Chart from './Chart';
-import { connect } from 'react-redux';
-import { setFilter } from './actions';
+import * as actions from './actions';
 
 import {aggregateGreetings, filterGreetings} from './selectors';
-
-const MODE_MASTER = 'MODE_MASTER';
-const MODE_DETAIL = 'MODE_DETAIL';
+import {MODE_MASTER, MODE_DETAIL} from './actions';
 
 class GreetingController extends React.Component {
     render() {
-        const {mode} = this.state;
-        const {aggregatedGreetings, greetings} = this.props;
+        const {aggregatedGreetings, greetings, mode} = this.props;
+        const {setMode, saveGreeting, setFilter} = this.props;
 
         return (
             <div className="Main">
                 <div className="Left">
                     {mode === MODE_MASTER ?
                         <GreetingMaster greetings={greetings}
-                                        onAdd={() => this.setState({mode: MODE_DETAIL})}
+                                        onAdd={() => setMode(MODE_DETAIL)}
                         /> :
-                        <GreetingDetail onAdd={(greeting) => this.saveGreeting(greeting)}/>
+                        <GreetingDetail onAdd={greeting => saveGreeting(greeting)}/>
                     }
                 </div>
                 <div className="Right">
-                    <Chart data={aggregatedGreetings} onSegmentSelected={filter => {
-                        if (this.state.filter === filter) {
-                            // reset filter when clicking again
-                            this.setState({filter: null})
-                        } else {
-                            this.setState({filter})
-                        }
-                    }}/>
+                    <Chart data={aggregatedGreetings} onSegmentSelected={filter => setFilter(filter)} />
                 </div>
             </div>);
     }
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            mode: MODE_MASTER,
-        };
-    }
-
 }
 
 export default connect(
     state => ({
         aggregatedGreetings: aggregateGreetings(state.greetings),
-        greetings: filterGreetings(state.greetings, state.filter)
+        greetings: filterGreetings(state.greetings, state.filter),
+        mode: state.mode
     }),
-    (dispatch) => ({
-        onSetFilter: filter => dispatch(setFilter(filter))
-    })
+    dispatch => bindActionCreators(actions, dispatch)
 )(GreetingController);

@@ -1,7 +1,12 @@
 import {BACKEND_URL} from './config';
 
 export const SET_GREETINGS = 'SET_GREETINGS';
+export const ADD_GREETING = 'ADD_GREETING';
 export const SET_FILTER = 'SET_FILTER';
+export const SET_MODE = 'SET_MODE';
+
+export const MODE_MASTER = 'MODE_MASTER';
+export const MODE_DETAIL = 'MODE_DETAIL';
 
 function saveToServer(greetingToBeSaved, onSuccess, onFailure) {
     // Four potential return "scenarios":
@@ -56,7 +61,7 @@ function loadFromServer(onSuccess, onFailure) {
         ;
 }
 
-export const loadGreetings = (dispatch) => {
+export const loadGreetings = dispatch => {
     return loadFromServer(
         greetings => dispatch({
                 type: SET_GREETINGS,
@@ -64,20 +69,22 @@ export const loadGreetings = (dispatch) => {
             }),
         err => console.error('LOADING GREETINGS FAILED:', err)
     );
-}
+};
 
+export const saveGreeting = greetingToBeAdded => dispatch => {
 
-export function saveGreeting(greetingToBeAdded) {
     const _addNewGreeting = serverResponse => {
         const newGreetingId = serverResponse.id;
-        const newGreeting = Object.assign({}, greetingToBeAdded, {id: newGreetingId});
-        const newGreetings = this.state.greetings.concat(newGreeting);
-        this.setState({
-            greetings: newGreetings,
-            mode: MODE_MASTER
+        const greeting = {
+            ...greetingToBeAdded,
+            id: newGreetingId
+        };
+        dispatch({
+            type: ADD_GREETING,
+            greeting
         });
-
-        return newGreeting;
+        dispatch(setMode(MODE_MASTER));
+        return greeting;
     };
 
     const _reportError = err => console.error('COULD NOT SAVE GREETING: ', err);
@@ -85,9 +92,17 @@ export function saveGreeting(greetingToBeAdded) {
     return saveToServer(greetingToBeAdded, _addNewGreeting, _reportError);
 }
 
-export function setFiler(filter) {
+export function setFilter(filter) {
     return {
         type: SET_FILTER,
         filter
     };
 }
+
+export function setMode(mode) {
+    return {
+        type: SET_MODE,
+        mode
+    };
+}
+
