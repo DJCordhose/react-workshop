@@ -13,6 +13,7 @@ const DIRS = [
     'code/schritte/2-hierarchy',
     'code/schritte/3-remote',
     'code/schritte/4-third-party',
+    'code/schritte/5-redux',
     'code/workspace'
 ];
 
