@@ -45,6 +45,10 @@ export default class Chart extends React.Component {
     }
 
     render() {
-        return <svg className="with-3d-shadow with-transitions" ref={c => this._chart = c}></svg>
+        const svgStyle = {
+            height: '500px',
+            width: '600px'
+        };
+        return <svg style={svgStyle} className="with-3d-shadow with-transitions" ref={c => this._chart = c}></svg>
     }
 }
