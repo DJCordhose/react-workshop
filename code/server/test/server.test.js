@@ -23,7 +23,7 @@ describe('GreetingServer', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('array');
-                    res.body.length.should.be.eql(4);
+                    res.body.length.should.be.eql(10);
                     done();
                 });
         });
@@ -56,10 +56,10 @@ describe('GreetingServer', () => {
                 .send({name: 'Moni', greeting: 'Huhu!'})
                 .end((err, res) => {
                     res.should.have.status(201);
-                    res.body.should.eql({id: 5});
-                    const newGreetingInDatabase = db._greetings[4];
+                    res.body.should.eql({id: 11});
+                    const newGreetingInDatabase = db._greetings[10];
                     newGreetingInDatabase.should.be.eql({
-                        id: 5, name: 'Moni', greeting: 'Huhu!'
+                        id: 11, name: 'Moni', greeting: 'Huhu!'
                     });
                     done();
                 });

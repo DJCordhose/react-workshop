@@ -12,6 +12,8 @@ html {
     font-size: 1.2rem;
 }
 
+
+
 input {
     padding: 0.5rem;
     margin: 0.5rem;
@@ -121,14 +123,40 @@ table ~ button {
     float: left;
 }
 
+.Title {
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    justify-content:         space-between;
+
+
+    border-bottom: 3px solid rgba(255, 127, 14, 0.7);
+    padding: 0 0 0.5rem 0;
+    margin: 0 0 1.5rem;
+
+}
+
+h1 {
+    flex: auto;
+    margin: 0;
+    padding: 0;
+}
+
+div.Counter {
+    margin-top: auto;
+}
+
 /* http://nicolasgallagher.com/micro-clearfix-hack */
 .Main:before,
-.Main:after {
+.Main:after,
+.Title:before,
+.Title:after
+{
     content: " "; /* 1 */
     display: table; /* 2 */
 }
 
-.Main:after {
+.Main:after,
+.Title:after {
     clear: both;
 }
 

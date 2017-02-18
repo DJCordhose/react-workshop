@@ -4,19 +4,24 @@ import { connect } from 'react-redux';
 
 import GreetingMaster from './GreetingMaster';
 import GreetingDetail from './GreetingDetail';
+import Counter from './Counter';
 import Chart from './Chart';
 import * as actions from './actions';
 
-import {aggregateGreetings, filterGreetings} from './selectors';
+import {filterGreetings} from './selectors';
 import {MODE_MASTER, MODE_DETAIL} from './actions';
 
 class GreetingController extends React.Component {
     render() {
-        const {aggregatedGreetings, greetings, mode} = this.props;
-        const {setMode, saveGreeting, setFilter} = this.props;
+        const {greetings, mode} = this.props;
+        const {setMode, saveGreeting} = this.props;
 
         return (
             <div className="Main">
+                <div className="Title">
+                    <h1>Greeting App</h1>
+                    <Counter />
+                </div>
                 <div className="Left">
                     {mode === MODE_MASTER ?
                         <GreetingMaster greetings={greetings}
@@ -26,7 +31,7 @@ class GreetingController extends React.Component {
                     }
                 </div>
                 <div className="Right">
-                    <Chart data={aggregatedGreetings} onSegmentSelected={filter => setFilter(filter)} />
+                    <Chart />
                 </div>
             </div>);
     }
@@ -34,7 +39,6 @@ class GreetingController extends React.Component {
 
 export default connect(
     state => ({
-        aggregatedGreetings: aggregateGreetings(state.greetings),
         greetings: filterGreetings(state.greetings, state.filter),
         mode: state.mode
     }),
