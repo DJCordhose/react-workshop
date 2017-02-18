@@ -30,6 +30,7 @@ export default class Chart extends React.Component {
                 .x(function(d) { return d.label })
                 .y(function(d) { return d.value })
                 .showLabels(true);
+            chart.legend.updateState(false);
 
             this._d3selection = d3.select(this._chart);
             this._d3selection
