@@ -6,15 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import GreetingController from './GreetingController';
-// import GreetingDisplay from './GreetingDisplay';
-import Layout from './Layout';
 
 const mountNode = document.getElementById('mount');
-// const router = <Router history={hashHistory }>
-//     <Route path="/" component={Layout}>
-//         <IndexRoute component={GreetingController} />
-//         <Route path="greet/:id" component={GreetingDisplay} />
-//     </Route>
-// </Router>;
 
-ReactDOM.render(<Layout><GreetingController/></Layout>, mountNode);
+ReactDOM.render(<GreetingController/>, mountNode);

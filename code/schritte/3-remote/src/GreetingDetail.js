@@ -8,9 +8,11 @@ export default class GreetingDetail extends React.Component {
             <div>
                 <input ref={input => this.input = input}
                        onChange={event => this.updateModel('name', event.target.value)}
-                       value={name} />
+                       value={name}
+                       placeholder="Name"/>
                 <input onChange={event => this.updateModel('greeting', event.target.value)}
-                       value={greeting} />
+                       value={greeting}
+                       placeholder="Greeting"/>
                 <button
                     onClick={() => this.reset()}>
                     Clear
@@ -21,6 +23,7 @@ export default class GreetingDetail extends React.Component {
                 </button>
             </div>);
     }
+
     constructor(props) {
         super(props);
         const {name, greeting} = this.props.greeting || {name: '', greeting: ''};
@@ -29,10 +32,12 @@ export default class GreetingDetail extends React.Component {
             greeting
         };
     }
+
     reset() {
         this.setState({name: '', greeting: ''});
         this.input.focus();
     }
+
     save() {
         const {onAdd} = this.props;
         const {name, greeting} = this.state;
@@ -48,8 +53,8 @@ export default class GreetingDetail extends React.Component {
 }
 GreetingDetail.propTypes = {
     greeting: PropTypes.shape({
-      name: React.PropTypes.string.isRequired,
-      greeting: React.PropTypes.string.isRequired
+        name: React.PropTypes.string.isRequired,
+        greeting: React.PropTypes.string.isRequired
     }),
     onAdd: PropTypes.func.isRequired
 };

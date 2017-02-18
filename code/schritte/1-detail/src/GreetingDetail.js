@@ -8,9 +8,11 @@ export default class GreetingDetail extends React.Component {
             <div>
                 <input ref={input => this.input = input}
                        onChange={event => this.updateModel('name', event.target.value)}
-                       value={name} />
+                       value={name}
+                       placeholder="Name" />
                 <input onChange={event => this.updateModel('greeting', event.target.value)}
-                       value={greeting} />
+                       value={greeting}
+                       placeholder="Greeting" />
                 <button
                     onClick={() => this.reset()}>
                     Clear
