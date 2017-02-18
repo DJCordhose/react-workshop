@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 
 import {filterGreetings} from './selectors';
 
-const Counter = ({greetings, filteredGreetings}) => (
-    <div className="Counter">Showing {filteredGreetings.length} of {greetings.length} Greetings</div>
+const Counter = ({greetingCount, filteredGreetingsCount}) => (
+    <div className="Counter">Showing {filteredGreetingsCount} of {greetingCount} Greetings</div>
 );
 
 export default connect(
     state => ({
-        greetings: state.greetings,
-        filteredGreetings: filterGreetings(state.greetings, state.filter)
+        greetingCount: state.greetings.length,
+        filteredGreetingsCount: filterGreetings(state.greetings, state.filter).length
     })
 )(Counter);
