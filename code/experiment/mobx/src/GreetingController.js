@@ -13,7 +13,7 @@ export default class GreetingController extends React.Component {
     render() {
         const {store} = this.props;
         const {mode, aggregatedGreetings, filteredGreetings} = store;
-        const {loadGreeting, saveGreeting, setFilter} = store;
+        const {saveGreeting, setFilter} = store;
 
         return (
             <div className="Main">

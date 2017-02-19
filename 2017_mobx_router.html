@@ -91,16 +91,6 @@
         </section>
 
         <section>
-<pre class="todo">
-- Nach 3rd Party
-    - Router rein in Experiment und Folien
-    - MobX Folien und Übung bauen
-</pre>
-
-        </section>
-
-
-        <section>
             <h2>Inhalt</h2>
             <ul>
                 <li><a href="#/t0">Teil 0: React-Einführung und Build-Prozess</a>
@@ -145,7 +135,8 @@
     return &lt;h1 className='title'>Hello, World!&lt;/h1>
   }
 }
-</code></pre></section>
+</code></pre>
+        </section>
 
         <section>
             <h3>Hello World React</h3>
@@ -279,7 +270,7 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
     </section>
     <section>
       <section>
-          <h2>Übung 0: React Hello-World</h2>
+          <h2>Übung: React Hello-World</h2>
           <h3>Mach dich mit den Werkzeugen vertraut und schreib deine erste React-Komponente</h3>
       </section>
       <section>
@@ -677,7 +668,7 @@ class HelloMessage extends React.Component {
 
         <section>
       <section>
-          <h2>Übung 1: Detail-Ansicht für unsere Gruß-Anwendung</h2>
+          <h2>Übung: Detail-Ansicht für unsere Gruß-Anwendung</h2>
           <h3>Erzeuge eine Komponenten mit der man einen Namen und eine Grußformel eingeben kann</h3>
       </section>
       <section>
@@ -832,7 +823,7 @@ GreetingDetail.propTypes = {
 
         <section>
             <section>
-                <h2>Übung 2: Eine komplette Anwendung zusammen setzen</h2>
+                <h2>Übung: Eine komplette Anwendung zusammen setzen</h2>
                 <h3>Füge deinen Detail-View und einen Master-View über eine Controller-Komponente zusammen</h3>
             </section>
             <section>
@@ -893,11 +884,6 @@ fetch(url, {
 </code></pre>
             </section>
 
-
-        <!--<section>-->
-            <!--<h2>Optionale Übung: Remote Calls</h2>-->
-            <!--<h3>Lade und Speichere Grüße vom/auf dem Server</h3>-->
-        <!--</section>-->
 
         <section>
             <h2>Promises</h2>
@@ -1007,7 +993,7 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
                 </section>
         <section>
             <section>
-                <h2>Übung 3: Laden und Speichern der Daten von/auf einem Server</h2>
+                <h2>Übung: Laden und Speichern der Daten von/auf einem Server</h2>
                 <p>Entwickle auf Basis von fetch eine Version, die die Daten auf dem Server laden und dort wieder speichern kann</p>
                 <p>Der Server ist bereits vorgegeben und kann mit <code>npm start</code> im Root-Verzeichnis gestartet werden. Er ist dann unter Port 7000 erreichbar</p>
             </section>
@@ -1119,8 +1105,9 @@ class Chart extends React.Component {
                 </ul>
                 <p>Zusatzaufgabe: Ein zweites Mal klicken auf das Segment soll den Filter wieder löschen</p>
             </section>
+        </section>
 
-            <section id="t5">
+        <section id="t5">
             <h1>Teil V</h1>
             <h2>React Router</h2>
             <a href="code/experiment/router-3/public/index.html" target="_blank">Ziel-Anwendung</a>
@@ -1281,7 +1268,7 @@ export default function Layout(props) {
 
         <section>
             <section>
-                <h2>Übung 4: Die Anwendung und Admin- und Nutzer-Ansicht unterteilen</h2>
+                <h2>Übung: Die Anwendung und Admin- und Nutzer-Ansicht unterteilen</h2>
                 <h3>Erstelle eine Route für den bestehenden Admin-Teil und binde eine Nutzer-Ansicht ein, die den Gruß darstellt</h3>
             </section>
             <section>
@@ -1295,7 +1282,134 @@ export default function Layout(props) {
             </section>
         </section>
 
+        <section id="t6">
+            <h1>Teil VI</h1>
+            <h2>MobX</h2>
+            <a href="code/experiment/mobx/public/index.html" target="_blank">Ziel-Anwendung</a>
+        </section>
 
+        <section>
+            <h2>Referenz</h2>
+            <p><a href="https://mobx.js.org/" target="_blank">
+                https://mobx.js.org/
+            </a>
+            </p>
+        </section>
+
+        <section>
+            <h2>Motivation</h2>
+            <p>Zustand, der über viele Komponenten verteilt ist, macht Programme kompliziert</p>
+            <p>Gemeinsame Nutzung von State in unterschiedlichen Komponenten-Hierarchien ist schwierig</p>
+            <p><strong>MobX zieht State-Management und Handler aus den React-Komponenten heraus</strong></p>
+        </section>
+
+        <section>
+            <h2>Und Redux?</h2>
+            <p><a href="http://redux.js.org/" target="_blank">
+                http://redux.js.org/
+            </a>
+            </p>
+            <ul>
+                <li>Redux ist die Mainstream-Lösung
+                <li>Lässt sich sehr gut testen
+                <li>Fehlersuche und Debugging erstaunlich einfach
+                <li>Funktioniert auch in großen Anwendungen sehr gut
+                <li>Dev-Tools erlauben Magisches
+            </ul>
+            <p>Allerdings: Lernkurve steil, gerade am Anfang wirklich viel Code</p>
+            <p><strong>Redux ist für kleinere Anwendungen meistens Overkill</strong></p>
+            <p>MobX erlaubt einen sehr einfachen Einstieg</p>
+        </section>
+
+        <section>
+            <h2>Prinzipien</h2>
+            <p><a href="https://mobx.js.org/intro/concepts.html" target="_blank">
+                https://mobx.js.org/intro/concepts.html
+            </a>
+            </p>
+            <img src="mobx-action-state-view.png">
+            <ol>
+                <li>Zustand wird extern in einer Klasse gehalten
+                <li>Abgeleitete Darstellungen des Zustands werden automatisch berechnet, sind getter einer Klasse
+                <li>Aktionen, die den Zustand ändern, sind Methoden des Klasse
+                <li>Komponenten werden bei Bedarf automatisch neu gerendert
+            </ol>
+        </section>
+
+        <section>
+            <h2>Beispiel-Zustand</h2>
+            <pre><code class="javascript" contenteditable data-trim>
+class Store {
+    @observable greetings = [];
+    @observable filter = null;
+
+    @computed get filteredGreetings() {
+        return filterGreetings(this.greetings, this.filter);
+    }
+
+    @action.bound
+    setFilter(filter) {
+        if (this.filter === filter) {
+            // reset filter when clicking again
+            this.filter = null;
+        } else {
+            this.filter = filter;
+        }
+    }
+}
+
+export default new Store();
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Komponenten reagieren</h2>
+            <pre class="fragment"><code class="javascript" contenteditable data-trim>
+import store from './store';
+
+ReactDOM.render(&lt;GreetingController store={store}/>, mountNode);
+            </code></pre>
+            <pre class="fragment"><code class="javascript" contenteditable data-trim>
+import {observer} from 'mobx-react';
+
+@observer
+export default class GreetingController extends React.Component {
+    render() {
+        const {store} = this.props;
+        const {filteredGreetings} = store;
+        const {setFilter} = store;
+
+        // ...
+    }
+
+    // ...
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Überblick</h2>
+            <p><a href="https://mobx.js.org/intro/concepts.html" target="_blank">
+                https://mobx.js.org/intro/concepts.html
+            </a>
+            </p>
+            <img src="mobx-flow.png">
+        </section>
+
+        <section>
+            <section>
+                <h2>Übung: Stelle deine Anwendung auf MobX um</h2>
+                <h3>Nutze die vorbereitete Implementierung</h3>
+            </section>
+            <section>
+                <h3>Schritte</h3>
+                <ul>
+                    <li>mache dich mit der vorbereiteten und lauffähigen Implementierung in <code>code/experiment/mobx</code> vertraut
+                    <li>integriere sie in deine bestehende Lösung inklusive des Routings
+                    <li>füge in eine neue Komponente hinzu, die zählt, die viele Grüße es insgesamt gibt und wie viele davon nach der Filterung noch angezeigt werden
+                </ul>
+            </section>
+        </section>
     </div>
 
 </div>
