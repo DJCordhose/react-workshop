@@ -13,7 +13,7 @@ import {MODE_MASTER, MODE_DETAIL} from './actions';
 
 class GreetingController extends React.Component {
     render() {
-        const {greetings, mode} = this.props;
+        const {greetings, mode, currentFilter} = this.props;
         const {setMode, saveGreeting, setFilter} = this.props;
 
         return (
@@ -27,6 +27,8 @@ class GreetingController extends React.Component {
                         <GreetingMaster greetings={greetings}
                                         onAdd={() => setMode(MODE_DETAIL)}
                                         onRowClicked={greeting => setFilter(greeting.name)}
+                                        currentFilter={currentFilter}
+                                        setFilter={setFilter}
                         /> :
                         <GreetingDetail onAdd={greeting => saveGreeting(greeting)}/>
                     }
@@ -41,6 +43,7 @@ class GreetingController extends React.Component {
 export default connect(
     state => ({
         greetings: filterGreetings(state.greetings, state.filter),
+        currentFilter: state.filter,
         mode: state.mode
     }),
     dispatch => bindActionCreators(actions, dispatch)

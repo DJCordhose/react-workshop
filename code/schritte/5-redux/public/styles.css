@@ -152,6 +152,21 @@ div.Counter {
     margin-top: auto;
 }
 
+div.FilterPanel {
+    margin-top: 0.7rem;
+    font-size: 15px;
+}
+
+div.FilterPanel a {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.Filter h1 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
 /* http://nicolasgallagher.com/micro-clearfix-hack */
 .Main:before,
 .Main:after,
