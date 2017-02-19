@@ -2,12 +2,6 @@ import React, {PropTypes} from 'react';
 import d3 from 'd3';
 import nv from 'nvd3';
 
-import {connect} from 'react-redux';
-
-import * as actions from './actions';
-import {aggregateGreetings} from './selectors';
-
-
 export default class Chart extends React.Component {
 
     static propTypes = {
@@ -59,13 +53,3 @@ export default class Chart extends React.Component {
         return <svg style={svgStyle} className="with-3d-shadow with-transitions" ref={c => this._chart = c}></svg>
     }
 }
-
-
-export default connect(
-    state => ({
-        data: aggregateGreetings(state.greetings),
-    }),
-    dispatch => ({
-        onSegmentSelected: filter => dispatch(actions.setFilter(filter))
-    })
-)(Chart);
