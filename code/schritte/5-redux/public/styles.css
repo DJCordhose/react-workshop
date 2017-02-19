@@ -83,6 +83,13 @@ th {
 
 }
 
+tbody tr {
+    cursor: pointer;
+}
+tbody tr:hover {
+    background-color: rgba(255, 187, 120, 0.4);
+}
+
 tr:nth-child(odd) {
     /*background-color: #F6F6F6*/
     background-color: rgba(255, 187, 120, 0.7);

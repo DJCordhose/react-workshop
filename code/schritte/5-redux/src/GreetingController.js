@@ -14,7 +14,7 @@ import {MODE_MASTER, MODE_DETAIL} from './actions';
 class GreetingController extends React.Component {
     render() {
         const {greetings, mode} = this.props;
-        const {setMode, saveGreeting} = this.props;
+        const {setMode, saveGreeting, setFilter} = this.props;
 
         return (
             <div className="Main">
@@ -26,6 +26,7 @@ class GreetingController extends React.Component {
                     {mode === MODE_MASTER ?
                         <GreetingMaster greetings={greetings}
                                         onAdd={() => setMode(MODE_DETAIL)}
+                                        onRowClicked={greeting => setFilter(greeting.name)}
                         /> :
                         <GreetingDetail onAdd={greeting => saveGreeting(greeting)}/>
                     }
