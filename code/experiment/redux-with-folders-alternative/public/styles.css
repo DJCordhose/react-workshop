@@ -2,10 +2,6 @@
     box-sizing: border-box;
 }
 
-*:focus {
-    outline: none;
-}
-
 html {
     /*margin: 2rem;*/
     margin-top: 2rem;
@@ -31,6 +27,7 @@ input {
 }
 
 input:focus {
+    outline: none;
     border: 1px solid rgb(255, 187, 120);
     background-color: rgba(255, 187, 120, 0.3);
 
@@ -84,6 +81,13 @@ th {
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
 
+}
+
+tbody tr {
+    cursor: pointer;
+}
+tbody tr:hover {
+    background-color: rgba(255, 187, 120, 0.4);
 }
 
 tr:nth-child(odd) {
@@ -148,6 +152,21 @@ div.Counter {
     margin-top: auto;
 }
 
+div.FilterPanel {
+    margin-top: 0.7rem;
+    font-size: 15px;
+}
+
+div.FilterPanel a {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.Filter h1 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
 /* http://nicolasgallagher.com/micro-clearfix-hack */
 .Main:before,
 .Main:after,
@@ -162,18 +181,6 @@ div.Counter {
 .Title:after {
     clear: both;
 }
-
-.ActionButton {
-    border-radius: 50%;
-    height: 3.5rem;
-    width: 3.5rem;
-    font-size: 1.75rem;
-
-    /*margin-top: 1rem;*/
-    /*margin-left: 0;*/
-    padding: 0;
-}
-
 
 /* Chart */
 .nvtooltip,
