@@ -601,7 +601,7 @@ class TitleComponent extends React.Component {
 </code></pre>
 <pre class="fragment"><code class="javascript" contenteditable data-trim>
   &lt;TitleComponent title='Hello World' />
-</pre></code>
+</code></pre>
 
         </section>
 
@@ -1014,7 +1014,113 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 
         </section>
 
-                <section id="t5">
+        <section id="t4">
+            <h1>Teil IV</h1>
+            <h2>Integration mit 3rd-Party Bibliotheken</h2>
+            <a href="code/schritte/4-third-party/public/index.html" target="_blank">Ziel-Anwendung</a>
+        </section>
+
+        <section>
+            <h2>3rd Party Libs?</h2>
+            <div class="fragment">
+                <p>Es gibt eine große Anzahl von sehr praktischen JavaScript-Bibliotheken</p>
+                <p>Viele davon sind aber nicht als React-Komponenten entwickelt worden</p>
+            </div>
+            <div class="fragment">
+                <p>Beispiels</p>
+                <p><em>jQuery</em> und <em>jQuery</em> Plugins wie z.B. <em>Bootstrap</em></p>
+                <p><em>d3</em> für interaktive SVGs und Chart Bibliotheken wie <em>nvd3</em></p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Unser Beispiel: Verteilung der Grüße</h3>
+            <a href="code/schritte/4-third-party/public/index.html" target="_blank">
+                <img src="screenshot-nvd3.png" height="400px">
+            </a>
+            <p><em>nvd3</em> Pie Chart mit <em>d3</em></p>
+        </section>
+
+        <section>
+            <h3>Aufgabe: Einbetten des Pie Charts in eine React-Komponente</h3>
+        </section>
+
+        <section>
+            <h3>Herausforderungen?</h3>
+            <ol>
+                <li>Wie kommen wir an den DOM Knoten der React-Komponente?
+                <li>Wie sagen wir React, dass nun NVD3 den Rest macht? Also, dass React nicht mehr neu rendern soll.
+                <li>Änderungen des Zustands sollen nach wie vor richtig dargestellt werden
+                <li>Ab welchem Zeitpunkt soll NVD3 das Rendern übernehmen?
+                <li>Wie können wir aus NVD3 heraus auch wieder andere React-Komponenten beeinflussen?
+            </ol>
+        </section>
+        <section>
+            <h3>React Chart Komponente #1</h3>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+class Chart extends React.Component {
+    render() {
+        // (1) we render an empty svg and
+        //     remember the reference to the DOM node
+        return &lt;svg ref={c => this._chart = c}>&lt;/svg>
+    }
+
+    shouldComponentUpdate() {
+        // (2) once rendered react never renders again
+        return false;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {data} = nextProps;
+        // (3) we still get updates of properties making it reactive
+        updateNvd3Chart(this._chart, data);
+    }
+
+    // ...
+}
+       </code></pre>
+        </section>
+
+        <section>
+            <h3>React Chart Komponent #2</h3>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+class Chart extends React.Component {
+    // ...
+
+    componentDidMount() {
+        const {data, onSegmentSelected} = this.props;
+
+        // (4) once rendered by react we create the nvd3 chart
+        const chart = createNvd3Chart(this._chart, data);
+
+        // (5) we delegate the label of clicked segment
+        //     back to parent component
+        if (onSegmentSelected) {
+            chart.pie.dispatch.on("elementClick",
+                                  e => onSegmentSelected(e.data.label));
+        }
+    }
+}
+       </code></pre>
+        </section>
+
+        <section>
+            <section>
+                <h2>Übung: Ein Pie-Chart integrieren</h2>
+                <h3>Das Pie Chart soll eine Übersicht aller Grüße anzeigen</h3>
+                <h3>Ein Klick auf ein Segment des Pie Charts soll die Liste der Grüße filtern</h3>
+            </section>
+            <section>
+                <h3>Schritte</h3>
+                <ul>
+                    <li>kopiere das Material aus <code>code/material/4-3rd-party</code> in deinen src-Ordner
+                    <li>binde die Chart-Komponente in die render-Methode des <code>GreetingController</code> ein
+                    <li>alle Stellen die du ändern musst sind dort bereits mit einem Kommentar versehen
+                </ul>
+                <p>Zusatzaufgabe: Ein zweites Mal klicken auf das Segment soll den Filter wieder löschen</p>
+            </section>
+
+            <section id="t5">
             <h1>Teil V</h1>
             <h2>React Router</h2>
             <a href="code/experiment/router-3/public/index.html" target="_blank">Ziel-Anwendung</a>
@@ -1188,6 +1294,7 @@ export default function Layout(props) {
                 </ul>
             </section>
         </section>
+
 
     </div>
 
