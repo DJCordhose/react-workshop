@@ -1,9 +1,7 @@
-import {Greeting, ChartData} from './types'
-
-export function aggregateGreetings(greetings: Array<Greeting>): Array<ChartData> {
+export function aggregateGreetings(greetings) {
 
     // first create an object as map as it is easier to access
-    const dataAsObjectMap: { [key: string]: number } = greetings.reduce((data: { [key: string]: number }, greeting) => {
+    const dataAsObjectMap = greetings.reduce((data, greeting) => {
         const {name} = greeting;
         if (data[name]) {
             data[name] = data[name] + 1;
@@ -13,8 +11,7 @@ export function aggregateGreetings(greetings: Array<Greeting>): Array<ChartData>
         return data;
     }, {});
 
-    // then concert to data structure Chart expects
-
+    // then convert to data structure Chart expects
     const chartData = Object.entries(dataAsObjectMap).map(entry => ({label: entry[0], value: entry[1]}));
     return chartData;
 }
