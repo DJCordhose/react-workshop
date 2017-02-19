@@ -14,6 +14,7 @@ const DIRS = [
     'code/schritte/3-remote',
     'code/schritte/4-third-party',
     'code/schritte/5-redux',
+    'code/schritte/6-redux-complete-app',
     'code/experiment/mobx',
     'code/workspace'
 ];
