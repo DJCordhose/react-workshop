@@ -19,6 +19,7 @@ Vergangene Workshops:
 Wir bieten diesen Workshop unter anderem auch in einer mehrtägigen Variante oder auch individuelle Trainings und Beratung an.
 Wenn Du noch Unterstützung beim Einstieg in React oder bei der Entwicklung mit React hast, kannst Du uns gerne [kontaktieren](autoren@reactbuch.de). Weitere Informationen zu unserem Workshop- und Beratungsangebot findest Du auch unter https://react-workshop.de.
  
+# Beispiel Anwendung
 
-
+![Greeting App](greeting-app.png)
 
