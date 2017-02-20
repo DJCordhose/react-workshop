@@ -317,10 +317,6 @@ class Chart extends React.Component {
 </pre>
                 <li><a href="#/t5">Teil V: Redux</a>
 <pre class="todo">
-- Übungen
-  - 1. Diskussion wie man eine größere Anwendung aufstellen kann
-  - 2. Im Material die komplette Anwendung vorgeben nur ohne die Filterung über das Chart
-       - da muss man einmal die ganze Runde drehen
 - Als Motivation:
     - Abstraktionen können helfen: https://twitter.com/deech/status/831606407011115008?s=03
     - Twitter nutzt Redux: https://medium.com/statuscode/dissecting-twitters-redux-store-d7280b62c6b1#.8vi5orv9r
@@ -1331,60 +1327,6 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 // Output:
 // error:  Promise rejected</code></pre>
                 </section>
-
-        <section id="t5">
-            <h1>Teil V</h1>
-            <h2>Redux</h2>
-            <a href="code/schritte/5-redux/public/index.html" target="_blank">Ziel-Anwendung</a>
-        </section>
-
-        <section>
-            <h2>Referenz</h2>
-            <p><a href="http://redux.js.org/" target="_blank">
-                http://redux.js.org/
-            </a>
-            </p>
-        </section>
-
-        <section>
-            <h2>Motivation</h2>
-            <p><a href="http://redux.js.org/docs/introduction/Motivation.html" target="_blank">
-                http://redux.js.org/docs/introduction/Motivation.html
-            </a>
-            </p>
-            <ul>
-                <li>Zustand, der über viele Komponenten verteilt ist, macht Programme kompliziert
-                <li>Gemeinsame Nutzung von State in unterschiedlichen Komponenten-Hierarchien ist schwierig
-                <li>Vermischung von Veränderung von Datenstrukturen und Nebenläufigkeit macht Code schwer verständlich
-            </ul>
-            <p><strong>Bottom-Line: State-Management soll vorhersagbar werden</strong></p>
-        </section>
-
-        <section>
-            <h2>Wieso Redux für das State-Management?</h2>
-            <ul>
-                <li>Redux ist die Mainstream-Lösung
-                <li>Lässt sich sehr gut testen
-                <li>Fehlersuche und Debugging erstaunlich einfach
-                <li>Funktioniert auch in großen Anwendungen sehr gut
-                <li>Dev-Tools erlauben Magisches
-            </ul>
-            <p>Allerdings: Lernkurve steil, gerade am Anfang wirklich viel Code</p>
-            <p><strong>Redux ist für kleinere Anwendungen meistens Overkill</strong></p>
-        </section>
-
-        <section>
-            <h2>Prinzipien</h2>
-            <p><a href="http://redux.js.org/docs/introduction/ThreePrinciples.html" target="_blank">
-                http://redux.js.org/docs/introduction/ThreePrinciples.html
-            </a>
-            </p>
-            <ol>
-                <li>Zustand liegt an einem einzigen, zentralen Ort
-                <li>Zustand ist read-only und immutable
-                <li>Zustands-Änderungen nur über pure Funktionen ohne Seiteneffekte durch Actions
-            </ol>
-        </section>
 
     </div>
 
