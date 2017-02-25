@@ -58,4 +58,4 @@ const processDir = dir => {
 };
 
 // Start
-processDir('.');
+processDir('./code');
