@@ -1,38 +1,61 @@
 const fs = require('fs');
 const os = require('os');
-
+const path = require('path');
 
 
 const SEP = os.platform() === 'win32' ? '\\\\' : '/';
 
-// TODO could be dynamic
-const DIRS = [
-    'code/hello_world',
-    'code/server',
-    'code/schritte/1-detail',
-    'code/schritte/2-hierarchy',
-    'code/schritte/3-remote',
-    'code/schritte/4-third-party',
-    'code/schritte/5-redux',
-    'code/schritte/6-redux-complete-app',
-    'code/experiment/mobx',
-    'code/workspace'
+const EXCLUDED_DIRS = [
+    'node_modules',
+    '.git',
+    '.idea',
+    'dist'
 ];
 
-const processPackageJsonInDirectory = dir => {
+const handlePackageJson = dir => {
+    const inputPackageJsonPath = `${dir}/_package.json`;
+    const outputPackageJsonPath = `${dir}/package.json`;
 
-    const filename = `${dir}/_package.json`;
-    const packageJsonFileName = `${dir}/package.json`;
+    console.log(`Processing ${inputPackageJsonPath} to ${outputPackageJsonPath}...`);
+    const content = fs.readFileSync(inputPackageJsonPath, 'UTF-8');
 
-    console.log(`Processing ${filename} ...`);
-    const content = fs.readFileSync(filename, 'UTF-8');
-    // console.log(content);
-
-    // path.sep
     const newContent = content.replace(/\.\.\//g, `..${SEP}`)
-        .replace(/\/\.bin\//g, `${SEP}.bin${SEP}`)
+        .replace(/\/\.bin\//g, `${SEP}.bin${SEP}`);
 
-    fs.writeFileSync(`${packageJsonFileName}`, newContent);
-}
+    fs.writeFileSync(outputPackageJsonPath, newContent);
+};
 
-DIRS.forEach(processPackageJsonInDirectory);
+const handlerForDirectory = dir => file => {
+    const qualifiedName = path.join(dir, file);
+    fs.stat(qualifiedName, (error, stat) => {
+        if (error) {
+            console.error(`Error stating file '${file}' in '${dir}' (${qualifiedName})`, error);
+            throw error;
+        }
+
+        if (stat.isFile() && file === '_package.json') {
+            handlePackageJson(dir);
+        } else if (stat.isDirectory()) {
+            if (!EXCLUDED_DIRS.includes(file)) {
+                processDir(qualifiedName);
+            }
+        }
+    });
+};
+
+// Read all entries in directory and invoke handler
+const processDir = dir => {
+    fs.readdir(dir, (err, files) => {
+        if (err) {
+            console.error(err);
+            throw err;
+        }
+
+        const handler = handlerForDirectory(dir);
+
+        files.forEach(handler);
+    })
+};
+
+// Start
+processDir('.');
