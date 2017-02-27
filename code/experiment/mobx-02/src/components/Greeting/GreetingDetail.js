@@ -29,7 +29,6 @@ export default class GreetingDetail extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log('GREETING DETAIL - props', props);
         const {name, greeting} = this.props.greeting || {name: '', greeting: ''};
         this.state = {
             name,
@@ -55,7 +54,7 @@ export default class GreetingDetail extends React.Component {
         this.setState({[name]: value});
     }
 }
-GreetingDetail.propTypes = {
+GreetingDetail.wrappedComponent.propTypes = {
     greeting: PropTypes.shape({
         name: React.PropTypes.string.isRequired,
         greeting: React.PropTypes.string.isRequired

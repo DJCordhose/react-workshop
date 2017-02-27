@@ -22,7 +22,6 @@ const FilterPanel = observer(({filter, setFilter}) => {
 
 
 function GreetingMaster(props) {
-    console.log('GreetingMaster props', props);
     const {greetings, setMode, filter, setFilter} = props;
     const body = greetings.map(greeting => <GreetingRow key={greeting.id} greeting={greeting}
                                                         onRowClicked={greeting => setFilter(greeting.name)}/>);
