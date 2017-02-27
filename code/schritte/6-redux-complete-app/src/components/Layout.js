@@ -3,7 +3,7 @@ import Greeting from './Greeting';
 import Counter from './Counter';
 import Chart from './Chart';
 
-const Layout = ({mode}) => (
+const Layout = () => (
     <div className="Main">
         <div className="Title">
             <h1>Greeting App</h1>
