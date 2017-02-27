@@ -8,7 +8,7 @@ import * as actions from '../actions';
 import {aggregateGreetings} from '../selectors';
 
 
-export default class Chart extends React.Component {
+class Chart extends React.Component {
 
     static propTypes = {
         data: PropTypes.array.isRequired,
