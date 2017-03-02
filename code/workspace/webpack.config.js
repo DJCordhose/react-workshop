@@ -6,10 +6,13 @@ module.exports = {
         publicPath: '/dist'
     },
     module: {
-        loaders: [
-            {test: /\.js$/, exclude: /node_modules/,  loader: 'babel'}
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: 'babel-loader'
+            }
         ]
     },
     devtool: 'inline-source-map'
-
 };
