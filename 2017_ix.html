@@ -217,104 +217,7 @@ Ende gegen 16.30 Uhr
                 <li><a href="#/t1">Teil I: React-Komponenten und ES6 Grundlagen</a>
                 <li><a href="#/t2">Teil II: Komponentenhierarchien</a>
                 <li><a href="#/t3">Teil III: Remote-Calls gegen Server</a>
-<pre class="todo">
-- Server bauen und fertig mit ausliefern
-- Lösung umbauen
-- Ordentlich Übungsbeschreibung
-- Auf dem Server speichern
-  - Detail delegiert an Controller
-  - Controller macht Call mit neuem Gruß
-    - Zusatz: add-Button sperren (oder modalen Progress Spinner als neue Komponente)
-  - Server gibt id zurück
-  - Controller fügt in Liste Gruß und id ein
-- Zurück auf die Master-Seite
-</pre>
-
                 <li><a href="#/t4">Teil IV: Integration mit 3rd-Party Libs</a>
-                <section>
-                    <section class="todo">
-<pre>1:1 Kopiert aus React/Angular-Talk: anpassen und übersetzen</pre>
-                    </section>
-
-                <section>
-                    <h2>3rd Party libraries?</h2>
-                    <div class="fragment">
-                    <p>There are a lot of 3rd party libraries around</p>
-                    <p>They are typically not written in the framework of your choice</p>
-                    </div>
-                    <div class="fragment">
-                        <p>Examples</p>
-                        <p><em>jQuery</em> and <em>jQuery</em> plugins like <em>Bootstrap</em></p>
-                        <p><em>d3</em> for interactive SVGs and more abstract charting libs like <em>nvd3</em></p>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Our example: Distribution of boxes</h3>
-                    <a href="code/angular2/3-third-party-integration/dist" target="_blank">
-                        <img src="screenshot_3rd_party.png">
-                    </a>
-                    <p><em>nvd3</em> pie chart using <em>d3</em></p>
-                </section>
-
-                <section>
-                    <h3>Challenges</h3>
-                    <ol>
-                        <li>How to get access to the DOM node of the component?
-                        <li>How do we tell the framework that rendering is on us?
-                        <li>When exactly do we take over rendering?
-                        <li>How does the 3rd party lib still get updates from state changes?
-                    </ol>
-                </section>
-                <section>
-                    <h4>React Chart Component</h4>
-                    <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-class Chart extends React.Component {
-    render() {
-        // (1) we render an empty svg and remember the reference to the DOM node
-        return &lt;svg ref={c => this._chart = c}>&lt;/svg>
-    }
-    shouldComponentUpdate() {
-        // (2) once rendered react never renders again
-        return false;
-    }
-    componentDidMount() {
-        // (3) once rendered by react we create the nvd3 chart
-        const data = calculateDistributionData(this.props.positions);
-        createNvd3Chart(this._chart, data);
-    }
-    componentWillReceiveProps(nextProps) {
-        // (4) we still get updates of properties making it reactive
-        const data = calculateDistributionData(nextProps.positions);
-        updateNvd3Chart(this._chart, data);
-    }
-}
-               </code></pre>
-                </section>
-            </section>
-<pre class="todo">
-- Von https://djcordhose.github.io/angular2-react/code/react/3-third-party-integration kopieren (DONE)
-  - Eingabe sind Name-Wert Paare (Verantwortlichkeit und Wiederverwendbarkeit, Dumb-Component)
-  - Controller-Komponente aggregiert Liste
-- Erklären wie es funktioniert und was nvd3 braucht (dom node und css)
-- In Material vorbereiten
-- Folien und Erklärung aus https://djcordhose.github.io/angular2-react/2017.html übernehmen
-- Übung 1: Hinweg, Hinzufügen von Gruß updated Chart
-  - Pie Chart kommt rechts neben Liste
-- Beispiel für Rückweg bauen (wir selbst) (DONE)
-  - Klicken auf Segment in Pie Chart filtert
-    - Aufgabe für uns: wie kriegt man den Click aus NVD3 mit?
-- Übung 2: Rückweg (optional bei Zeitnot)
-  - Filter in Controller bereits vorbereitet
-  - Code für Klick aus nvd3 bereits vorgeben
-    chart.pie.dispatch.on("elementClick", function(e) {
-        alert("You've clicked " + e.data.label);
-    });
-  - Aufgabe: Anbindung des Charts komplett bauen
-    - Callback reinreichen
-      - im Chart aufrufen
-      - im Controller verarbeiten
-</pre>
                 <li><a href="#/t5">Teil V: Redux</a>
 <pre class="todo">
 - Als Motivation:
@@ -1328,6 +1231,114 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 // error:  Promise rejected</code></pre>
                 </section>
 
+        <section id="t4">
+            <h1>Teil IV</h1>
+            <h2>Integration mit 3rd-Party Bibliotheken</h2>
+            <a href="code/schritte/4-third-party/public/index.html" target="_blank">Ziel-Anwendung</a>
+        </section>
+
+        <section>
+            <h2>3rd Party Libs?</h2>
+            <div class="fragment">
+                <p>Es gibt eine große Anzahl von sehr praktischen JavaScript-Bibliotheken</p>
+                <p>Viele davon sind aber nicht als React-Komponenten entwickelt worden</p>
+            </div>
+            <div class="fragment">
+                <p>Beispiels</p>
+                <p><em>jQuery</em> und <em>jQuery</em> Plugins wie z.B. <em>Bootstrap</em></p>
+                <p><em>d3</em> für interaktive SVGs und Chart Bibliotheken wie <em>nvd3</em></p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Unser Beispiel: Verteilung der Grüße</h3>
+            <a href="code/schritte/4-third-party/public/index.html" target="_blank">
+                <img src="screenshot-nvd3.png" height="400px">
+            </a>
+            <p><em>nvd3</em> Pie Chart mit <em>d3</em></p>
+        </section>
+
+        <section>
+            <h3>Aufgabe: Einbetten des Pie Charts in eine React-Komponente</h3>
+        </section>
+
+        <section>
+            <h3>Herausforderungen?</h3>
+            <ol>
+                <li>Wie kommen wir an den DOM Knoten der React-Komponente?
+                <li>Wie sagen wir React, dass nun NVD3 den Rest macht? Also, dass React nicht mehr neu rendern soll.
+                <li>Änderungen des Zustands sollen nach wie vor richtig dargestellt werden
+                <li>Ab welchem Zeitpunkt soll NVD3 das Rendern übernehmen?
+                <li>Wie können wir aus NVD3 heraus auch wieder andere React-Komponenten beeinflussen?
+            </ol>
+        </section>
+        <section>
+            <h3>React Chart Komponente #1</h3>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+class Chart extends React.Component {
+    render() {
+        // (1) we render an empty svg and
+        //     remember the reference to the DOM node
+        return &lt;svg ref={c => this._chart = c}>&lt;/svg>
+    }
+
+    shouldComponentUpdate() {
+        // (2) once rendered react never renders again
+        return false;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {data} = nextProps;
+        // (3) we still get updates of properties making it reactive
+        updateNvd3Chart(this._chart, data);
+    }
+
+    // ...
+}
+       </code></pre>
+        </section>
+
+        <section>
+            <h3>React Chart Komponent #2</h3>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+class Chart extends React.Component {
+    // ...
+
+    componentDidMount() {
+        const {data, onSegmentSelected} = this.props;
+
+        // (4) once rendered by react we create the nvd3 chart
+        const chart = createNvd3Chart(this._chart, data);
+
+        // (5) we delegate the label of clicked segment
+        //     back to parent component
+        if (onSegmentSelected) {
+            chart.pie.dispatch.on("elementClick",
+                                  e => onSegmentSelected(e.data.label));
+        }
+    }
+}
+       </code></pre>
+        </section>
+
+        <section>
+            <section>
+                <h2>Übung: Ein Pie-Chart integrieren</h2>
+                <h3>Das Pie Chart soll eine Übersicht aller Grüße anzeigen</h3>
+                <h3>Ein Klick auf ein Segment des Pie Charts soll die Liste der Grüße filtern</h3>
+            </section>
+            <section>
+                <h3>Schritte</h3>
+                <ul>
+                    <li>kopiere das Material aus <code>code/material/4-3rd-party</code> in deinen src-Ordner
+                    <li>binde die Chart-Komponente in die render-Methode des <code>GreetingController</code> ein
+                    <li>alle Stellen die du ändern musst sind dort bereits mit einem Kommentar versehen
+                </ul>
+                <p>Zusatzaufgabe: Ein zweites Mal klicken auf das Segment soll den Filter wieder löschen</p>
+            </section>
+        </section>
+
+
         <section id="t5">
             <h1>Teil IV</h1>
             <h2>Redux</h2>
@@ -1354,6 +1365,21 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 
 <script src="reveal.js/lib/js/head.min.js"></script>
 <script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+        $('code').addClass('line-numbers');
+    } );
+</script>
 
 <script>
 
@@ -1392,7 +1418,8 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
             }
             },
             {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
-            {src: 'reveal.js/plugin/notes/notes.js', async: true}
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            {src: 'lib/js/line-numbers.js'}
         ]
     });
 

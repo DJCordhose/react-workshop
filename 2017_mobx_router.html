@@ -79,7 +79,7 @@
                 <li>Ausführen: <code>npm start</code></li>
                 <li>Browser öffnen: http://localhost:8080</li>
             </ol>
-            <p>Folien: Im geklonten Verzeichnis <code>2017_mobx.html</code>
+            <p>Folien: Im geklonten Verzeichnis <code>2017_mobx_router.html</code>
             </p>
         </section>
         <section>
@@ -1289,7 +1289,7 @@ export default function Layout(props) {
 
         <section id="t6">
             <h1>Teil VI</h1>
-            <h2>MobX</h2>
+            <h2>State Management mit MobX</h2>
             <a href="code/experiment/mobx/public/index.html" target="_blank">Ziel-Anwendung</a>
         </section>
 
@@ -1299,6 +1299,7 @@ export default function Layout(props) {
                 https://mobx.js.org/
             </a>
             </p>
+
         </section>
 
         <section>
@@ -1402,8 +1403,22 @@ export default class GreetingController extends React.Component {
         </section>
 
         <section>
+            <h2>Wie kann man noch Stores an Komponenten übergeben?</h2>
+            <a href="https://github.com/mobxjs/mobx/issues/300#issuecomment-223704275" target="_blank">
+                https://github.com/mobxjs/mobx/issues/300#issuecomment-223704275</a>
+            <ol>
+                <li>Explizit durch props
+                <li>Direkter Zugriff aus importierte Stores
+                <li>Implizit über einen Provider (wie bei Redux),
+                    <a target="_blank" href="https://github.com/mobxjs/mobx-react#provider-and-inject">
+                        https://github.com/mobxjs/mobx-react#provider-and-inject
+                    </a>
+            </ol>
+        </section>
+        <section>
             <h3>Zusammenfassung</h3>
-            <img src="mobX-Overview.jpg" height="600px">
+            <img src="ai/mobx.png" height="600px">
+            <!--<img src="mobX-Overview.jpg" height="600px">-->
         </section>
 
         <section>
@@ -1420,12 +1435,34 @@ export default class GreetingController extends React.Component {
                 </ul>
             </section>
         </section>
+
+        <section>
+            <h2>Wie funktioniert MobX?</h2>
+            <a href="https://www.youtube.com/watch?v=TfxfRkNCnmk" target="_blank">
+                RuhrJS 2016 - Michel Weststrate - MAGIC MOBX BECOME A REACTIVE WIZARD IN 30 MINUTES
+            </a>
+        </section>
     </div>
 
 </div>
 
 <script src="reveal.js/lib/js/head.min.js"></script>
 <script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+<script>
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+        $('code').addClass('line-numbers');
+    } );
+</script>
+
 
 <script>
 
@@ -1464,7 +1501,8 @@ export default class GreetingController extends React.Component {
             }
             },
             {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
-            {src: 'reveal.js/plugin/notes/notes.js', async: true}
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            {src: 'lib/js/line-numbers.js'}
         ]
     });
 
