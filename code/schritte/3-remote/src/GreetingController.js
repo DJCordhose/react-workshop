@@ -48,10 +48,10 @@ export default class GreetingController extends React.Component {
             const newGreetingId = serverResponse.id;
             // create a new Greeting object that contains the received id
             // (create a new object for immutability)
-            const newGreeting = Object.assign({}, greetingToBeAdded, {id: newGreetingId});
+            const newGreeting = {...greetingToBeAdded, id: newGreetingId};
             // add the new greetings to the list of all greetings
             // (create a new array for immutability)
-            const newGreetings = this.state.greetings.concat(newGreeting);
+            const newGreetings = [...this.state.greetings, newGreeting];
 
             // set the new list of greetings as our new state
             // also set 'MODE_MASTER' to make sure the master-View is

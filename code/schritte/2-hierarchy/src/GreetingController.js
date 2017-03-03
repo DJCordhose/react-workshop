@@ -44,9 +44,9 @@ export default class GreetingController extends React.Component {
     addGreeting(greetingToBeAdded) {
         const {greetings} = this.state;
         greetingToBeAdded.id = currentId++;
-        greetings.push(greetingToBeAdded);
+        const newGreetings = [...greetings, greetingToBeAdded];
         this.setState({
-            greetings,
+            greetings: newGreetings,
             mode: MODE_MASTER
         });
     }

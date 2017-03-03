@@ -24,7 +24,7 @@ export default class GreetingController extends React.Component {
         const {mode, greetings} = this.state;
         return (
             <div>
-                {mode === MODE_MASTER ? 
+                {mode === MODE_MASTER ?
                     <GreetingMaster greetings={greetings}
                         onAdd={() => this.setState({mode: MODE_DETAIL})}
                     /> : null
@@ -48,9 +48,9 @@ export default class GreetingController extends React.Component {
     addGreeting(greetingToBeAdded) {
         const {greetings} = this.state;
         greetingToBeAdded.id = currentId++;
-        greetings.push(greetingToBeAdded);
+        const newGreetings = [...greetings, greetingToBeAdded];
         this.setState({
-            greetings,
+            greetings: newGreetings,
             mode: MODE_MASTER
         });
     }
