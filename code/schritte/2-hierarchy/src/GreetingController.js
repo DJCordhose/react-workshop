@@ -1,5 +1,5 @@
 import React from 'react';
-// import GreetingMaster from './GreetingMaster';
+
 import GreetingMaster from './GreetingMaster';
 import GreetingDetail from './GreetingDetail';
 
@@ -25,7 +25,7 @@ export default class GreetingController extends React.Component {
         const {mode, greetings} = this.state;
         return (
             <div>
-                {mode === MODE_MASTER ? 
+                {mode === MODE_MASTER ?
                     <GreetingMaster greetings={greetings}
                         onAdd={() => this.setState({mode: MODE_DETAIL})}
                     /> :
