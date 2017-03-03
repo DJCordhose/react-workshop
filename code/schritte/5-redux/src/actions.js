@@ -90,7 +90,7 @@ export const saveGreeting = greetingToBeAdded => dispatch => {
     const _reportError = err => console.error('COULD NOT SAVE GREETING: ', err);
 
     return saveToServer(greetingToBeAdded, _addNewGreeting, _reportError);
-}
+};
 
 export function setFilter(filter) {
     return {

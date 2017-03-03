@@ -22,11 +22,11 @@ class GreetingController extends React.Component {
                         <GreetingMaster greetings={greetings}
                                         onAdd={() => setMode(MODE_DETAIL)}
                         /> :
-                        <GreetingDetail onAdd={greeting => saveGreeting(greeting)}/>
+                        <GreetingDetail onAdd={saveGreeting}/>
                     }
                 </div>
                 <div className="Right">
-                    <Chart data={aggregatedGreetings} onSegmentSelected={filter => setFilter(filter)} />
+                    <Chart data={aggregatedGreetings} onSegmentSelected={setFilter} />
                 </div>
             </div>);
     }
