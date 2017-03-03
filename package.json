@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run server",
     "setup": "node setup.js",
-    "server": "nodemon ./code/server"
+    "server": "nodemon ./code/server",
+    "prettier": "prettier --single-quote --bracket-spacing=false --tab-width 4 --write 'code/**/src/**/*.js'"
   },
   "devDependencies": {
     "babel-core": "^6.1.21",
@@ -27,6 +28,7 @@
     "mocha": "^3.2.0",
     "mocha-jsdom": "^1.1.0",
     "nodemon": "^1.11.0",
+    "prettier": "^0.20.0",
     "react-addons-test-utils": "^15.0.2",
     "react-loader": "^2.0.0",
     "redux-devtools": "^3.3.2",
