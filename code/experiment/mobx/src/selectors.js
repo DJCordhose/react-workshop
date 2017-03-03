@@ -1,11 +1,9 @@
-import {Greeting, ChartData} from './types'
+export const filterGreetings = (greetings, filter) => filter ? greetings.filter(greeting => greeting.name === filter) : greetings;
 
-export const filterGreetings = (greetings: Array<Greeting>, filter: string) => filter ? greetings.filter(greeting => greeting.name === filter) : greetings;
-
-export function aggregateGreetings(greetings: Array<Greeting>): Array<ChartData> {
+export function aggregateGreetings(greetings) {
 
     // first create an object as map as it is easier to access
-    const dataAsObjectMap: { [key: string]: number } = greetings.reduce((data: { [key: string]: number }, greeting) => {
+    const dataAsObjectMap = greetings.reduce((data, greeting) => {
         const {name} = greeting;
         if (data[name]) {
             data[name] = data[name] + 1;
