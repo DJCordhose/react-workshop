@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 
 import {SET_GREETINGS, ADD_GREETING, SET_FILTER, SET_MODE, MODE_MASTER} from './actions';
 
-function greetings(state = [], action) {
+const greetings = (state = [], action) => {
     switch (action.type) {
         case SET_GREETINGS:
             return action.greetings;
@@ -11,9 +11,9 @@ function greetings(state = [], action) {
         default:
             return state;
     }
-}
+};
 
-function filter(state = null, action) {
+const filter = (state = null, action) => {
     switch (action.type) {
         case SET_FILTER:
             const newFilter = action.filter;
@@ -26,16 +26,16 @@ function filter(state = null, action) {
         default:
             return state;
     }
-}
+};
 
-function mode(state = MODE_MASTER, action) {
+const mode = (state = MODE_MASTER, action) => {
     switch (action.type) {
         case SET_MODE:
             return action.mode;
         default:
             return state;
     }
-}
+};
 
 export const rootReducer = combineReducers({
     greetings,

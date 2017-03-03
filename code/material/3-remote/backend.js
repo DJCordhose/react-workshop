@@ -11,7 +11,7 @@ const BACKEND_URL = 'http://localhost:7000/greetings';
  * (due to technical or other reasons, like invalid request parameters). The callback will be invoked with one
  * parameter that contains an error message (string)
  */
-export function saveToServer(greetingToBeSaved, onSuccess, onFailure) {
+export const saveToServer = (greetingToBeSaved, onSuccess, onFailure) => {
     // Four potential return "scenarios":
     // SCENARIO 1: Server responded, HTTP 201 => OK, as expected
     // SCENARIO 2: Server responded, HTTP != 201 => Server error (e.g. invalid data posted)
@@ -34,7 +34,7 @@ export function saveToServer(greetingToBeSaved, onSuccess, onFailure) {
      */
     const handleUnexpectedError = err => onFailure('Unexpected error: ' + err);
 
-    fetch(BACKEND_URL, {
+    return fetch(BACKEND_URL, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -45,7 +45,7 @@ export function saveToServer(greetingToBeSaved, onSuccess, onFailure) {
         .then(handleServerResponse, handleServerError)
         .catch(handleUnexpectedError)
     ;
-}
+};
 
 /**
  * Loads a list of all greetings from the server
@@ -54,14 +54,14 @@ export function saveToServer(greetingToBeSaved, onSuccess, onFailure) {
  * @param onFailure {function} The callback function is invoked when the server call failed. The callback is invoked
  * with one parameter: a string with an error message
  */
-export function loadFromServer(onSuccess, onFailure) {
+export const loadFromServer = (onSuccess, onFailure) => {
     const handleServerResponse = response => response.json()
         .then(json => response.status === 200 ? onSuccess(json) : onFailure(json.error));
     const handleServerError = err => onFailure(err.message);
     const handleUnexpectedError = err => onFailure('Unexpected error: ' + err);
 
-    fetch(BACKEND_URL)
+    return fetch(BACKEND_URL)
         .then(handleServerResponse, handleServerError)
         .catch(handleUnexpectedError)
     ;
-}
+};

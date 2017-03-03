@@ -1,8 +1,10 @@
 import React from 'react';
 
-export default function Layout(props) {
+const Layout = (props) => {
     return <div>
         <h1>Greetings</h1>
         {props.children}
     </div>;
-}
+};
+
+export default Layout;

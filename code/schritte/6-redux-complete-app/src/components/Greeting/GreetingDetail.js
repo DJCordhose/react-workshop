@@ -64,5 +64,3 @@ export default connect(
         onAdd: (greeting) => dispatch(actions.saveGreeting(greeting))
     })
 )(GreetingDetail);
-
-

@@ -11,9 +11,9 @@ export const MODE_DETAIL = 'MODE_DETAIL';
 export const loadGreetings = dispatch => {
     loadFromServer(
         greetings => dispatch({
-                type: SET_GREETINGS,
-                greetings
-            }),
+            type: SET_GREETINGS,
+            greetings
+        }),
         err => console.error('LOADING GREETINGS FAILED:', err)
     );
 };
@@ -39,17 +39,13 @@ export const saveGreeting = greetingToBeAdded => dispatch => {
     saveToServer(greetingToBeAdded, _addNewGreeting, _reportError);
 };
 
-export function setFilter(filter) {
-    return {
-        type: SET_FILTER,
-        filter
-    };
-}
+export const setFilter = filter => ({
+    type: SET_FILTER,
+    filter
+});
 
-export function setMode(mode) {
-    return {
-        type: SET_MODE,
-        mode
-    };
-}
+export const setMode = mode => ({
+    type: SET_MODE,
+    mode
+});
 

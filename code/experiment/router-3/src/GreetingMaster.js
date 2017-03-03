@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-export default function GreetingMaster(props) {
+const GreetingMaster = (props) => {
     const {greetings, onAdd} = props;
     const body = greetings.map(greeting => <tr key={greeting.id}>
         <td>{greeting.name}</td>
@@ -24,4 +24,6 @@ export default function GreetingMaster(props) {
             </button>
         </div>
     );
-}
+};
+
+export default GreetingMaster;

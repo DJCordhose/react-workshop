@@ -6,7 +6,6 @@ import * as actions from '../../actions';
 import {filterGreetings} from '../../selectors';
 import {MODE_DETAIL} from '../../actions';
 
-
 const GreetingRow = ({greeting, onRowClicked}) => (
     <tr onClick={() => onRowClicked(greeting)}>
         <td>{greeting.name}</td>
@@ -24,7 +23,7 @@ const FilterPanel = ({filter, setFilter}) => {
 };
 
 
-function GreetingMaster(props) {
+const GreetingMaster = (props) => {
     const {greetings, setMode, filter, setFilter} = props;
     const body = greetings.map(greeting => <GreetingRow key={greeting.id} greeting={greeting}
                                                         onRowClicked={greeting => setFilter(greeting.name)}/>);
@@ -48,7 +47,7 @@ function GreetingMaster(props) {
             </button>
         </div>
     );
-}
+};
 
 export default connect(
     state => ({

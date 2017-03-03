@@ -1,15 +1,7 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import d3 from 'd3';
 import nv from 'nvd3';
 import {inject} from 'mobx-react';
-
-// state => ({
-//     data: aggregateGreetings(state.greetings),
-// }),
-//     dispatch => ({
-//         onSegmentSelected: filter => dispatch(actions.setFilter(filter))
-//     })
-
 
 @inject( ({store}) => ({
     data: store.aggregatedGreetings,
