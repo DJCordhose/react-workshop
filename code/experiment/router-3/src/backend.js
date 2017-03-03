@@ -1,14 +1,17 @@
-import {BACKEND_URL} from './config';
+const BACKEND_URL = 'http://localhost:7000/greetings';
 
-export const SET_GREETINGS = 'SET_GREETINGS';
-export const ADD_GREETING = 'ADD_GREETING';
-export const SET_FILTER = 'SET_FILTER';
-export const SET_MODE = 'SET_MODE';
-
-export const MODE_MASTER = 'MODE_MASTER';
-export const MODE_DETAIL = 'MODE_DETAIL';
-
-function saveToServer(greetingToBeSaved, onSuccess, onFailure) {
+/**
+ * Saves a new greeting on the server using an HTTP POST request
+ * @param {greeting} greetingToBeSaved - The Greeting object that should be inserted.
+ * The object must not be null and must not contain an id property. The id will be generated on the server.
+ * @param {function} onSuccess - A Callback function that is invoked when a successful response is received from the
+ * server. The callback receives an object as its only parameter that has a property "id" that contains the server
+ * generated id for the new greeting.
+ * @param onFailure {function} onFailure - Callback function that is invoked when the server called failed
+ * (due to technical or other reasons, like invalid request parameters). The callback will be invoked with one
+ * parameter that contains an error message (string)
+ */
+export function saveToServer(greetingToBeSaved, onSuccess, onFailure) {
     // Four potential return "scenarios":
     // SCENARIO 1: Server responded, HTTP 201 => OK, as expected
     // SCENARIO 2: Server responded, HTTP != 201 => Server error (e.g. invalid data posted)
@@ -31,11 +34,6 @@ function saveToServer(greetingToBeSaved, onSuccess, onFailure) {
      */
     const handleUnexpectedError = err => onFailure('Unexpected error: ' + err);
 
-    // just to provoke exception
-    const snafu = () => {
-        throw new Error('SNAFU')
-    };
-
     return fetch(BACKEND_URL, {
         method: 'POST',
         headers: {
@@ -49,7 +47,14 @@ function saveToServer(greetingToBeSaved, onSuccess, onFailure) {
         ;
 }
 
-function loadFromServer(onSuccess, onFailure) {
+/**
+ * Loads a list of all greetings from the server
+ * @param onSuccess {function} A Callback function that is invoked when a successful response is received from the server.
+ * The callback is invoked with one parameter: an Array of all greetings
+ * @param onFailure {function} The callback function is invoked when the server call failed. The callback is invoked
+ * with one parameter: a string with an error message
+ */
+export function loadFromServer(onSuccess, onFailure) {
     const handleServerResponse = response => response.json()
         .then(json => response.status === 200 ? onSuccess(json) : onFailure(json.error));
     const handleServerError = err => onFailure(err.message);
@@ -60,49 +65,3 @@ function loadFromServer(onSuccess, onFailure) {
         .catch(handleUnexpectedError)
         ;
 }
-
-export const loadGreetings = dispatch => {
-    loadFromServer(
-        greetings => dispatch({
-                type: SET_GREETINGS,
-                greetings
-            }),
-        err => console.error('LOADING GREETINGS FAILED:', err)
-    );
-};
-
-export const saveGreeting = greetingToBeAdded => dispatch => {
-
-    const _addNewGreeting = serverResponse => {
-        const newGreetingId = serverResponse.id;
-        const greeting = {
-            ...greetingToBeAdded,
-            id: newGreetingId
-        };
-        dispatch({
-            type: ADD_GREETING,
-            greeting
-        });
-        dispatch(setMode(MODE_MASTER));
-        return greeting;
-    };
-
-    const _reportError = err => console.error('COULD NOT SAVE GREETING: ', err);
-
-    saveToServer(greetingToBeAdded, _addNewGreeting, _reportError);
-};
-
-export function setFilter(filter) {
-    return {
-        type: SET_FILTER,
-        filter
-    };
-}
-
-export function setMode(mode) {
-    return {
-        type: SET_MODE,
-        mode
-    };
-}
-

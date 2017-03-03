@@ -13,20 +13,20 @@ export default class GreetingController extends React.Component {
     render() {
         const {store} = this.props;
         const {mode, aggregatedGreetings, filteredGreetings} = store;
-        const {saveGreeting, setFilter} = store;
+        const {setMode, saveGreeting, setFilter} = store;
 
         return (
             <div className="Main">
                 <div className="Left">
                     {mode === MODE_MASTER ?
                         <GreetingMaster greetings={filteredGreetings}
-                                        onAdd={() => store.mode = MODE_DETAIL}
+                                        onAdd={() => setMode(MODE_DETAIL)}
                         /> :
-                        <GreetingDetail onAdd={(greeting) => saveGreeting(greeting)}/>
+                        <GreetingDetail onAdd={saveGreeting}/>
                     }
                 </div>
                 <div className="Right">
-                    <Chart data={aggregatedGreetings} onSegmentSelected={filter => setFilter(filter)}/>
+                    <Chart data={aggregatedGreetings} onSegmentSelected={setFilter}/>
                 </div>
             </div>);
     }
@@ -35,6 +35,5 @@ export default class GreetingController extends React.Component {
         const {loadGreetings} = this.props.store;
         loadGreetings();
     }
-
 }
 

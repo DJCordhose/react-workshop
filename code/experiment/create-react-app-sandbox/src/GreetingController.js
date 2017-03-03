@@ -102,7 +102,7 @@ export default class GreetingController extends React.Component {
     }
 
     loadGreetings() {
-        return loadFromServer(
+        loadFromServer(
             greetings => this.setState({greetings}),
             err => console.error('LOADING GREETINGS FAILED:', err)
         );
@@ -124,7 +124,7 @@ export default class GreetingController extends React.Component {
 
         const _reportError = err => console.error('COULD NOT SAVE GREETING: ', err);
 
-        return saveToServer(greetingToBeAdded, _addNewGreeting, _reportError);
+        saveToServer(greetingToBeAdded, _addNewGreeting, _reportError);
     }
 }
 
