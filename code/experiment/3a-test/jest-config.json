@@ -1,0 +1,8 @@
+{
+  "verbose": true,
+  "notify": true,
+  "testRegex": "(/test/.*\\.test.js)$",
+  "setupFiles": [
+    "./test/setup-jest.js"
+  ]
+}
