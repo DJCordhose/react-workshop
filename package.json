@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run server",
     "setup": "node setup.js",
-    "server": "nodemon ./code/server",
+    "server": "nodemon ./code/server/src/server.js",
     "prettier": "prettier --single-quote --bracket-spacing=false --tab-width 4 --write 'code/**/src/**/*.js'"
   },
   "devDependencies": {
