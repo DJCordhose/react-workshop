@@ -304,22 +304,22 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
     </section>
 
         <section id="t1">
-            <h1>Teil I</h1>
-            <h2>React-Komponenten und ES6 Grundlagen</h2>
-            <a href="code/schritte/1-detail/public/index.html" target="_blank">Ziel-Anwendung</a>
+            <h1>Part I</h1>
+            <h2>React and ES6 Basics</h2>
+            <a href="code/schritte/1-detail/public/index.html" target="_blank">Complete Application</a>
         </section>
 
         <section>
-            <h3>Themen</h3>
+            <h3>Topics</h3>
             <ul>
                 <li>Rendering
-                <li>Properties und Zustand
+                <li>Properties and State
                 <li>Refs
             </ul>
         </section>
 
         <section>
-            <h2>ES6-Referenz</h2>
+            <h2>ES6-Reference</h2>
             <p><a href="http://exploringjs.com/es6/" target="_blank">
                 http://exploringjs.com/es6/
             </a>
@@ -328,10 +328,10 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
             <section>
                 <h3>React: Rendering</h3>
                 <ul class="fragment">
-                    <li>Jede React-Komponente braucht eine <code>render</code>-Methode:</li>
-                    <li>wird aufgerufen beim ersten Rendering und wenn sich der Zustand ändert</li>
-                    <li>kann HTML-artige JSX-Syntax nutzen</li>
-                    <li>JSX kann pures JavaScript in geschweiften Klammern enthalten (<code>{}</code>)
+                    <li>Every React Component needs a <code>render</code>-Method (or needs to be a function):</li>
+                    <li>will be called when first displayed into DOM and when state changes</li>
+                    <li>uses HTML like JSX syntax</li>
+                    <li>JSX can contain pure JavaScript in curly braces (<code>{}</code>)
                 </ul>
 <pre class="fragment"><code class="xml" contenteditable data-trim>
 class GreetingDetail extends React.Component {
@@ -352,9 +352,9 @@ class GreetingDetail extends React.Component {
            <section>
                 <h3>React: Rendering #2</h3>
                 <ul class="fragment">
-                    <li>DOM-Events werden in React-Events verpackt
-                    <li>React-Events haben weitgehend selbe API wie DOM-Events
-                    <li>Es gibt keine automatische Bindung an Modelle
+                    <li>DOM-Events are wrapped in React-Events
+                    <li>React-Events have very simliar API as DOM-Events
+                    <li>No automatic 2-way binding to models
                 </ul>
 <pre class="fragment"><code class="xml" contenteditable data-trim>
 class GreetingDetail extends React.Component {
@@ -376,7 +376,7 @@ class GreetingDetail extends React.Component {
 </code></pre>
         </section>
         <section>
-            <h3>ES6: Erweiterte Objekt-Literale</h3>
+            <h3>ES6: Extended Object Literals</h3>
    <pre><code class="javascript" contenteditable>const name = 'Oma';
 const person = {
     // ES5: name: name
@@ -388,10 +388,10 @@ console.log(person.name); // Oma
 
 
                     <section>
-                        <h2>ES6: Module, Importe und Exporte</h2>
+                        <h2>ES6: Modules, Imports und Exports</h2>
                     </section>
                     <section>
-                        <h3>ES6: Export einer einzigen Klasse</h3>
+                        <h3>ES6: Export of a single class</h3>
    <pre><code class="javascript" contenteditable>// Person.js
 class Person {
   // ...
@@ -410,7 +410,7 @@ export default class Programmer extends Person {
    </code></pre>
                     </section>
                     <section>
-                        <h3>ES6: Benannte Exporte</h3>
+                        <h3>ES6: Named Export and Import</h3>
    <pre><code class="javascript" contenteditable data-trim>// util.js
 export function displayInPage(text) {
     document.body.innerHTML +=
@@ -457,7 +457,7 @@ displayInPage('Hello, World');
                     <!--</section>-->
 
                     <section>
-                        <h3>ES6: Destructuring von Objekten</h3>
+                        <h3>ES6: Destructuring of Objects</h3>
    <pre><code class="javascript" contenteditable>const person = {
   name: 'Olli',
   email: 'oliver.zeigermann@gmail.com'
@@ -473,6 +473,28 @@ console.log(`notThere=${notThere}`);
 <!--//city=Hamburg-->
 <!--</code></pre>-->
                     </section>
+
+        <section>
+                        <h3>ES6: Template Literals</h3>
+          <p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings">
+         String-Literals with Gaps
+    </a>
+    </p>
+
+   <pre><code class="javascript" contenteditable>const person = 'Oma';
+const language = 'Haskell';
+
+console.log(`${person} programs
+${10 * 1024 * 1024} lines of code
+in ${language}.`);
+// Output:
+// Oma programs
+// 10485760 lines of code
+// in Haskell.
+</code></pre>
+                    </section>
+
+
                     <!--<section>-->
                         <!--<h3>Destructuring bei Parametern</h3>-->
    <!--<pre><code class="javascript" contenteditable>const person = {-->
@@ -565,21 +587,20 @@ console.log(`notThere=${notThere}`);
 
 
         <section>
-            <h3>React: Properties und Zustand</h3>
+            <h3>React: Properties and State</h3>
             <ul class="fragment">
-                <li><b>Properties</b> werden der Komponente von <b>außen</b> übergeben (und nicht verändert)</li>
-                <li><b>Zustand (State)</b> ist eine <b>innere</b> Eigenschaft der Komponente (die verändert werden kann)</li>
-                <li>Beides sind Objekte mit Key-Value-Paaren</li>
-                <li>Beide können an Unterkomponenten übergeben werden</li>
+                <li><b>Properties</b> are being passed to components from <b>outside</b> and are immutable</li>
+                <li><b>State</b> an <b>internal</b> property of a component and can be changed</li>
+                <li>Both are objects containing key-/value pairs</li>
+                <li>Both can be passed to child components</li>
             </ul>
         </section>
 
         <section>
-            <h3>Properties einer Komponente</h3>
+            <h3>Properties of a Component</h3>
             <ul class="fragment">
-                <li>Properties werden von außen über den Konstruktor übergeben</li>
-                <li>Properties dürfen nicht verändert werden</li>
-                <li>Zugriff über <code>this.props</code></li>
+                <li>Properties initially being passed in contructor</li>
+                <li>RO Access using <code>this.props</code></li>
             </ul>
             <pre class="fragment"><code class="javascript" contenteditable data-trim>
 class TitleComponent extends React.Component {
@@ -599,22 +620,21 @@ class TitleComponent extends React.Component {
         </section>
 
         <section>
-            <h3>Zustand einer Komponente</h3>
+            <h3>State of a Component</h3>
             <ul class="fragment">
-                <li>Beispiel: Inhalt eines Eingabefelds, Daten vom Server</li>
-                <li>Werte üblicherweise immutable</li>
-                <li>Initialisieren im Konstruktor mit <code>this.state={}</code>
-                <li>Zustand <b>lesen</b> über <code>this.state</code>
-                <li>Zustand <b>setzen</b> über <code>this.setState()</code>
-                <ul><li>kein "reiner" Setter</li>
-                    <li>Führt alten und neuen Zustand zusammen</li>
-                    <li><b>Löst erneutes rendern der <i>gesamten</i> Komponente aus</b></li>
+                <li>Example: Data from Input Field or loaded from Server</li>
+                <li>Initialization in Constructor <code>this.state={}</code>
+                <li><b>Read</b> state using <code>this.state</code>
+                <li><b>Set</b> state using <code>this.setState()</code>
+                <ul><li>not really a setter</li>
+                    <li>merges old and new state</li>
+                    <li><b>triggers re-rendering of <i>complete</i> component</b></li>
                 </ul>
             </ul>
             </section>
 
             <section>
-                <h3>Beispiel: Zustand einer Komponente</h3>
+                <h3>Example: State of a component</h3>
 <pre><code class="javascript" contenteditable data-trim>
 class GreetingDetail extends React.Component {
     constructor(props) {
@@ -623,7 +643,6 @@ class GreetingDetail extends React.Component {
     }
 
     updateModel(event) {
-        // Zustand ändern: Komponente wird neu gerendert
         this.setState({name: event.target.value});
     }
 
@@ -635,22 +654,13 @@ class GreetingDetail extends React.Component {
 }
 </code></pre>
         </section>
-        <section>
-            <h3>Render Zyklus</h3>
-            <img src="event-zustand-render.png" height="550" style="border:0;box-shadow:0 0 0 0">
-        </section>
-
-        <section>
-            <h3>Virtual DOM</h3>
-            <img src="virtual-dom.png" style="border:0;box-shadow:0 0 0 0">
-        </section>
 
         <section>
             <h3>React: Refs</h3>
             <ul class="fragment">
-                <li>Beim rendern kann man an eine Referenz des unterliegenden DOMs kommen
-                <li>die DOM-Referenz kann einer Funktion übergeben werden
-                <li>Diese Referenz kann man z.B. als Member-Variable speichern
+                <li>When rendering you can get access to the underlying DOM element
+                <li>you get this reference passed into a function
+                <li>typically you store the reference into a class variable
             </ul>
 <pre class="fragment"><code class="javascript" contenteditable data-trim>
 class HelloMessage extends React.Component {
@@ -670,21 +680,20 @@ class HelloMessage extends React.Component {
 
         <section>
       <section>
-          <h2>Übung: Detail-Ansicht für unsere Gruß-Anwendung</h2>
-          <h3>Erzeuge eine Komponenten mit der man einen Namen und eine Grußformel eingeben kann</h3>
+          <h2>Exercise: Detail View for Greeting Application</h2>
+          <h3>Create a component that lets you enter a name and a greeting</h3>
       </section>
       <section>
-          <h3>Schritte</h3>
-          <h4>Erweitere deine erste React-Komponente im workspace-Ordner</h4>
+          <h3>Steps</h3>
+          <h4>Extend you first React Component in the workspace Folder</h4>
           <ul>
-              <li>benenne deine Komponente in <code>GreetingDetail</code> um
-              <li>du brauchst zwei Eingabefelder, die <code>name</code> und <code>greeting</code> im Zustand der Komponente setzen
-              <li>für etwas Styling kopiere das Material in <code>code/material/1-detail</code> in deinen <code>public</code>-Ordner
-              <li><em>Zusatzaufgabe: Erweitere deine Komponente so, dass man von außen Properties übergeben kann, die den Zustand initialisieren</em>
+              <li>rename your component to <code>GreetingDetail</code>
+              <li>you need to input field that set <code>name</code> und <code>greeting</code> in the component's state
+              <li>for basic styling copy material from <code>code/material/1-detail</code> to your <code>public</code> folder
+              <li><em>Optional Step: Extend your component so that you can pass in initial State as Properties from the outside</em>
           </ul>
       </section>
     </section>
-
 
         <section id="t2">
             <h1>Teil II</h1>
