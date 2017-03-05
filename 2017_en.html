@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>React Workshop Part I</title>
+    <title>React Workshop</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -69,17 +69,17 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
         <section>
-            <h3>React Workshop - Vorbereitung</h3>
-            <p>Falls noch nicht gemacht:</p>
+            <h3>React Workshop - Preparation</h3>
             <ol>
-                <li><code>git clone -b gh-pages https://github.com/DJCordhose/react-workshop.git</code></li>
-                <li>Im geklonten Verzeichnis: <code>npm install</code></li>
-                <li>Im geklonten Verzeichnis: <code>npm run setup</code></li>
-                <li>In <code>code/workspace</code> wechseln</li>
-                <li>Ausführen: <code>npm start</code></li>
-                <li>Browser öffnen: http://localhost:8080</li>
+                <li>Install node LTS from https://nodejs.org/en/
+                <li><code>git clone https://github.com/DJCordhose/react-workshop.git</code></li>
+                <li><code>npm install</code></li>
+                <li><code>npm run setup</code></li>
+                <li>cd <code>code/workspace</code></li>
+                <li><code>npm start</code></li>
+                <li>open http://localhost:8080</li>
             </ol>
-            <p>Folien: Im geklonten Verzeichnis <code>2017_en.html</code>
+            <p>Slides: <code>2017_en.html</code>
             </p>
         </section>
         <section>
@@ -122,10 +122,10 @@
 	<!--* Type Checking using Flow-->
 
 
-        <section>
-            <h2>Day I</h2>
+        <section class="todo">
+            <h2>Day I: Introduction</h2>
             <ul>
-                <li><a href="#/t0">Part 0: Setup and Introduction into React (shorten and translate)</a>
+                <li><a href="#/t0">Part 0: Setup and Introduction into React</a>
                 <li><a href="#/t1">Part I: React and ES6 Basics (shorten and translate)</a>
                 <li><a href="#/t2">Part II: Composing Components (shorten and translate)</a>
                 <li><a href="#/t3">Part III: Remote-Calls and Promises (shorten and translate)</a>
@@ -134,44 +134,31 @@
             </ul>
         </section>
 
-        <section>
-            <h2>Day II</h2>
-            <p>Starting point: create sample app, all exercises in sample app</p>
+        <section class="todo">
+            <h2>Day II: Advanced and more Hands-On</h2>
+            <p>Starting point: create sample app, all exercises in sample app, prepare in sample app</p>
+            <p>Should we have slides at all? Or rather show in other applications and let people implement stuff into Sampel App</p>
             <ul>
-                <li><a href="#/t6">Part VI: React Router (copy from mobx, shorten and translate, exercise add a random route tab and link to it)</a>
+                <li><a href="#/t6">Part VI: React Router (copy from mobx, shorten and translate, exercise add a dummy route tab called stats and link to it)</a>
                 <li><a href="#/t7">Part VII: Testing (copy from nils version, shorten and translate, exercise: add tests to sample app)</a>
-                <li><a href="#/t8">Part VIII: 3rd Party integration (copy from mobx and Angular 2 talk, shorten and translate, transform 3rd party chart to github contribution)</a>
-                <li><a href="#/t9">Part IX: Optimizations (create in Englisch based on note in ix, exercise should component update, reselect, immutable.js)</a>
+                <li><a href="#/t8">Part VIII: 3rd Party integration (copy from mobx and Angular 2 talk, shorten and translate, transform 3rd party chart to github contribution and add to stats tab)</a>
+                <li><a href="#/t9">Part IX: Optimizations (create in Englisch based on note in ix and Angular 2 talk, exercise should component update, reselect, immutable.js)</a>
                 <li>Part X: Type checking using Flow (slides from intro talk, examples from Hops Demo App, exercise to type more in hops and malt)
             </ul>
         </section>
 
         <section id="t0">
-            <h1>Teil 0</h1>
-            <h2>React-Einführung und Build-Prozess</h2>
-        </section>
-
-        <section id="react">
-            <h2>React</h2>
-            <ul>
-                <li class="fragment">Framework für Facebook und viele andere
-                <li class="fragment">Komponenten kapseln Template und Logik
-                  <li class="fragment">Deklarativ
-                <li class="fragment">Abstraktion vom DOM: <em>f(model) -> UI</em>
-                <li class="fragment">Minimales API
-                <li class="fragment">Ein-Weg-Data-Binding: Zustandsänderungen stellen Komponente <b>komplett</b> neu dar
-                <li class="fragment">Kann im Browser und auf dem Server rendern
-                <!--<li class="fragment">wird für komplette Anwendung typischerweise mit React Router und einem Flux-Framework gekoppelt-->
-                <!--<li class="fragment">viel Inspiration aus der funktionalen Ecke (Immutable, pure functions, stateless)-->
-            </ul>
+            <h1>Part 0</h1>
+            <h2>Setup and Introduction into React</h2>
         </section>
 
         <section>
-            <h3>React Komponenten</h3>
+            <h3>React: Applications from Components</h3>
             <ul>
-                <li class="fragment">Werden als ES6 Klasse oder Funktion implementiert
-                <li class="fragment">Keine Templatesprache (stattdessen JavaScript)
-                <li class="fragment">Templates können HTML-artige Syntax enthalten (JSX)
+                <li class="fragment">Everything is a component, even an Application
+                <li class="fragment">Components wrap Template and Logic
+                <li class="fragment">Can be implemented as a class or a function
+                <li class="fragment">JSX (HTML like) as template language
             </ul>
             <pre class="fragment"><code data-trim contenteditable>class HelloMessage extends React.Component {
   render() {
@@ -187,7 +174,6 @@
         </section>
 
         <section>
-                <section>
                     <h3>Hello World React</h3>
 <pre><code data-trim contenteditable>class HelloMessage extends React.Component {
   render() {
@@ -217,7 +203,7 @@
                 </section>
 
             <section>
-                <h3>ES6: Klassen</h3>
+                <h3>ES6: Classes</h3>
                 <pre class="fragment"><code class="javascript" contenteditable>class Person {
     constructor(name) {
         this._name = name;
@@ -253,27 +239,8 @@ console.log(programmer instanceof Person); // true</code></pre>
 </code></pre>
         </section>
 
-                <!--<section>-->
-                    <!--<h3>ES6: Lexcial Binding an this bei Arrow-Functions</h3>-->
-<!--<pre><code class="javascript" contenteditable data-trim="">-->
-<!--const obj = {-->
-    <!--methodOfObj: function () {-->
-      <!--console.log(`In Method: ${obj === this}`); // true-->
-        <!--['1', '2', '3'].forEach( e => {-->
-           <!--console.log(`In Loop: ${obj === this}`); // true-->
-        <!--});-->
-    <!--}-->
-<!--};-->
-
-<!--obj.methodOfObj();-->
-<!--</code></pre>-->
-            <!--</section>-->
-
-
-        </section>
-
         <section>
-                    <h3>Aufruf</h3>
+                    <h3>Glue code to start application</h3>
 <pre><code data-trim contenteditable>
 // index.html
 &lt;html>
@@ -295,49 +262,41 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
 
 
     <section>
-        <h2>Buildprozess</h2>
+        <h2>Build Process</h2>
         <ul>
-            <li>ES6- und JSX-Code muss nach ECMAScript 5 übersetzt werden
-            <li>Typische Werkzeuge
+            <li>ES6- und JSX-Code must be converted toECMAScript 5
+            <li>Tools
                 <ul><li>Babel (Compiler)
                     <li>Webpack (Bundler)
-                    <li>Webpack Dev Sever (HTTP Server mit Hot Reload)
+                    <li>Webpack Dev Sever (HTTP Server with Hot Reload)
                     </ul>
         </ul>
     </section>
      <section>
-        <h2>Webpack und Babel</h2>
+        <h2>Webpack and Babel</h2>
         <img src="webpack-und-babel.png" style="border:0;box-shadow:0 0 0 0"/>
     </section>
 
     </section>
     <section>
       <section>
-          <h2>Übung: React Hello-World</h2>
-          <h3>Mach dich mit den Werkzeugen vertraut und schreib deine erste React-Komponente</h3>
+          <h2>Excercise: React Hello-World</h2>
+          <h3>Getting used to tools and write your first React Application</h3>
       </section>
       <section>
-          <h3>Schritt #1: Tool-Chain starten</h3>
-          <p>Nutze das <code>workspace</code>-Verzeichnis in diesem Repository</p>
-          <p>Hier ist eine Tool-Chain mit Webpack und Babel vorbereitet</p>
-          <ul>
-              <li>Evtl. dafür einen Proxy konfigurieren <a target="_blank" href="http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/">http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/</a></li>
-              <li><code>npm install</code> (auf oberster Ebene)
-              <li><code>npm run setup</code> (auf oberster Ebene)
-              <li><code>cd code/workspace</code>
-              <li><code>npm run devserver</code>
-              <li>Öffne <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> im Browser
-              <li>Wenn auf der Seite 'Hello, World' steht, ist alles gut
+          <h3>Step #1: Start Tool-Chain</h3>
+          <p>Make sure you performed steps as described in initial setup</p>
+          <p>If your browser displays 'Hello, World' all is fine
           </ul>
       </section>
       <section>
-          <h3>Schritt #2: Deine erste React-Komponente</h3>
+          <h3>Step #2: Your first React application</h3>
           <ul>
-              <li>Ersetze die "statische" Komponente (HelloMessage) mit der React-Komponente aus dem vorherigen Beispiel aus den Folien
-              <li>Experimentiere mit der Anwendung, mache einige Änderungen, wie z.B.
+              <li>Replace the static component (HelloMessage) with the component you have seen in the previous slides
+              <li>Make experiments
                   <ul>
-                      <li>Alle Eingaben sollen in Großbuchstaben auftauchen
-                      <li>Gib irgendeine Rückmeldung wenn die Eingabe erfolgreich gelöscht wurde
+                      <li>Make all input upper case
+                      <li>Display feedback when input has been cleared successfully
                   </ul>
           </li>
           </ul>
