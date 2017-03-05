@@ -1180,13 +1180,73 @@ const mode = (state = MODE_MASTER, action) => {
             </ul>
         </section>
 
-        <section class="todo">
-<pre>
-- Reducer
-- connected component
-- Excercise: make your application Redux, was vorgeben in Material?
-</pre>
+        <section>
+            <h3>Connecting Store to Components</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import * as actions from './actions';
+
+export default connect(
+    state => ({
+        mode: state.mode
+        // ...
+    }),
+    dispatch => bindActionCreators(actions, dispatch)
+)(GreetingController);
+            </code></pre>
+            <ul>
+                <li class="fragment">Interfaces to store passed down by provider</li>
+                <li class="fragment">Extracts state that a specific compoenent is interested in an passes as props</li>
+                <li class="fragment">Action Creators can be bound to dispatch method from state and also passed as props</li>
+            </ul>
         </section>
+
+        <section>
+            <h3>Using state and action creators in connected Components</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+class GreetingController extends React.Component {
+    render() {
+        // state from store
+        const {aggregatedGreetings, greetings, mode} = this.props;
+        // action creators bound to dispatch from store
+        const {setMode, saveGreeting, setFilter} = this.props;
+
+        // ...
+    }
+}
+            </code></pre>
+            <ul>
+                <li class="fragment">Both Action Creators and State meged into props passed from parent</li>
+                <li class="fragment">State and Action Creators decomposed where needed</li>
+                <li class="fragment">Only re-rendered when accessed state changes</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Selectors</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+export const filterGreetings = (greetings, filter) =>
+        filter ? greetings.filter(greeting => greeting.name === filter)
+                : greetings;
+
+export default connect(
+    state => ({
+        greetings: filterGreetings(state.greetings, state.filter),
+        // ...
+    }),
+    // ...
+)(GreetingController);        </code></pre>
+            <ul>
+                <li class="fragment">Compute derived data</li>
+                <li class="fragment">Transiently transform (normalized) state to data structure component needs</li>
+                <li class="fragment">Typically in a file of their own</li>
+                <li class="fragment">Allow for reuse and use for caching (typically using
+                <a href="http://redux.js.org/docs/recipes/ComputingDerivedData.html" target="_blank">reselect</a>)</li>
+            </ul>
+        </section>
+
         <section>
             <section>
                 <h2>Excercise: Complete Redux Application</h2>
