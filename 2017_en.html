@@ -1070,7 +1070,8 @@ export function setFilter(filter) {
 }
 </code></pre>
             <ul>
-                <li class="fragment">Action-Creators create Action-Objects, command like structures of things to do by application</li>
+                <li class="fragment">Action-Creators create Action-Objects</li>
+                <li class="fragment">Actions are command like structures of things to do by application</li>
                 <li class="fragment">They are passed to all reducers using dispatch method of store</li>
                 <li class="fragment">Actions consist of type and random payload</li>
             </ul>
@@ -1090,18 +1091,119 @@ export const loadGreetings = dispatch => {
 };
 </code></pre>
             <ul>
-                <li class="fragment">As dispatch is async, we get the dispatch method passed in</li>
+                <li class="fragment">As call is async, we need to get the dispatch method passed in</li>
             </ul>
             <p  class="fragment"><strong>Action-Creators are the only part of the application allowed to perform async operations, like server calls</strong></p>
+        </section>
+
+        <section>
+            <h3>A <em>single</em> Store holds <em>all</em> State</h3>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { rootReducer } from './reducers';
+
+// http://redux.js.org/docs/api/createStore.html
+const store = createStore(
+    rootReducer // reducer
+);
+ReactDOM.render(
+    &lt;Provider store={store}>
+        &lt;GreetingController />
+    &lt;/Provider>,
+    mountNode
+);
+        </code></pre>
+            <ul>
+                <li class="fragment">Central part of application</li>
+                <li class="fragment">Provides the dispatch method used in action creators</li>
+                <li class="fragment">Made available to all Components using Provider wrapper</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Middleware sits between dispatch and store</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+import { applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+
+const store = createStore(
+    rootReducer, // reducer
+    applyMiddleware(thunk) // middleware as enhancer
+);
+        </code></pre>
+            <ul>
+                <li class="fragment">Thunk middleware serves as a de-facto standard</li>
+                <li class="fragment">Passes in the dispatch method into the async action creator</li>
+                <li class="fragment"><a href="https://github.com/gaearon/redux-thunk#whats-a-thunk" target="_blank">
+                    A thunk is a function that wraps an expression to delay its evaluation.
+                </a></li>
+                <li class="fragment">You don't have to worry about it for basic Redux usage</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Reducers contain core (business) logic</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+import {combineReducers} from 'redux';
+
+// http://redux.js.org/docs/api/combineReducers.html
+export const rootReducer = combineReducers({
+    greetings, // updates greeting partial state
+    filter,
+    mode
+});
+        </code></pre>
+            <ul>
+                <li class="fragment">A pure function that takes old state plus action and returns a new state</li>
+                <li class="fragment">Often composed of reducers only updating partial state</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Partial Reducers</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+const mode = (state = MODE_MASTER, action) => {
+    switch (action.type) {
+        case SET_MODE:
+            return action.mode;
+        default:
+            return state;
+    }
+};
+        </code></pre>
+            <ul>
+                <li class="fragment">Initialize part of the state (often using default parameters)</li>
+                <li class="fragment">Never mutate state</li>
+                <li class="fragment">Always return a (not necessarily complete) copy of state fragment</li>
+                <li class="fragment">Depend on action and state structure</li>
+            </ul>
         </section>
 
         <section class="todo">
 <pre>
 - Reducer
-- Store Setup and Provider
 - connected component
 - Excercise: make your application Redux, was vorgeben in Material?
 </pre>
+        </section>
+        <section>
+            <section>
+                <h2>Excercise: Complete Redux Application</h2>
+                <h3>The application is already working with Redux, but filtering from the Chart still needs to be done</h3>
+            </section>
+            <section>
+                <h3>Steps</h3>
+                <ul>
+                    <li>Copy all material from <code>code/material/5-redux</code> to your source folder
+                    <li>TODOs have been added to actions, reducers and GreetingController to guide you through the exercise
+                    <li>Use the existing filter code from the previous step as a starting point
+                    <li>Add an Action Type and an action creator for filtering
+                    <li>Add a reducer to handle such an action and add it to <code>combineReducers</code>
+                    <li>In <code>GreetingController</code> import the action creator and pass it down to the Chart to react to
+                    filtering events
+                </ul>
+            </section>
         </section>
 
     </div>
