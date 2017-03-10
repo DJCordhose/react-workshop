@@ -1,5 +1,7 @@
 import React from 'react';
 import GreetingMaster from '../src/GreetingMaster';
+import renderer from 'react-test-renderer';
+
 import {shallow} from 'enzyme';
 
 const someGreetings = [
@@ -9,10 +11,22 @@ const someGreetings = [
 
 test('it should render table with all greetings', () => {
     const onAddMock = jest.fn();
-    const component = shallow(<GreetingMaster greetings={someGreetings} onAdd={onAddMock}/> );
-    expect(component).toMatchSnapshot();
+    const tree = renderer.create(
+        <GreetingMaster greetings={someGreetings} onAdd={onAddMock}/>
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+});
+
+test('on click callback should work', () => {
+    const onAddMock = jest.fn();
+    const component = shallow(<GreetingMaster greetings={someGreetings} onAdd={onAddMock}/>);
+
+    // make sure it behaves correctly
     component.find('button').simulate('click');
     expect(onAddMock.mock.calls.length).toBe(1);
 });
 
 
+// http://redux.js.org/docs/recipes/WritingTests.html
+// https://github.com/adriantoine/enzyme-to-json
+// https://medium.com/selleo/testing-react-components-best-practices-2f77ac302d12#.k3hji9cih

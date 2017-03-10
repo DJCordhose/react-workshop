@@ -3,6 +3,7 @@ import GreetingMaster from '../src/GreetingMaster';
 import GreetingDetail from '../src/GreetingDetail';
 import GreetingController from '../src/GreetingController';
 import backend from '../src/backend';
+import renderer from 'react-test-renderer';
 import {shallow, mount} from 'enzyme';
 
 jest.mock('../src/backend', () => ({
@@ -12,19 +13,27 @@ jest.mock('../src/backend', () => ({
     ]))
 }));
 
-test('it should render master view by default', () => {
-    const component = shallow(<GreetingController/>);
-    expect(component).toMatchSnapshot();
+test('it should render greetings received from backend', () => {
+    const tree = renderer.create(
+        <GreetingController/>
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
 });
 
-// TODO: Write more tests... but: is difficult due to
-// the internal structure of the controller component
-
-test('it should render greetings received from server', () => {
+test('it should open detail view on button click', () => {
     const component = mount(<GreetingController  />);
-    expect(backend.loadFromServer.mock.calls).toHaveLength(1);
 
-    expect(component.find('button')).toHaveLength(1);
-    expect(component.find('tbody > tr')).toHaveLength(2);
+    // on initial render the list with greetings (GreetingMaster)
+    // is visible but no GreetingDetail
+    expect(component.find(GreetingDetail)).toHaveLength(0);
+
+    // find the "add" Button...
+    const addButton = component.find('button');
+
+    // click on the button
+    addButton.simulate('click');
+
+    // now the GreetingDetail should be visible
+    expect(component.find(GreetingDetail)).toHaveLength(1);
 });
 
