@@ -1,11 +1,10 @@
 import React from 'react';
-import GreetingMaster from '../src/GreetingMaster';
 import GreetingDetail from '../src/GreetingDetail';
 import GreetingController from '../src/GreetingController';
-import backend from '../src/backend';
 import renderer from 'react-test-renderer';
-import {shallow, mount} from 'enzyme';
+import {mount} from 'enzyme';
 
+// Mock the backend module avoid "real" server calls
 jest.mock('../src/backend', () => ({
     loadFromServer: jest.fn((success, failure) => success([
         {id: 1, name: 'Klaus', greeting: 'Moin moin'},
@@ -14,13 +13,18 @@ jest.mock('../src/backend', () => ({
 }));
 
 test('it should render greetings received from backend', () => {
+    // render the component we want to test
     const tree = renderer.create(
         <GreetingController/>
     ).toJSON();
+
+    // make sure the json matches the last stored snapshot
+    // (saved on the filesystem in __snapshots__)
     expect(tree).toMatchSnapshot();
 });
 
 test('it should open detail view on button click', () => {
+    // mount the component into a real dom (implemented by JSDom)
     const component = mount(<GreetingController  />);
 
     // on initial render the list with greetings (GreetingMaster)
