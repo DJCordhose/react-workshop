@@ -8,9 +8,11 @@ export default class GreetingDetail extends React.Component {
             <div>
                 <input ref={input => this.input = input}
                        onChange={event => this.updateModel('name', event.target.value)}
+                       name="name"
                        value={name}
                        placeholder="Name"/>
                 <input onChange={event => this.updateModel('greeting', event.target.value)}
+                       name="greeting"
                        value={greeting}
                        placeholder="Greeting"/>
                 <button
@@ -35,7 +37,9 @@ export default class GreetingDetail extends React.Component {
 
     reset() {
         this.setState({name: '', greeting: ''});
-        this.input.focus();
+        if (this.input) {
+            this.input.focus();
+        }
     }
 
     save() {
