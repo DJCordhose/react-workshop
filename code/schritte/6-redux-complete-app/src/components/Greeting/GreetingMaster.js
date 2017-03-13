@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 
 import * as actions from '../../actions';
 import {filterGreetings} from '../../selectors';
@@ -54,5 +53,5 @@ export default connect(
         greetings: filterGreetings(state.greetings, state.filter),
         filter: state.filter
     }),
-    dispatch => bindActionCreators(actions, dispatch)
+    actions
 )(GreetingMaster);
