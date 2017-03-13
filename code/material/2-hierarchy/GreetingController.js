@@ -29,6 +29,9 @@ export default class GreetingController extends React.Component {
                         onAdd={() => this.setState({mode: MODE_DETAIL})}
                     /> : null
                     /*
+                        Instead of null, display your GreetingDetail. Add callback for saving the new greeting.
+                        In GreetingDetail add a button to save the new greeting that calls the passed callback.
+
                         Hier statt null dein GreetingDetail einbinden und den Callback für das Hinzufügen
                         eines Grußes übergeben.
                         In GreetingDetail einen Knopf zum Hinzufügen einbauen und mit dem neuen

@@ -815,7 +815,7 @@ class GreetingController extends React.Component {
                     <li>Eine Komponente kann deklarieren, welche Properties sie erwartet
                     <li>Auch der Typ kann angegeben werden
                     <li>Fehlende / falsche Properties führen zu Laufzeitfehlern
-                    <li><a href="https://facebook.github.io/react/docs/reusable-components.html#prop-validation " target="_blank">Mögliche Typen</a>
+                    <li><a href="https://facebook.github.io/react/docs/typechecking-with-proptypes.html" target="_blank">Mögliche Typen</a>
                 </ul>
 <pre class="fragment"><code class="javascript" contenteditable data-trim>
 GreetingDetail.propTypes = {
@@ -837,7 +837,7 @@ GreetingDetail.propTypes = {
                 <h3>Schritte</h3>
                 <ul>
                     <li>kopiere das Material aus <code>code/material/2-hierarchy</code> in deinen src-Ordner
-                    <li>erweitere im <code>GreetingController</code> die render-Methode, so dass dein Detail-View ebenfalls angezeigt wird, wenn der Benutzer den Add-Button klickt
+                    <li>erweitere im <code>GreetingController</code> die render-Methode, so dass dein Detail-View angezeigt wird, wenn der Benutzer den Add-Button klickt
                     <li>dort gibt es bereits einen Kommentar, der dir die richtige Stelle anzeigt und weitere Details enthält
                     <li>übergib einen Callback der <code>addGreeting</code> nutzt
                     <li>im deinem <code>GreetingDetail</code> brauchst du einen neuen Knopf, der mit dem neuen Gruß den Callback aufruft
@@ -1003,6 +1003,10 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
                 <h2>Übung: Laden und Speichern der Daten von/auf einem Server</h2>
                 <p>Entwickle auf Basis von fetch eine Version, die die Daten auf dem Server laden und dort wieder speichern kann</p>
                 <p>Der Server ist bereits vorgegeben und kann mit <code>npm start</code> im Root-Verzeichnis gestartet werden. Er ist dann unter Port 7000 erreichbar</p>
+                <p>Weitere Details findest du unter:
+                    <a href="code/material/3-remote/AUFGABEN.md" target="_blank">
+                        code/material/3-remote/AUFGABEN.md</a>
+                    </p>
             </section>
 
         </section>

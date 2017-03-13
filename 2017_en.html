@@ -122,15 +122,15 @@
 	<!--* Type Checking using Flow-->
 
 
-        <section class="todo">
+        <section>
             <h2>Day I: Introduction</h2>
             <ul>
                 <li><a href="#/t0">Part 0: Setup and Introduction into React</a>
-                <li><a href="#/t1">Part I: React and ES6 Basics (shorten and translate)</a>
-                <li><a href="#/t2">Part II: Composing Components (shorten and translate)</a>
-                <li><a href="#/t3">Part III: Remote-Calls and Promises (shorten and translate)</a>
+                <li><a href="#/t1">Part I: React and ES6 Basics</a>
+                <li><a href="#/t2">Part II: Composing Components</a>
+                <li><a href="#/t3">Part III: Remote-Calls and Promises</a>
                 <li><a href="#/t4">Part IV: Introduction to Redux</a>
-                <li>Part V: Bridging to Hops and Malt: create sample app (no slides)
+                <li>Part V: Bridging to Hops and Malt: create sample app (live demo, no slides)
             </ul>
         </section>
 
@@ -287,7 +287,6 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
           <h3>Step #1: Start Tool-Chain</h3>
           <p>Make sure you performed steps as described in initial setup</p>
           <p>If your browser displays 'Hello, World' all is fine
-          </ul>
       </section>
       <section>
           <h3>Step #2: Your first React application</h3>
@@ -696,14 +695,14 @@ class HelloMessage extends React.Component {
     </section>
 
         <section id="t2">
-            <h1>Teil II</h1>
-            <h2>Komponentenhierarchien</h2>
-            <h3>Komplette Anwendung aus Komponenten bauen</h3>
-            <a href="code/schritte/2-hierarchy/public/index.html" target="_blank">Ziel-Anwendung</a>
+            <h1>Part II</h1>
+            <h2>Composing Components</h2>
+            <h3>Building a Complete Application from Components</h3>
+            <a href="code/schritte/2-hierarchy/public/index.html" target="_blank">Complete Application</a>
         </section>
 
         <section>
-            <h2>Referenz</h2>
+            <h2>Reference</h2>
             <p><a href="https://facebook.github.io/react/docs" target="_blank">
                 https://facebook.github.io/react/docs
             </a>
@@ -711,23 +710,22 @@ class HelloMessage extends React.Component {
         </section>
 
         <section>
-            <h3>Themen</h3>
+            <h3>Topics</h3>
             <ul>
-                <li>Komponenten als Funktion
-                <li>Darstellung von Listen und Keys
-                <li>Architektur-Idee: Controller-Komponente und View-Komponente
-                <li>Durchreichen von Zustand und Callbacks
+                <li>Components as Functions
+                <li>Displaying Lists and Keys
+                <li>Architectural Vision: Smart and Dumb Components
+                <li>Passing State and Callbacks
                 <li>PropTypes
             </ul>
         </section>
 
             <section>
-                <h3>Komponenten als Funktion</h3>
+                <h3>Components as Functions</h3>
                 <ul class="fragment">
-                    <li>Komponente ist eine einfache Funktion</li>
-                    <li>entspricht der <code>render</code>-Methode</li>
-                    <li>Properties werden als Parameter übergeben</li>
-                    <li>Zurzeit nur ohne Zustand und ohne Lifecycle-Methoden</li>
+                    <li>function more or less <code>render</code> method</li>
+                    <li>Properties are being passed as parameters</li>
+                    <li>Currently no state and no lifecycle methods</li>
                 </ul>
 <pre class="fragment"><code class="xml" contenteditable data-trim>
 function Layout(props) {
@@ -743,11 +741,11 @@ function Layout(props) {
         </section>
 
             <section>
-                <h3>Listen und Keys</h3>
+                <h3>Lists and Keys</h3>
                 <ul class="fragment">
-                    <li>JSX bietet nichts für Listen
-                    <li>Ausgabe typischerweise über <code>Array.map</code>
-                    <li>Elemente einer Liste brauchen einen eindeutigen key
+                    <li>No special synatx in JSX for Listen
+                    <li>Instead use JavaScripts's <code>Array.map</code>
+                    <li>Elements of a List need unique key
                 </ul>
 <pre class="fragment"><code class="javascript" contenteditable data-trim>
 const greetings = [{
@@ -769,16 +767,16 @@ const body = greetings.map(greeting =>
 </code></pre>
         </section>
 
-        <section>
-            <h3>Controller und Child-Views</h3>
+        <section class="todo">
+            <h3>Smart and Dumb Component</h3>
             <img src="controller.png" height="600" style="border:0;box-shadow:0 0 0 0">
         </section>
 
         <section>
-            <h3>Durchreichen vom Zustand und Callbacks</h3>
-            <ul class="fragment">
-                <li>Funktioniert beides über Properties
-            </ul>
+            <h3>Passing of State and Callbacks</h3>
+            <p class="fragment">
+                Both are passed via props
+            </p>
 <pre class="fragment"><code class="javascript" contenteditable data-trim>
 class GreetingController extends React.Component {
     render() {
@@ -794,9 +792,9 @@ class GreetingController extends React.Component {
     </code></pre>
     </section>
     <section>
-        <h3>Properties übergeben mit Object-Spread</h3>
+        <h3>Passing Properties using Object-Spread</h3>
         <ul class="fragment">
-                <li>Übergibt <b>alle</b> Eigenschaften eines Objektes als individuelle Properties</li>
+                <li>Passes <b>all</b> fields of an Object as individual Properties</li>
         </ul>
         <pre class="fragment"><code class="javascript" contenteditable data-trim>
 class GreetingController extends React.Component {
@@ -806,7 +804,7 @@ class GreetingController extends React.Component {
     render() {
         return &lt;GreetingDetail {...greeting} />
 
-        // entspricht:
+        // same as:
         // &lt;GreetingDetail name='Klaus' greeting='Hello' />
     }
 }
@@ -816,10 +814,12 @@ class GreetingController extends React.Component {
         <section>
             <h3>PropTypes</h3>
                 <ul class="fragment">
-                    <li>Eine Komponente kann deklarieren, welche Properties sie erwartet
-                    <li>Auch der Typ kann angegeben werden
-                    <li>Fehlende / falsche Properties führen zu Laufzeitfehlern
-                    <li><a href="https://facebook.github.io/react/docs/reusable-components.html#prop-validation " target="_blank">Mögliche Typen</a>
+                    <li>You can declare what properties a component expects
+                    <li>Can contain type information
+                    <li>Wrong or missing properties result in warnings at run time
+                    <li><a href="https://facebook.github.io/react/docs/typechecking-with-proptypes.html" target="_blank">
+                    Reference
+                    </a>
                 </ul>
 <pre class="fragment"><code class="javascript" contenteditable data-trim>
 GreetingDetail.propTypes = {
@@ -834,21 +834,21 @@ GreetingDetail.propTypes = {
 
         <section>
             <section>
-                <h2>Übung: Eine komplette Anwendung zusammen setzen</h2>
-                <h3>Füge deinen Detail-View und einen Master-View über eine Controller-Komponente zusammen</h3>
+                <h2>Exercise: Compose a complete Application</h2>
+                <h3>Assemble your existing Detail View and a Master View (Dumb Components) with the GreetingController (Smart Component)</h3>
             </section>
             <section>
-                <h3>Schritte</h3>
+                <h3>Steps</h3>
                 <ul>
-                    <li>kopiere das Material aus <code>code/material/2-hierarchy</code> in deinen src-Ordner
-                    <li>erweitere im <code>GreetingController</code> die render-Methode, so dass dein Detail-View ebenfalls angezeigt wird, wenn der Benutzer den Add-Button klickt
-                    <li>dort gibt es bereits einen Kommentar, der dir die richtige Stelle anzeigt und weitere Details enthält
-                    <li>übergib einen Callback der <code>addGreeting</code> nutzt
-                    <li>im deinem <code>GreetingDetail</code> brauchst du einen neuen Knopf, der mit dem neuen Gruß den Callback aufruft
+                    <li>copy material from <code>code/material/2-hierarchy</code> into your src folder
+                    <li>in <code>GreetingController</code> extend the render method to display the Detail View when a user clicks the Add Button
+                    <li>in the <code>GreetingController</code> you will already find a guiding comment that also indicates where you need to include the component
+                    <li>to the Detail View pass a callback that uses the <code>addGreeting</code> method that has already been prepared for you
+                    <li>in <code>GreetingDetail</code> you need a new button that triggers the callback with the newly created greeting as a parameter
                 </ul>
             </section>
             <section>
-                <h3>Architektur Beispiel-Anwendung</h3>
+                <h3>Architecture Sample Application</h3>
                 <img src="greeting-hierarchy.png" style="border:0;box-shadow:0 0 0 0"/>
             </section>
             <section>
@@ -862,24 +862,23 @@ GreetingDetail.propTypes = {
         </section>
 
         <section id="t3">
-            <h1>Teil III</h1>
-            <h2>Remote-Calls gegen Server</h2>
-            <a href="code/schritte/3-remote/public/index.html" target="_blank">Ziel-Anwendung</a>
+            <h1>Part III</h1>
+            <h2>Remote-Calls to Server</h2>
+            <a href="code/schritte/3-remote/public/index.html" target="_blank">Complete Application</a>
         </section>
 
         <section>
-            <h3>Herausforderungen</h3>
+            <h3>Challenges</h3>
             <ul>
-                <li>Wo speichern wir?
-                <li>Wie machen wir das Laden und Speichern technisch?
-                <li>Wie funktioniert asynchrone Verarbeitung in React?
-                <li>Wo steht der Code zum initialen Laden der Grüße?
+                <li>How to load and save technically?
+                <li>How to do async operations in React?
+                <li>Where to trigger initial load?
             </ul>
         </section>
 
             <section>
                 <h3>fetch</h3>
-                <p>Browser-API zum Laden und Speichern von Daten</p>
+                <p>Browser API to load and save data</p>
 <pre><code class="javascript" contenteditable data-trim>
 fetch(url, {
     method: 'PUT',
@@ -910,12 +909,15 @@ return fetch(url)
 </code></pre>
                 </section>
                     <section>
-                        <h3>Ein Promise ist ein Versprechen auf einen Wert</h3>
-                        <h4 class="fragment">Wird evtl. erst in der Zukunft eingelöst</h4>
+                        <h3>A Promise will resolve to a value, be rejected or abort with an error</h3>
+                        <ul>
+                            <li class="fragment">If it resolves this might be right now or in the future</li>
+                            <li class="fragment">In any case a reaction will be asynchronous</li>
+                        </ul>
                     </section>
 
                 <section>
-                        <h3>Erzeugen und asynchron reagieren</h3>
+                        <h3>Create a Promoise and react asynchronously</h3>
    <pre class="fragment"><code class="javascript" contenteditable>const promise = new Promise(resolve =>
     setTimeout(
         () => resolve('Result from promise'),
@@ -927,7 +929,7 @@ return fetch(url)
 </code></pre>
                     </section>
                     <section>
-                        <h3>Verkettete Ausführung</h3>
+                        <h3>Chaining Execution</h3>
    <pre><code class="javascript" contenteditable>const promise = new Promise(resolve =>
     setTimeout(
         () => resolve('Result from promise'),
@@ -941,12 +943,12 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 </code></pre>
                     </section>
             <section>
-                <h3>Fehler führen zum Abbruch der Chain</h3>
-                <h4 class="fragment">Allerdings muss man etwas tun, um das mitzubekommen</h4>
+                <h3>Errors abort the rest of the chain</h3>
+                <p class="fragment">Unfortunately, such an error will be swallowed if you do not react to it</p>
             </section>
 
                     <section>
-                        <h3>Catch-Klausel</h3>
+                        <h3>Catch Clause</h3>
    <pre><code class="javascript" contenteditable>Promise
     // creates and directly resolves promise
     .resolve('Result from promise')
@@ -965,7 +967,7 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 // This will be printed</code></pre>
                     </section>
                     <section>
-                        <h3>Catch-Klausel im Fehlerfall</h3>
+                        <h3>Catch Clause when there is an error</h3>
    <pre><code class="javascript" contenteditable>Promise
     // creates and directly resolves promise
     .resolve('Result from promise')
@@ -985,7 +987,7 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 // error:  [Error: Something went wrong]</code></pre>
                     </section>
                     <section>
-                        <h3>Catch-Klausel bei Ablehnung</h3>
+                        <h3>Catch Clause when Promise is rejected</h3>
    <pre><code class="javascript" contenteditable>Promise
     // creates and directly rejects promise
     .reject('Promise rejected')
@@ -1004,9 +1006,20 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
                 </section>
         <section>
             <section>
-                <h2>Übung: Laden und Speichern der Daten von/auf einem Server</h2>
-                <p>Entwickle auf Basis von fetch eine Version, die die Daten auf dem Server laden und dort wieder speichern kann</p>
-                <p>Der Server ist bereits vorgegeben und kann mit <code>npm start</code> im Root-Verzeichnis gestartet werden. Er ist dann unter Port 7000 erreichbar</p>
+                <h2>Exercise: Loading and Saving Data from/to server</h2>
+                <p>Create a new version of your application that initially loads greeting data from the server</p>
+                <p>It should also save data to the server when a new greeting is added</p>
+            </section>
+            <section>
+                <h3>Steps</h3>
+                <ol>
+                    <li>There already is a complete server implementation, which you can start using <code>npm start</code> in the root directory
+                    <li>localhost:7000
+                    <li>Use material from <code>code/material/3-remote</code> into your src folder</li>
+                    <li>in <code>GreetingController</code> call loading of greetings from <code>backend</code> in lifecycle method <code>componentDidMount</code></li>
+                    <li>in <code>onAdd</code> call saving of the greeting to the server</li>
+                </ol>
+                <p>Have a look at <code>backend.js</code> that contains proper API documentation</p>
             </section>
 
         </section>
@@ -1176,7 +1189,6 @@ const mode = (state = MODE_MASTER, action) => {
         <section>
             <h3>Connecting Store to Components</h3>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as actions from './actions';
@@ -1186,12 +1198,12 @@ export default connect(
         mode: state.mode
         // ...
     }),
-    dispatch => bindActionCreators(actions, dispatch)
+    actions
 )(GreetingController);
             </code></pre>
             <ul>
                 <li class="fragment">Interfaces to store passed down by provider</li>
-                <li class="fragment">Extracts state that a specific compoenent is interested in an passes as props</li>
+                <li class="fragment">Extracts state that a specific component is interested in an passes as props</li>
                 <li class="fragment">Action Creators can be bound to dispatch method from state and also passed as props</li>
             </ul>
         </section>
