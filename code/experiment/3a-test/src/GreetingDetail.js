@@ -7,11 +7,11 @@ export default class GreetingDetail extends React.Component {
         return (
             <div>
                 <input ref={input => this.input = input}
-                       onChange={event => this.updateModel('name', event.target.value)}
+                       onChange={event => this.updateModel(event)}
                        name="name"
                        value={name}
                        placeholder="Name"/>
-                <input onChange={event => this.updateModel('greeting', event.target.value)}
+                <input onChange={event => this.updateModel(event)}
                        name="greeting"
                        value={greeting}
                        placeholder="Greeting"/>
@@ -51,8 +51,8 @@ export default class GreetingDetail extends React.Component {
         });
     }
 
-    updateModel(name, value) {
-        this.setState({[name]: value});
+    updateModel(event) {
+        this.setState({[event.target.name]: event.target.value});
     }
 }
 GreetingDetail.propTypes = {

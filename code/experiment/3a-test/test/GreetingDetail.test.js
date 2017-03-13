@@ -47,11 +47,11 @@ test('it should render fine', () => {
 test('onAdd should be called with values from form', () => {
     const { onAddMock, elements } = setup();
 
-    elements.nameInput.simulate('change', { target: { value: aGreeting.name } });
+    elements.nameInput.simulate('change', { target: { name: 'name', value: aGreeting.name } });
     // checking the state here might be too much in real live,
     // here just to demonstrate the Enzyme API
 
-    elements.greetingInput.simulate('change', { target: { value: aGreeting.greeting } });
+    elements.greetingInput.simulate('change', { target: { name: 'greeting', value: aGreeting.greeting } });
 
     elements.addButton.simulate('click');
     expect(onAddMock.mock.calls).toHaveLength(1);
@@ -62,8 +62,8 @@ test('clear should clear the form', () => {
     const { component, elements } = setup();
 
     // enter
-    elements.nameInput.simulate('change', { target: { value: aGreeting.name } });
-    elements.greetingInput.simulate('change', { target: { value: aGreeting.greeting } });
+    elements.nameInput.simulate('change', { target: { name: 'name', value: aGreeting.name } });
+    elements.greetingInput.simulate('change', { target: { name: 'greeting', value: aGreeting.greeting } });
 
     // just to make sure, state has a value before resetting
     expect(component.state('name')).toEqual(aGreeting.name);
