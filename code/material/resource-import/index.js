@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GreetingController from './GreetingController';
+import HelloMessage from './HelloMessage';
 
 import './normalize.css';
 import './styles.css';
@@ -8,6 +8,6 @@ import './lib/nv.d3.css';
 import './google-fonts.css';
 
 ReactDOM.render(
-  <GreetingController />,
+  <HelloMessage />,
   document.getElementById('root')
 );
