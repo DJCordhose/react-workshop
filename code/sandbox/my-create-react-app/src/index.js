@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+import GreetingController from './GreetingController';
+
+import './normalize.css';
+import './styles.css';
+import './lib/nv.d3.css';
+import './google-fonts.css';
 
 ReactDOM.render(
-  <App />,
+  <GreetingController />,
   document.getElementById('root')
 );
