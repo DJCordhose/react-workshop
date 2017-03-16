@@ -1,10 +1,10 @@
-const aggregateGreetings = (greetings) => {
+export const aggregateGreetings = (greetings) => {
 
     // first create an object as map as it is easier to access
     const dataAsObjectMap = greetings.reduce((data, greeting) => {
         const {name} = greeting;
         if (data[name]) {
-            data[name] = data[name] + 1;
+            data[name] += 1;
         } else {
             data[name] = 1;
         }
