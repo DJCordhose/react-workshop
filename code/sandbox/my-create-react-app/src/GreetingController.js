@@ -4,21 +4,38 @@ import {loadFromServer, saveToServer} from './backend';
 
 import GreetingMaster from './GreetingMaster';
 import GreetingDetail from './GreetingDetail';
+import Chart from './Chart';
+import {aggregateGreetings} from './util';
 
 const MODE_MASTER = 'MODE_MASTER';
 const MODE_DETAIL = 'MODE_DETAIL';
 
 export default class GreetingController extends React.Component {
     render() {
-        const {mode, greetings} = this.state;
+        const {mode, greetings, filter} = this.state;
+        const aggregatedGreetings = aggregateGreetings(greetings);
+        const filtered = filter ? greetings.filter(greeting => greeting.name === filter) : greetings;
+
         return (
-            <div>
-                {mode === MODE_MASTER ?
-                    <GreetingMaster greetings={greetings}
-                                    onAdd={() => this.setState({mode: MODE_DETAIL})}
-                    /> :
-                    <GreetingDetail onAdd={(greeting) => this.saveGreeting(greeting)}/>
-                }
+            <div className="Main">
+                <div className="Left">
+                    {mode === MODE_MASTER ?
+                        <GreetingMaster greetings={filtered}
+                                        onAdd={() => this.setState({mode: MODE_DETAIL})}
+                        /> :
+                        <GreetingDetail onAdd={(greeting) => this.saveGreeting(greeting)}/>
+                    }
+                </div>
+                <div className="Right">
+                    <Chart data={aggregatedGreetings} onSegmentSelected={filter => {
+                        if (this.state.filter === filter) {
+                            // reset filter when clicking again
+                            this.setState({filter: null})
+                        } else {
+                            this.setState({filter})
+                        }
+                    }}/>
+                </div>
             </div>);
     }
 
@@ -26,7 +43,8 @@ export default class GreetingController extends React.Component {
         super(props);
         this.state = {
             greetings: [],
-            mode: MODE_MASTER
+            mode: MODE_MASTER,
+            filter: null
         };
     }
 
