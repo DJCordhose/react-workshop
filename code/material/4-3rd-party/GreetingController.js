@@ -28,8 +28,9 @@ export default class GreetingController extends React.Component {
                 </div>
                 <div className="Right">
                     {
+
                         // hier fehlt die Einbindung des Charts
-                        // du musst die bereits in Zeile 70 berechnete Summierung der Grüße übergeben
+                        // du musst die bereits in Zeile 16 berechnete Aggregation der Grüße übergeben
                         // ebenso brauchen wir einen Callback, der mit dem Namen des Segments den Filter aktualisiert
                         // dieser ist bereits im Zustand vorgesehen und bisher mit null initialsiert
                     }

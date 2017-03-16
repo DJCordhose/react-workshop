@@ -4,7 +4,7 @@ export const aggregateGreetings = (greetings) => {
     const dataAsObjectMap = greetings.reduce((data, greeting) => {
         const {name} = greeting;
         if (data[name]) {
-            data[name] = data[name] + 1;
+            data[name] += 1;
         } else {
             data[name] = 1;
         }
