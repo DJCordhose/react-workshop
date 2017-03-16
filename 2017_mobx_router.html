@@ -1317,32 +1317,14 @@ export default function Layout(props) {
             <p><strong>MobX zieht State-Management und Handler aus den React-Komponenten heraus</strong></p>
         </section>
 
-        <section>
-            <h2>Überblick</h2>
-            <p><a href="https://mobx.js.org/intro/concepts.html" target="_blank">
-                https://mobx.js.org/intro/concepts.html
-            </a>
-            </p>
-            <img src="mobx-flow.png">
-        </section>
-
-        <section>
-            <h2>Und Redux?</h2>
-            <p><a href="http://redux.js.org/" target="_blank">
-                http://redux.js.org/
-            </a>
-            </p>
-            <ul>
-                <li>Redux ist die Mainstream-Lösung
-                <li>Lässt sich sehr gut testen
-                <li>Fehlersuche und Debugging erstaunlich einfach
-                <li>Funktioniert auch in großen Anwendungen sehr gut
-                <li>Dev-Tools erlauben Magisches
-            </ul>
-            <p>Allerdings: Lernkurve steil, gerade am Anfang wirklich viel Code</p>
-            <p><strong>Redux ist für kleinere Anwendungen meistens Overkill</strong></p>
-            <p>MobX erlaubt einen sehr einfachen Einstieg</p>
-        </section>
+        <!--<section>-->
+            <!--<h2>Überblick</h2>-->
+            <!--<p><a href="https://mobx.js.org/intro/concepts.html" target="_blank">-->
+                <!--https://mobx.js.org/intro/concepts.html-->
+            <!--</a>-->
+            <!--</p>-->
+            <!--<img src="mobx-flow.png">-->
+        <!--</section>-->
 
         <section>
             <h2>Prinzipien</h2>
@@ -1411,19 +1393,6 @@ export default class GreetingController extends React.Component {
         </section>
 
         <section>
-            <h2>Wie kann man noch Stores an Komponenten übergeben?</h2>
-            <a href="https://github.com/mobxjs/mobx/issues/300#issuecomment-223704275" target="_blank">
-                https://github.com/mobxjs/mobx/issues/300#issuecomment-223704275</a>
-            <ol>
-                <li>Explizit durch props
-                <li>Direkter Zugriff aus importierte Stores
-                <li>Implizit über einen Provider (wie bei Redux),
-                    <a target="_blank" href="https://github.com/mobxjs/mobx-react#provider-and-inject">
-                        https://github.com/mobxjs/mobx-react#provider-and-inject
-                    </a>
-            </ol>
-        </section>
-        <section>
             <h3>Zusammenfassung</h3>
             <img src="ai/mobx.png" height="600px">
             <!--<img src="mobX-Overview.jpg" height="600px">-->
@@ -1442,6 +1411,38 @@ export default class GreetingController extends React.Component {
                     <li>füge in eine neue Komponente hinzu, die zählt, wie viele Grüße es insgesamt gibt und wie viele davon nach der Filterung noch angezeigt werden
                 </ul>
             </section>
+        </section>
+
+        <section>
+            <h2>Wie kann man Stores noch an Komponenten übergeben?</h2>
+            <a href="https://github.com/mobxjs/mobx/issues/300#issuecomment-223704275" target="_blank">
+                https://github.com/mobxjs/mobx/issues/300#issuecomment-223704275</a>
+            <ol>
+                <li>Explizit durch props
+                <li>Direkter Zugriff aus importierten Stores
+                <li>Implizit über einen Provider (wie bei Redux),
+                    <a target="_blank" href="https://github.com/mobxjs/mobx-react#provider-and-inject">
+                        https://github.com/mobxjs/mobx-react#provider-and-inject
+                    </a>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Und Redux?</h2>
+            <p><a href="http://redux.js.org/" target="_blank">
+                http://redux.js.org/
+            </a>
+            </p>
+            <ul>
+                <li>Redux ist die Mainstream-Lösung
+                <li>Lässt sich sehr gut testen
+                <li>Fehlersuche und Debugging erstaunlich einfach
+                <li>Funktioniert auch in großen Anwendungen sehr gut
+                <li>Dev-Tools erlauben Magisches
+            </ul>
+            <p>Allerdings: Lernkurve steil, gerade am Anfang wirklich viel Code</p>
+            <p><strong>Redux ist für kleinere Anwendungen meistens Overkill</strong></p>
+            <p>MobX erlaubt einen sehr einfachen Einstieg</p>
         </section>
 
         <section>
