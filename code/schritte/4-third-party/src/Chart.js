@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
-import d3 from 'd3';
-import nv from 'nvd3';
+import React, {PropTypes} from "react";
+import d3 from "d3";
+import nv from "nvd3";
 
 export default class Chart extends React.Component {
 
@@ -16,9 +16,12 @@ export default class Chart extends React.Component {
     // will be called even when shouldComponentUpdate returns false
     componentWillReceiveProps(nextProps) {
         const {data} = nextProps;
+
+        if (this._d3selection) {
         this._d3selection
             .datum(data)
             .call(this._nvd3chart);
+        }
     }
 
     componentDidMount() {
@@ -33,6 +36,7 @@ export default class Chart extends React.Component {
             chart.legend.updateState(false);
 
             this._d3selection = d3.select(this._chart);
+
             this._d3selection
                 .datum(data)
                 .call(chart);
