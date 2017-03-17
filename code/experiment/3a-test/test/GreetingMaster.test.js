@@ -30,3 +30,4 @@ test('on click callback should work', () => {
 // http://redux.js.org/docs/recipes/WritingTests.html
 // https://github.com/adriantoine/enzyme-to-json
 // https://medium.com/selleo/testing-react-components-best-practices-2f77ac302d12#.k3hji9cih
+// createNodeMock: // https://github.com/facebook/react/issues/7740#issuecomment-247335106
