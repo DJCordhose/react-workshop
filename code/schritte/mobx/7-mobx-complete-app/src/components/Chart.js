@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import d3 from 'd3';
 import nv from 'nvd3';
 import {inject} from 'mobx-react';
