@@ -1,16 +1,27 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes} from "react";
 
 export default class GreetingDetail extends React.Component {
+
+    static propTypes = {
+        greeting: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            greeting: PropTypes.string.isRequired
+        }),
+        onAdd: PropTypes.func.isRequired
+    };
+
     render() {
         const {name, greeting} = this.state;
 
         return (
             <div>
                 <input ref={input => this.input = input}
-                       onChange={event => this.updateModel('name', event.target.value)}
+                       onChange={event => this.updateModel(event)}
+                       name="name"
                        value={name}
                        placeholder="Name"/>
-                <input onChange={event => this.updateModel('greeting', event.target.value)}
+                <input onChange={event => this.updateModel(event)}
+                       name="greeting"
                        value={greeting}
                        placeholder="Greeting"/>
                 <button
@@ -35,7 +46,9 @@ export default class GreetingDetail extends React.Component {
 
     reset() {
         this.setState({name: '', greeting: ''});
-        this.input.focus();
+        if (this.input) {
+            this.input.focus();
+        }
     }
 
     save() {
@@ -47,14 +60,7 @@ export default class GreetingDetail extends React.Component {
         });
     }
 
-    updateModel(name, value) {
-        this.setState({[name]: value});
+    updateModel(event) {
+        this.setState({[event.target.name]: event.target.value});
     }
 }
-GreetingDetail.propTypes = {
-    greeting: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        greeting: PropTypes.string.isRequired
-    }),
-    onAdd: PropTypes.func.isRequired
-};

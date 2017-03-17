@@ -1,6 +1,15 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes} from "react";
 
 export default class GreetingDetail extends React.Component {
+
+    static propTypes = {
+        greeting: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            greeting: PropTypes.string.isRequired
+        }),
+        onAdd: PropTypes.func.isRequired
+    };
+
     render() {
         const {name, greeting} = this.state;
 
@@ -55,10 +64,3 @@ export default class GreetingDetail extends React.Component {
         this.setState({[event.target.name]: event.target.value});
     }
 }
-GreetingDetail.propTypes = {
-    greeting: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        greeting: PropTypes.string.isRequired
-    }),
-    onAdd: PropTypes.func.isRequired
-};

@@ -1,19 +1,26 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes} from "react";
 
-import * as actions from '../../actions';
-import { connect } from 'react-redux';
+import * as actions from "../../actions";
+import {connect} from "react-redux";
 
 class GreetingDetail extends React.Component {
+
+    static propTypes = {
+        onAdd: PropTypes.func.isRequired
+    };
+
     render() {
         const {name, greeting} = this.state;
 
         return (
             <div>
                 <input ref={input => this.input = input}
-                       onChange={event => this.updateModel('name', event.target.value)}
+                       onChange={event => this.updateModel(event)}
+                       name="name"
                        value={name}
                        placeholder="Name"/>
-                <input onChange={event => this.updateModel('greeting', event.target.value)}
+                <input onChange={event => this.updateModel(event)}
+                       name="greeting"
                        value={greeting}
                        placeholder="Greeting"/>
                 <button
@@ -38,7 +45,9 @@ class GreetingDetail extends React.Component {
 
     reset() {
         this.setState({name: '', greeting: ''});
-        this.input.focus();
+        if (this.input) {
+            this.input.focus();
+        }
     }
 
     save() {
@@ -50,13 +59,10 @@ class GreetingDetail extends React.Component {
         });
     }
 
-    updateModel(name, value) {
-        this.setState({[name]: value});
+    updateModel(event) {
+        this.setState({[event.target.name]: event.target.value});
     }
 }
-GreetingDetail.propTypes = {
-    onAdd: PropTypes.func.isRequired
-};
 
 export default connect(
     null,
