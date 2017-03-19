@@ -65,3 +65,15 @@ export const loadFromServer = (onSuccess, onFailure) => {
         .catch(handleUnexpectedError)
     ;
 };
+
+export const loadGreetingFromServer = (greetingId, onSuccess, onFailure) => {
+    const handleServerResponse = response => response.json()
+        .then(json => response.status === 200 ? onSuccess(json) : onFailure(json.error));
+    const handleServerError = err => onFailure(err.message);
+    const handleUnexpectedError = err => onFailure('Unexpected error: ' + err);
+
+    return fetch(`${BACKEND_URL}/${greetingId}`)
+        .then(handleServerResponse, handleServerError)
+        .catch(handleUnexpectedError)
+        ;
+};
