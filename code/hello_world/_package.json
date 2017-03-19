@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "start": "npm run webpack",
-    "clean": "../../node_modules/.bin/rimraf -rf dist/ public/dist/",
+    "clean": "../../node_modules/.bin/rimraf -rf public/dist/",
+    "dist": "../../node_modules/.bin/webpack",
     "webpack": "../../node_modules/.bin/webpack --watch"
   },
   "license": "ISC"

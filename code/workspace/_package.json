@@ -4,10 +4,10 @@
   "description": "",
   "scripts": {
     "start": "npm run devserver",
-    "clean": "../../node_modules/.bin/rimraf -rf dist/ public/dist/",
+    "clean": "../../node_modules/.bin/rimraf -rf public/dist/",
+    "dist": "../../node_modules/.bin/webpack",
     "webpack": "../../node_modules/.bin/webpack --watch",
     "devserver": "../../node_modules/.bin/webpack-dev-server --content-base public/",
-    "test": "../../node_modules/.bin/mocha ./test --compilers js:babel-register --recursive",
-    "test:watch": "npm test -- --watch"
+    "test": "../../node_modules/.bin/jest \"(/test/.*\\.test.js)$\" --setupTestFrameworkScriptFile=test/setup-jest.js --verbose --watchAll",
   }
 }
