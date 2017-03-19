@@ -360,7 +360,6 @@ x
         </section>
 
         <section>
-                <section>
                     <h3>Hello World React</h3>
 <pre><code data-trim contenteditable>import React from "react";
 class HelloMessage extends React.Component {
@@ -385,8 +384,23 @@ class HelloMessage extends React.Component {
     this.input.focus();
   }
 }</code></pre>
-                </section>
+        </section>
+            <section>
+                <h3>ES6: Template Strings</h3>
+                <ul>
+                <li>Strings, die eingebette Symbole mit (${...}) erlauben</li>
+                <li>Einbetten in back ticks (umgekehrtes Hochkomma) ``</li>
+                </ul>
+                <pre class="fragment"><code class="javascript" contenteditable>const name = 'Susi';
+console.log(`Hello, ${name}`);
+// => Hello, Susi
+                </code></pre>
+                <pre class="fragment"><code class="javascript" contenteditable>const age = 24;
+console.log(`You are ${age * 12} month old`);
+// => You are 288 month old
+                </code></pre>
 
+            </section>
             <section>
                 <h3>ES6: Klassen</h3>
                 <pre class="fragment"><code class="javascript" contenteditable>class Person {
@@ -403,7 +417,7 @@ class Programmer extends Person {
         this.language = language;
     }
     code() {
-        return this.name + " codes in " + this.language;
+        return `${this.name} codes in ${this.language}`;
     }
 }</code></pre>
                 <pre><code class="javascript" contenteditable>const programmer = new Programmer('Erna', 'JavaScript');
@@ -412,17 +426,6 @@ console.log(programmer instanceof Programmer); // true
 console.log(programmer instanceof Person); // true</code></pre>
             </section>
 
-
-
-            <section>
-            <h3>ES6: Arrow Functions</h3>
-            <pre><code class="javascript" contenteditable>const displayInPage = (text) => {
-   return document.body.innerHTML +=
-       `${text}<br>`;
-};</code></pre>
-            <pre class="fragment"><code class="javascript" contenteditable>const displayInPage = text => document.body.innerHTML += `${text}<br>`;
-</code></pre>
-        </section>
 
                 <!--<section>-->
                     <!--<h3>ES6: Lexcial Binding an this bei Arrow-Functions</h3>-->
@@ -442,7 +445,19 @@ console.log(programmer instanceof Person); // true</code></pre>
 
 
         </section>
-
+        <section>
+            <h3>ES6: Arrow Functions</h3>
+            <pre><code class="javascript" contenteditable>const ageAsString = (name, age) => {
+   const month = age * 12;
+   return `${name} is ${month} month olds`;
+};</code></pre>
+            <pre class="fragment"><code class="javascript" contenteditable>// () und {} können u.U. weggelassen werden
+const greeting = name => `Hello, ${name}`;
+</code></pre>
+            <pre class="fragment"><code class="javascript" contenteditable>// no params
+const goHome = () => window.location.href = '/';
+</code></pre>
+        </section>
         <section>
                     <h3>Aufruf</h3>
 <pre><code data-trim contenteditable>
@@ -622,8 +637,7 @@ class GreetingDetail extends React.Component {
   render() {
     return (
       <div>
-        &lt;input ref={input => this.input = input}
-               onChange={event => this.updateModel(event.target.value)}
+        &lt;input onChange={event => this.updateModel(event.target.value)}
                value={this.state.greeting} />
         <p>{this.state.greeting}, World</p>
       </div>
@@ -729,102 +743,15 @@ console.log(`name=${name}`);
 console.log(`notThere=${notThere}`);
 // notThere=undefined
 </code></pre>
-   <!--<pre class="fragment"><code class="javascript" contenteditable>const {address: {city}} = person;-->
-<!--console.log(`city=${city}`);-->
-<!--//city=Hamburg-->
-<!--</code></pre>-->
+<pre class="fragment"><code class="javascript" contenteditable>function someFunction({name, notThere}) {
+  console.log(`name=${name}`);
+  // name=Olli
+  console.log(`notThere=${notThere}`);
+  // notThere=undefined
+}
+someFunction(person);
+</code></pre>
                     </section>
-                    <!--<section>-->
-                        <!--<h3>Destructuring bei Parametern</h3>-->
-   <!--<pre><code class="javascript" contenteditable>const person = {-->
-  <!--name: 'Olli',-->
-  <!--address: {-->
-    <!--city: 'Hamburg'-->
-  <!--},-->
-  <!--email: 'oliver.zeigermann@gmail.com'-->
-<!--};</code></pre>-->
-   <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>-->
-<!--function print({email: contact}) {-->
-    <!--console.log(`contact=${contact}`);-->
-<!--}-->
-<!--print(person);-->
-<!--// contact=oliver.zeigermann@gmail.com-->
-<!--</code></pre>-->
-   <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>-->
-<!--function g({name: x, y, z=10}) {-->
-  <!--console.log(`x=${x}`); // x=olli-->
-  <!--console.log(`y=${y}`); // y=undefined-->
-  <!--console.log(`z=${z}`); // z=10-->
-<!--}-->
-<!--g({ name: 'olli' });-->
-<!--</code></pre>-->
-                    <!--</section>-->
-                    <!--<section>-->
-                        <!--<h3>Destructuring bei Arrays</h3>-->
-   <!--<pre><code class="javascript" contenteditable>const [a, b] = [1, 2];-->
-<!--console.log(`a=${a}`);-->
-<!--// a=1-->
-<!--console.log(`b=${b}`);-->
-<!--// b=2-->
-<!--</code></pre>-->
-   <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>-->
-<!--const [, b] = [1, 2];-->
-<!--console.log(`b=${b}`);-->
-<!--//b=2-->
-<!--</code></pre>-->
-                    <!--</section>-->
-                    <!--<section>-->
-                        <!--<h3>Erweiterte Objekt-Literale</h3>-->
-   <!--<pre><code class="javascript" contenteditable>const name = 'Oma';-->
-<!--const person = {-->
-    <!--// ES5: name: name-->
-    <!--name,-->
-    <!--// ES5: toString: function()-->
-    <!--toString() {-->
-        <!--return this.name;-->
-    <!--}-->
-<!--};-->
-<!--console.log(person.name); // Oma-->
-<!--console.log(person.toString()); // Oma-->
-   <!--</code></pre>-->
-                    <!--</section>-->
-                    <!--<section>-->
-                        <!--<h3>for..of</h3>-->
-          <!--<p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">-->
-         <!--Iterieren über alles was 'iterable' ist-->
-    <!--</a>-->
-    <!--</p>-->
-
-   <!--<pre><code class="javascript" contenteditable>for (const e of array2) {-->
-    <!--console.log(e);-->
-<!--}-->
-<!--// Hi-->
-<!--// Olli-->
-<!--// how are you-->
-<!--// ?-->
-<!--</code></pre>-->
-                    <!--</section>-->
-
-    <!--<section>-->
-                        <!--<h3>Spread-Operator</h3>-->
-          <!--<p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">-->
-          <!--Alles was 'iterable' ist kann in einzelne Parameter transformiert werden-->
-    <!--</a>-->
-    <!--</p>-->
-   <!--<pre><code class="javascript" contenteditable>const array1 = ['Olli', 'how are you'];-->
-<!--const array2 = ['Hi', ...array1, '?'];-->
-<!--console.log(array2);-->
-<!--// => ["Hi", "Olli", "how are you", "?"]-->
-<!--</code></pre>-->
-   <!--<pre class="fragment"><code class="javascript" contenteditable>console.log(...array1);-->
-<!--</code></pre>-->
-                    <!--</section>-->
-
-                <!--<section>-->
-                    <!--<h2>Verbesserungen bei Funktionen in ES6</h2>-->
-                <!--</section>-->
-
-
         <section>
             <h3>React: Properties und Zustand</h3>
             <ul class="fragment">
@@ -852,10 +779,10 @@ class TitleComponent extends React.Component {
     }
    // ...
 }
+            </code></pre>
+            <pre class="fragment"><code class="javascript" contenteditable data-trim>
+  &lt;TitleComponent title='Hello World' /&gt;
 </code></pre>
-<pre class="fragment"><code class="javascript" contenteditable data-trim>
-  &lt;TitleComponent title='Hello World' />
-</pre></code>
 
         </section>
 
@@ -864,11 +791,12 @@ class TitleComponent extends React.Component {
             <ul class="fragment">
                 <li>Beispiel: Inhalt eines Eingabefelds, Daten vom Server</li>
                 <li>Werte üblicherweise immutable</li>
-                <li>Initialisieren im Konstruktor mit <code>this.state={}</code>
-                <li>Zustand <b>lesen</b> über <code>this.state</code>
-                <li>Zustand <b>setzen</b> über <code>this.setState()</code>
-                <ul><li>kein "reiner" Setter</li>
+                <li><b>Initialisieren</b> im Konstruktor mit <code>this.state={}</code>
+                <li class="fragment">Zustand <b>lesen</b> über <code>this.state</code>
+                <li class="fragment">Zustand <b>setzen</b> über <code>this.setState()</code>
+                <ul><li><b>Achtung:</b> kein "reiner" Setter</li>
                     <li>Führt alten und neuen Zustand zusammen</li>
+                    <li>Wird asynchron ausgeführt!</li>
                     <li><b>Löst erneutes rendern der <i>gesamten</i> Komponente aus</b></li>
                 </ul>
             </ul>
