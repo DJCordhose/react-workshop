@@ -96,7 +96,16 @@ table ~ button {
     margin-left: 0;
     padding-left: 2rem;
     padding-right: 2rem;
+}
 
+table a {
+    color: rgba(0, 0, 0, 0.6);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+table a:hover {
+    text-decoration: underline;
 }
 
 #mount {

@@ -1,7 +1,7 @@
-import React from 'react';
-import {inject, observer} from 'mobx-react';
+import React from "react";
+import {inject, observer} from "mobx-react";
 
-import {MODE_DETAIL} from '../../store';
+import {MODE_DETAIL} from "../../store";
 
 
 const GreetingRow = observer(({greeting, onRowClicked}) => (
@@ -27,7 +27,7 @@ const GreetingMaster = (props) => {
                                                         onRowClicked={greeting => setFilter(greeting.name)}/>);
     return (
         <div>
-            <table>
+            <table className="SelectableTable">
                 <thead>
                 <tr>
                     <th>Name</th>

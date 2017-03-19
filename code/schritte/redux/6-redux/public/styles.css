@@ -12,8 +12,6 @@ html {
     font-size: 1.2rem;
 }
 
-
-
 input {
     padding: 0.5rem;
     margin: 0.5rem;
@@ -98,7 +96,16 @@ table ~ button {
     margin-left: 0;
     padding-left: 2rem;
     padding-right: 2rem;
+}
 
+table a {
+    color: rgba(0, 0, 0, 0.6);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+table a:hover {
+    text-decoration: underline;
 }
 
 #mount {
@@ -123,55 +130,14 @@ table ~ button {
     float: left;
 }
 
-.Title {
-    display: flex;
-    display: -webkit-flex; /* Safari */
-    justify-content:         space-between;
-
-
-    border-bottom: 3px solid rgba(255, 127, 14, 0.7);
-    padding: 0 0 0.5rem 0;
-    margin: 0 0 1.5rem;
-
-}
-
-h1 {
-    flex: auto;
-    margin: 0;
-    padding: 0;
-}
-
-div.Counter {
-    margin-top: auto;
-}
-
-div.FilterPanel {
-    margin-top: 0.7rem;
-    font-size: 15px;
-}
-
-div.FilterPanel a {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.Filter h1 {
-    font-size: 1.5rem;
-    text-align: center;
-}
-
 /* http://nicolasgallagher.com/micro-clearfix-hack */
 .Main:before,
-.Main:after,
-.Title:before,
-.Title:after
-{
+.Main:after {
     content: " "; /* 1 */
     display: table; /* 2 */
 }
 
-.Main:after,
-.Title:after {
+.Main:after {
     clear: both;
 }
 

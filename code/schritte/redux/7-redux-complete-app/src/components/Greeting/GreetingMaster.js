@@ -1,9 +1,9 @@
-import React from 'react';
-import {connect} from 'react-redux';
+import React from "react";
+import {connect} from "react-redux";
 
-import * as actions from '../../actions';
-import {filterGreetings} from '../../selectors';
-import {MODE_DETAIL} from '../../actions';
+import * as actions from "../../actions";
+import {MODE_DETAIL} from "../../actions";
+import {filterGreetings} from "../../selectors";
 
 const GreetingRow = ({greeting, onRowClicked}) => (
     <tr onClick={() => onRowClicked(greeting)}>
@@ -28,7 +28,7 @@ const GreetingMaster = (props) => {
                                                         onRowClicked={greeting => setFilter(greeting.name)}/>);
     return (
         <div>
-            <table>
+            <table className="SelectableTable">
                 <thead>
                 <tr>
                     <th>Name</th>
