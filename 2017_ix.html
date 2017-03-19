@@ -595,6 +595,12 @@ class MyImage extends React.Component {
         </section>
 
         <section>
+            <h2>React Referenz</h2>
+            <p><a href="https://facebook.github.io/react/docs/hello-world.html" target="_blank">
+                https://facebook.github.io/react/docs/hello-world.html
+            </a>
+            </p>
+
             <h2>ES6-Referenz</h2>
             <p><a href="http://exploringjs.com/es6/" target="_blank">
                 http://exploringjs.com/es6/
@@ -882,9 +888,9 @@ class HelloMessage extends React.Component {
         </section>
 
         <section>
-            <h2>Referenz</h2>
-            <p><a href="https://facebook.github.io/react/docs" target="_blank">
-                https://facebook.github.io/react/docs
+            <h2>Thinking in React</h2>
+            <p><a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank">
+                https://facebook.github.io/react/docs/thinking-in-react.html
             </a>
             </p>
         </section>
@@ -905,20 +911,46 @@ class HelloMessage extends React.Component {
                 <ul class="fragment">
                     <li>Komponente ist eine einfache Funktion</li>
                     <li>entspricht der <code>render</code>-Methode</li>
-                    <li>Properties werden als Parameter übergeben</li>
+                    <li>Properties werden als Object per Parameter übergeben</li>
                     <li>Zurzeit nur ohne Zustand und ohne Lifecycle-Methoden</li>
+                    <li>Empfehlung: Funktionen statt Klassen verwenden (wenn möglich)</li>
                 </ul>
-<pre class="fragment"><code class="xml" contenteditable data-trim>
-function Layout(props) {
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+function Greet(props) {
   return (
-      <div className="Main">
-        <div className="Container">
-          {props.children}
-        </div>
+      <div>
+          <h1>{props.greeting}</h1>
+          <h2>{props.name}</h2>
+      </div>
+  );
+}
+
+// Verwendung:
+&lt;Greet name="Susi" greeting="Hello" /&gt;
+
+</code></pre></section>
+                <section>
+                    <h3>Komponenten als Funktion</h3>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+// Mit Destructuring
+function Greet({greeting, name}) {
+  return (
+      <div>
+          <h1>{greeting}</h1>
+          <h2>{name}</h2>
       </div>
   );
 }
 </code></pre>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+// Als Arrow Function
+const Greet = ({greeting, name}) => <div>
+    <h1>{greeting}</h1>
+    <h2>{name}</h2>
+  </div>
+}
+</code></pre>
+
         </section>
 
             <section>
