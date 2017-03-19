@@ -315,6 +315,11 @@ x
             <!--</ul>-->
         <!--</section>-->
 
+        <section id="example-app">
+            <h2>Beispiel-Anwendung</h2>
+            <a target="_blank" href="code/schritte/redux/7-redux-complete-app/public/index.html"><img src="greeting-app.png" style="border:0;box-shadow:0 0 0 0;max-width: 80%"/></a>
+        </section>
+
         <section id="t0">
             <h1>Teil 0</h1>
             <h2>React-Einführung und Build-Prozess</h2>
@@ -357,17 +362,15 @@ x
         <section>
                 <section>
                     <h3>Hello World React</h3>
-<pre><code data-trim contenteditable>class HelloMessage extends React.Component {
+<pre><code data-trim contenteditable>import React from "react";
+class HelloMessage extends React.Component {
   render() {
     return (&lt;div>
             &lt;input ref={input => this.input = input}
                    onChange={event => this.updateModel(event)}
                    value={this.state.greeting} />
             &lt;p>{this.state.greeting}, World&lt;/p>
-            &lt;button
-                onClick={() => this.reset()}>
-                Clear
-            &lt;/button>
+            &lt;button onClick={() => this.reset()}>Clear&lt;/button>
         &lt;/div>);
   }</code></pre>
 <pre class="fragment"><code contenteditable class="javascript">  constructor(props) {
@@ -453,6 +456,9 @@ console.log(programmer instanceof Person); // true</code></pre>
 </code></pre>
 <pre class="fragment"><code data-trim contenteditable class="javascript">
 // main.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import HelloMessage from './HelloMessage';
 
 const mountNode = document.getElementById('mount');
@@ -469,16 +475,63 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
             <li>Typische Werkzeuge
                 <ul><li>Babel (Compiler)
                     <li>Webpack (Bundler)
-                    <li>Webpack Dev Sever (HTTP Server mit Hot Reload)
-                    </ul>
+                </ul>
         </ul>
     </section>
-     <section>
-        <h2>Webpack und Babel</h2>
-        <img src="webpack-und-babel.png" style="border:0;box-shadow:0 0 0 0"/>
-    </section>
+        <section>
+            <h2>Webpack (Bundler)</h2>
+            <ul>
+                <li>Typische JavaScript SPAs bestehen aus einer Vielzahl von internen und externen JS Modulen</li>
+                <li class="fragment">Händische Pflege (compilieren, einbinden in HTML-Datei etc) sehr aufwendig</li>
+                <li class="fragment">Keine Unterstützung von "require" im Browser</li>
+                <li class="fragment">Weitere Artefakte einer Anwendung: CSS, Bilder etc</li>
+                <li class="fragment">Webpack macht automatisch aus <b>allen</b> Artefakten unserer Anwendung <b>ein</b> JavaScript Modul</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Typische Verarbeitung mit Webpack</h2>
+            <ul>
+                <li class="fragment"><b>JavaScript</b>: compilieren, minifizieren</li>
+                <li class="fragment"><b>Stylesheets</b>: LESS/SCSS/PostCSS ausführen</li>
+                <li class="fragment"><b>Images</b>: als Inline Resource zur Verfügung stellen</li>
+                <li class="fragment">Alle unterstützten Resourcen können aus JavaScript referenziert werden:
+                    <pre><code data-trim contenteditable class="javascript">
+                        import './my-syles.scss'; // wird in DOM per script-Tag eingebunden
+import anImage from './images/my-image.png';
+import React from 'react';
+class MyImage extends React.Component {
+  render() { return &lt;img src={anImage} /&gt; }
+}
 
-    </section>
+                    </code></pre>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Webpack und Babel</h2>
+                <ul>
+                    <li>Resource-spezifische "Loader"</li>
+                    <li>Statische Code-Analyse für Abhängigkeiten</li>
+                </ul>
+            <img src="webpack-und-babel.png" style="border:0;box-shadow:0 0 0 0"/>
+        </section>
+        <section>
+            <h2>Webpack Development Server</h2>
+            <ul>
+                <li>Zum Ausführen der Anwendung wird ein Webserver benötigt</li>
+                <li class="fragment">Für die Entwicklung <b>Webpack Dev Server</b>:
+                <ul>
+                    <li class="fragment">...führt Webpack auf Basis der Projekt Webpack Konfiguration aus</li>
+                    <li class="fragment">...erzeugt Ausgabe in Memory (Performance)</li>
+                    <li class="fragment">...Hot Reloading: Automatische Aktualisierung nach Code Änderung</li>
+                    <li class="fragment">...React Hot Loader: Zustand bleibt nach Aktualisierung erhalten (Beta)</li>
+                </ul>
+                <li class="fragment"><code>npm start</code> in unserem Beispiel-Projekt</li>
+            </ul>
+        </section>
+
+
     <section>
       <section>
           <h2>Übung 0: React Hello-World</h2>
@@ -491,9 +544,8 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
           <ul>
               <li>Evtl. dafür einen Proxy konfigurieren <a target="_blank" href="http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/">http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/</a></li>
               <li><code>npm install</code> (auf oberster Ebene)
-              <li><code>npm run setup</code> (auf oberster Ebene)
               <li><code>cd code/workspace</code>
-              <li><code>npm run devserver</code>
+              <li><code>npm start</code>
               <li>Öffne <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> im Browser
               <li>Wenn auf der Seite 'Hello, World' steht, ist alles gut
           </ul>
