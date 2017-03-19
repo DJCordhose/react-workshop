@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import {observer} from 'mobx-react';
+import {observer} from "mobx-react";
 
-import GreetingMaster from './GreetingMaster';
-import GreetingDetail from './GreetingDetail';
-import Chart from './Chart';
+import GreetingMaster from "./GreetingMaster";
+import GreetingDetail from "./GreetingDetail";
+import Chart from "./Chart";
 
-import {MODE_MASTER, MODE_DETAIL} from './store';
+import {MODE_DETAIL, MODE_MASTER} from "./store";
 
 @observer
 export default class GreetingController extends React.Component {
@@ -36,4 +36,3 @@ export default class GreetingController extends React.Component {
         loadGreetings();
     }
 }
-

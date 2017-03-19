@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
-import d3 from 'd3';
-import nv from 'nvd3';
+import React, {PropTypes} from "react";
+import d3 from "d3";
+import nv from "nvd3";
 
 export default class Chart extends React.Component {
 
