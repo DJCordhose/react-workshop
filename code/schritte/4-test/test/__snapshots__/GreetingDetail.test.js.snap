@@ -20,6 +20,7 @@ exports[`it should render fine 1`] = `
     Clear
   </button>
   <button
+    disabled={true}
     onClick={[Function]}
   >
     Save

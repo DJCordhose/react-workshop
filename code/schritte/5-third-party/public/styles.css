@@ -44,6 +44,12 @@ button:hover {
     background-color: #4995C7;
 }
 
+button:disabled {
+    color: rgba(233, 233, 233, 0.8);
+    background-color: rgba(72, 148, 199, 0.8);
+    cursor: default;
+}
+
 table {
     width: 100%;
     border-spacing: 0;

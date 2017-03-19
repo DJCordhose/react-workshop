@@ -6,6 +6,7 @@ import {inject} from 'mobx-react';
 export default class GreetingDetail extends React.Component {
     render() {
         const {name, greeting} = this.state;
+        const saveDisabled = !(name && greeting);
 
         return (
             <div>
@@ -21,6 +22,7 @@ export default class GreetingDetail extends React.Component {
                     Clear
                 </button>
                 <button
+                    disabled={saveDisabled}
                     onClick={() => this.save()}>
                     Save
                 </button>
