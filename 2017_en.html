@@ -46,8 +46,19 @@
         .reveal pre code {
             max-height: 1000px !important;
         }
+        .hide {
+            display: none !important;
+        }
 
     </style>
+
+    <script>
+        // remove slides that are not part of current version
+        // IMPORTANT: Do this before anything else happens
+        // TODO: should only apply to non barcelona version
+        $('.barcelona').remove();
+    </script>
+
 
     <!-- Printing and PDF exports -->
     <script>
@@ -123,7 +134,20 @@
 
 <!--Target Audience: Frontend and Fullstack Developers who already know React and Redux and want to dive deeper. Knowledge can be acquired in Day I.-->
 
-        <section>
+        <section class="hamburgI">
+            <h2>Introduction Into React and Redux</h2>
+            <ul>
+                <li><a href="#/t0">Part 0: Setup and Introduction into React</a>
+                <li><a href="#/t1">Part I: React and ES6 Basics</a>
+                <li><a href="#/t2">Part II: Composing Components</a>
+                <li><a href="#/t3">Part III: Remote-Calls and Promises</a>
+                <li><a href="#/t4">Part IV: Introduction to Redux</a>
+            </ul>
+            <p><strong>Target Audience: Frontend and Fullstack Developers interested in React, no prior knowledge of React or ES6 required</strong></p>
+        </section>
+
+
+        <section class="barcelona">
             <h2>Introduction Into React and Redux</h2>
             <ul>
                 <li><a href="#/t0">Part 0: Setup and Introduction into React</a>
@@ -668,7 +692,6 @@ class HelloMessage extends React.Component {
 </code></pre>
         </section>
 
-        <section>
       <section>
           <h2>Exercise: Detail View for Greeting Application</h2>
           <h3>Create a component that lets you enter a name and a greeting</h3>
@@ -683,7 +706,6 @@ class HelloMessage extends React.Component {
               <li><em>Optional Step: Extend your component so that you can pass in initial State as Properties from the outside</em>
           </ul>
       </section>
-    </section>
 
         <section id="t2">
             <h1>Part II</h1>
@@ -759,8 +781,36 @@ const body = greetings.map(greeting =>
         </section>
 
         <section>
-            <h3>Smart and Dumb Component</h3>
-            <img src="smart-dumb.jpg">
+            <h2>Smart and Dumb Components</h2>
+            <p>Common Architectural Pattern</p>
+            <p>Not restricted to React</p>
+        </section>
+
+        <section>
+            <h3>Smart Components (aka Container Components aka Containers)</h3>
+                    <ul>
+                        <li>manage a selection of the current application state (or are connected to state management)
+                        <li>pass down state to their children as properties
+                        <li>have UI logic they can call or pass down to their children as properties
+                        <li>might be mapped to a specific URL
+                    </ul>
+        </section>
+
+        <section>
+            <h3>Dumb Components (aka Presentational Components aka Components)</h3>
+                    <ul>
+                        <li>do not manage state (and are not connected to state management)
+                        <li>typically only contain other Dumb Components (there are
+                            <a target="_blank" href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.z8xy5zvhs">
+                                exceptions to this rule</a>)
+                        <li>have no knowledge of their parent
+                        <li>can hold and manage temporary UI (like expanded or open)
+                    </ul>
+        </section>
+
+        <section>
+            <h3>Communication</h3>
+            <img src="smart-dumb-w-label.png">
         </section>
 
         <section>
@@ -823,7 +873,6 @@ GreetingDetail.propTypes = {
 </code></pre>
         </section>
 
-        <section>
             <section>
                 <h2>Exercise: Compose a complete Application</h2>
                 <h3>Assemble your existing Detail View and a Master View (Dumb Components) with the GreetingController (Smart Component)</h3>
@@ -850,7 +899,6 @@ GreetingDetail.propTypes = {
                 <h3>GreetingDetail</h3>
                 <img src="greeting-detail.png" style="border:0;box-shadow:0 0 0 0"/>
             </section>
-        </section>
 
         <section id="t3">
             <h1>Part III</h1>
@@ -868,37 +916,44 @@ GreetingDetail.propTypes = {
         </section>
 
             <section>
-                <h3>fetch</h3>
+                <h2>fetch</h2>
                 <p>Browser API to load and save data</p>
-<pre><code class="javascript" contenteditable data-trim>
+            </section>
+        <section>
+        <h3>fetch as a simple GET</h3>
+        <pre><code class="javascript" contenteditable>const url = `${BACKEND_URL}${path}`;
+
+fetch(url)
+    .then(response => response.json())
+    .then(json => /* ... */)
+    .catch(ex => console.error('request failed', ex));
+</code></pre>
+        </section>
+
+        <section>
+            <h3>fetch sending JSON using POST</h3>
+            <pre><code class="javascript" contenteditable>const url = `${BACKEND_URL}${path}`;
+const objectBeSaved = ...;
+
 fetch(url, {
-    method: 'PUT',
+    method: 'POST',
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(objectBeSaved)
 })
-.then(response => response.json())
-.then(json => /* ... */)
-.catch(ex => console.error('request failed', ex));
+    .then(json => response.status === 201 ? /* success */ :
+                                            /* failure */)
+    .catch(ex => console.error('request failed', ex));
 </code></pre>
-            </section>
+
+        </section>
 
 
         <section>
             <h2>Promises</h2>
         </section>
-                <section>
-                        <h3>fetch</h3>
-<pre><code class="javascript" contenteditable>const url = `${BACKEND_URL}${path}`;
-
-return fetch(url)
-    .then(response => response.json())
-    .then(json => /* ... */)
-    .catch(ex => console.error('request failed', ex));
-</code></pre>
-                </section>
                     <section>
                         <h3>A Promise will resolve to a value, be rejected or abort with an error</h3>
                         <ul>
@@ -995,9 +1050,8 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 // Output:
 // error:  Promise rejected</code></pre>
                 </section>
-        <section>
             <section>
-                <h2>Exercise: Loading and Saving Data from/to server</h2>
+                <h2>OPTIONAL<br>Exercise: Loading and Saving Data from/to server</h2>
                 <p>Create a new version of your application that initially loads greeting data from the server</p>
                 <p>It should also save data to the server when a new greeting is added</p>
             </section>
@@ -1005,15 +1059,13 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
                 <h3>Steps</h3>
                 <ol>
                     <li>There already is a complete server implementation, which you can start using <code>npm start</code> in the root directory
-                    <li>localhost:7000
-                    <li>Use material from <code>code/material/3-remote</code> into your src folder</li>
-                    <li>in <code>GreetingController</code> call loading of greetings from <code>backend</code> in lifecycle method <code>componentDidMount</code></li>
-                    <li>in <code>onAdd</code> call saving of the greeting to the server</li>
+                    <li>It runs on localhost:7000
+                    <li>in <code>GreetingController</code> call <code>fetch</code> using <em>GET</em> to load greetings from the server in lifecycle method <code>componentDidMount</code></li>
+                    <li>in <code>onAdd</code> call <code>fetch</code> using <em>POST</em> to save the new greeting to the server</li>
                 </ol>
                 <p>Have a look at <code>backend.js</code> that contains proper API documentation</p>
             </section>
 
-        </section>
         <section id="t4">
             <h1>Part IV</h1>
             <h2>State Management using Redux</h2>
@@ -1214,7 +1266,7 @@ class GreetingController extends React.Component {
 }
             </code></pre>
             <ul>
-                <li class="fragment">Both Action Creators and State meged into props passed from parent</li>
+                <li class="fragment">Both Action Creators and State merged into props passed from parent</li>
                 <li class="fragment">State and Action Creators decomposed where needed</li>
                 <li class="fragment">Only re-rendered when accessed state changes</li>
             </ul>
