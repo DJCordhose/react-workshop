@@ -127,17 +127,39 @@
 <!--Target Audience: Frontend and Fullstack Developers who already know React and Redux and want to dive deeper. Knowledge can be acquired in Day I.-->
 
         <section class="hamburgI">
-            <h2>Introduction Into React and Redux</h2>
+            <h2>"Day" I: Introduction Into React and Redux</h2>
             <ul>
                 <li><a href="#/t0">Part 0: Setup and Introduction into React</a>
                 <li><a href="#/t1">Part I: React and ES6 Basics</a>
                 <li><a href="#/t2">Part II: Composing Components</a>
                 <li><a href="#/t3">Part III: Remote-Calls and Promises</a>
                 <li><a href="#/t4">Part IV: Introduction to Redux</a>
+                <li>Part VI: Bridging to Hops and Malt: starter app using hops-tools (client/exercises/Readme.md)
             </ul>
             <p><strong>Target Audience: Frontend and Fullstack Developers interested in React, no prior knowledge of React or ES6 required</strong></p>
         </section>
 
+        <section class="hamburgII">
+            <h2>"Day" II: Advanced and more Hands-On</h2>
+            <!--<p>Starting point: create sample app, all exercises in sample app, prepare in sample app</p>-->
+            <!--<p>Should we have slides at all? Or rather show in other applications and let people implement stuff into Sample App</p>-->
+            <ul>
+                <li>Part V: Bridging to Hops and Malt: create sample app (live demo, no slides)
+                <li class="todo"><a href="#/t6">Part VI: React Router </a>
+                    <!--L(east)R(esponsible)M(oment): Decide which version to use 3 or 4-->
+                    <!--(copy from mobx, shorten and translate, exercise add a dummy route tab called stats and link to it)-->
+                <li class="todo"><a href="#/t7">Part VII: Testing</a>
+                    <!--(copy from nils version, shorten and translate, add redux style exercise: add tests to sample app)-->
+                <li class="todo"><a href="#/t8">Part VIII: 3rd Party integration</a>
+                    <!--(copy from mobx and Angular 2 talk, shorten and translate, transform 3rd party chart to github contribution and add to stats tab)-->
+                <li class="todo"><a href="#/t9">Part IX: Optimizations</a>
+                    <!--(create in English based on note in ix and Angular 2 talk, exercise should component update, reselect, immutable.js)-->
+                <li class="todo">Part X: Type checking using Flow
+                    <!--(slides from intro talk, examples from Hops Demo App, exercise to type more in hops and malt)-->
+            </ul>
+            <p><strong>Target Audience: Frontend and Fullstack Developers who already know React and Redux and want to dive deeper. Knowledge can be acquired in Day I.
+            </strong></p>
+        </section>
 
         <section class="barcelona">
             <h2>Introduction Into React and Redux</h2>
@@ -150,6 +172,7 @@
                 <li><a href="#/t4">Part IV: Introduction to Redux</a>
                 <li class="todo"><a href="#/t4a">Part IVa: Testing Redux</a>
                 <li class="todo"><a href="#/t6">Part V: React Router 3/4</a>
+                <li>Part VI: Bridging to Hops and Malt: create sample app (client/exercises/Readme.md)
             </ul>
             <p><strong>Target Audience: Frontend and Fullstack Developers interested in React, no prior knowledge of React or ES6 required</strong></p>
         </section>
@@ -1313,8 +1336,9 @@ export default connect(
 <script>
   // remove slides that are not part of current version
   // IMPORTANT: Do this before anything else happens
-  // TODO: should only apply to non barcelona version
+  // just hamburg I
   $('.barcelona').remove();
+  $('.hamburgII').remove();
 </script>
 
 
