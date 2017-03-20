@@ -52,14 +52,6 @@
 
     </style>
 
-    <script>
-        // remove slides that are not part of current version
-        // IMPORTANT: Do this before anything else happens
-        // TODO: should only apply to non barcelona version
-        $('.barcelona').remove();
-    </script>
-
-
     <!-- Printing and PDF exports -->
     <script>
         var link = document.createElement('link');
@@ -1317,10 +1309,18 @@ export default connect(
     </div>
 
 </div>
+<script src="lib/jquery-2.2.4.js"></script>
+<script>
+  // remove slides that are not part of current version
+  // IMPORTANT: Do this before anything else happens
+  // TODO: should only apply to non barcelona version
+  $('.barcelona').remove();
+</script>
+
+
 
 <script src="reveal.js/lib/js/head.min.js"></script>
 <script src="reveal.js/js/reveal.js"></script>
-<script src="lib/jquery-2.2.4.js"></script>
 <script>
     Reveal.addEventListener( 'ready', function( event ) {
         if (window.location.hostname.indexOf('localhost') !== -1) {
