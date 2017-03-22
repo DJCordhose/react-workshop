@@ -7,9 +7,9 @@ export default class GreetingDisplayController extends React.Component {
     }
 
     loadGreeting() {
-        const {params} = this.props;
+        const {match} = this.props;
 
-        loadGreetingFromServer(params.greetingId,
+        loadGreetingFromServer(match.params.greetingId,
             greeting => this.setState({greeting}),
             error => console.log('FAILED TO LOAD GREETING:', error)
         );

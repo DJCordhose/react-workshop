@@ -1,42 +1,44 @@
-import React from 'react';
+import React from "react";
+import {HashRouter as Router, Route} from "react-router-dom";
 
-import {loadFromServer, saveToServer} from './backend';
+import {loadFromServer, saveToServer} from "./backend";
 
-import GreetingMaster from './GreetingMaster';
-import GreetingDetail from './GreetingDetail';
-import Chart from './Chart';
-import {aggregateGreetings} from './util';
-
-const MODE_MASTER = 'MODE_MASTER';
-const MODE_DETAIL = 'MODE_DETAIL';
+import GreetingMaster from "./GreetingMaster";
+import GreetingDetail from "./GreetingDetail";
+import Chart from "./Chart";
+import {aggregateGreetings} from "./util";
 
 export default class GreetingController extends React.Component {
     render() {
-        const {mode, greetings, filter} = this.state;
+        const {greetings, filter} = this.state;
         const aggregatedGreetings = aggregateGreetings(greetings);
         const filtered = filter ? greetings.filter(greeting => greeting.name === filter) : greetings;
 
         return (
-            <div className="Main">
-                <div className="Left">
-                    {mode === MODE_MASTER ?
-                        <GreetingMaster greetings={filtered}
-                                        onAdd={() => this.setState({mode: MODE_DETAIL})}
-                        /> :
-                        <GreetingDetail onAdd={(greeting) => this.saveGreeting(greeting)}/>
-                    }
+            <Router>
+                <div className="Main">
+                    <div className="Left">
+                        <Route exact path="/" render={() => (
+                            <GreetingMaster greetings={filtered}
+                                            onAdd={() => this.redirectTo('/add')}
+                            />)
+                        }/>
+                        <Route path="/add" render={() => (
+                            <GreetingDetail onAdd={(greeting) => this.saveGreeting(greeting)}/>
+                        )}/>
+                    </div>
+                    <div className="Right">
+                        <Chart data={aggregatedGreetings} onSegmentSelected={filter => {
+                            if (this.state.filter === filter) {
+                                // reset filter when clicking again
+                                this.setState({filter: null})
+                            } else {
+                                this.setState({filter})
+                            }
+                        }}/>
+                    </div>
                 </div>
-                <div className="Right">
-                    <Chart data={aggregatedGreetings} onSegmentSelected={filter => {
-                        if (this.state.filter === filter) {
-                            // reset filter when clicking again
-                            this.setState({filter: null})
-                        } else {
-                            this.setState({filter})
-                        }
-                    }}/>
-                </div>
-            </div>);
+            </Router>);
     }
 
     constructor(props) {
@@ -72,12 +74,12 @@ export default class GreetingController extends React.Component {
             const newGreetings = [...this.state.greetings, newGreeting];
 
             // set the new list of greetings as our new state
-            // also set 'MODE_MASTER' to make sure the master-View is
-            // displayed now
             this.setState({
                 greetings: newGreetings,
-                mode: MODE_MASTER
             });
+
+            // redirect to master view
+            this.redirectTo('/');
 
             return newGreeting;
         };
@@ -85,6 +87,11 @@ export default class GreetingController extends React.Component {
         const _reportError = err => console.error('COULD NOT SAVE GREETING: ', err);
 
         saveToServer(greetingToBeAdded, _addNewGreeting, _reportError);
+    }
+
+    redirectTo(path) {
+        const {history} = this.props;
+        history.push(path);
     }
 }
 
