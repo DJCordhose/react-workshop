@@ -1,6 +1,15 @@
 import * as React from 'react';
 
-export default class HelloMessage extends React.Component<any, any> {
+type Props = {
+    greeting: string;
+    // greeting: boolean; // Outsch
+};
+
+type State = {
+    greeting: string;
+}
+
+export default class HelloMessage extends React.Component<Props, State> {
     input: HTMLInputElement;
     render() {
         return (
