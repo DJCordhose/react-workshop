@@ -6,4 +6,8 @@ import * as ReactDOM from 'react-dom';
 import HelloMessage from './HelloMessage';
 
 const mountNode = document.getElementById('mount');
-ReactDOM.render(<HelloMessage greeting="Hello"/>, mountNode);
+// ouch
+// ReactDOM.render(<HelloMessage greeting={10}/>, mountNode);
+// also ouch
+// ReactDOM.render(<HelloMessage/>, mountNode);
+ReactDOM.render(<HelloMessage greeting="Huhu"/>, mountNode);
