@@ -8,6 +8,8 @@ type Props = {
 
 type State = {
     greeting: string;
+    // ouch
+    // name: string;
 }
 
 export default class HelloMessage extends React.Component<Props, State> {
