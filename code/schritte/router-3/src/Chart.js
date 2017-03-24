@@ -16,7 +16,7 @@ export default class Chart extends React.Component {
     // will be called even when shouldComponentUpdate returns false
     componentWillReceiveProps(nextProps) {
         const {data} = nextProps;
-        this._d3selection
+        this._d3selection && this._d3selection
             .datum(data)
             .call(this._nvd3chart);
     }

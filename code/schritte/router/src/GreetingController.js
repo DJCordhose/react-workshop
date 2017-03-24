@@ -45,7 +45,6 @@ export default class GreetingController extends React.Component {
         super(props);
         this.state = {
             greetings: [],
-            mode: MODE_MASTER,
             filter: null
         };
     }
