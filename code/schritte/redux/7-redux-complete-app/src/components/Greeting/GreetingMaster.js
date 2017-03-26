@@ -47,6 +47,7 @@ const GreetingMaster = (props) => {
         </div>
     );
 };
+GreetingMaster.displayName = 'GreetingMaster';
 
 export default connect(
     state => ({
