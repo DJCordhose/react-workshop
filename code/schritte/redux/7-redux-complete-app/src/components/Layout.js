@@ -17,5 +17,6 @@ const Layout = () => (
         </div>
     </div>
 );
+Layout.displayName = 'Layout';
 
 export default Layout;

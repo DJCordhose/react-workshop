@@ -45,7 +45,8 @@ const GreetingMaster = (props) => {
             </button>
         </div>
     );
-}
+};
+GreetingMaster.displayName = 'GreetingMaster';
 
 export default inject( ({store}) => ({
     greetings: store.filteredGreetings,
