@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {SyntheticEvent} from "react";
 
 type Props = {
     greeting: string;
@@ -51,7 +52,7 @@ export default class HelloMessage extends React.Component<Props, State> {
         this.setState({greeting: ""});
         this.input.focus();
     }
-    updateModel(event) {
-        this.setState({greeting: event.target.value});
+    updateModel(event: SyntheticEvent<HTMLInputElement>) {
+        this.setState({greeting: event.currentTarget.value});
     }
 }
