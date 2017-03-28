@@ -4,16 +4,20 @@ import { connect } from 'react-redux';
 
 import * as actions from './actions';
 
-type Props = {
-    greeting: string;
+import {State} from './store';
+
+type Props = Partial<State> & {
+    // greeting: string;
     repeat?: boolean;
-    resetGreeting: () => void;
-    updateGreeting: (string) => void;
+    resetGreeting: typeof actions.resetGreeting;
+    updateGreeting: typeof actions.updateGreeting;
 };
 
 class HelloMessage extends React.Component<Props, undefined> {
     input: HTMLInputElement;
     render() {
+        // ERROR: Type 'Readonly<{ children?: ReactNode; }> & Readonly<Props>' has no property 'updateGreting' and no string index signature.
+        // const { greeting, repeat, updateGreting } = this.props;
         const { greeting, repeat, updateGreeting } = this.props;
 
         const output = <p>{greeting}, World</p>;
