@@ -1,31 +1,31 @@
 import * as React from 'react';
 import {SyntheticEvent} from "react";
+import { connect } from 'react-redux';
+
+import * as actions from './actions';
 
 type Props = {
     greeting: string;
-    // greeting: boolean; // Outsch
     repeat?: boolean;
+    resetGreeting: () => void;
+    updateGreeting: (string) => void;
 };
 
-type State = {
-    greeting: string;
-    // ouch
-    // name: string;
-}
-
-export default class HelloMessage extends React.Component<Props, State> {
+class HelloMessage extends React.Component<Props, undefined> {
     input: HTMLInputElement;
     render() {
-        const output = <p>{this.state.greeting}, World</p>;
+        const { greeting, repeat, updateGreeting } = this.props;
+
+        const output = <p>{greeting}, World</p>;
 
         return (
             <div>
                 <input ref={input => this.input = input}
-                       onChange={event => this.updateModel(event)}
-                       value={this.state.greeting} />
+                       onChange={(event: SyntheticEvent<HTMLInputElement>) => updateGreeting(event.currentTarget.value)}
+                       value={greeting} />
                 {output}
                 {
-                    this.props.repeat && output
+                    repeat && output
                 }
                 <button
                     onClick={() => this.reset()}>
@@ -33,26 +33,14 @@ export default class HelloMessage extends React.Component<Props, State> {
                 </button>
             </div>);
     }
-    constructor(props) {
-        super(props);
-        // ERROR: Object literal may only specify known properties, and 'aha' does not exist in type 'Readonly<State>'
-        // this.state = {greeting: this.props.greeting, aha: 10};
-        this.state = {greeting: this.props.greeting};
-
-        // READONLY
-        // https://github.com/Microsoft/TypeScript/wiki/What%27s-new-in-TypeScript#partial-readonly-record-and-pick
-
-        // ERROR: Cannot assign to 'greeting' because it is a constant or a read-only property.
-        // this.state.greeting = 'no way';
-
-        // ERROR: Property 'newStuff' does not exist on type 'Readonly<State>'.
-        // this.state.newStuff = 'also not going to work'
-    }
     reset() {
-        this.setState({greeting: ""});
+        const { resetGreeting } = this.props;
         this.input.focus();
-    }
-    updateModel(event: SyntheticEvent<HTMLInputElement>) {
-        this.setState({greeting: event.currentTarget.value});
+        resetGreeting();
     }
 }
+
+export default connect(
+    state => ({greeting: state.greeting}),
+    actions
+)(HelloMessage);
