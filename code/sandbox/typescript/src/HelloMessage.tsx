@@ -34,7 +34,18 @@ export default class HelloMessage extends React.Component<Props, State> {
     }
     constructor(props) {
         super(props);
+        // ERROR: Object literal may only specify known properties, and 'aha' does not exist in type 'Readonly<State>'
+        // this.state = {greeting: this.props.greeting, aha: 10};
         this.state = {greeting: this.props.greeting};
+
+        // READONLY
+        // https://github.com/Microsoft/TypeScript/wiki/What%27s-new-in-TypeScript#partial-readonly-record-and-pick
+
+        // ERROR: Cannot assign to 'greeting' because it is a constant or a read-only property.
+        // this.state.greeting = 'no way';
+
+        // ERROR: Property 'newStuff' does not exist on type 'Readonly<State>'.
+        // this.state.newStuff = 'also not going to work'
     }
     reset() {
         this.setState({greeting: ""});
