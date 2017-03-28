@@ -3,7 +3,7 @@ import greetingReducer from './greetingReducer';
 import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
-export type state = {
+export type State = {
     greeting: string;
 }
 
