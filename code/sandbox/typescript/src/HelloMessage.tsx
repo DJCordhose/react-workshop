@@ -1,29 +1,50 @@
 import * as React from 'react';
+import {SyntheticEvent} from "react";
+import { connect } from 'react-redux';
 
-export default class HelloMessage extends React.Component<any, any> {
+import * as actions from './actions';
+
+import {State} from './store';
+
+type Props = Partial<State> & {
+    // greeting: string;
+    repeat?: boolean;
+    resetGreeting: typeof actions.resetGreeting;
+    updateGreeting: typeof actions.updateGreeting;
+};
+
+class HelloMessage extends React.Component<Props, undefined> {
     input: HTMLInputElement;
     render() {
+        // ERROR: Type 'Readonly<{ children?: ReactNode; }> & Readonly<Props>' has no property 'updateGreting' and no string index signature.
+        // const { greeting, repeat, updateGreting } = this.props;
+        const { greeting, repeat, updateGreeting } = this.props;
+
+        const output = <p>{greeting}, World</p>;
+
         return (
             <div>
                 <input ref={input => this.input = input}
-                       onChange={event => this.updateModel(event)}
-                       value={this.state.greeting} />
-                <p>{this.state.greeting}, World</p>
+                       onChange={(event: SyntheticEvent<HTMLInputElement>) => updateGreeting(event.currentTarget.value)}
+                       value={greeting} />
+                {output}
+                {
+                    repeat && output
+                }
                 <button
                     onClick={() => this.reset()}>
                     Clear
                 </button>
             </div>);
     }
-    constructor(props) {
-        super(props);
-        this.state = {greeting: this.props.greeting};
-    }
     reset() {
-        this.setState({greeting: ""});
+        const { resetGreeting } = this.props;
         this.input.focus();
-    }
-    updateModel(event) {
-        this.setState({greeting: event.target.value});
+        resetGreeting();
     }
 }
+
+export default connect(
+    state => ({greeting: state.greeting}),
+    actions
+)(HelloMessage);
