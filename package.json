@@ -62,6 +62,7 @@
     "mobx": "^3.1.0",
     "mobx-react": "^4.1.0",
     "mobx-react-devtools": "^4.2.11",
+    "normalizr": "^3.2.2",
     "nvd3": "^1.8.5",
     "react": "^15",
     "react-dom": "^15",
@@ -71,6 +72,7 @@
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.0",
     "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.0",
     "whatwg-fetch": "^1.0.0"
   }
 }
