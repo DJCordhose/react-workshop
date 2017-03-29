@@ -1,0 +1,14 @@
+{
+  "name": "react-workshop",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "npm run devserver",
+    "clean": "../../../node_modules/.bin/rimraf -rf public/dist/",
+    "dist": "../../../node_modules/.bin/webpack",
+    "webpack": "../../../node_modules/.bin/webpack --watch",
+    "devserver": "../../../node_modules/.bin/webpack-dev-server --content-base public/",
+    "flow": "../../../node_modules/.bin/flow",
+    "flow:watch": "../../../node_modules/.bin/nodemon --watch ../src ../../../node_modules/.bin/flow"
+  }
+}
