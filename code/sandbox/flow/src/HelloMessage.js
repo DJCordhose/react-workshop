@@ -1,19 +1,20 @@
+// @flow
+
 import React from 'react';
-import {SyntheticEvent} from "react";
 import { connect } from 'react-redux';
 
 import * as actions from './actions';
 
-import {State} from './store';
+import type {State} from './store';
 
-type Props = Partial<State> & {
+type Props = State & {
     // greeting: string;
     repeat?: boolean;
     resetGreeting: typeof actions.resetGreeting;
     updateGreeting: typeof actions.updateGreeting;
 };
 
-class HelloMessage extends React.Component<Props, undefined, undefined> {
+class HelloMessage extends React.Component<void, Props, void> {
     input: HTMLInputElement;
     render() {
         // ERROR: Type 'Readonly<{ children?: ReactNode; }> & Readonly<Props>' has no property 'updateGreting' and no string index signature.
@@ -25,7 +26,7 @@ class HelloMessage extends React.Component<Props, undefined, undefined> {
         return (
             <div>
                 <input ref={input => this.input = input}
-                       onChange={(event: SyntheticEvent<HTMLInputElement>) => updateGreeting(event.currentTarget.value)}
+                       onChange={event => updateGreeting(event.currentTarget.value)}
                        value={greeting} />
                 {output}
                 {

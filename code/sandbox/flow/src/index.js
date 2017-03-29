@@ -1,3 +1,5 @@
+// @flow
+
 // https://flow.org/en/docs/frameworks/react/
 // https://flow.org/en/docs/frameworks/redux/
 

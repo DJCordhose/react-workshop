@@ -1,3 +1,5 @@
+// @flow
+
 export const RESET_GREETING = 'RESET_GREETING';
 export const UPDATE_GREETING = 'UPDATE_GREETING';
 

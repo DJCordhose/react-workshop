@@ -1,4 +1,6 @@
-import {Action} from './actions';
+// @flow
+
+import type {Action} from './actions';
 
 export default function greetingReducer(state: string = 'Hello', action: Action) {
     switch (action.type) {
