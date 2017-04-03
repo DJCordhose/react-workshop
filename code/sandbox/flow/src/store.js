@@ -8,6 +8,7 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 export type State = {
     // make this read-only, effectively
     // https://flow.org/en/docs/frameworks/redux/
+    // https://flow.org/blog/2016/10/04/Property-Variance/
     +greeting: string;
 }
 
