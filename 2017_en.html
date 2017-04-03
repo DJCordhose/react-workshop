@@ -1282,7 +1282,7 @@ class GreetingController extends React.Component {
             </code></pre>
             <ul>
                 <li class="fragment">Both Action Creators and State merged into props passed from parent</li>
-                <li class="fragment">State and Action Creators decomposed where needed</li>
+                <li class="fragment">State and Action Creators destructered where needed</li>
                 <li class="fragment">Only re-rendered when accessed state changes</li>
             </ul>
         </section>
@@ -1323,7 +1323,7 @@ export default connect(
                     <li>Use the existing filter code from the previous step as a starting point
                     <li>Add an Action Type and an action creator for filtering
                     <li>Add a reducer to handle such an action and add it to <code>combineReducers</code>
-                    <li>In <code>GreetingController</code> import the action creator and pass it down to the Chart to react to
+                    <li>In <code>GreetingController</code> pass down the action creator to the Chart to react to
                     filtering events
                 </ul>
             </section>
