@@ -189,6 +189,35 @@ export default class GreetingController extends React.Component {
         </section>
 
         <section>
+            <section>
+                <h2>Übung: Stelle deine Anwendung auf MobX um</h2>
+                <h3>Nutze die vorbereitete Implementierung</h3>
+            </section>
+            <section>
+                <h3>Schritte</h3>
+                <ul>
+                    <li>mache dich mit der vorbereiteten und lauffähigen Implementierung in <code>code/experiment/mobx</code> vertraut
+                    <li>integriere sie in deine bestehende Lösung inklusive des Routings
+                    <li>füge in eine neue Komponente hinzu, die zählt, wie viele Grüße es insgesamt gibt und wie viele davon nach der Filterung noch angezeigt werden
+                </ul>
+            </section>
+        </section>
+
+        <section>
+            <h2>Wie kann man Stores noch an Komponenten übergeben?</h2>
+            <a href="https://github.com/mobxjs/mobx/issues/300#issuecomment-223704275" target="_blank">
+                https://github.com/mobxjs/mobx/issues/300#issuecomment-223704275</a>
+            <ol>
+                <li>Explizit durch props
+                <li>Direkter Zugriff aus importierten Stores
+                <li>Implizit über einen Provider (wie bei Redux),
+                    <a target="_blank" href="https://github.com/mobxjs/mobx-react#provider-and-inject">
+                        https://github.com/mobxjs/mobx-react#provider-and-inject
+                    </a>
+            </ol>
+        </section>
+
+        <section>
             <h1>Option 3: Redux</h1>
         </section>
 
@@ -207,7 +236,25 @@ export default class GreetingController extends React.Component {
             <img src="redux-03-resulting-redux-architecture.png" style="border:0;box-shadow:0 0 0 0"/>
         </section>
 
-                <section>
+        <section>
+            <h2>Redux vs MobX</h2>
+            <p><a href="http://redux.js.org/" target="_blank">
+                http://redux.js.org/
+            </a>
+            </p>
+            <ul>
+                <li>Redux ist die Mainstream-Lösung
+                <li>Lässt sich sehr gut testen
+                <li>Fehlersuche und Debugging erstaunlich einfach
+                <li>Funktioniert auch in großen Anwendungen sehr gut
+                <li>Dev-Tools erlauben Magisches
+            </ul>
+            <p>Allerdings: Lernkurve steil, gerade am Anfang wirklich viel Code</p>
+            <p><strong>Redux ist für kleinere Anwendungen meistens Overkill</strong></p>
+            <p>MobX erlaubt einen sehr einfachen Einstieg</p>
+        </section>
+
+        <section>
             <h3>Event-Handlers werden Action-Creators</h3>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 export function setFilter(filter) {
