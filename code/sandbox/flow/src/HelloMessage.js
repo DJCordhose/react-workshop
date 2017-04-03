@@ -17,16 +17,16 @@ type Props = State & {
 class HelloMessage extends React.Component<void, Props, void> {
     input: HTMLInputElement;
     render() {
-        // ERROR: Type 'Readonly<{ children?: ReactNode; }> & Readonly<Props>' has no property 'updateGreting' and no string index signature.
         // const { greeting, repeat, updateGreting } = this.props;
         const { greeting, repeat, updateGreeting } = this.props;
 
         const output = <p>{greeting}, World</p>;
 
+        // https://flow.org/en/docs/frameworks/react/#toc-adding-types-for-react-events
         return (
             <div>
                 <input ref={input => this.input = input}
-                       onChange={event => updateGreeting(event.currentTarget.value)}
+                       onChange={(event: SyntheticEvent & { currentTarget: HTMLInputElement }) => updateGreeting(event.currentTarget.value)}
                        value={greeting} />
                 {output}
                 {

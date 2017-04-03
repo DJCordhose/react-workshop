@@ -11,12 +11,12 @@ export const UPDATE_GREETING = 'UPDATE_GREETING';
 // export const UPDATE_GREETING = PREFIX + 'UPDATE_GREETING';
 
 export type UpdateGreetingAction = {
-    type: typeof UPDATE_GREETING;
-    payload: string;
+    +type: typeof UPDATE_GREETING;
+    +payload: string;
 };
 
 export type ResetGreetingAction = {
-    type: typeof RESET_GREETING;
+    +type: typeof RESET_GREETING;
 };
 
 export type Action = UpdateGreetingAction | ResetGreetingAction;
