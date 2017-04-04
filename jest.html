@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>JavaScript Frontend Testing with Jest</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            height: 500px;
+        }
+
+        .todo:before {
+            content: 'TODO: ';
+        }
+
+        .todo {
+            color: red !important;
+        }
+
+        code span.line-number {
+            color: lightcoral;
+        }
+
+        .reveal pre code {
+            max-height: 1000px !important;
+        }
+
+        img {
+            border: 0 !important;
+            box-shadow: 0 0 0 0 !important;
+        }
+
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>Jest Test runner</h1>
+            <ul>
+                <li><a href="https://facebook.github.io/jest/">https://facebook.github.io/jest/</a></li>
+                <li>Besonderheit: Snapshot Testing von React (und JSON Objekten)</li>
+                <li>Enthält "alles": Test Runner, Assertions, Mock, Reporter, ...</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Testen in JavaScript</h2>
+            <p>Zwei mögliche Stacks</p>
+            <table>
+                <thead>
+                <tr>
+                    <th>Aufgabe</th>
+                    <th>Mocha-stack (EOS)</th>
+                    <th>Jest</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Runner</td>
+                    <td>Mocha</td>
+                    <td>Jest</td>
+                </tr>
+                <tr>
+                    <td>Reporter</td>
+                    <td>Mocha</td>
+                    <td>Jest</td>
+                </tr>
+                <tr>
+                    <td>Code coverage</td>
+                    <td>Istanbul</td>
+                    <td>Jest</td>
+                </tr>
+                <tr>
+                    <td>Specs</td>
+                    <td>Mocha</td>
+                    <td>Jest</td>
+                </tr>
+                <tr>
+                    <td>Assertions</td>
+                    <td>Chai</td>
+                    <td>Jest</td>
+                </tr>
+                <tr>
+                    <td>Mock & Spy</td>
+                    <td>Sinon</td>
+                    <td>Jest</td>
+                </tr>
+                <tr>
+                    <td>Rendern &amp; Navigieren im DOM</td>
+                    <td>Enzyme</td>
+                    <td>Enzyme</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h2>Testcases</h2>
+            <ul>
+                <li><code>test</code> oder <code>it</code>
+                    <pre><code data-trim contenteditable>test('it should work', () => {
+  expect('...').toBe('...);
+});</code></pre>
+                    <pre><code data-trim contenteditable>it('it should also work', () => {
+  expect('...').toBe('...);
+});</code></pre>
+                </li>
+                <li class="fragment">Kann ein Promise für asynchrones testen zurückliefern:
+                    <pre><code data-trim contenteditable>test('it should work', () => {
+  return someFunctionReturningAPromise()
+    .then( value => { expect(value).toBe('...') });
+});</code></pre>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h2>Testsuites und Lifecycle</h2>
+            <ul>
+                <li>Testsuites (optional, müssen nicht verwendet werden)
+                    <pre><code data-trim contenteditable>describe('some feature', () => {
+  test(() => {...});
+  test(() => {...});
+  test(() => {...});
+});</code></pre>
+                </li>
+                <span class="fragment">
+                <li>Lifecycle
+                    <pre><code data-trim contenteditable>beforeAll(() => {...});
+beforeEach(() => {...});
+afterEach(() => {...});
+afterall(() => {...});
+</code></pre>
+                </li>
+                <li>Können Promises zurückliefern</li>
+                </span>
+            </ul>
+        </section>
+        <section>
+            <h2>Assertions</h2>
+            <ul>
+            <li><code>expect()</code>, funktioniert wie in Mocha:
+                <pre><code data-trim contenteditable>expect(actual).toXyz(expected);
+</code></pre></li>
+                <li class="fragment">Assertions in Camel-Case Notation, z.B:
+
+                    <pre><code data-trim contenteditable>// Vergleich auf Identität
+expect(actual).toBe(expected);
+// Inhaltsvergleich:
+expect(actual).toEqual(expected);
+// True / false / null:
+expect(actual).toBeTruthy();
+expect(actual).toBeFalsy();
+expect(actual).toBeNull();
+</code></pre>
+                </li>
+                <li class="fragment"><a href="https://facebook.github.io/jest/docs/expect.html#content">https://facebook.github.io/jest/docs/expect.html#content</a></li>
+            </ul>
+        </section>
+        <section>
+            <h2>Snapshot testing</h2>
+            <pre><code data-trim contenteditable>import {shallow} from 'enzyme';
+test('render correctly', () => {
+  const component = shallow(&lt;MyReactComponent /&gt;);
+
+  // snapshot matching:
+  expect(component).toMatchSnapshot();
+});
+</code></pre>
+        </section>
+        <section>
+            <h2>Snapshot testing</h2>
+            <ul>
+                <li class="fragment">Bei erster Ausführung: legt Snapshot File an
+                (Im eigenen Verzeichnis, *.snap)</li>
+                <li class="fragment">Bei folgenden Ausführungen: erzeugt neuen Snapshot und vergleicht mit gespeichtertem Snapshot</li>
+                <li class="fragment">Wenn Snapshots unterschiedlich
+                    <ul>
+                        <li>Fehler samt Diff</li>
+                        <li>Im Watch Mode kann Snapshot aktualisiert werden</li>
+                    </ul>
+                </li>
+                <li class="fragment">Snapshotdateien werden in Git versioniert</li>
+                <li class="fragment">Als Snapshot können jegliche JSON Objekte verwendet werden</li>
+                <li class="fragment">Für Enzyme spezieller Serialisierer (in Jest-Konfig)</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Mock Funktionen</h2>
+            <ul>
+                <li class="fragment"><code>jest.fn()</code> erzeugt eine Mock-Funktion<pre><code data-trim contenteditable>// Liefert undefined zurück, wenn ausgeführt
+const aMockFn = jest.fn();
+                    </code></pre>
+                <li class="fragment">Implementierung der Mockfunktion kann als Parameter übergeben werden:<pre><code data-trim contenteditable>
+const aMockFn = jest.fn( param => `Hello, ${param}` );
+
+console.log(aMockFn('World'));
+// => Hello, World
+                </code></pre></li>
+            </ul>
+        </section>
+        <section>
+            <h2>Mock Funktionen</h2>
+            <li class="fragment">Aufrufe sicherstellen<pre><code data-trim contenteditable>
+const aMockFn = jest.fn( param => `Hello, ${param}` );
+// use aMockFn somewhere in your code, then assert:
+
+expect(aMockFn).toHaveBeenCalled();
+expect(aMockFn).toHaveBeenCalledWith('World');
+</code></pre></li>
+            <li class="fragment">Aufrufe: <code>fn.mock.calls</code> <pre><code data-trim contenteditable>
+const mockFn = jest.fn();
+mockFn('Hello', 'World');
+expect(mockFn.mock.calls).toHaveLength(1);
+expect(mockFn.mock.calls[0].toBe(['Hello', 'World']);
+</code></pre></li>
+            <li class="fragment">Zurücksetzen: Reset
+            <pre><code data-trim contenteditable>
+const mockFn = jest.fn();
+mockFn('Hello', 'World');
+expect(mockFn.mock.calls).toHaveLength(1);
+jest.restAllMocks(); // or: mockFn.mockReset();
+expect(mockFn.mock.calls).toHaveLength(0);
+            </code></pre></li>
+        </section>
+        <section>
+            <h2>Mock modules</h2>
+            <li class="fragment">Ein Modul mocken:
+                <pre><code data-trim contenteditable>
+// external module:
+jest.mock('react-dom');
+// internal module:
+jest.mock('../../app/myDataService');
+
+// alle Funktionen sind jetzt gemockt,
+// "leere" Implementierung, return undefined)
+</code></pre></li>
+            <li class="fragment">Implementierung für Mockfunktion:
+                <pre><code data-trim contenteditable>
+jest.mock('../../app/myDataService', () => ({
+  loadData: jest.fn( () => ({data: 'mock data'}) );
+});
+
+console.log(myDataService.loadData());
+// => {data: 'mock data'}
+</code></pre></li>
+        </section>
+        <section>
+            <h2>Mock modules</h2>
+            <li class="fragment">Funktionen aus gemockten Modulen sind Jest Mock Funktionen
+                <pre><code data-trim contenteditable>
+import myDataService from '../../app/myDataService';
+jest.mock('../../app/myDataService');
+
+// do something in code, that uses my dataservice
+expect(myDataService).toHaveBeenCalled();
+
+</code></pre></li>
+        </section>
+
+    </div>
+
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+<script>
+    Reveal.addEventListener('ready', function (event) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({controls: false});
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+        $('code').addClass('line-numbers');
+    });
+</script>
+
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
