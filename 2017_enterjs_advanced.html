@@ -76,10 +76,10 @@
         <section class="todo">
             <pre>
 Themen
-- State Management
-- Type System
-- Optimierungen, immutable​, shouldComponentUpdate
-- 3rd Party
+- State Management: ist da
+- Type System: aus Flow und TypeScript Beispiele nehmen
+- Optimierungen, immutable​, shouldComponentUpdate: ist da, muss noch übersetzt werden
+- 3rd Party: aus base übernhemen
             </pre>
 
         </section>
@@ -460,23 +460,92 @@ export default connect(
             </ul>
         </section>
 
-            <section>
-                <h2>Übung: eine Redux Anwendung fertig stellen</h2>
-                <h3>Es gibt bereits eine vorgebaute Redux-Anwendung, aber wir die Filterung über das Chart muss noch implementiert werden</h3>
+        <section id="optimize">
+            <h2>Optimization: Advanced Change Detection</h2>
+        </section>
+
+                <section>
+                    <h3>Example: SVG Boxes</h3>
+                    <a href="../workshop/code/sandbox/optimize/public" target="_blank">
+                        <img src="screenshot_svg.png" height="500px">
+                    </a>
+                    <p>Move a single Box using D'n'D</p>
+                </section>
+
+                <section>
+                    <h2>A really mean example</h2>
+                    <ul>
+                        <li class="fragment">Super fast using no framework at all (as only one box at a time needs update)</li>
+                        <li class="fragment">Overhead introduced by framework makes application slow</li>
+                        <li class="fragment">Challenge is to execute as little code as possible when updating a single model of a box</li>
+                        <li class="fragment">Update happens at every mouse move event (can be hundreds per second)</li>
+                        <li class="fragment">Model naturally is a flat list of boxes</li>
+                        <li class="fragment">No natural hierarchy - which would make change detection easier</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Change Detection on Level of Virtual DOM</h2>
+                    <p>With every move of the mouse the full application (all boxes) are re-rendered</p>
+                    <p>Not as a DOM, but in a light weight structure called Virtual DOM</p>
+                    <p>Then only the difference of old and new Virtual DOM effects the real DOM</p>
+                </section>
+
+                <section>
+                    <h2>Change Detection on Level of Model</h2>
+                    <p><strong>shouldComponentUpdate</strong> is a lifecycle method on a component that can shortcut this procedure</p>
+                    <p>it can check old model against new model</p>
+                    <p><strong>immutable data structures</strong>
+                        (<a href="https://facebook.github.io/immutable-js/" target="_blank">immutable.js</a>) <strong>can speed up</strong> the check</p>
+                </section>
+
+                <section>
+                    <h3>The Box Component</h3>
+                <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+class Box extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    // simple check: every change to a box creates a new object
+    const changed = this.props.box !== nextProps.box;
+    return changed;
+  }
+
+  render() {
+    const {box} = this.props;
+    return &lt;rect data-id={box.id} x={box.x} y={box.y}
+                 width="10" height="10"
+                 stroke="black" fill="transparent" strokeWidth="1"/>;
+  }
+}
+               </code></pre>
             </section>
-            <section>
-                <h3>Schritte</h3>
-                <ul>
-                    <li>Alles Material von <code>code/material/6-redux</code> in deinem Source-Ordner kopieren
-                    <li>TODOs leiten dich, die bereits in den Actions, den Reducers und dem GreetingController eingefügt sind
-                    <li>Nutzen den bereits existierenden Filer-Coder als dem vorherigen Schritt
-                    <li>Erzeuge einen neuen Action-Typ und einen Action-Creator für das setzen des Filters
-                    <li>Füge einen passenden Reducer zur Behandlung einer solchen Action hinzu und füge ihn als Teil-Reducer in
-                    <code>combineReducers</code> hinzu
-                    <li>Reiche den Action-Creator von <code>GreetingController</code> in die Chart-Komponente in der du auf das
-                    Filter-Event reagierst
-                </ul>
-            </section>
+
+        <section>
+            <h3>Using immutable.js</h3>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+import {List} from 'immutable';
+
+this.state = {
+    boxes: List(boxes)
+};
+   </code></pre>
+
+    <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+updateBox(id, x, y) {
+    const {boxes} = this.state;
+    const modifiedBox = {
+        id,
+        x,
+        y
+    };
+    const modifiedBoxes = boxes.set(id, modifiedBox);
+    this.setState({
+        boxes: modifiedBoxes
+    });
+}
+               </code></pre>
+            <p><a href="code/sandbox/optimize/src">Full code</a></p>
+        </section>
+    </section>
 
 
     </div>
