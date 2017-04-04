@@ -8,7 +8,7 @@
     "dist": "../../../node_modules/.bin/webpack",
     "webpack": "../../../node_modules/.bin/webpack --watch",
     "devserver": "../../../node_modules/.bin/webpack-dev-server --content-base public/",
-    "flow": "../../../node_modules/.bin/flow",
-    "flow:watch": "../../../node_modules/.bin/nodemon --watch ../src ../../../node_modules/.bin/flow"
+    "flow": "../../../node_modules/.bin/flow || exit 0",
+    "flow:watch": "../../../node_modules/.bin/nodemon flow-runner.js"
   }
 }
