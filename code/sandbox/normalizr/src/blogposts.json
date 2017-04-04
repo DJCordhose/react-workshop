@@ -1,8 +1,7 @@
 {
-  "blogname": "myblog",
   "articles": [
     {
-      "id": "123",
+      "name": "great-stuff",
       "author": {
         "id": "1",
         "name": "Paul"
@@ -17,6 +16,24 @@
           }
         }
       ]
+    },
+    {
+      "name": "strange",
+      "author": {
+        "id": "3",
+        "name": "Oma"
+      },
+      "title": "Oma geht in die Konditorei",
+      "comments": [
+        {
+          "id": "3435",
+          "commenter": {
+            "id": "1",
+            "name": "Paul"
+          }
+        }
+      ]
     }
+
   ]
 }
