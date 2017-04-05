@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>JavaScript Frontend Testing with Jest</title>
+    <title>React Testing with Jest</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -71,11 +71,11 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
         <section>
-            <h1>Jest Test runner</h1>
+            <h1>Jest Test Runner</h1>
             <ul>
                 <li><a href="https://facebook.github.io/jest/">https://facebook.github.io/jest/</a></li>
-                <li>Besonderheit: Snapshot Testing von React (und JSON Objekten)</li>
                 <li>Enthält "alles": Test Runner, Assertions, Mock, Reporter, ...</li>
+                <li>Besonderheit: Snapshot Testing von React (und JSON Objekten)</li>
             </ul>
         </section>
         <section>
@@ -85,7 +85,7 @@
                 <thead>
                 <tr>
                     <th>Aufgabe</th>
-                    <th>Mocha-stack (EOS)</th>
+                    <th>Mocha</th>
                     <th>Jest</th>
                 </tr>
                 </thead>
@@ -181,10 +181,12 @@ afterall(() => {...});
 expect(actual).toBe(expected);
 // Inhaltsvergleich:
 expect(actual).toEqual(expected);
-// True / false / null:
+// true / false / null:
 expect(actual).toBeTruthy();
 expect(actual).toBeFalsy();
 expect(actual).toBeNull();
+// Länge (Array oder String)
+expect(actual).toHaveLength(123);
 </code></pre>
                 </li>
                 <li class="fragment"><a href="https://facebook.github.io/jest/docs/expect.html#content">https://facebook.github.io/jest/docs/expect.html#content</a></li>
@@ -192,20 +194,26 @@ expect(actual).toBeNull();
         </section>
         <section>
             <h2>Snapshot testing</h2>
+            <p>(Mit Enzyme)</p>
             <pre><code data-trim contenteditable>import {shallow} from 'enzyme';
 test('render correctly', () => {
+
+  // 1. shallow render component with Enzyme...
   const component = shallow(&lt;MyReactComponent /&gt;);
 
-  // snapshot matching:
+  // 2. snapshot matching:
   expect(component).toMatchSnapshot();
 });
 </code></pre>
+            <p>Für Enzyme wird Serializer benötigt: <a href="https://github.com/adriantoine/enzyme-to-json" target="_blank">enzyme-to-json</a></p>
         </section>
         <section>
             <h2>Snapshot testing</h2>
             <ul>
-                <li class="fragment">Bei erster Ausführung: legt Snapshot File an
-                (Im eigenen Verzeichnis, *.snap)</li>
+                <li class="fragment">Bei erster Ausführung: legt <a href="jest-snapshot-file.png" target="_blank">Snapshot File</a> an
+                (Im eigenen Verzeichnis, *.snap)
+
+                </li>
                 <li class="fragment">Bei folgenden Ausführungen: erzeugt neuen Snapshot und vergleicht mit gespeichtertem Snapshot</li>
                 <li class="fragment">Wenn Snapshots unterschiedlich
                     <ul>
