@@ -18,9 +18,8 @@ describe('loadFromServer', () => {
 
         return loadFromServer(successMock, errorMock)
             .then(() => {
-                expect(errorMock.mock.calls.length).toBe(0);
-                expect(successMock.mock.calls.length).toBe(1);
-                expect(successMock.mock.calls[0][0]).toEqual(someGreetings);
+                expect(errorMock).not.toHaveBeenCalled();
+                expect(successMock).toHaveBeenCalledWith(someGreetings);
             });
     });
 
@@ -32,9 +31,8 @@ describe('loadFromServer', () => {
 
         return loadFromServer(successMock, errorMock)
             .then(() => {
-                expect(errorMock.mock.calls.length).toBe(1);
-                expect(errorMock.mock.calls[0][0]).toBe('Server is doomed');
-                expect(successMock.mock.calls.length).toBe(0);
+                expect(errorMock).toHaveBeenCalledWith('Server is doomed');
+                expect(successMock).not.toHaveBeenCalled();
             });
     })
 });
@@ -48,9 +46,8 @@ describe('saveToServer', () => {
 
         return saveToServer({}, successMock, errorMock)
             .then(() => {
-                expect(successMock.mock.calls.length).toBe(1);
-                expect(successMock.mock.calls[0][0]).toEqual({id: 1234});
-                expect(errorMock.mock.calls.length).toBe(0);
+                expect(successMock).toHaveBeenCalledWith({id: 1234});
+                expect(errorMock).not.toHaveBeenCalled();
             });
     });
 
@@ -62,9 +59,8 @@ describe('saveToServer', () => {
 
         return saveToServer({}, successMock, errorMock)
             .then(() => {
-                expect(successMock.mock.calls.length).toBe(0);
-                expect(errorMock.mock.calls.length).toBe(1);
-                expect(errorMock.mock.calls[0][0]).toEqual('hoe?');
+                expect(successMock).not.toHaveBeenCalled();
+                expect(errorMock).toHaveBeenCalledWith('hoe?');
             });
     });
 });

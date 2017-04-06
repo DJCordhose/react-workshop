@@ -148,7 +148,7 @@
             </ul>
         </section>
         <section>
-            <h2>Testsuites und Lifecycle</h2>
+            <h2>Testsuites</h2>
             <ul>
                 <li>Testsuites (optional, müssen nicht verwendet werden)
                     <pre><code data-trim contenteditable>describe('some feature', () => {
@@ -157,25 +157,51 @@
   test(() => {...});
 });</code></pre>
                 </li>
-                <span class="fragment">
-                <li>Lifecycle
-                    <pre><code data-trim contenteditable>beforeAll(() => {...});
-beforeEach(() => {...});
-afterEach(() => {...});
-afterall(() => {...});
+                <li class="fragment">Überspringen (<code>skip</code>) / Auswählen (<code>only</code>) einzelner Tests:
+                    <pre><code data-trim contenteditable>describe.only('some feature', () => { } );
+describe.skip('another feature', () => { });
+
+test.only('should work', () => { });
+test.skip('does not work, skip for now', () => { });
+
 </code></pre>
+
                 </li>
-                <li>Können Promises zurückliefern</li>
-                </span>
             </ul>
         </section>
         <section>
-            <h2>Assertions</h2>
+            <h2>Lifecycle</h2>
             <ul>
-            <li><code>expect()</code>, funktioniert wie in Mocha:
-                <pre><code data-trim contenteditable>expect(actual).toXyz(expected);
-</code></pre></li>
-                <li class="fragment">Assertions in Camel-Case Notation, z.B:
+                <li>Einrichten der Testumgebung/-daten und Mocks</li>
+                <li>Aufräumen nach den Tests</li>
+                <li>Können global oder innerhalb einer Testsuite definiert werden</li>
+                <li>Können Promises zurückliefern</li>
+            </ul>
+            <pre><code data-trim contenteditable>beforeAll(() => {...});
+beforeEach(() => {...});
+afterEach(() => {...});
+afterall(() => {...});
+describe('...', () => {
+  beforeEach(...);
+  afterEach(...);
+  ...
+});
+</code></pre>
+
+        </section>
+        <section>
+            <h2>Expectations und Matcher</h2>
+            <ul>
+                <li><a href="https://facebook.github.io/jest/docs/expect.html#content">https://facebook.github.io/jest/docs/expect.html#content</a>
+                </li>
+                <li class="fragment"><code>expect()</code> liefert eine Expectation zurück, auf der Matcher definiert
+                    sind:
+                    <pre><code data-trim contenteditable>expect(actual).toXyz(expected);
+// for example:
+expect("Hello Jest").toBe("Hello Jest"); // => ok
+</code></pre>
+                </li>
+                <li class="fragment">Einige Matcher
 
                     <pre><code data-trim contenteditable>// Vergleich auf Identität
 expect(actual).toBe(expected);
@@ -189,7 +215,6 @@ expect(actual).toBeNull();
 expect(actual).toHaveLength(123);
 </code></pre>
                 </li>
-                <li class="fragment"><a href="https://facebook.github.io/jest/docs/expect.html#content">https://facebook.github.io/jest/docs/expect.html#content</a></li>
             </ul>
         </section>
         <section>
@@ -205,64 +230,79 @@ test('render correctly', () => {
   expect(component).toMatchSnapshot();
 });
 </code></pre>
-            <p>Für Enzyme wird Serializer benötigt: <a href="https://github.com/adriantoine/enzyme-to-json" target="_blank">enzyme-to-json</a></p>
+            <p class="fragment">Rendert die Komponente in ein Snapshot-File und vergleicht damit bei folgenden Testausführungen</p>
+            <p class="fragment"><b>Snapshot sagt nicht, ob UI richtig oder falsch gerendert wird, sondern nur, ob sie geändert wurde!</b></p>
         </section>
         <section>
-            <h2>Snapshot testing</h2>
+            <h2>Überblick: Snapshot testing</h2>
             <ul>
-                <li class="fragment">Bei erster Ausführung: legt <a href="jest-snapshot-file.png" target="_blank">Snapshot File</a> an
-                (Im eigenen Verzeichnis, *.snap)
-
+                <li class="fragment">Bei <b>erster</b> Ausführung: legt Snapshot-File in <code>__snapshot__</code> an
+                    (<a href="jest-snapshot-file.png" target="_blank">Beispiel</a>)
                 </li>
-                <li class="fragment">Bei folgenden Ausführungen: erzeugt neuen Snapshot und vergleicht mit gespeichtertem Snapshot</li>
+                <li class="fragment">Bei <b>folgenden</b> Ausführungen: erzeugt neuen Snapshot und vergleicht mit
+                    gespeichtertem Snapshot
+                </li>
                 <li class="fragment">Wenn Snapshots unterschiedlich
                     <ul>
-                        <li>Fehler samt Diff</li>
-                        <li>Im Watch Mode kann Snapshot aktualisiert werden</li>
+                        <li>Fehler samt Diff (<a href="jest-snapshot-diff.png" target="_blank">Beispiel</a>)</li>
+                        <li>Im Watch Mode kann Snapshot aktualisiert werden
+                        <img src="jest-snapshot-update.png"></li>
                     </ul>
                 </li>
                 <li class="fragment">Snapshotdateien werden in Git versioniert</li>
-                <li class="fragment">Als Snapshot können jegliche JSON Objekte verwendet werden</li>
-                <li class="fragment">Für Enzyme spezieller Serialisierer (in Jest-Konfig)</li>
+                <li class="fragment">Für Enzyme wird Serializer benötigt: <a href="https://github.com/adriantoine/enzyme-to-json"
+                                                           target="_blank">enzyme-to-json</a></li>
+
+
             </ul>
         </section>
         <section>
             <h2>Mock Funktionen</h2>
             <ul>
-                <li class="fragment"><code>jest.fn()</code> erzeugt eine Mock-Funktion<pre><code data-trim contenteditable>// Liefert undefined zurück, wenn ausgeführt
+                <li class="fragment"><code>jest.fn()</code> erzeugt eine Mock-Funktion
+                    <pre><code data-trim contenteditable>// Liefert undefined zurück, wenn ausgeführt
 const aMockFn = jest.fn();
+
+aMockFn(); // => undefined
                     </code></pre>
-                <li class="fragment">Implementierung der Mockfunktion kann als Parameter übergeben werden:<pre><code data-trim contenteditable>
+                <li class="fragment">Implementierung der Mockfunktion kann als Parameter übergeben werden:
+                    <pre><code data-trim contenteditable>
 const aMockFn = jest.fn( param => `Hello, ${param}` );
 
 console.log(aMockFn('World'));
 // => Hello, World
-                </code></pre></li>
+                </code></pre>
+                </li>
             </ul>
         </section>
         <section>
             <h2>Mock Funktionen</h2>
-            <li class="fragment">Aufrufe sicherstellen<pre><code data-trim contenteditable>
+            <li class="fragment">Aufrufe sicherstellen
+                <pre><code data-trim contenteditable>
 const aMockFn = jest.fn( param => `Hello, ${param}` );
 // use aMockFn somewhere in your code, then assert:
 
 expect(aMockFn).toHaveBeenCalled();
 expect(aMockFn).toHaveBeenCalledWith('World');
-</code></pre></li>
-            <li class="fragment">Aufrufe: <code>fn.mock.calls</code> <pre><code data-trim contenteditable>
+</code></pre>
+            </li>
+            <li class="fragment">Aufrufe: <code>fn.mock.calls</code>
+                <pre><code data-trim contenteditable>
 const mockFn = jest.fn();
 mockFn('Hello', 'World');
 expect(mockFn.mock.calls).toHaveLength(1);
 expect(mockFn.mock.calls[0].toBe(['Hello', 'World']);
-</code></pre></li>
+</code></pre>
+            </li>
             <li class="fragment">Zurücksetzen: Reset
-            <pre><code data-trim contenteditable>
+                <pre><code data-trim contenteditable>
 const mockFn = jest.fn();
 mockFn('Hello', 'World');
 expect(mockFn.mock.calls).toHaveLength(1);
 jest.restAllMocks(); // or: mockFn.mockReset();
 expect(mockFn.mock.calls).toHaveLength(0);
-            </code></pre></li>
+            </code></pre>
+            </li>
         </section>
         <section>
             <h2>Mock modules</h2>
@@ -275,7 +315,8 @@ jest.mock('../../app/myDataService');
 
 // alle Funktionen sind jetzt gemockt,
 // "leere" Implementierung, return undefined)
-</code></pre></li>
+</code></pre>
+            </li>
             <li class="fragment">Implementierung für Mockfunktion:
                 <pre><code data-trim contenteditable>
 jest.mock('../../app/myDataService', () => ({
@@ -284,7 +325,8 @@ jest.mock('../../app/myDataService', () => ({
 
 console.log(myDataService.loadData());
 // => {data: 'mock data'}
-</code></pre></li>
+</code></pre>
+            </li>
         </section>
         <section>
             <h2>Mock modules</h2>
@@ -296,7 +338,8 @@ jest.mock('../../app/myDataService');
 // do something in code, that uses my dataservice
 expect(myDataService).toHaveBeenCalled();
 
-</code></pre></li>
+</code></pre>
+            </li>
         </section>
 
     </div>

@@ -58,25 +58,25 @@ test('onAdd should be called with values from form', () => {
     expect(onAddMock.mock.calls[0][0]).toEqual(aGreeting);
 });
 
-test.only('onAdd should be disabled and enabled', () => {
+test('onAdd should be disabled and enabled', () => {
     const {elements} = setup();
 
     // should initialy be disabled
-    expect(elements.addButton().prop('disabled')).toEqual(true);
+    expect(elements.addButton().prop('disabled')).toBe(true);
 
     // should be disabled if only name is entered
     elements.nameInput().simulate('change', {target: {name: 'name', value: aGreeting.name}});
-    expect(elements.addButton().prop('disabled')).toEqual(true);
+    expect(elements.addButton().prop('disabled')).toBe(true);
 
     // should be disabled if only greeting is enabled
     elements.nameInput().simulate('change', {target: {name: 'name', value: null}});
     elements.greetingInput().simulate('change', {target: {name: 'greeting', value: aGreeting.greeting}});
-    expect(elements.addButton().prop('disabled')).toEqual(true);
+    expect(elements.addButton().prop('disabled')).toBe(true);
 
     // should be enabled if name and greeting is set
     // (btw note the imperative test code style vs the declarative react code style)
     elements.nameInput().simulate('change', {target: {name: 'name', value: aGreeting.name}});
-    expect(elements.addButton().prop('disabled')).toEqual(false);
+    expect(elements.addButton().prop('disabled')).toBe(false);
 });
 
 
@@ -88,13 +88,13 @@ test('clear should clear the form', () => {
     elements.greetingInput().simulate('change', {target: {name: 'greeting', value: aGreeting.greeting}});
 
     // just to make sure, state has a value before resetting
-    expect(component.state('name')).toEqual(aGreeting.name);
-    expect(component.state('greeting')).toEqual(aGreeting.greeting);
+    expect(component.state('name')).toBe(aGreeting.name);
+    expect(component.state('greeting')).toBe(aGreeting.greeting);
 
     // press clear button
     elements.clearButton().simulate('click');
 
     // make sure state has been reset correctly
-    expect(component.state('name')).toEqual('');
-    expect(component.state('greeting')).toEqual('');
+    expect(component.state('name')).toBe('');
+    expect(component.state('greeting')).toBe('');
 });
