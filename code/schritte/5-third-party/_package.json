@@ -5,8 +5,8 @@
   "scripts": {
     "start": "npm run devserver",
     "clean": "../../../node_modules/.bin/rimraf -rf public/dist/",
-    "dist": "../../../node_modules/.bin/webpack",
-    "webpack": "../../../node_modules/.bin/webpack --watch",
+    "dist": "../../../node_modules/.bin/webpack -p",
+    "webpack": "../../../node_modules/.bin/webpack",
     "devserver": "../../../node_modules/.bin/webpack-dev-server --content-base public/",
     "test": "../../../node_modules/.bin/jest \"(/test/.*\\.test.js)$\" --setupTestFrameworkScriptFile=test/setup-jest.js --verbose --watchAll"
   }

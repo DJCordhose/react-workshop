@@ -12,7 +12,7 @@ const MODE_DETAIL = 'MODE_DETAIL';
 
 export default class GreetingController extends React.Component {
     render() {
-        const {mode, greetings, filter} = this.state;
+        const {mode, greetings, filter, showChart} = this.state;
         const aggregatedGreetings = aggregateGreetings(greetings);
         const filtered = filter ? greetings.filter(greeting => greeting.name === filter) : greetings;
 
@@ -27,14 +27,18 @@ export default class GreetingController extends React.Component {
                     }
                 </div>
                 <div className="Right">
-                    <Chart data={aggregatedGreetings} onSegmentSelected={filter => {
+                  {this.state.showChart && <Chart data={aggregatedGreetings} onSegmentSelected={filter => {
                         if (this.state.filter === filter) {
                             // reset filter when clicking again
                             this.setState({filter: null})
                         } else {
                             this.setState({filter})
                         }
-                    }}/>
+                    }}/>}
+                    <button
+                      onClick={() => this.setState({showChart: !this.state.showChart})}>
+                        Toggle Display
+                    </button>
                 </div>
             </div>);
     }
@@ -44,7 +48,8 @@ export default class GreetingController extends React.Component {
         this.state = {
             greetings: [],
             mode: MODE_MASTER,
-            filter: null
+            filter: null,
+            showChart: true
         };
     }
 
