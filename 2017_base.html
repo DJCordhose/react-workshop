@@ -1061,6 +1061,14 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
                 <li>Wie räumen wir wieder auf?
             </ol>
         </section>
+
+        <section>
+            <h3>Übersicht über den Komponenten-Lifecycle</h3>
+            <a href="https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle" target="_blank">
+                https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle
+            </a>
+        </section>
+
         <section>
             <h3>React Chart Komponente #1</h3>
             <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
@@ -1091,6 +1099,8 @@ class Chart extends React.Component {
             <h3>React Chart Komponent #2</h3>
             <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
 class Chart extends React.Component {
+    // ...
+
     componentDidMount() {
         const {data, onSegmentSelected} = this.props;
 
@@ -1105,12 +1115,9 @@ class Chart extends React.Component {
         }
     }
 
-    // (6)
+    // (6) called just before destroying component
     componentWillUnmount() {
         this._d3selection.remove();
-        this._d3selection = null;
-        this._chart = null;
-        this._nvd3chart = null;
     }
 }
        </code></pre>

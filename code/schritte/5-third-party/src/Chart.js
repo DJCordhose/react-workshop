@@ -26,9 +26,6 @@ export default class Chart extends React.Component {
 
     componentWillUnmount() {
         this._d3selection.remove();
-        this._d3selection = null;
-        this._chart = null;
-        this._nvd3chart = null;
     }
 
     componentDidMount() {
