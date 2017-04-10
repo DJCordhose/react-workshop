@@ -24,6 +24,13 @@ export default class Chart extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        this._d3selection.remove();
+        this._d3selection = null;
+        this._chart = null;
+        this._nvd3chart = null;
+    }
+
     componentDidMount() {
         const {data, onSegmentSelected} = this.props;
 
@@ -48,6 +55,8 @@ export default class Chart extends React.Component {
             return chart;
         });
     }
+
+    o
 
     render() {
         const svgStyle = {
