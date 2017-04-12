@@ -9,7 +9,10 @@
     "allowJs": true,
     "strictNullChecks": true,
     "noLib": false,
-    "jsx": "react"
+    "jsx": "react",
+     "types": [
+      "mocha"
+    ]
   },
   "include": [
     "./src/**/*"
