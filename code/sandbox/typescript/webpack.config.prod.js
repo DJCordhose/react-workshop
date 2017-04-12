@@ -8,18 +8,13 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx']
     },
-    watchOptions: {
-        poll: true
-    },
     module: {
         rules: [
             {
                 test: /\.(t|j)sx?$/,
                 use: 'awesome-typescript-loader',
                 exclude: /node_modules/,
-            },
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+            }
         ]
-    },
-    devtool: 'inline-source-map'
+    }
 };

@@ -33,7 +33,7 @@ class HelloMessage extends React.Component<Props, undefined> {
                 }
                 <button
                     onClick={() => this.reset()}>
-                    Clear
+                    Clear All
                 </button>
             </div>);
     }
