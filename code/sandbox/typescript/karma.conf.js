@@ -2,11 +2,12 @@ const webpack = require('webpack');
 
 module.exports = function (config) {
     config.set({
-        // browsers: ['Chrome', 'PhantomJS', 'Firefox'],
-        browsers: ['PhantomJS'],
+        browsers: ['Chrome', 'PhantomJS'],
         frameworks: ['mocha'],
         reporters: ['mocha'],
-
+         mime: {
+              'text/x-typescript': ['ts','tsx']
+            },
         files: [
             "test/**.spec.ts"
         ],
