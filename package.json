@@ -33,6 +33,7 @@
     "jest": "^19.0.2",
     "jest-fetch-mock": "^1.0.8",
     "jsdom": "^9.0.0",
+    "jsdom-global": "^2.1.1",
     "json-loader": "^0.5.4",
     "karma": "^1.6.0",
     "karma-chrome-launcher": "^2.0.0",
