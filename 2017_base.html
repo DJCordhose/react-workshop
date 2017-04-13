@@ -74,7 +74,8 @@
             <ol>
                 <li><code>git clone https://github.com/DJCordhose/react-workshop.git</code></li>
                 <li>Im geklonten Verzeichnis: <code>npm install</code></li>
-                <li>In <code>code/workspace</code> wechseln</li>
+                <li><code>npm start</code></li>
+                <li>In neuem Terminal: in <code>code/workspace</code> wechseln</li>
                 <li>Ausführen: <code>npm start</code></li>
                 <li>Browser öffnen: <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
                 <li>Wenn dort ein Hello-World-Text erscheint ist alles gut
@@ -120,6 +121,11 @@
             </ul>
         </section>
 
+        <section id="example-app">
+            <h2>Beispiel-Anwendung</h2>
+            <a target="_blank" href="code/schritte/redux/7-redux-complete-app/public/index.html"><img src="greeting-app.png" style="border:0;box-shadow:0 0 0 0;max-width: 80%"/></a>
+        </section>
+
         <section id="t0">
             <h1>Teil 0</h1>
             <h2>React-Einführung und Build-Prozess</h2>
@@ -160,6 +166,41 @@
                 <a target="_blank" href="code/hello_world/public/index.html">Demo</a>
         </section>
 
+        <section>
+            <h3>ES6: Klassen</h3>
+            <pre class="fragment"><code class="javascript" contenteditable>class Person {
+    constructor(name) {
+        this._name = name;
+    }
+    get name() {
+        return this._name;
+    }
+}
+class Programmer extends Person {
+    constructor(name, language) {
+        super(name);
+        this.language = language;
+    }
+    code() {
+        return this.name + " codes in " + this.language;
+    }
+}</code></pre>
+            <pre><code class="javascript" contenteditable>const programmer = new Programmer('Erna', 'JavaScript');
+console.log(programmer.code());
+console.log(programmer instanceof Programmer); // true
+console.log(programmer instanceof Person); // true</code></pre>
+        </section>
+
+        <section>
+            <h3>ES6: Arrow Functions</h3>
+            <pre><code class="javascript" contenteditable>const displayInPage = (text) => {
+   return document.body.innerHTML +=
+       `${text}<br>`;
+};</code></pre>
+            <pre class="fragment"><code class="javascript" contenteditable>const displayInPage = text => document.body.innerHTML += `${text}<br>`;
+</code></pre>
+        </section>
+
                 <section>
                     <h3>Hello World React</h3>
 <pre><code data-trim contenteditable>class HelloMessage extends React.Component {
@@ -189,42 +230,6 @@
 }</code></pre>
                 </section>
 
-            <section>
-                <h3>ES6: Klassen</h3>
-                <pre class="fragment"><code class="javascript" contenteditable>class Person {
-    constructor(name) {
-        this._name = name;
-    }
-    get name() {
-        return this._name;
-    }
-}
-class Programmer extends Person {
-    constructor(name, language) {
-        super(name);
-        this.language = language;
-    }
-    code() {
-        return this.name + " codes in " + this.language;
-    }
-}</code></pre>
-                <pre><code class="javascript" contenteditable>const programmer = new Programmer('Erna', 'JavaScript');
-console.log(programmer.code());
-console.log(programmer instanceof Programmer); // true
-console.log(programmer instanceof Person); // true</code></pre>
-            </section>
-
-
-
-            <section>
-            <h3>ES6: Arrow Functions</h3>
-            <pre><code class="javascript" contenteditable>const displayInPage = (text) => {
-   return document.body.innerHTML +=
-       `${text}<br>`;
-};</code></pre>
-            <pre class="fragment"><code class="javascript" contenteditable>const displayInPage = text => document.body.innerHTML += `${text}<br>`;
-</code></pre>
-        </section>
         <section>
                     <h3>Aufruf</h3>
 <pre><code data-trim contenteditable>
@@ -238,6 +243,9 @@ console.log(programmer instanceof Person); // true</code></pre>
 </code></pre>
 <pre class="fragment"><code data-trim contenteditable class="javascript">
 // main.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import HelloMessage from './HelloMessage';
 
 const mountNode = document.getElementById('mount');
@@ -276,9 +284,8 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
           <ul>
               <li>Evtl. dafür einen Proxy konfigurieren <a target="_blank" href="http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/">http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/</a></li>
               <li><code>npm install</code> (auf oberster Ebene)
-              <li><code>npm run setup</code> (auf oberster Ebene)
               <li><code>cd code/workspace</code>
-              <li><code>npm run devserver</code>
+              <li><code>npm start</code>
               <li>Öffne <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> im Browser
               <li>Wenn auf der Seite 'Hello, World' steht, ist alles gut
           </ul>
@@ -355,8 +362,7 @@ class GreetingDetail extends React.Component {
   render() {
     return (
       <div>
-        &lt;input ref={input => this.input = input}
-               onChange={event => this.updateModel(event.target.value)}
+        &lt;input onChange={event => this.updateModel(event.target.value)}
                value={this.state.greeting} />
         <p>{this.state.greeting}, World</p>
       </div>
@@ -615,11 +621,12 @@ class TitleComponent extends React.Component {
             <ul class="fragment">
                 <li>Beispiel: Inhalt eines Eingabefelds, Daten vom Server</li>
                 <li>Werte üblicherweise immutable</li>
-                <li>Initialisieren im Konstruktor mit <code>this.state={}</code>
+                <li><b>Initialisieren</b> im Konstruktor mit <code>this.state={}</code>
                 <li>Zustand <b>lesen</b> über <code>this.state</code>
                 <li>Zustand <b>setzen</b> über <code>this.setState()</code>
-                <ul><li>kein "reiner" Setter</li>
+                <ul><li><b>Achtung:</b> kein "reiner" Setter</li>
                     <li>Führt alten und neuen Zustand zusammen</li>
+                    <li>Wird asynchron ausgeführt!</li>
                     <li><b>Löst erneutes rendern der <i>gesamten</i> Komponente aus</b></li>
                 </ul>
             </ul>
@@ -691,7 +698,6 @@ class HelloMessage extends React.Component {
           <ul>
               <li>benenne deine Komponente in <code>GreetingDetail</code> um
               <li>du brauchst zwei Eingabefelder, die <code>name</code> und <code>greeting</code> im Zustand der Komponente setzen
-              <li>für etwas Styling kopiere das Material in <code>code/material/1-detail</code> in deinen <code>public</code>-Ordner
               <li><em>Zusatzaufgabe: Erweitere deine Komponente so, dass man von außen Properties übergeben kann, die den Zustand initialisieren</em>
           </ul>
       </section>
@@ -706,12 +712,21 @@ class HelloMessage extends React.Component {
         </section>
 
         <section>
+            <h2>Thinking in React</h2>
+            <p><a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank">
+                https://facebook.github.io/react/docs/thinking-in-react.html
+            </a>
+            </p>
+        </section>
+
+        <section>
             <h2>Referenz</h2>
             <p><a href="https://facebook.github.io/react/docs" target="_blank">
                 https://facebook.github.io/react/docs
             </a>
             </p>
         </section>
+
 
         <section>
             <h3>Themen</h3>
@@ -729,20 +744,46 @@ class HelloMessage extends React.Component {
                 <ul class="fragment">
                     <li>Komponente ist eine einfache Funktion</li>
                     <li>entspricht der <code>render</code>-Methode</li>
-                    <li>Properties werden als Parameter übergeben</li>
+                    <li>Properties werden als Object per Parameter übergeben</li>
                     <li>Zurzeit nur ohne Zustand und ohne Lifecycle-Methoden</li>
+                    <li>Empfehlung: Funktionen statt Klassen verwenden (wenn möglich)</li>
                 </ul>
-<pre class="fragment"><code class="xml" contenteditable data-trim>
-function Layout(props) {
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+function Greet(props) {
   return (
-      <div className="Main">
-        <div className="Container">
-          {props.children}
-        </div>
+      <div>
+          <h1>{props.greeting}</h1>
+          <h2>{props.name}</h2>
+      </div>
+  );
+}
+
+// Verwendung:
+&lt;Greet name="Susi" greeting="Hello" /&gt;
+
+</code></pre></section>
+                <section>
+                    <h3>Komponenten als Funktion</h3>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+// Mit Destructuring
+function Greet({greeting, name}) {
+  return (
+      <div>
+          <h1>{greeting}</h1>
+          <h2>{name}</h2>
       </div>
   );
 }
 </code></pre>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+// Als Arrow Function
+const Greet = ({greeting, name}) => <div>
+    <h1>{greeting}</h1>
+    <h2>{name}</h2>
+  </div>
+}
+</code></pre>
+
         </section>
 
             <section>
@@ -1323,6 +1364,7 @@ export default function Layout(props) {
 <script src="reveal.js/lib/js/head.min.js"></script>
 <script src="reveal.js/js/reveal.js"></script>
 <script src="lib/jquery-2.2.4.js"></script>
+
 <script>
     Reveal.addEventListener( 'ready', function( event ) {
         if (window.location.hostname.indexOf('localhost') !== -1) {

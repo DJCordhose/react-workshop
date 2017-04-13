@@ -188,10 +188,11 @@ Ende gegen 16.30 Uhr
             <ol>
                 <li><code>git clone https://github.com/DJCordhose/react-workshop.git</code></li>
                 <li>Im geklonten Verzeichnis: <code>npm install</code></li>
-                <li>In <code>code/server</code> wechseln und <code>npm start</code> ausführen</li>
-                <li>In neuem Terminal: <code>code/workspace</code> wechseln</li>
+                <li><code>npm start</code></li>
+                <li>In neuem Terminal: in <code>code/workspace</code> wechseln</li>
                 <li>Ausführen: <code>npm start</code></li>
                 <li>Browser öffnen: <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
+                <li>Wenn dort ein Hello-World-Text erscheint ist alles gut
             </ol>
             <p>Folien: Im geklonten Verzeichnis <code>2017_ix.html</code>
             </p>
@@ -199,14 +200,14 @@ Ende gegen 16.30 Uhr
         <section>
             <h1>React Workshop</h1>
             <p>
-                <small><a href="http://nilshartmann.net">Nils Hartmann</a> / <a href="http://twitter.com/nilshartmann">@nilshartmann</a>
-                </small>
+                <a href="http://nilshartmann.net">Nils Hartmann</a> / <a href="http://twitter.com/nilshartmann">@nilshartmann</a>
+
             </p>
             <p>
-                <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-                </small>
+                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+
             </p>
-            <p><small><a href="http://bit.ly/react-ix">http://bit.ly/react-ix</a></small></p>
+            <p><a href="http://bit.ly/react-ix">http://bit.ly/react-ix</a></p>
 
         </section>
 
@@ -218,102 +219,22 @@ Ende gegen 16.30 Uhr
                 <li><a href="#/t2">Teil II: Komponentenhierarchien</a>
                 <li><a href="#/t3">Teil III: Remote-Calls gegen Server</a>
                 <li><a href="#/t4">Teil IV: Integration mit 3rd-Party Libs</a>
-                <li><a href="#/t5">Teil V: Redux</a>
-<pre class="todo">
-- Als Motivation:
-    - Abstraktionen können helfen: https://twitter.com/deech/status/831606407011115008?s=03
-    - Twitter nutzt Redux: https://medium.com/statuscode/dissecting-twitters-redux-store-d7280b62c6b1#.8vi5orv9r
-- Zähler als dritte Komponente vorgeben
-  - x (gefiltert)/y (insgesamt)
-- Einleitende Übung für Flux / Redux
-- Komplette Anwendung, damit klar ist, wie sie funktioniert
-  - keinen Code zeigen
-  - Herausforderungen
-    - Verteilte Logik
-       - Aggreation in Chart
-       - Filterung in Controller
-       - Counter
-       - Server Aufruf
-    - Sicher stellen, dass alle drei Darstellungen konsistent sind
-    - Controller ist Gottkomponente
-       - mit aller Business-Logic
-       - und allem "fachlichem" State (Liste der Grüße)
-       - und allem UI-State (welche Komponente wird angezeigt, wonach wird gefiltert)
-       - Wissen über Layout
-    - Transformierte Daten müssen bei jedem Rendering erneut errechnet werden (auch wenn gar nicht notwendig)
-    - Möglichkeiten diskutieren
-      - I: Smart-, Dumb-Komponent (wie gehabt)
-      - II: Event-Bus mit verteiltem State
-        - Wie wird der initiale State gesetzt?
-        - Wie geht man mit einer Komponente um, die erst später hinzugefügt wird?
-      - III: Flux
-        - State und Logik zentral in Store ziehen
-        - Server-Call in Action Creator
-        - 2 Optionen
-          - Controller bleibt und registriert an Store, dispatcht actions
-          - Controller verschwindet, store übernimmt seine Aufgabe
-            - Dumb Componentes
-      - IV: Redux
-</pre>
-                <li><a href="#/t6">Teil VI: Performance</a>
-<pre class="todo">
-- https://facebook.github.io/react/docs/optimizing-performance.html
-- shouldComponentUpdate: In unserem Fall:
-  - Redux macht den Check
-  - Wir haben aber nur genau einen Zustand, daher macht ein shouldComponentUpdate so keinen Sinn
-  - Wir brauchen ein besseres Beispiel
-    - Default: Einzelnen Eintrag aus Liste herausziehen
-- Prod build
-- Reselect
-- immutable.js
-</pre>
-
-                <li><a href="#/t7">Teil VII: Ausblick</a>
-                <h2>Ausblick</h2>
-                <pre class="todo">
-1-1,5 Kino zum Abschluss
-
-- TypeScript Flow
-- Eslint?
-- React Native
-- Neuer React Kern: https://github.com/acdlite/react-fiber-architecture
-- Router (falls noch nicht vorher passiert)
-    - Jest (falls noch nicht vorher passiert)
-- Flux / Redux (falls noch nicht vorher passiert)
-- Server Side Rendering
-- GraphQL und Relay
-- Auth???? https://dzone.com/articles/adding-authentication-to-a-web-application-with-au?edition=261708&utm_source=Spotlight&utm_medium=email&utm_campaign=web%20dev%202017-01-05
-            </pre>
-x
+                <li><a href="state.html" target="_blank">Teil V: Zustandsmanagement (Redux)</a>
+                <li><a href="2017_enterjs_advanced.html#/optimize" target="_blank">Teil VI: Performance</a>
+            </li>
             </ul>
         </section>
 
-        <section class="todo">
+        <section>
+            <h2>Ausbilick</h2>
             <ul>
-                <li>Teil 3 (Server) neu bauen mit express API (Daten in Memory halten), lokale Installation
-                <li>Buildprozess mehr Folien</li>
-                <li>Was in TODO.md steht
-                <li>Computed Properties erklären in Folie oder aus dem Beispiel herausnehmen
+                <li><a href="jest.html" target="_blank">React-Tests mit Jest und Enzyme</a> und
+                    <a href="http://redux.js.org/docs/recipes/WritingTests.html" target="_blank">Redux-Tests</a>
+                <li><a href="2017_enterjs_advanced.html#/types" target="_blank">Typsysteme mit TypeScript und Flow</a>
+                <li><a href="code/sandbox/hoc/src/HelloMessage.js" target="_blank">Higher Order Components (HoC)</a>
+                <li><a href="router-v3.html" target="_blank">React Router V3</a>
             </ul>
         </section>
-        <!--<section>-->
-            <!--<h3>Plan</h3>-->
-            <!--<ul>-->
-                <!--<li>11:00 - 11:30: Teil 0: React-Einführung und Build-Prozess-->
-                <!--<li>11:30 - 12:30: Teil 1: React-Komponenten, ES6 Grundlagen-->
-                <!--<li><em>12:30 - 13:30: Mittagessen</em>-->
-                <!--<li>13:30 - 14:00: Übung für Teil 1-->
-                <!--<li>14:00 - 14:30: Teil 2: Komponentenhierarchien-->
-                <!--<li>14:30 - 15:00: Übung für Teil 2-->
-                <!--<li><em>15:00 - 15:15: Kaffeepause</em>-->
-                <!--<li>15:15 - 15:45: Teil 3: Testen (optional mit kleiner Übung)-->
-                <!--<li>15:45 - 16:15: Teil 4: React Router-->
-                <!--<li>16:15 - 16:45: Übung für Teil 4-->
-                <!--<li><em>16:45 - 17:00: kleine Kaffeepause</em>-->
-                <!--<li>17:00 - 17:30: Teil 5: Remote-Calls gegen Server-->
-                <!--<li>17:30 - max. 18:00: Ausblick/Fragen/Abschluss-->
-            <!--</ul>-->
-        <!--</section>-->
 
         <section id="example-app">
             <h2>Beispiel-Anwendung</h2>
@@ -335,8 +256,8 @@ x
                 <li class="fragment">Minimales API
                 <li class="fragment">Ein-Weg-Data-Binding: Zustandsänderungen stellen Komponente <b>komplett</b> neu dar
                 <li class="fragment">Kann im Browser und auf dem Server rendern
-                <!--<li class="fragment">wird für komplette Anwendung typischerweise mit React Router und einem Flux-Framework gekoppelt-->
-                <!--<li class="fragment">viel Inspiration aus der funktionalen Ecke (Immutable, pure functions, stateless)-->
+                <li class="fragment">wird für komplette Anwendung typischerweise mit React Router und einem Flux-Framework gekoppelt
+                <li class="fragment">viel Inspiration aus der funktionalen Ecke (Immutable, pure functions, stateless)
             </ul>
         </section>
 
@@ -352,7 +273,8 @@ x
     return &lt;h1 className='title'>Hello, World!&lt;/h1>
   }
 }
-</code></pre></section>
+</code></pre>
+        </section>
 
         <section>
             <h3>Hello World React</h3>
@@ -360,16 +282,53 @@ x
         </section>
 
         <section>
+            <h3>ES6: Klassen</h3>
+            <pre class="fragment"><code class="javascript" contenteditable>class Person {
+    constructor(name) {
+        this._name = name;
+    }
+    get name() {
+        return this._name;
+    }
+}
+class Programmer extends Person {
+    constructor(name, language) {
+        super(name);
+        this.language = language;
+    }
+    code() {
+        return this.name + " codes in " + this.language;
+    }
+}</code></pre>
+            <pre><code class="javascript" contenteditable>const programmer = new Programmer('Erna', 'JavaScript');
+console.log(programmer.code());
+console.log(programmer instanceof Programmer); // true
+console.log(programmer instanceof Person); // true</code></pre>
+        </section>
+
+        <section>
+            <h3>ES6: Arrow Functions</h3>
+            <pre><code class="javascript" contenteditable>const displayInPage = (text) => {
+   return document.body.innerHTML +=
+       `${text}<br>`;
+};</code></pre>
+            <pre class="fragment"><code class="javascript" contenteditable>const displayInPage = text => document.body.innerHTML += `${text}<br>`;
+</code></pre>
+        </section>
+
+                <section>
                     <h3>Hello World React</h3>
-<pre><code data-trim contenteditable>import React from "react";
-class HelloMessage extends React.Component {
+<pre><code data-trim contenteditable>class HelloMessage extends React.Component {
   render() {
     return (&lt;div>
             &lt;input ref={input => this.input = input}
                    onChange={event => this.updateModel(event)}
                    value={this.state.greeting} />
             &lt;p>{this.state.greeting}, World&lt;/p>
-            &lt;button onClick={() => this.reset()}>Clear&lt;/button>
+            &lt;button
+                onClick={() => this.reset()}>
+                Clear
+            &lt;/button>
         &lt;/div>);
   }</code></pre>
 <pre class="fragment"><code contenteditable class="javascript">  constructor(props) {
@@ -384,80 +343,8 @@ class HelloMessage extends React.Component {
     this.input.focus();
   }
 }</code></pre>
-        </section>
-            <section>
-                <h3>ES6: Template Strings</h3>
-                <ul>
-                <li>Strings, die eingebette Symbole mit (${...}) erlauben</li>
-                <li>Einbetten in back ticks (umgekehrtes Hochkomma) ``</li>
-                </ul>
-                <pre class="fragment"><code class="javascript" contenteditable>const name = 'Susi';
-console.log(`Hello, ${name}`);
-// => Hello, Susi
-                </code></pre>
-                <pre class="fragment"><code class="javascript" contenteditable>const age = 24;
-console.log(`You are ${age * 12} month old`);
-// => You are 288 month old
-                </code></pre>
+                </section>
 
-            </section>
-            <section>
-                <h3>ES6: Klassen</h3>
-                <pre class="fragment"><code class="javascript" contenteditable>class Person {
-    constructor(name) {
-        this._name = name;
-    }
-    get name() {
-        return this._name;
-    }
-}
-class Programmer extends Person {
-    constructor(name, language) {
-        super(name);
-        this.language = language;
-    }
-    code() {
-        return `${this.name} codes in ${this.language}`;
-    }
-}</code></pre>
-                <pre><code class="javascript" contenteditable>const programmer = new Programmer('Erna', 'JavaScript');
-console.log(programmer.code());
-console.log(programmer instanceof Programmer); // true
-console.log(programmer instanceof Person); // true</code></pre>
-            </section>
-
-
-                <!--<section>-->
-                    <!--<h3>ES6: Lexcial Binding an this bei Arrow-Functions</h3>-->
-<!--<pre><code class="javascript" contenteditable data-trim="">-->
-<!--const obj = {-->
-    <!--methodOfObj: function () {-->
-      <!--console.log(`In Method: ${obj === this}`); // true-->
-        <!--['1', '2', '3'].forEach( e => {-->
-           <!--console.log(`In Loop: ${obj === this}`); // true-->
-        <!--});-->
-    <!--}-->
-<!--};-->
-
-<!--obj.methodOfObj();-->
-<!--</code></pre>-->
-            <!--</section>-->
-
-
-        </section>
-        <section>
-            <h3>ES6: Arrow Functions</h3>
-            <pre><code class="javascript" contenteditable>const ageAsString = (name, age) => {
-   const month = age * 12;
-   return `${name} is ${month} month olds`;
-};</code></pre>
-            <pre class="fragment"><code class="javascript" contenteditable>// () und {} können u.U. weggelassen werden
-const greeting = name => `Hello, ${name}`;
-</code></pre>
-            <pre class="fragment"><code class="javascript" contenteditable>// no params
-const goHome = () => window.location.href = '/';
-</code></pre>
-        </section>
         <section>
                     <h3>Aufruf</h3>
 <pre><code data-trim contenteditable>
@@ -490,66 +377,19 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
             <li>Typische Werkzeuge
                 <ul><li>Babel (Compiler)
                     <li>Webpack (Bundler)
-                </ul>
+                    <li>Webpack Dev Sever (HTTP Server mit Hot Reload)
+                    </ul>
         </ul>
     </section>
-        <section>
-            <h2>Webpack (Bundler)</h2>
-            <ul>
-                <li>Typische JavaScript SPAs bestehen aus einer Vielzahl von internen und externen JS Modulen</li>
-                <li class="fragment">Händische Pflege (compilieren, einbinden in HTML-Datei etc) sehr aufwendig</li>
-                <li class="fragment">Keine Unterstützung von "require" im Browser</li>
-                <li class="fragment">Weitere Artefakte einer Anwendung: CSS, Bilder etc</li>
-                <li class="fragment">Webpack macht automatisch aus <b>allen</b> Artefakten unserer Anwendung <b>ein</b> JavaScript Modul</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Typische Verarbeitung mit Webpack</h2>
-            <ul>
-                <li class="fragment"><b>JavaScript</b>: compilieren, minifizieren</li>
-                <li class="fragment"><b>Stylesheets</b>: LESS/SCSS/PostCSS ausführen</li>
-                <li class="fragment"><b>Images</b>: als Inline Resource zur Verfügung stellen</li>
-                <li class="fragment">Alle unterstützten Resourcen können aus JavaScript referenziert werden:
-                    <pre><code data-trim contenteditable class="javascript">
-                        import './my-syles.scss'; // wird in DOM per script-Tag eingebunden
-import anImage from './images/my-image.png';
-import React from 'react';
-class MyImage extends React.Component {
-  render() { return &lt;img src={anImage} /&gt; }
-}
+     <section>
+        <h2>Webpack und Babel</h2>
+        <img src="webpack-und-babel.png" style="border:0;box-shadow:0 0 0 0"/>
+    </section>
 
-                    </code></pre>
-                </li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Webpack und Babel</h2>
-                <ul>
-                    <li>Resource-spezifische "Loader"</li>
-                    <li>Statische Code-Analyse für Abhängigkeiten</li>
-                </ul>
-            <img src="webpack-und-babel.png" style="border:0;box-shadow:0 0 0 0"/>
-        </section>
-        <section>
-            <h2>Webpack Development Server</h2>
-            <ul>
-                <li>Zum Ausführen der Anwendung wird ein Webserver benötigt</li>
-                <li class="fragment">Für die Entwicklung <b>Webpack Dev Server</b>:
-                <ul>
-                    <li class="fragment">...führt Webpack auf Basis der Projekt Webpack Konfiguration aus</li>
-                    <li class="fragment">...erzeugt Ausgabe in Memory (Performance)</li>
-                    <li class="fragment">...Hot Reloading: Automatische Aktualisierung nach Code Änderung</li>
-                    <li class="fragment">...React Hot Loader: Zustand bleibt nach Aktualisierung erhalten (Beta)</li>
-                </ul>
-                <li class="fragment"><code>npm start</code> in unserem Beispiel-Projekt</li>
-            </ul>
-        </section>
-
-
+    </section>
     <section>
       <section>
-          <h2>Übung 0: React Hello-World</h2>
+          <h2>Übung: React Hello-World</h2>
           <h3>Mach dich mit den Werkzeugen vertraut und schreib deine erste React-Komponente</h3>
       </section>
       <section>
@@ -595,12 +435,6 @@ class MyImage extends React.Component {
         </section>
 
         <section>
-            <h2>React Referenz</h2>
-            <p><a href="https://facebook.github.io/react/docs/hello-world.html" target="_blank">
-                https://facebook.github.io/react/docs/hello-world.html
-            </a>
-            </p>
-
             <h2>ES6-Referenz</h2>
             <p><a href="http://exploringjs.com/es6/" target="_blank">
                 http://exploringjs.com/es6/
@@ -785,9 +619,9 @@ class TitleComponent extends React.Component {
     }
    // ...
 }
-            </code></pre>
-            <pre class="fragment"><code class="javascript" contenteditable data-trim>
-  &lt;TitleComponent title='Hello World' /&gt;
+</code></pre>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+  &lt;TitleComponent title='Hello World' />
 </code></pre>
 
         </section>
@@ -798,8 +632,8 @@ class TitleComponent extends React.Component {
                 <li>Beispiel: Inhalt eines Eingabefelds, Daten vom Server</li>
                 <li>Werte üblicherweise immutable</li>
                 <li><b>Initialisieren</b> im Konstruktor mit <code>this.state={}</code>
-                <li class="fragment">Zustand <b>lesen</b> über <code>this.state</code>
-                <li class="fragment">Zustand <b>setzen</b> über <code>this.setState()</code>
+                <li>Zustand <b>lesen</b> über <code>this.state</code>
+                <li>Zustand <b>setzen</b> über <code>this.setState()</code>
                 <ul><li><b>Achtung:</b> kein "reiner" Setter</li>
                     <li>Führt alten und neuen Zustand zusammen</li>
                     <li>Wird asynchron ausgeführt!</li>
@@ -863,9 +697,9 @@ class HelloMessage extends React.Component {
 </code></pre>
         </section>
 
-    <section>
+        <section>
       <section>
-          <h2>Übung 1: Detail-Ansicht für unsere Gruß-Anwendung</h2>
+          <h2>Übung: Detail-Ansicht für unsere Gruß-Anwendung</h2>
           <h3>Erzeuge eine Komponenten mit der man einen Namen und eine Grußformel eingeben kann</h3>
       </section>
       <section>
@@ -894,6 +728,15 @@ class HelloMessage extends React.Component {
             </a>
             </p>
         </section>
+
+        <section>
+            <h2>Referenz</h2>
+            <p><a href="https://facebook.github.io/react/docs" target="_blank">
+                https://facebook.github.io/react/docs
+            </a>
+            </p>
+        </section>
+
 
         <section>
             <h3>Themen</h3>
@@ -982,7 +825,9 @@ const body = greetings.map(greeting =>
 
         <section>
             <h3>Controller und Child-Views</h3>
-            <img src="controller.png" height="600" style="border:0;box-shadow:0 0 0 0">
+            <!--<img src="smart-dumb.jpg">-->
+            <!--<img src="smart-dumb.png">-->
+            <img src="smart-dumb-w-label.png">
         </section>
 
         <section>
@@ -1045,7 +890,7 @@ GreetingDetail.propTypes = {
 
         <section>
             <section>
-                <h2>Übung 2: Eine komplette Anwendung zusammen setzen</h2>
+                <h2>Übung: Eine komplette Anwendung zusammen setzen</h2>
                 <h3>Füge deinen Detail-View und einen Master-View über eine Controller-Komponente zusammen</h3>
             </section>
             <section>
@@ -1079,37 +924,18 @@ GreetingDetail.propTypes = {
         </section>
 
         <section>
-            <section>
-                <h2>Übung 5: Laden und Speichern der Daten von/auf einem Server</h2>
-                <h3>Entwickelt gemeinsam mit den Workshop-Leitern eine Version, die die Grüße über eine id darstellen kann</h3>
-            </section>
-
-            <!--Idee: gemeinsam Live entwickeln und dabei die Punkte herausarbeiten-->
-            <!-- - wie macht man das laden und speichern technisch: fetch vorgeben-->
-            <!-- - wie funktioniert asynchrones?-->
-            <!-- - wo lädt man die Daten eigentlich: live cycle methoden-->
-            <!-- - was macht man mit der id?-->
-            <section>
-                <h3>Herausforderungen</h3>
-                <ul>
-                    <li>Wo speichern wir?
-                    <li>Wie machen wir das Laden und Speichern technisch?
-                    <li>Wie funktioniert asynchrone Verarbeitung in React?
-                    <li>Wo steht der Code zum Laden der Grüße?
-                </ul>
-            </section>
+            <h3>Herausforderungen</h3>
+            <ul>
+                <li>Wo speichern wir?
+                <li>Wie machen wir das Laden und Speichern technisch?
+                <li>Wie funktioniert asynchrone Verarbeitung in React?
+                <li>Wo steht der Code zum initialen Laden der Grüße?
+            </ul>
+        </section>
 
             <section>
-                <h3>Material: Firebase</h3>
-                <ul>
-                    <li><code>https://gruss.firebaseio.com/</code>: Admin-Interface der Firebase DB
-                    <li><code>curl 'https://gruss.firebaseio.com/rest/greetings.json'</code> greetings holen
-                    <li><code>curl -X PUT -d '[{ "id": 1, "name": "Oma", "greeting": "Hiho"}, {"id": 2, "name": "Opa"}]' 'https://gruss.firebaseio.com/rest/greetings.json'</code> greetings speichern
-                    <li><code>curl 'https://gruss.firebaseio.com/rest/greetings.json?orderBy="id"&equalTo=3'</code> greeting über id laden
-                </ul>
-            </section>
-            <section>
-                <h3>Material: fetch</h3>
+                <h3>fetch</h3>
+                <p>Browser-API zum Laden und Speichern von Daten</p>
 <pre><code class="javascript" contenteditable data-trim>
 fetch(url, {
     method: 'PUT',
@@ -1124,16 +950,10 @@ fetch(url, {
 .catch(ex => console.error('request failed', ex));
 </code></pre>
             </section>
-        </section>
 
-
-        <!--<section>-->
-            <!--<h2>Optionale Übung: Remote Calls</h2>-->
-            <!--<h3>Lade und Speichere Grüße vom/auf dem Server</h3>-->
-        <!--</section>-->
 
         <section>
-            <h2>Optional: Promises</h2>
+            <h2>Promises</h2>
         </section>
                 <section>
                         <h3>fetch</h3>
@@ -1238,6 +1058,18 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 // Output:
 // error:  Promise rejected</code></pre>
                 </section>
+        <section>
+            <section>
+                <h2>Übung: Laden und Speichern der Daten von/auf einem Server</h2>
+                <p>Entwickle auf Basis von fetch eine Version, die die Daten auf dem Server laden und dort wieder speichern kann</p>
+                <p>Der Server ist bereits vorgegeben und kann mit <code>npm start</code> im Root-Verzeichnis gestartet werden. Er ist dann unter Port 7000 erreichbar</p>
+                <p>Weitere Details findest du unter:
+                    <a href="code/material/3-remote/AUFGABEN.md" target="_blank">
+                        code/material/3-remote/AUFGABEN.md</a>
+                    </p>
+            </section>
+
+        </section>
 
         <section id="t4">
             <h1>Teil IV</h1>
@@ -1278,8 +1110,17 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
                 <li>Änderungen des Zustands sollen nach wie vor richtig dargestellt werden
                 <li>Ab welchem Zeitpunkt soll NVD3 das Rendern übernehmen?
                 <li>Wie können wir aus NVD3 heraus auch wieder andere React-Komponenten beeinflussen?
+                <li>Wie räumen wir wieder auf?
             </ol>
         </section>
+
+        <section>
+            <h3>Übersicht über den Komponenten-Lifecycle</h3>
+            <a href="https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle" target="_blank">
+                https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle
+            </a>
+        </section>
+
         <section>
             <h3>React Chart Komponente #1</h3>
             <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
@@ -1325,6 +1166,11 @@ class Chart extends React.Component {
                                   e => onSegmentSelected(e.data.label));
         }
     }
+
+    // (6) called just before destroying component
+    componentWillUnmount() {
+        this._d3selection.remove();
+    }
 }
        </code></pre>
         </section>
@@ -1345,28 +1191,6 @@ class Chart extends React.Component {
                 <p>Zusatzaufgabe: Ein zweites Mal klicken auf das Segment soll den Filter wieder löschen</p>
             </section>
         </section>
-
-
-        <section id="t5">
-            <h1>Teil IV</h1>
-            <h2>Redux</h2>
-            <a href="code/schritte/redux/6-redux/public/index.html" target="_blank">Ziel-Anwendung</a>
-        </section>
-
-        <section>
-            <h2>Redux 1</h2>
-            <img src="redux-01-react-cycle-no-redux.png" style="border:0;box-shadow:0 0 0 0"/>
-        </section>
-
-        <section>
-            <h2>Redux 2</h2>
-            <img src="redux-02-extracting-responsibility.png" style="border:0;box-shadow:0 0 0 0"/>
-        </section>
-        <section>
-            <h2>Redux 3</h2>
-            <img src="redux-03-resulting-redux-architecture.png" style="border:0;box-shadow:0 0 0 0"/>
-        </section>
-
     </div>
 
 </div>
@@ -1388,6 +1212,7 @@ class Chart extends React.Component {
         $('code').addClass('line-numbers');
     } );
 </script>
+
 
 <script>
 
