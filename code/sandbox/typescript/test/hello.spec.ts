@@ -7,4 +7,7 @@ describe('actions', () => {
     const action = resetGreeting();
     assert(action.type === RESET_GREETING, 'aha2')
   });
+  it('soso', () => {
+    assert(5 == 5, 'aha2')
+  });
 });

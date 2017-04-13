@@ -1,6 +1,9 @@
-import {Action, UPDATE_GREETING, RESET_GREETING} from './actions';
+import {Action, UpdateGreetingAction, ResetGreetingAction, UPDATE_GREETING, RESET_GREETING} from './actions';
 
-export default function greetingReducer(state: string = 'Hello', action: Action) {
+type PartialState = string;
+
+export default function greetingReducer(state: PartialState = 'Hello', 
+action:  UpdateGreetingAction | ResetGreetingAction): PartialState {
     switch (action.type) {
         // ERROR: Type '"UPDATE_GRETING"' is not comparable to type '"UPDATE_GREETING" | "RESET_GREETING"'.
         // case 'UPDATE_GRETING':

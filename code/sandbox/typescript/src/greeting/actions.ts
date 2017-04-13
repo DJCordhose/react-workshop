@@ -28,6 +28,20 @@ export function updateGreeting(greeting: string): UpdateGreetingAction {
 
 export function resetGreeting(): ResetGreetingAction {
     return {
-        type: 'RESET_GREETING'
+        type: RESET_GREETING
+    };
+
+
+}
+
+type FilterAction = {
+  type: string;
+  filter: string;
+};
+
+export function setFilter(filter: string): FilterAction  {
+    return {
+        type: 'SET_FILTER',
+        filter
     };
 }

@@ -9,7 +9,7 @@ module.exports = function (config) {
               'text/x-typescript': ['ts','tsx']
             },
         files: [
-            "test/**.spec.ts"
+            "test/**.spec.ts" 
         ],
         preprocessors: {
             ["test/**.spec.ts"]: ["webpack"]
