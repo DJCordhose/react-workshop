@@ -14,11 +14,11 @@ export default class NoVNC extends React.Component<void, any> {
             return;
         }
 
-        rfb.connect('192.168.0.67', 6010);
+        rfb.connect('172.16.11.252', 6010);
     }
 
     render() {
-        return (<div>
+        return (<div style={{width: '100vh'}}>
             <canvas ref={canvas => this.canvas = canvas}></canvas>
         </div>);
     }
