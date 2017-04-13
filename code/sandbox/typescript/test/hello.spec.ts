@@ -1,6 +1,6 @@
 import {assert} from 'chai';
 
-import {resetGreeting, RESET_GREETING, UPDATE_GREETING} from '../src/actions';
+import {resetGreeting, RESET_GREETING, UPDATE_GREETING} from '../src/greeting/actions';
 
 describe('actions', () => {
   it('reset greetings has proper type', () => {
