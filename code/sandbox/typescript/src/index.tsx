@@ -9,11 +9,13 @@ import store from './store';
 
 import {HelloMessage} from './greeting';
  
+
+import Routes from './routes'; 
 // if (process.env.NODE_ENV !== 'production') console.log('Ich bin nicht in Production');
 
 const mountNode = document.getElementById('mount');
 ReactDOM.render(
     <Provider store={store}>
-        <HelloMessage repeat={true}/>
+        <Routes />
     </Provider>,
     mountNode);
