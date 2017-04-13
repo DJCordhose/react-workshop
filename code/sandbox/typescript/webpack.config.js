@@ -8,9 +8,9 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.css']
     },
-    watchOptions: {
-        poll: true
-    },
+    // watchOptions: {
+    //     poll: true
+    // },
     module: {
         rules: [
 {

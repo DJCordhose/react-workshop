@@ -8,6 +8,8 @@
     "experimentalDecorators": true,
     "allowJs": true,
     "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "allowUnreachableCode": true,
     "noLib": false,
     "jsx": "react",
      "types": [
