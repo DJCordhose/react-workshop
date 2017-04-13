@@ -6,14 +6,19 @@ module.exports = {
         publicPath: '/dist'
     },
     resolve: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx']
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.css']
     },
     watchOptions: {
         poll: true
     },
     module: {
         rules: [
-            {
+{
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ],
+                exclude: /node_modules/
+      },
+                  {
                 test: /\.(t|j)sx?$/,
                 use: 'awesome-typescript-loader',
                 exclude: /node_modules/,
