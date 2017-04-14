@@ -25,10 +25,11 @@ class HelloMessage extends React.Component<Props, undefined> {
 
         return (
             <div>
+                {/*Trying to extract this results in an anemic component with the API as we also need the dom ref here*/}
+                {/*so extracting it does not make any sense*/}
                 <input ref={input => this.input = input}
                        onChange={(event: SyntheticEvent<HTMLInputElement>) => updateGreeting(event.currentTarget.value)}
                        value={greeting} />
-                {/*import HelloMessageOutput from './HelloMessageOutput';*/}
                 <HelloMessageOutput {...this.props} />
                 <HelloMessageButton 
                   text="Click me"
