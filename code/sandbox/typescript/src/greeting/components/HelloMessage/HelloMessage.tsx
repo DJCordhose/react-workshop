@@ -6,18 +6,25 @@ import * as actions from '../../actions';
 
 import {State} from '../../../store';
 
+import HelloMessageInput from './HelloMessageInput';
 import HelloMessageOutput from './HelloMessageOutput';
 import HelloMessageButton from './HelloMessageButton';
 
-type Props = {
+type Props = Partial<State> & {
     greeting: string;
     repeat?: boolean;
     resetGreeting: typeof actions.resetGreeting;
     updateGreeting: typeof actions.updateGreeting;
 };
 
-class HelloMessage extends React.Component<Props, undefined> {
-    input: HTMLInputElement;
+class HelloMessage extends React.Component<Props, any> {
+
+  constructor(props) {
+super(props);
+this.state = {
+  focus: false
+};
+  }
     render() {
         // ERROR: Type 'Readonly<{ children?: ReactNode; }> & Readonly<Props>' has no property 'updateGreting' and no string index signature.
         // const { greeting, repeat, updateGreting } = this.props;
@@ -25,19 +32,21 @@ class HelloMessage extends React.Component<Props, undefined> {
 
         return (
             <div>
-                <input ref={input => this.input = input}
-                       onChange={(event: SyntheticEvent<HTMLInputElement>) => updateGreeting(event.currentTarget.value)}
-                       value={greeting} />
-                {/*import HelloMessageOutput from './HelloMessageOutput';*/}
-                <HelloMessageOutput {...this.props} />
-                <HelloMessageButton 
-                  text="Click me"
-                  onClicked={() => this.reset()} />
+                <HelloMessageInput text={greeting} 
+                onFocusSet={() => this.setState({
+                  focus: false
+                })}
+                focus={this.state.focus} onChange={(text : string) => updateGreeting(text)}/>
+                {/*<HelloMessageOutput greeting={greeting} repeat={repeat}/>*/}
+                <HelloMessageOutput {...this.props}/>
+                <HelloMessageButton onClicked={() => this.reset()} text="Clear"/>
             </div>);
     }
     reset() {
         const { resetGreeting } = this.props;
-        this.input.focus();
+        this.setState({
+          focus: true
+        });
         resetGreeting();
     }
 }

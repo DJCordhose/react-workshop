@@ -5,6 +5,7 @@ import {hashHistory, IndexRoute, Route, Router} from "react-router";
 import Frame from "./Frame";
 
 import {HelloMessage} from './greeting';
+import NoVNC from "./NoVNC";
 
 const Greeting = ({params, location}) => {
     return <div>
@@ -44,6 +45,7 @@ const routes = () => <Router history={hashHistory }>
         <IndexRoute component={HelloMessage} />
         <Route path="greet/:greeting" onEnter={requireAuth} component={Greeting}/>
         <Route path="login" component={Login}/>
+        <Route path="novnc" component={NoVNC}/>
     </Route>
 </Router>;
 

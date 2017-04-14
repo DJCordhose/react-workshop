@@ -6,7 +6,7 @@ export const UPDATE_GREETING = 'UPDATE_GREETING';
 // const PREFIX = 'PREFIX:';
 //
 // export const RESET_GREETING = PREFIX + 'RESET_GREETING';
-// export const UPDATE_GREETING = PREFIX + 'UPDATE_GREETING';
+// export const UPDATE_GREETING = PREFIX + 'UPDATE_GREETING';  
 
 export type UpdateGreetingAction = {
     type: typeof UPDATE_GREETING;
