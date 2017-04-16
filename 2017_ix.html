@@ -875,9 +875,14 @@ class GreetingController extends React.Component {
                     <li>Eine Komponente kann deklarieren, welche Properties sie erwartet
                     <li>Auch der Typ kann angegeben werden
                     <li>Fehlende / falsche Properties führen zu Laufzeitfehlern
+                    <li>Ab React 15.5 eigenes npm modul: <a href="https://www.npmjs.com/package/prop-types" target="_blank"><code>prop-types</code></a></li>
                     <li><a href="https://facebook.github.io/react/docs/typechecking-with-proptypes.html" target="_blank">Mögliche Typen</a>
                 </ul>
 <pre class="fragment"><code class="javascript" contenteditable data-trim>
+import PropTypes from 'prop-types';
+
+export default class GreetingDetail extends React.Component { . . . };
+
 GreetingDetail.propTypes = {
     greeting: PropTypes.shape({
       name: React.PropTypes.string.isRequired,

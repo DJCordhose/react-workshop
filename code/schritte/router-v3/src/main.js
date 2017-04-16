@@ -10,7 +10,7 @@ import GreetingDisplayController from "./GreetingDisplayController";
 const mountNode = document.getElementById('mount');
 const router = <Router history={hashHistory }>
     <Route path="/" component={Layout}>
-        <IndexRoute component={GreetingController} />
+        <IndexRoute component={GreetingController}/>
         <Route path="greet/:greetingId" component={GreetingDisplayController}/>
     </Route>
 </Router>;

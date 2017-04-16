@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 import GreetingMaster from './GreetingMaster';
 import GreetingDetail from './GreetingDetail';
@@ -25,7 +25,7 @@ class GreetingController extends React.Component {
                     }
                 </div>
                 <div className="Right">
-                    <Chart data={aggregatedGreetings} onSegmentSelected={setFilter} />
+                    <Chart data={aggregatedGreetings} onSegmentSelected={setFilter}/>
                 </div>
             </div>);
     }

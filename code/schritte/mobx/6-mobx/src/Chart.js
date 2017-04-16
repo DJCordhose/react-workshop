@@ -1,4 +1,5 @@
-import React, {PropTypes} from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 import d3 from "d3";
 import nv from "nvd3";
 
@@ -27,8 +28,12 @@ export default class Chart extends React.Component {
         // http://nvd3.org/examples/pie.html
         nv.addGraph(() => {
             const chart = nv.models.pieChart()
-                .x(function(d) { return d.label })
-                .y(function(d) { return d.value })
+                .x(function (d) {
+                    return d.label
+                })
+                .y(function (d) {
+                    return d.value
+                })
                 .showLabels(true);
             chart.legend.updateState(false);
 

@@ -6,7 +6,7 @@ import GreetingController from './GreetingController';
 import store from './store';
 const mountNode = document.getElementById('mount');
 ReactDOM.render(
-<div>
-    <GreetingController store={store}/>
-    <DevTools />
-</div>, mountNode);
+    <div>
+        <GreetingController store={store}/>
+        <DevTools />
+    </div>, mountNode);
