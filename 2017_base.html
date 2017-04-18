@@ -622,6 +622,29 @@ class TitleComponent extends React.Component {
         </section>
 
         <section>
+            <h3>Das besondere Property <em>children</em></h3>
+            <ul class="fragment">
+                <li>Komponenten, die in einer anderen Komponente enthalten sind, werden über das Property <em>children</em> übergeben</li>
+                <li>Kann ein Array sein oder eine einzelne Komponente, oder null
+            </ul>
+            <pre class="fragment"><code class="jsx" contenteditable data-trim>
+class DivWrapperComponent extends React.Component {
+    render() {
+      return &lt;div>{this.props.children}&lt;/div>
+    }
+   // ...
+}
+</code></pre>
+            <pre class="fragment"><code class="jsx" contenteditable data-trim>
+&lt;DivWrapperComponent>
+  <p>I will be the first child</p>
+  <p>Because of me, children will now be an Array</p>
+&lt;/DivWrapperComponent>
+</code></pre>
+
+        </section>
+
+        <section>
             <h3>Zustand einer Komponente</h3>
             <ul class="fragment">
                 <li>Beispiel: Inhalt eines Eingabefelds, Daten vom Server</li>
