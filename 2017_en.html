@@ -1340,11 +1340,11 @@ history.replace('/profile')
         <section>
             <h3>Route</h3>
             <ul class="fragment">
-                <li>Konfigurations-Komponente</li>
-                <li>welche Komponente soll bei welcher URL darstellt werden</li>
-                <li>können verschachtelt werden (nested)</li>
-                <li>Matching der URL mit Konfiguration ergibt einen Pfad</li>
-                <li>Alle Komponenten des Pfads werden dargestellt</li>
+                <li>Configuration Component
+                    Konfigurations-Komponente</li>
+                <li>Mapping for which component to display for which URL
+                <li>can be nested</li>
+                <li>All Components matching the URL path will be displayed
             </ul>
 <pre class="fragment"><code class="xml" contenteditable data-trim>
 // plain match (containing nested routes)
@@ -1363,7 +1363,7 @@ history.replace('/profile')
         </section>
 
         <section>
-            <h3>IndexRoute und Redirect</h3>
+            <h3>IndexRoute and Redirect</h3>
 <pre class="fragment"><code class="xml" contenteditable data-trim>
   // /vote redirects to /votes
 &lt;Redirect from="/vote" to="/votes"/>
@@ -1376,12 +1376,12 @@ history.replace('/profile')
         </section>
 
         <section>
-            <h3>Nested Routes und children</h3>
+            <h3>Nested Routes and children</h3>
             <ul class="fragment">
-                <li>Router rendert den gematchten Komponenten-Pfad als seine Unterkomponenten
-                <li>Unterkomponenten werden als <code>children</code> in den <code>props</code> übergeben
-                <li><code>children</code> kann grundsätzlich eine oder mehrere Komponenten sein
-                <li>beim Router ist es immer nur eine Komponente
+                <li>Router renders components matched by path from URL as its sub components
+                    rendert den gematchten Komponenten-Pfad als seine Unterkomponenten
+                <li>sub components will be passed as <code>children</code> in <code>props</code>
+                <li><code>children</code> in Router always is a single component, never an array
             </ul>
 <pre class="fragment"><code class="xml" contenteditable data-trim>
 export default function Layout(props) {
@@ -1396,11 +1396,11 @@ export default function Layout(props) {
             <section>
                 <h3>Link</h3>
                 <ul class="fragment">
-                    <li>Echte React-Komponente</li>
-                    <li>Ein Link auf eine Route</li>
-                    <li>wird als <code>a</code>-Element gerendert</li>
-                    <li>hat zudem einen Click-Handler, der den Default verhindert und das history-Objekt updated</li>
-                    <li>weiß, ob die Route auf die sie verweist, aktiv ist</li>
+                    <li>Real React Component</li>
+                    <li>A Link matching a path of a Route
+                    <li>is rendered as an <code>a</code>-Element</li>
+                    <li>has an additonal click handler, that disables the default behavior and instead updates using history API
+                    <li>knows if a route it points to is currently activ (displayed) - useful for simple styling
                 </ul>
 <pre class="fragment"><code class="xml" contenteditable data-trim>
 &lt;Link to={`/votes/${vote.id}`} activeClassName='active'>
@@ -1410,12 +1410,12 @@ export default function Layout(props) {
         </section>
 
         <section>
-            <h3>Datenübergabe an Routen</h3>
-            <p>Der Router übergibt den zu rendernden Routen Daten als Properties</p>
+            <h3>Passing data to Routes</h3>
+            <p>Router passes data from URL to rendered components using Properties</p>
             <ul class="fragment">
-                <li>Property <code>location</code>: enthält <code>pathname</code> und <code>query</code></li>
-                <li>Property <code>params</code>: die dynamischen Segmente der Route (z.B. <code>id</code>)</li>
-                <li>Lifecycle-Methode <code>componentWillReceiveProps</code>: wird mit neuen Properties aufgerufen, wenn sich die Route geändert hat
+                <li>Property <code>location</code>: full <code>pathname</code> and <code>query</code></li>
+                <li>Property <code>params</code>: dynamic Segments of URL as described in Route (e.g.. <code>id</code>)</li>
+                <li>Lifecycle method <code>componentWillReceiveProps</code>: will be supplied with new Properties when route changes
             </ul>
         </section>
 
