@@ -105,6 +105,7 @@
                 <li><a href="#/t2">Part II: Composing Components</a>
                 <li><a href="#/t3">Part III: Remote-Calls and Promises</a>
                 <li><a href="#/t4">Part IV: Introduction to Redux</a>
+                <li><a href="#/t5">Part V: React Router</a>
             </ul>
         </section>
 
@@ -1258,6 +1259,164 @@ export default connect(
                     filtering events
                 </ul>
             </section>
+        </section>
+
+                <section id="t5">
+            <h1>Part </h1>
+            <h2>React Router</h2>
+            <a href="code/schritte/router-v3/public" target="_blank">Target Application</a>
+        </section>
+
+        <section>
+            <h2>API-Reference</h2>
+            <p><a href="https://github.com/reactjs/react-router/blob/master/docs/API.md" target="_blank">
+                https://github.com/reactjs/react-router/blob/master/docs/API.md
+            </a>
+            </p>
+        </section>
+
+        <section>
+            <h3>Topics</h3>
+            <ul>
+                <li><code>Route</code> and <code>IndexRoute</code>
+                <li>history
+                <li>Nested routes and the <code>children</code>-Property
+                <li>Links
+                <li><code>location</code> and <code>param</code> Property and <code>componentWillReceiveProps</code>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Router, Route, IndexRoute, Redirect</h3>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+import { Router, Route, Redirect, IndexRoute, hashHistory }
+    from 'react-router';
+
+const routes = &lt;Router history={hashHistory}>
+  &lt;Redirect from="/vote" to="/votes"/>
+  &lt;Route path="/" component={Layout}>
+    &lt;IndexRoute component={VotePage}/>
+    &lt;Route path="votes/:id" component={SingleVotePage}/>
+    &lt;Route path="login(/:redirect)" component={LoginPage}/>
+    &lt;Route path="compose" component={VoteComposerPage} onEnter={requireAuth}/>
+    &lt;Route path="*" component={NoMatchPage}/>
+  &lt;/Route>
+&lt;/Router>;
+</code></pre>
+        </section>
+
+        <section>
+            <h3>Router</h3>
+            <ul class="fragment">
+                <li>Real React Component</li>
+                <li>Top-Level-Component, decides what gets displayed based on URL from <b>history</b></li>
+                <li>has Routes as children</li>
+            </ul>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+const routes = &lt;Router history={hashHistory}>
+...
+&lt;/Router>;
+</code></pre>
+        </section>
+
+        <section>
+            <h3>History</h3>
+            <ul class="fragment">
+                <li>Abstraction of browser history</li>
+                <li>can be used to navigate by calling methods on it</li>
+                <li>delivers URL to Router</li>
+                <li><code>hashHistory</code> encodes path as deep link (#/vote)
+                <li><code>browserHistory</code> encodes path directly into URL (/vote)
+            </ul>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+// Push a new entry onto the history stack.
+history.push('/home')
+
+// Replace the current entry on the history stack.
+history.replace('/profile')
+</code></pre>
+        </section>
+
+        <section>
+            <h3>Route</h3>
+            <ul class="fragment">
+                <li>Konfigurations-Komponente</li>
+                <li>welche Komponente soll bei welcher URL darstellt werden</li>
+                <li>können verschachtelt werden (nested)</li>
+                <li>Matching der URL mit Konfiguration ergibt einen Pfad</li>
+                <li>Alle Komponenten des Pfads werden dargestellt</li>
+            </ul>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+// plain match (containing nested routes)
+&lt;Route path="/" component={Layout}>
+    // id is passed as parameter to component
+    &lt;Route path="votes/:id" component={SingleVotePage}/> /
+    // redirect is optional
+    &lt;Route path="login(/:redirect)" component={LoginPage}/>
+    // onEnter and onExit possible as hooks
+    &lt;Route path="compose" component={VoteComposerPage}
+        onEnter={requireAuth}/>
+    // wildcard
+    &lt;Route path="*" component={NoMatchPage}/>
+&lt;/Route>
+</code></pre>
+        </section>
+
+        <section>
+            <h3>IndexRoute und Redirect</h3>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+  // /vote redirects to /votes
+&lt;Redirect from="/vote" to="/votes"/>
+&lt;Route path="/" component={Layout}>
+  // will be rendered additionally when path is just /
+  &lt;IndexRoute component={VotePage}/>
+  // ...
+&lt;/Route>
+</code></pre>
+        </section>
+
+        <section>
+            <h3>Nested Routes und children</h3>
+            <ul class="fragment">
+                <li>Router rendert den gematchten Komponenten-Pfad als seine Unterkomponenten
+                <li>Unterkomponenten werden als <code>children</code> in den <code>props</code> übergeben
+                <li><code>children</code> kann grundsätzlich eine oder mehrere Komponenten sein
+                <li>beim Router ist es immer nur eine Komponente
+            </ul>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+export default function Layout(props) {
+    return <div>
+        <h1>Greetings</h1>
+        {props.children}
+    </div>;
+}
+</code></pre>
+        </section>
+
+            <section>
+                <h3>Link</h3>
+                <ul class="fragment">
+                    <li>Echte React-Komponente</li>
+                    <li>Ein Link auf eine Route</li>
+                    <li>wird als <code>a</code>-Element gerendert</li>
+                    <li>hat zudem einen Click-Handler, der den Default verhindert und das history-Objekt updated</li>
+                    <li>weiß, ob die Route auf die sie verweist, aktiv ist</li>
+                </ul>
+<pre class="fragment"><code class="xml" contenteditable data-trim>
+&lt;Link to={`/votes/${vote.id}`} activeClassName='active'>
+  <h1 className="Title">{vote.title}</h1>
+&lt;/Link>
+</code></pre>
+        </section>
+
+        <section>
+            <h3>Datenübergabe an Routen</h3>
+            <p>Der Router übergibt den zu rendernden Routen Daten als Properties</p>
+            <ul class="fragment">
+                <li>Property <code>location</code>: enthält <code>pathname</code> und <code>query</code></li>
+                <li>Property <code>params</code>: die dynamischen Segmente der Route (z.B. <code>id</code>)</li>
+                <li>Lifecycle-Methode <code>componentWillReceiveProps</code>: wird mit neuen Properties aufgerufen, wenn sich die Route geändert hat
+            </ul>
         </section>
 
     </div>
