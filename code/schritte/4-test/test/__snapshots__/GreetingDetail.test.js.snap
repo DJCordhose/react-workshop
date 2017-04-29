@@ -5,7 +5,7 @@ exports[`it should render fine 1`] = `
   <input
     name="name"
     onChange={[Function]}
-    placeholder="Name"
+    placeholder="Another Name"
     value=""
   />
   <input

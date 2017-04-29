@@ -35,12 +35,8 @@ export default class Chart extends React.Component {
         // http://nvd3.org/examples/pie.html
         nv.addGraph(() => {
             const chart = nv.models.pieChart()
-                .x(function (d) {
-                    return d.label
-                })
-                .y(function (d) {
-                    return d.value
-                })
+                .x(d => d.label)
+                .y(d => d.value)
                 .showLabels(true);
             chart.legend.updateState(false);
 
@@ -63,6 +59,6 @@ export default class Chart extends React.Component {
             height: '500px',
             width: '600px'
         };
-        return <div><svg style={svgStyle} className="with-3d-shadow with-transitions" ref={c => this._chart = c}></svg></div>;
+        return <div><svg style={svgStyle} className="with-3d-shadow with-transitions" ref={c => this._chart = c} /></div>;
     }
 }

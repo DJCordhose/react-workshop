@@ -8,6 +8,10 @@
     "dist": "../../../node_modules/.bin/webpack",
     "webpack": "../../../node_modules/.bin/webpack --watch",
     "devserver": "../../../node_modules/.bin/webpack-dev-server --content-base public/",
-    "test": "../../../node_modules/.bin/jest \"(/test/.*\\.test.js)$\" --setupTestFrameworkScriptFile=test/setup-jest.js --verbose --watchAll"
+    "test": "../../../node_modules/.bin/jest \"(/test/.*\\.test.js)$\" --setupTestFrameworkScriptFile=test/setup-jest.js --watchAll",
+    "testreport": "../../../node_modules/.bin/jest \"(/test/.*\\.test.js)$\" --coverage --setupTestFrameworkScriptFile=test/setup-jest.js"
+  },
+  "jest": {
+    "testResultsProcessor": "../../../node_modules/jest-html-reporter"
   }
 }

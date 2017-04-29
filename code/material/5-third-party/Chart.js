@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import d3 from 'd3';
-import nv from 'nvd3';
+import d3 from "d3";
+import nv from "nvd3";
 
 export default class Chart extends React.Component {
 
@@ -17,9 +17,16 @@ export default class Chart extends React.Component {
     // will be called even when shouldComponentUpdate returns false
     componentWillReceiveProps(nextProps) {
         const {data} = nextProps;
-        this._d3selection
-            .datum(data)
-            .call(this._nvd3chart);
+
+        if (this._d3selection) {
+            this._d3selection
+                .datum(data)
+                .call(this._nvd3chart);
+        }
+    }
+
+    componentWillUnmount() {
+        this._d3selection.remove();
     }
 
     componentDidMount() {
@@ -28,12 +35,13 @@ export default class Chart extends React.Component {
         // http://nvd3.org/examples/pie.html
         nv.addGraph(() => {
             const chart = nv.models.pieChart()
-                .x(function(d) { return d.label })
-                .y(function(d) { return d.value })
+                .x(d => d.label)
+                .y(d => d.value)
                 .showLabels(true);
             chart.legend.updateState(false);
 
             this._d3selection = d3.select(this._chart);
+
             this._d3selection
                 .datum(data)
                 .call(chart);
@@ -51,6 +59,6 @@ export default class Chart extends React.Component {
             height: '500px',
             width: '600px'
         };
-        return <svg style={svgStyle} className="with-3d-shadow with-transitions" ref={c => this._chart = c}></svg>
+        return <div><svg style={svgStyle} className="with-3d-shadow with-transitions" ref={c => this._chart = c} /></div>;
     }
 }
