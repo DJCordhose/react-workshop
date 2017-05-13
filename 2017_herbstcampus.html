@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Frontend-Architektur</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        /*pre code {*/
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+        /*}*/
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            height: 500px;
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+        .reveal pre code {
+            max-height: 1000px !important;
+        }
+        img {
+            border: 0 !important;
+            box-shadow:0 0 0 0 !important;
+        }
+
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<!--
+Überblick über moderne (JavaScript-)Frontend-Architektur
+
+https://www.herbstcampus.de/veranstaltung-5928-%C3%9Cberblick-%C3%BCber-moderne-%28javascript-%29frontend-architektur.html?id=5928
+
+70 Minuten
+
+Die Anforderungen an eine moderne, clientseitige Architektur für Webanwendungen sind typischerweise deutlich höher als die an die zugehörige Backendarchitektur. Backendarchitekturen sind zudem seit Jahren Thema und gut durchschaut. Im Gegensatz dazu ist der Wissensstand zu Architekturansätzen und deren Verständnis oft erschreckend niedrig.
+
+In diesem Vortrag wird erklärt, warum moderne Webanwendungen komplexe Architekturanforderungen haben und mit welchen Konzepten und auch mit welchen konkreten Technologien man darauf reagieren kann. Es wird auch Code gezeigt.
+
+Skills
+Grundsätzliches Verständnis von Web-Anwendung und deren Architektur
+
+Lernziele
+Verständnis für die Herausforderungen moderner, clientseitiger Webanwendungen. Warum sind diese so anders als klassische Architekturen?
+-->
+
+<div class="reveal">
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <section>
+            <h2>Überblick über moderne (JavaScript-)Frontend-Architektur</h2>
+            <h3><a href="https://www.herbstcampus.de/veranstaltung-5928-%C3%9Cberblick-%C3%BCber-moderne-%28javascript-%29frontend-architektur.html?id=5928" target="_blank">
+                Herbstcampus 2017</a></h3>
+            <p>
+                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </p>
+            <p><small>Folien: <a href="http://djcordhose.github.io/react-workshop/2017_herbstcampus.html">
+                http://djcordhose.github.io/react-workshop/2017_herbstcampus.html</a></small></p>
+        </section>
+
+        <!--<section class="todo">-->
+            <!--<pre>-->
+            <!--</pre>-->
+        <!--</section>-->
+
+        <section>
+            <h2>Was macht Frontend-Architektur schwierig?</h2>
+            <h3 class="fragment">Das Problem ist der <em>Benutzer!</em></h3>
+
+            <ul>
+                <li class="fragment">alles muss wirken wie aus einem Guss
+                    <ul>
+                        <li>einheltliches Layout (UI)
+                        <li>einheltliches Bedienkonzept (UX)
+                    </ul>
+                </li>
+                <li class="fragment">reaktonsschnelles UI, auch unter Last
+                <li class="fragment">Anzeige soll jederzeit über alle Komponenten konsistent sein
+                <li class="fragment">alles von Anfang an da, ohne Verzögerung
+            </ul>
+            <p class="fragment"><small>Oder man nimmt auf den Benutzer keine Rücksicht wenn es das Geschäftsmodell zulässt</small></p>
+        </section>
+
+        <section>
+            <h2>Wo ist das Problem? Das ist doch einfach oder?</h2>
+            <h3 class="fragment">Prominente Gegenbeispiele</h3>
+            <!-- TODO: Add screenshot from LinkedIn-->
+            <ul>
+                <li class="fragment">Facebook, LinkedIn, XING: Uneinheitlicher Anzeigestand
+                <!--Add screenshot from LinkedIn-->
+                <li class="fragment">Gmail: Ladebalken am Anfang
+                <li class="fragment">Amazon: uneinheitliches Layout und Bedienkonzept
+                <li class="fragment">Viele seiten von Behörden/Ämtern/Großkonzernen etc.: zähes UI, validieren der Eingaben erst nach Submit
+            </ul>
+        </section>
+
+        <section>
+            <h2>Sind die alle unfähig?</h2>
+            <p class="fragment">Oder liegt das eher an Konflikten mit anderen typischen Anforderungen?</p>
+            <p class="fragment">Natürlich soll das alles auch</p>
+            <ul>
+                <li class="fragment">schnell und kostengünstig entwickelt werden
+                <li class="fragment">über Jahrzehnte wartbar sein
+                <li class="fragment">als Komponenten oder Teilprojekte entwickelbar sein
+                <li class="fragment">eine einheitliche Architektur haben
+                <li class="fragment">zum Skillset der vorhandenen Entwickler passen
+            </ul>
+        </section>
+
+        <section>
+            <h3>Welcher Anforderungen kommen durch das Web hinzu?</h3>
+            <ul>
+                <li class="fragment">Wie kann man wartbar JavaScript entwickeln?
+                <li class="fragment">Wie geht man mit der schnellen Entwicklung der Web-Frameworks um?
+                <li class="fragment">JavaScript im Browser, aber meist nicht auch auf dem Server -
+                wie bekommt man damit eine einheitliche Architektur hin?
+            </ul>
+        </section>
+
+        <section>
+            <h2>Typische Szenarien</h2>
+            <p>Das gucken wir uns heute an</p>
+            <ul>
+                <li class="fragment">Microservices im Backend (Monolithischer Client vs Vertikalen)
+                <li class="fragment">Komplexes Zusammenspiel von Komponenten (State Management, Wartbarkeit)
+                <li class="fragment">Schnelle erste Anzeige bei gleichzeitig hoher Interaktivität (Universal Rendering)
+            </ul>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+<script>
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+        $('code').addClass('line-numbers');
+    } );
+</script>
+
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
