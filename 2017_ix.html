@@ -219,8 +219,8 @@ Ende gegen 16.30 Uhr
                 <li><a href="#/t2">Teil II: Komponentenhierarchien</a>
                 <li><a href="#/t3">Teil III: Remote-Calls gegen Server</a>
                 <li><a href="#/t4">Teil IV: Integration mit 3rd-Party Libs</a>
-                <li><a href="state.html" target="_blank">Teil V: Zustandsmanagement (Redux)</a>
-                <li><a href="2017_enterjs_advanced.html#/optimize" target="_blank">Teil VI: Performance</a>
+                <li><a href="#/t5">Teil V: Zustandsmanagement (Redux)</a>
+                <li><a href="#/t6">Teil VI: Performance</a>
             </li>
             </ul>
         </section>
@@ -1196,6 +1196,338 @@ class Chart extends React.Component {
                 <p>Zusatzaufgabe: Ein zweites Mal klicken auf das Segment soll den Filter wieder löschen</p>
             </section>
         </section>
+
+        <section id="t5">
+            <h1>Zustands-Management mit Redux</h1>
+        </section>
+
+        <section>
+            <h2>Über Komponenten verteilter Zustand</h2>
+            <img src="ai/distributed-state.png" />
+        </section>
+
+        <section>
+            <h2>Render Cycle in Pure React</h2>
+            <img src="redux-01-react-cycle-no-redux.png" style="border:0;box-shadow:0 0 0 0"/>
+        </section>
+
+        <section>
+            <h2>Motivation für Zustandsmanagement</h2>
+            <p class="fragment">Zustand, der über viele Komponenten verteilt ist, macht Programme kompliziert</p>
+            <p class="fragment">Gemeinsame Nutzung von State in unterschiedlichen Komponenten-Hierarchien ist schwierig</p>
+            <p class="fragment">Zustandmanagement und UI-Handler werden aus React-Komponenten extrahiert</p>
+            <p class="fragment">Besseres SoC</p>
+        </section>
+
+        <section>
+            <h2>Redux extrahiert die Verantwortlichkeiten</h2>
+            <img src="redux-02-extracting-responsibility.png" style="border:0;box-shadow:0 0 0 0"/>
+        </section>
+
+        <section>
+            <h3>Event-Handlers werden Action-Creators</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+export function setFilter(filter) {
+    return {
+        type: SET_FILTER,
+        filter
+    };
+}
+</code></pre>
+            <ul>
+                <li class="fragment">Action-Creators erzeugen Action-Objekte</li>
+                <li class="fragment">Actions sind Kommando-artige Strukturen von Dingen, die die Applikation tun soll
+                <li class="fragment">Über die dispatch-Methode des Stores werden sie an <em>alle</em> Reducer weiter gegeben
+                <li class="fragment">Actions bestehen aus einem Typen und einer belibiegen Nutzlast (payload)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Action-Creators machen Server-Calls</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+export const loadGreetings = dispatch => {
+    return fetch(BACKEND_URL)
+        .then(response => response.json())
+        .then(greetings => dispatch({
+            type: SET_GREETINGS,
+            greetings
+        });
+    );
+};
+</code></pre>
+            <ul>
+                <li class="fragment">Da der Server-Call asynchron ist, bekommen wir die dispatch Methode als Parameter, mit der wir später
+                    die Action dispatchen</li>
+            </ul>
+            <p  class="fragment"><strong>Action-Creators sind die einzigen Teile einer Redux-Anwendung, die asynchrone Operationen
+                ausführen dürfen, wie z.B. eben Server-Calls</strong></p>
+        </section>
+
+        <section>
+            <h3>Ein <em>einziger</em> Store hält den <em>kompletten</em> Zustand</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { rootReducer } from './reducers';
+
+// http://redux.js.org/docs/api/createStore.html
+const store = createStore(
+    rootReducer // reducer
+);
+ReactDOM.render(
+    &lt;Provider store={store}>
+        &lt;GreetingController />
+    &lt;/Provider>,
+    mountNode
+);
+        </code></pre>
+            <ul>
+                <li class="fragment">Zentraler Teil der Anwendung
+                <li class="fragment">Liefert die bereits bekannte dispatch-Methode
+                <li class="fragment">Der Store wird allen Componenten über die Wrapper-Komponenten <em>Provider</em>
+                    zur Verfügung gestellt
+            </ul>
+        </section>
+
+        <section>
+            <h3>Middleware sitzt zwischen Dispatch und Store</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+import { applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+
+const store = createStore(
+    rootReducer, // reducer
+    applyMiddleware(thunk) // middleware as enhancer
+);
+        </code></pre>
+            <ul>
+                <li class="fragment">Die Thunk Middleware dient als de-facto-Standard</li>
+                <li class="fragment">Gibt die dispatch-Methode and (asynchrone) Action Creators weiter
+                <li class="fragment"><a href="https://github.com/gaearon/redux-thunk#whats-a-thunk" target="_blank">
+                    'A thunk is a function that wraps an expression to delay its evaluation'
+                </a></li>
+                <li class="fragment">Middleware ist ein fortgeschrittenes Feature und meistens genügt die Thunk Middleware</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Reducers enthalten die Kern-(Business)-Logik</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+import {combineReducers} from 'redux';
+
+// http://redux.js.org/docs/api/combineReducers.html
+export const rootReducer = combineReducers({
+    greetings, // updates greeting partial state
+    filter,
+    mode
+});
+        </code></pre>
+            <ul>
+                <li class="fragment">Reducer sind pure Funtionen, die den alten Zustand und eine Action bekommen und einen neuen Zustand erzeugen
+                <li class="fragment">Oft bearbeitet ein Reducer nur einen Teil des Zustands
+            </ul>
+        </section>
+
+        <section>
+            <h3>Teil-Reducer</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+const mode = (state = MODE_MASTER, action) => {
+    switch (action.type) {
+        case SET_MODE:
+            return action.mode;
+        default:
+            return state;
+    }
+};
+        </code></pre>
+            <ul>
+                <li class="fragment">Initialisiert seinen Teilzustand (oft mit einem Default-Parameter)</li>
+                <li class="fragment">Ändert niemals zustand direkt</li>
+                <li class="fragment">Sondern liefert einen neuen Zustand (manchmal teilweise als Kopie)
+            </ul>
+        </section>
+
+        <section>
+            <h3>Zustand mit Komponenten verbinden</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+import { connect } from 'react-redux';
+
+import * as actions from './actions';
+
+export default connect(
+    state => ({
+        mode: state.mode
+        // ...
+    }),
+    actions
+)(GreetingController);
+            </code></pre>
+            <ul>
+                <li class="fragment">der Provider gibt den Store in alle Komponenten</li>
+                <li class="fragment">Die Connect-Funktion extrahiert daraus Zustand, der als Property an Komponenten übergeben wird
+                <li class="fragment">Action-Creators können ebenso in Komponent gegeben werden</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Verwendung von Zustand und Action-Creators in verbundenen Komponenten</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+class GreetingController extends React.Component {
+    render() {
+        // state from store
+        const {aggregatedGreetings, greetings, mode} = this.props;
+        // action creators bound to dispatch from store
+        const {setMode, saveGreeting, setFilter} = this.props;
+
+        // ...
+    }
+}
+            </code></pre>
+            <ul>
+                <li class="fragment">Action-Creators und Zustand werden in Properties hinein gemerged
+                <li class="fragment">Diese werden mit ES6-Destructuring an den Stellen aufgelöst wo wir sie brauchen
+                <li class="fragment">Die Komponenten wird nur neu gerendert wenn sich der benutzte Zustand verändert</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Selektoren</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+export const filterGreetings = (greetings, filter) =>
+        filter ? greetings.filter(greeting => greeting.name === filter)
+                : greetings;
+
+export default connect(
+    state => ({
+        greetings: filterGreetings(state.greetings, state.filter),
+        // ...
+    }),
+    // ...
+)(GreetingController);        </code></pre>
+            <ul>
+                <li class="fragment">Berechnen abgeleiteten Zustand</li>
+                <li class="fragment">Oft in einer eigener Datei</li>
+                <li class="fragment">Erlauben Wiederbenutzung und Caching (normalerweise
+                    <a href="http://redux.js.org/docs/recipes/ComputingDerivedData.html" target="_blank">reselect</a>)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Zusammenfassung Redux-Architektur</h2>
+            <img src="redux-03-resulting-redux-architecture.png" style="border:0;box-shadow:0 0 0 0"/>
+        </section>
+
+        <section>
+            <h2>Übung: eine Redux Anwendung fertig stellen</h2>
+            <h3>Es gibt bereits eine vorgebaute Redux-Anwendung, aber wir die Filterung über das Chart muss noch implementiert werden</h3>
+        </section>
+        <section>
+            <h3>Schritte</h3>
+            <ul>
+                <li>Alles Material von <code>code/material/6-redux</code> in deinem Source-Ordner kopieren
+                <li>TODOs leiten dich, die bereits in den Actions, den Reducers und dem GreetingController eingefügt sind
+                <li>Nutzen den bereits existierenden Filer-Coder als dem vorherigen Schritt
+                <li>Erzeuge einen neuen Action-Typ und einen Action-Creator für das setzen des Filters
+                <li>Füge einen passenden Reducer zur Behandlung einer solchen Action hinzu und füge ihn als Teil-Reducer in
+                    <code>combineReducers</code> hinzu
+                <li>Reiche den Action-Creator von <code>GreetingController</code> in die Chart-Komponente in der du auf das
+                    Filter-Event reagierst
+            </ul>
+        </section>
+
+        <section id="t6">
+            <h2>Laufzeit-Optimierungen</h2>
+            <p><a href="https://facebook.github.io/react/docs/optimizing-performance.html" target="_blank">https://facebook.github.io/react/docs/optimizing-performance.html</a></p>
+        </section>
+
+        <section>
+            <h3>Beispiel: SVG Boxes</h3>
+            <a href="code/sandbox/optimize/public" target="_blank">
+                <img src="screenshot_svg.png" height="500px">
+            </a>
+            <p>Eine einzelne Box mit D'n'D verschieben</p>
+        </section>
+
+        <section>
+            <h2>Change Detection auf der Ebene des Virtual DOM</h2>
+            <p>bei jeder Bewegung der Maus werden alle Boxen neu gerendert</p>
+            <p>Nicht direkt im DOM, sondern in einer leichtgewichtigen Datenstruktur (Virtual DOM)</p>
+            <p>Änderungen im echten DOM werden aus Änderungen im Virtual DOM errechnet</p>
+        </section>
+
+        <section>
+            <h2>Change Detection auf der Ebene des Models</h2>
+            <p><strong>shouldComponentUpdate</strong> ist eine Lifecycle-Methode einer Komponente
+                die diese Prozedur abkürzen kann</p>
+            <p>das alte Modell kann mit dem neuen verglichen werden</p>
+            <p><strong>immutable data structures</strong>
+                (<a href="https://facebook.github.io/immutable-js/" target="_blank">immutable.js</a>) können den Vergleich beschleinigen</p>
+        </section>
+
+        <section>
+            <h3>Die Box Component</h3>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+class Box extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    // simple check: every change to a box creates a new object
+    const changed = this.props.box !== nextProps.box;
+    return changed;
+  }
+
+  render() {
+    const {box} = this.props;
+    return &lt;rect data-id={box.id} x={box.x} y={box.y}
+                 width="10" height="10"
+                 stroke="black" fill="transparent" strokeWidth="1"/>;
+  }
+}
+               </code></pre>
+        </section>
+
+        <section>
+            <h3>immutable.js</h3>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+import {List} from 'immutable';
+
+this.state = {
+    boxes: List(boxes)
+};
+   </code></pre>
+
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+updateBox(id, x, y) {
+    const {boxes} = this.state;
+    const modifiedBox = {
+        id,
+        x,
+        y
+    };
+    const modifiedBoxes = boxes.set(id, modifiedBox);
+    this.setState({
+        boxes: modifiedBoxes
+    });
+}
+               </code></pre>
+            <p><a href="code/sandbox/optimize/src">Full code</a></p>
+        </section>
+
+        <section>
+            <h2>Build-Optimierungen</h2>
+            <p>Minifizieren, Optimieren und alle React-Warnungen herauskompilieren:</p>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+webpack --optimize-minimize --define process.env.NODE_ENV=\"'production'\"
+            </code></pre>
+            <p><a href="http://lisperator.net/uglifyjs/" target="_blank">Nutzt Uglify</a></p>
+            <p>Oder als Kurzform:</p>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+webpack -p
+            </code></pre>
+            <p><a href="https://webpack.js.org/guides/production-build/" target="_blank">https://webpack.js.org/guides/production-build/</a></p>
+
+        </section>
+
+
+
     </div>
 
 </div>
