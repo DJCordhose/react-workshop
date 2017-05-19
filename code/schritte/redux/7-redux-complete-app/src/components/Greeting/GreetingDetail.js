@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 class GreetingDetail extends React.Component {
 
     static propTypes = {
-        onAdd: PropTypes.func.isRequired
+        onSave: PropTypes.func.isRequired
     };
 
     render() {
@@ -54,9 +54,9 @@ class GreetingDetail extends React.Component {
     }
 
     save() {
-        const {onAdd} = this.props;
+        const {onSave} = this.props;
         const {name, greeting} = this.state;
-        onAdd({
+        onSave({
             name,
             greeting
         });
@@ -70,6 +70,6 @@ class GreetingDetail extends React.Component {
 export default connect(
     null,
     dispatch => ({
-        onAdd: (greeting) => dispatch(actions.saveGreeting(greeting))
+        onSave: (greeting) => dispatch(actions.saveGreeting(greeting))
     })
 )(GreetingDetail);

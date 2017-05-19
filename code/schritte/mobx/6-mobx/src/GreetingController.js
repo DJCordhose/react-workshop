@@ -22,7 +22,7 @@ export default class GreetingController extends React.Component {
                         <GreetingMaster greetings={filteredGreetings}
                                         onAdd={() => setMode(MODE_DETAIL)}
                         /> :
-                        <GreetingDetail onAdd={saveGreeting}/>
+                        <GreetingDetail onSave={saveGreeting}/>
                     }
                 </div>
                 <div className="Right">

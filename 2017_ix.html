@@ -984,7 +984,7 @@ GreetingDetail.propTypes = {
       name: PropTypes.string.isRequired,
       greeting: PropTypes.string.isRequired
     }),
-    onAdd: PropTypes.func.isRequired
+    onSave: PropTypes.func.isRequired
 };
 </code></pre>
       </section>
@@ -1000,7 +1000,7 @@ class GreetingDetail extends React.Component {
       name: PropTypes.string.isRequired,
       greeting: PropTypes.string.isRequired
     }),
-    onAdd: PropTypes.func.isRequired
+    onSave: PropTypes.func.isRequired
   };
 
   render() { . . . }
@@ -1040,7 +1040,7 @@ HelloMessage.propTypes = {
           </section>
             <section>
                 <h3>Architektur Beispiel-Anwendung</h3>
-                <img src="greeting-hierarchy.png" style="border:0;box-shadow:0 0 0 0"/>
+                <img src="ai/greeting-hierarchy.png" style="border:0;box-shadow:0 0 0 0"/>
             </section>
             <section>
                 <h3>GreetingMaster</h3>
@@ -1243,7 +1243,7 @@ fetch('http://localhost:7000/api/greetings')
         <pre class="fragment"><code class="javascript" contenteditable data-trim>class GreetingController extends React.Component {
   render() {
     ...
-      &lt;GreetingDetail onAdd={greeting => this.saveGreeting(greeting)} />
+      &lt;GreetingDetail onSave={greeting => this.saveGreeting(greeting)} />
     ...
   }
   saveGreeting(greetingToBeSaved) {

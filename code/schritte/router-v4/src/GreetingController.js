@@ -24,7 +24,7 @@ export default class GreetingController extends React.Component {
                             />)
                         }/>
                         <Route path="/add" render={() => (
-                            <GreetingDetail onAdd={(greeting) => this.saveGreeting(greeting)}/>
+                            <GreetingDetail onSave={(greeting) => this.saveGreeting(greeting)}/>
                         )}/>
                     </div>
                     <div className="Right">

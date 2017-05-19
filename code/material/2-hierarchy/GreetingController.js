@@ -49,9 +49,16 @@ export default class GreetingController extends React.Component {
     }
 
     addGreeting(greetingToBeAdded) {
+        // Aktuelle Liste mit Greetings aus dem State holen
         const {greetings} = this.state;
+
+        // dem übergebenen (neuen) Greeting eine "eindeutige" Id hinzufügen
         greetingToBeAdded.id = currentId++;
+
+        // Ein neues Array mit den alten Greetings und dem neuen Greeting erzeugen
         const newGreetings = [...greetings, greetingToBeAdded];
+
+        // den State mit den neuen Greetings setzen, außerdem wieder die MASTER-View anzeigen
         this.setState({
             greetings: newGreetings,
             mode: MODE_MASTER

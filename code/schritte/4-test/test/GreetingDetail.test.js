@@ -9,9 +9,9 @@ const exactlyOne = component => {
 };
 
 const setup = () => {
-    const onAddMock = jest.fn();
+    const onSaveMock = jest.fn();
 
-    const component = shallow(<GreetingDetail onAdd={onAddMock}/>);
+    const component = shallow(<GreetingDetail onSave={onSaveMock}/>);
 
     const nameInput = () => exactlyOne(component.find('input[name="name"]'));
     const greetingInput = () => exactlyOne(component.find('input[name="greeting"]'));
@@ -19,7 +19,7 @@ const setup = () => {
     const clearButton = () => exactlyOne(component.find('button[children="Clear"]'));
 
     return {
-        onAddMock,
+        onSaveMock,
         component,
         elements: {
             nameInput, greetingInput, addButton, clearButton
@@ -33,10 +33,10 @@ const aGreeting = {
 };
 
 test('it should render fine', () => {
-    const onAddMock = jest.fn();
+    const onSaveMock = jest.fn();
     // render the component we want to test
     const tree = renderer.create(
-        <GreetingDetail onAdd={onAddMock}/>
+        <GreetingDetail onSave={onSaveMock}/>
     ).toJSON();
 
     // make sure the json matches the last stored snapshot
@@ -44,8 +44,8 @@ test('it should render fine', () => {
     expect(tree).toMatchSnapshot();
 });
 
-test('onAdd should be called with values from form', () => {
-    const {onAddMock, elements} = setup();
+test('onSave should be called with values from form', () => {
+    const {onSaveMock, elements} = setup();
 
     elements.nameInput().simulate('change', {target: {name: 'name', value: aGreeting.name}});
     // checking the state here might be too much in real live,
@@ -54,11 +54,11 @@ test('onAdd should be called with values from form', () => {
     elements.greetingInput().simulate('change', {target: {name: 'greeting', value: aGreeting.greeting}});
 
     elements.addButton().simulate('click');
-    expect(onAddMock.mock.calls).toHaveLength(1);
-    expect(onAddMock.mock.calls[0][0]).toEqual(aGreeting);
+    expect(onSaveMock.mock.calls).toHaveLength(1);
+    expect(onSaveMock.mock.calls[0][0]).toEqual(aGreeting);
 });
 
-test('onAdd should be disabled and enabled', () => {
+test('onSave should be disabled and enabled', () => {
     const {elements} = setup();
 
     // should initialy be disabled

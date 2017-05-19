@@ -8,7 +8,7 @@ export default class GreetingDetail extends React.Component {
             name: PropTypes.string.isRequired,
             greeting: PropTypes.string.isRequired
         }),
-        onAdd: PropTypes.func.isRequired
+        onSave: PropTypes.func.isRequired
     };
 
     render() {
@@ -55,9 +55,9 @@ export default class GreetingDetail extends React.Component {
     }
 
     save() {
-        const {onAdd} = this.props;
+        const {onSave} = this.props;
         const {name, greeting} = this.state;
-        onAdd({
+        onSave({
             name,
             greeting
         });
