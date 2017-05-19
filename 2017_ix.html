@@ -47,6 +47,15 @@
             max-height: 1000px !important;
         }
 
+        .reveal section img {
+          border:0;
+          box-shadow:0 0 0 0
+        }
+
+        html.exkurs body {
+          background: rgb(252, 220, 185) url("ai/es6-icon.png") no-repeat right bottom;
+        }
+
     </style>
 
     <!-- Printing and PDF exports -->
@@ -182,36 +191,46 @@ Ende gegen 16.30 Uhr
 
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
-        <section>
-            <h3>React Workshop - Vorbereitung</h3>
-            <p>Falls noch nicht gemacht:</p>
-            <ol>
-                <li><code>git clone https://github.com/DJCordhose/react-workshop.git</code></li>
-                <li>Im geklonten Verzeichnis: <code>npm install</code></li>
-                <li><code>npm start</code></li>
-                <li>In neuem Terminal: in <code>code/workspace</code> wechseln</li>
-                <li>Ausführen: <code>npm start</code></li>
-                <li>Browser öffnen: <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
-                <li>Wenn dort ein Hello-World-Text erscheint ist alles gut
-            </ol>
-            <p>Folien: Im geklonten Verzeichnis <code>2017_ix.html</code>
-            </p>
-        </section>
-        <section>
-            <h1>React Workshop</h1>
-            <p>
-                <a href="http://nilshartmann.net">Nils Hartmann</a> / <a href="http://twitter.com/nilshartmann">@nilshartmann</a>
+      <section>
+        <h3>React Workshop - Vorbereitung</h3>
+        <p>Falls noch nicht gemacht:</p>
+        <ol style="font-size: 85%">
+          <li><code>git clone https://github.com/DJCordhose/react-workshop.git</code></li>
+          <li>Im geklonten Verzeichnis: <code>npm install</code>
+            <br><span  style="font-size: 85%">(Dafür evtl. einen Proxy konfigurieren <a target="_blank" href="http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/">http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/</a>)</span>
+          <li><code>npm start</code></li>
+          <li>In neuem Terminal: in <code>code/workspace</code> wechseln</li>
+          <li>Ausführen: <code>npm start</code></li>
+          <li>Browser öffnen: <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
+          <li>Wenn dort ein Hello-World-Text erscheint ist alles gut
+        </ol>
+        <p>Folien: Im geklonten Verzeichnis <code>2017_ix.html</code>
+        </p>
+      </section>
+      <section>
+        <h1>React Workshop</h1>
+        <div style="float:left">
 
-            </p>
-            <p>
-                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+          <p>
+            <a href="http://nilshartmann.net" target="_blank">Nils Hartmann</a> / <a href="http://twitter.com/nilshartmann" target="_blank">@nilshartmann</a>
 
-            </p>
-            <p><a href="http://bit.ly/react-ix">http://bit.ly/react-ix</a></p>
+          </p>
+          <p>
+            <a href="http://zeigermann.eu" target="_blank">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose" target="_blank">@DJCordhose</a>
+          </p>
+          <p><a href="http://bit.ly/react-ix">http://bit.ly/react-ix</a></p>
+          <p style="border-top: 2px solid darkgray;margin-top:25px;padding-top:25px;">
+            <a href="https://reactbuch.de" target="_blank">React Buch (https://reactbuch.de)</a></p>
+          </p>
+        </div>
+        <div style="float:right">
+          <img style="max-height:350px" src="reactbuch-de.png" />
+          <p>
 
-        </section>
+        </div>
+      </section>
 
-        <section>
+      <section>
             <h2>Inhalt</h2>
             <ul>
                 <li><a href="#/t0">Teil 0: React-Einführung und Build-Prozess</a>
@@ -276,14 +295,35 @@ Ende gegen 16.30 Uhr
 </code></pre>
         </section>
 
-        <section>
-            <h3>Hello World React</h3>
-                <a target="_blank" href="code/schritte/0-hello_world/public/index.html">Demo</a>
-        </section>
+      <section>
+        <h3>Eine erste Komponente: Hello, World!</h3>
+        <a target="_blank" href="code/schritte/0-hello_world/public/index.html">Demo</a>
+      </section>
 
-        <section>
-            <h3>ES6: Klassen</h3>
-            <pre class="fragment"><code class="javascript" contenteditable>class Person {
+      <section data-state="exkurs">
+        <h2>ES6-Referenz</h2>
+        <p>ES6 Features werden vorgestellt, wo wir sie brauchen</p>
+        <p><a href="http://exploringjs.com/es6/" target="_blank">
+          http://exploringjs.com/es6/</a>
+      </section>
+      <section data-state="exkurs">
+        <h3>ES6: Template Strings</h3>
+        <p>Template Strings werden in Backticks (``) geschrieben und können Ausdrücke
+          (in <code>${}</code>) enthalten:</p>
+
+        <pre class="fragment"><code class="javascript" contenteditable>const name = "Susi";
+const greeting = `Hello, ${name}`; // Hello, Susi
+
+const four = `Two and two is: ${2+2}` // Two and two is: 4
+
+const time = `The time is: ${new Date()}`); // The time is: ...
+            </code></pre>
+      </section>
+
+
+      <section data-state="exkurs">
+        <h3>ES6: Klassen</h3>
+        <pre><code class="javascript" contenteditable>class Person {
     constructor(name) {
         this._name = name;
     }
@@ -297,24 +337,27 @@ class Programmer extends Person {
         this.language = language;
     }
     code() {
-        return this.name + " codes in " + this.language;
+        return `${this.name} codes in ${this.language}`;
     }
 }</code></pre>
-            <pre><code class="javascript" contenteditable>const programmer = new Programmer('Erna', 'JavaScript');
+        <pre class="fragment"><code class="javascript" contenteditable>const programmer = new Programmer('Erna', 'JavaScript');
 console.log(programmer.code());
 console.log(programmer instanceof Programmer); // true
 console.log(programmer instanceof Person); // true</code></pre>
-        </section>
+      </section>
 
-        <section>
-            <h3>ES6: Arrow Functions</h3>
-            <pre><code class="javascript" contenteditable>const displayInPage = (text) => {
+      <section data-state="exkurs">
+        <h3>ES6: Arrow Functions</h3>
+        <pre><code class="javascript" contenteditable>const displayInPage = (text) => {
    return document.body.innerHTML +=
        `${text}<br>`;
 };</code></pre>
-            <pre class="fragment"><code class="javascript" contenteditable>const displayInPage = text => document.body.innerHTML += `${text}<br>`;
+        <pre class="fragment"><code class="javascript" contenteditable>// Klammern können weggelassen werden, genau ein Parameter
+// ebenso die geschweiften Klassen, wenn nur ein Statement:
+const displayInPage = text => document.body.innerHTML += `${text}<br>`;
 </code></pre>
-        </section>
+      </section>
+
 
                 <section>
                     <h3>Hello World React</h3>
@@ -385,25 +428,37 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
         <h2>Webpack und Babel</h2>
         <img src="webpack-und-babel.png" style="border:0;box-shadow:0 0 0 0"/>
     </section>
+      <section>
+        <h2>Webpack Development Server</h2>
+        <ul>
+          <li>Zum Ausführen der Anwendung wird ein Webserver benötigt</li>
+          <li class="fragment">Für die Entwicklung <b>Webpack Dev Server</b>:
+            <ul>
+              <li>...führt Webpack auf Basis der Projekt Webpack Konfiguration aus</li>
+              <li>...erzeugt Ausgabe nur in Memory (nicht auf Platte)</li>
+              <li>...Hot Reloading: Automatische Aktualisierung nach Code Änderung</li>
+              <li>...React Hot Loader: Zustand bleibt nach Aktualisierung erhalten (Beta)</li>
+            </ul>
+          <li class="fragment"><code>npm start</code> in unserem Beispiel-Projekt</li>
+        </ul>
+      </section>
 
-    </section>
     <section>
       <section>
           <h2>Übung: React Hello-World</h2>
           <h3>Mach dich mit den Werkzeugen vertraut und schreib deine erste React-Komponente</h3>
       </section>
       <section>
-          <h3>Schritt #1: Tool-Chain starten</h3>
-          <p>Nutze das <code>workspace</code>-Verzeichnis in diesem Repository</p>
-          <p>Hier ist eine Tool-Chain mit Webpack und Babel vorbereitet</p>
-          <ul>
-              <li>Evtl. dafür einen Proxy konfigurieren <a target="_blank" href="http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/">http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/</a></li>
-              <li><code>npm install</code> (auf oberster Ebene)
-              <li><code>cd code/workspace</code>
-              <li><code>npm start</code>
-              <li>Öffne <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> im Browser
-              <li>Wenn auf der Seite 'Hello, World' steht, ist alles gut
-          </ul>
+        <h3>Schritt #1: Tool-Chain starten (falls noch nicht gemacht)</h3>
+        <p>Nutze für die Übungen das <code>workspace</code>-Verzeichnis in diesem Repository. Hier ist eine Tool-Chain mit Webpack und Babel vorbereitet</p>
+        <ol style="font-size: 85%">
+          <li><code>npm install</code> (auf oberster Ebene)
+            <br><span  style="font-size: 85%">(Dafür evtl. einen Proxy konfigurieren <a target="_blank" href="http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/">http://wil.boayue.com/blog/2013/06/14/using-npm-behind-a-proxy/</a>)</span>
+          <li><code>cd code/workspace</code>
+          <li><code>npm start</code>
+          <li>Öffne <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> im Browser
+          <li>Wenn auf der Seite 'Hello, World' steht, ist alles gut
+        </ol>
       </section>
       <section>
           <h3>Schritt #2: Deine erste React-Komponente</h3>
@@ -434,20 +489,14 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
             </ul>
         </section>
 
-        <section>
-            <h2>ES6-Referenz</h2>
-            <p><a href="http://exploringjs.com/es6/" target="_blank">
-                http://exploringjs.com/es6/
-            </a>
-        </section>
-
             <section>
                 <h3>React: Rendering</h3>
-                <ul class="fragment">
-                    <li>Jede React-Komponente braucht eine <code>render</code>-Methode:</li>
-                    <li>wird aufgerufen beim ersten Rendering und wenn sich der Zustand ändert</li>
-                    <li>kann HTML-artige JSX-Syntax nutzen</li>
-                    <li>JSX kann pures JavaScript in geschweiften Klammern enthalten (<code>{}</code>)
+                <em>Jede React-Komponente braucht eine <code>render</code>-Methode:</em>
+                <ul>
+
+                    <li class="fragment">wird aufgerufen beim ersten Rendering und immer wenn sich der Zustand ändert</li>
+                  <li class="fragment">kann HTML-artige <b>JSX</b>-Syntax nutzen</li>
+                    <li class="fragment">JSX kann pures JavaScript in geschweiften Klammern enthalten (<code>{}</code>)
                 </ul>
 <pre class="fragment"><code class="xml" contenteditable data-trim>
 class GreetingDetail extends React.Component {
@@ -465,7 +514,40 @@ class GreetingDetail extends React.Component {
 }
 </code></pre>
         </section>
-           <section>
+      <section>
+        <h3>React: JSX</h3>
+        <ul>
+          <li style="font-size: 80%" class="fragment">Wird wie HTML hingeschrieben, inkl Attribute: <pre><code class="xml" contenteditable data-trim>
+&lt;div>&lt;input type="text"/>&lt;/div>
+                    </code></pre></li>
+          <li style="font-size: 80%"  class="fragment">Attribute, die keine Strings sind, müssen in {} eingechlossen werden:
+            <pre><code class="xml" contenteditable data-trim>
+&lt;Counter label="Count" count={7} showValues={true} />
+                    </code></pre>
+          </li>
+          <li style="font-size: 80%"  class="fragment">Kann pures JavaScript enthalten, eingeschlossen in {}:
+            <pre><code class="xml" contenteditable data-trim>
+const title = 'Hello, World';
+&lt;h1>{title.toUpperCase()&lt;/h1>
+                    </code></pre>
+          </li>
+
+          <li style="font-size: 80%"  class="fragment"><code>class</code>-Attribut heißt <code>className</code>:
+            <pre><code class="xml" contenteditable data-trim>
+                        &lt;h1 className="title">...&lt;/h1>
+                    </code></pre>
+          </li>
+          <li style="font-size: 80%"  class="fragment">CSS-Eigenschaften werden als Objekt übergeben in Camel-Case-Notation:
+            <pre><code class="xml" contenteditable data-trim>
+const styles = { marginLeft: '10px', border: '1px solid red' };
+&lt;h1 style={styles}>...&lt;/h1>
+                    </code></pre>
+          </li>
+        </ul>
+      </section>
+
+
+      <section>
                 <h3>React: Rendering #2</h3>
                 <ul class="fragment">
                     <li>DOM-Events werden in React-Events verpackt
@@ -490,100 +572,111 @@ class GreetingDetail extends React.Component {
 }
 </code></pre>
         </section>
-        <section>
-            <h3>ES6: Erweiterte Objekt-Literale</h3>
-   <pre><code class="javascript" contenteditable>const name = 'Oma';
+      <section data-state="exkurs">
+        <h3>ES6: Erweiterte Objekt-Literale</h3>
+        <pre><code class="javascript" contenteditable>const name = 'Oma';
 const person = {
     // ES5: name: name
     name
 };
 console.log(person.name); // Oma
    </code></pre>
-        </section>
+      </section>
 
 
-                    <section>
-                        <h2>ES6: Module, Importe und Exporte</h2>
-                    </section>
-                    <section>
-                        <h3>ES6: Export einer einzigen Klasse</h3>
-   <pre><code class="javascript" contenteditable>// Person.js
+      <section data-state="exkurs">
+        <h2>ES6: Module, Importe und Exporte</h2>
+      </section>
+      <section data-state="exkurs">
+        <h3>ES6: Export einer einzigen Klasse</h3>
+        <pre><code class="javascript" contenteditable>// Person.js
 class Person {
   // ...
 }
 export default Person;
    </code></pre>
-                    </section>
-                    <section>
-                        <h3>ES6: Import</h3>
-   <pre><code class="javascript" contenteditable>// Programmer.js
+        <pre><code class="javascript" contenteditable>// Person.js
+// in einer Zeile zusammengefasst
+export default class Person {
+  // ...
+}
+   </code></pre>
+      </section>
+      <section data-state="exkurs">
+        <h3>ES6: Import</h3>
+        <pre><code class="javascript" contenteditable>// Programmer.js
 import Person from './Person';
 
 export default class Programmer extends Person {
   // ...
 }
    </code></pre>
-                    </section>
-                    <section>
-                        <h3>ES6: Benannte Exporte</h3>
-   <pre><code class="javascript" contenteditable data-trim>// util.js
+      </section>
+      <section data-state="exkurs">
+        <h3>ES6: Benannte Exporte</h3>
+        <pre><code class="javascript" contenteditable data-trim>// util.js
 export function displayInPage(text) {
     document.body.innerHTML +=
         `${text}<br>` ;
 }
+
+export showInfo = msg => window.alert(`Wichtige Info: ${msg}`);
+
 // or
-export { displayInPage };
+function displayInPage(text) { . . . }
+const showInfo = ...;
+export { displayInPage, showInfo };
    </code></pre>
-   <pre class="fragment"><code class="javascript" contenteditable data-trim>import {displayInPage} from "./util";
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>import {displayInPage} from "./util";
 displayInPage('Hello, World');
    </code></pre>
-   <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import {displayInPage as display} from "./util";-->
-<!--display('Hello, World');-->
-   <!--</code></pre>-->
-   <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import * as util from "./util";-->
-<!--util.displayInPage('Hello, World');-->
-   <!--</code></pre>-->
-                    </section>
-        <!--<section>-->
-                        <!--<h2>Neuerungen und Verbesserungen in ES6</h2>-->
-                    <!--</section>-->
+        <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import {displayInPage as display} from "./util";-->
+        <!--display('Hello, World');-->
+        <!--</code></pre>-->
+        <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import * as util from "./util";-->
+        <!--util.displayInPage('Hello, World');-->
+        <!--</code></pre>-->
+      </section>
+      <!--<section>-->
+      <!--<h2>Neuerungen und Verbesserungen in ES6</h2>-->
+      <!--</section>-->
 
-                    <!--<section>-->
-                      <!--<h3>Tagged Template Literals</h3>-->
-          <!--<p><a target="_blank" href="http://exploringjs.com/es6/ch_template-literals.html#_tagged-templates">-->
-         <!--Mini-DSLs: Template-Literals mit tag-->
-    <!--</a>-->
-    <!--</p>-->
+      <!--<section>-->
+      <!--<h3>Tagged Template Literals</h3>-->
+      <!--<p><a target="_blank" href="http://exploringjs.com/es6/ch_template-literals.html#_tagged-templates">-->
+      <!--Mini-DSLs: Template-Literals mit tag-->
+      <!--</a>-->
+      <!--</p>-->
 
-   <!--<pre class="fragment"><code class="javascript" contenteditable>function tag(strings, ...values) {-->
-  <!--console.log(strings);-->
-  <!--//[ '', ' codes in ', '.' ]-->
-  <!--console.log(values);-->
-  <!--//[ 'Oma', 'Haskell' ]-->
-  <!--return 'whatever you want';-->
-<!--}-->
-<!--</code></pre>-->
+      <!--<pre class="fragment"><code class="javascript" contenteditable>function tag(strings, ...values) {-->
+      <!--console.log(strings);-->
+      <!--//[ '', ' codes in ', '.' ]-->
+      <!--console.log(values);-->
+      <!--//[ 'Oma', 'Haskell' ]-->
+      <!--return 'whatever you want';-->
+      <!--}-->
+      <!--</code></pre>-->
 
-   <!--<pre><code class="javascript" contenteditable>const expanded = tag`${person} codes in ${language}.`;-->
-<!--console.log(expanded);-->
-<!--//whatever you want-->
-<!--</code></pre>-->
+      <!--<pre><code class="javascript" contenteditable>const expanded = tag`${person} codes in ${language}.`;-->
+      <!--console.log(expanded);-->
+      <!--//whatever you want-->
+      <!--</code></pre>-->
 
-                    <!--</section>-->
+      <!--</section>-->
 
-                    <section>
-                        <h3>ES6: Destructuring von Objekten</h3>
-   <pre><code class="javascript" contenteditable>const person = {
+      <section data-state="exkurs">
+        <h3>ES6: Destructuring von Objekten</h3>
+        <pre><code class="javascript" contenteditable>const person = {
   name: 'Olli',
   email: 'oliver.zeigermann@gmail.com'
 };</code></pre>
-   <pre class="fragment"><code class="javascript" contenteditable>const {name, notThere} = person;
+        <pre class="fragment"><code class="javascript" contenteditable>const {name, notThere} = person;
 console.log(`name=${name}`);
 // name=Olli
 console.log(`notThere=${notThere}`);
 // notThere=undefined
 </code></pre>
-<pre class="fragment"><code class="javascript" contenteditable>function someFunction({name, notThere}) {
+        <pre class="fragment"><code class="javascript" contenteditable>function someFunction({name, notThere}) {
   console.log(`name=${name}`);
   // name=Olli
   console.log(`notThere=${notThere}`);
@@ -591,7 +684,7 @@ console.log(`notThere=${notThere}`);
 }
 someFunction(person);
 </code></pre>
-                    </section>
+      </section>
         <section>
             <h3>React: Properties und Zustand</h3>
             <ul class="fragment">
@@ -608,6 +701,7 @@ someFunction(person);
                 <li>Properties werden von außen über den Konstruktor übergeben</li>
                 <li>Properties dürfen nicht verändert werden</li>
                 <li>Zugriff über <code>this.props</code></li>
+                <li><code>this.props.children</code> enthält Kind-Elemente</li>
             </ul>
             <pre class="fragment"><code class="javascript" contenteditable data-trim>
 class TitleComponent extends React.Component {
@@ -657,7 +751,8 @@ class GreetingDetail extends React.Component {
     }
 
     render() {
-        return &lt;input value={this.state.name}
+        return &lt;input name="name"
+            value={this.state.name}
             onChange={e => this.updateModel(e)} />
     }
    // ...
@@ -674,33 +769,32 @@ class GreetingDetail extends React.Component {
             <img src="virtual-dom.png" style="border:0;box-shadow:0 0 0 0">
         </section>
 
-        <section>
-            <h3>React: Refs</h3>
-            <ul class="fragment">
-                <li>Beim rendern kann man an eine Referenz des unterliegenden DOMs kommen
-                <li>die DOM-Referenz kann einer Funktion übergeben werden
-                <li>Diese Referenz kann man z.B. als Member-Variable speichern
-            </ul>
-<pre class="fragment"><code class="javascript" contenteditable data-trim>
+      <section>
+        <h3>React: Referenzen auf nativen DOM</h3>
+        <em class="fragment">Elementen kann eine Callback-Funktion <code>ref</code> übergeben werden</em>
+        <ul>
+          <li class="fragment">Funktion wird nach dem Rendern mit Referenz auf DOM Element aufgerufen (oder <code>null</code>)
+          <li class="fragment">Diese Referenz kann man z.B. als Member-Variable speichern
+        </ul>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
 class HelloMessage extends React.Component {
     render() {
         return (
-            <div>
-                &lt;input ref={input => this.input = input} />
+            &lt;div>
+                &lt;input ref={inputNode => this.inputNode = inputNode} />
                 &lt;button
-                    onClick={() => this.input.focus()}>
+                    onClick={() => this.inputNode.focus()}>
                     Focus
                 &lt;/button>
-            </div>);
+            &lt;/div>);
     }
 }
 </code></pre>
-        </section>
-
+      </section>
         <section>
       <section>
           <h2>Übung: Detail-Ansicht für unsere Gruß-Anwendung</h2>
-          <h3>Erzeuge eine Komponenten mit der man einen Namen und eine Grußformel eingeben kann</h3>
+          <em>Erzeuge eine Komponenten mit der man einen Namen und eine Grußformel eingeben kann</em>
       </section>
       <section>
           <h3>Schritte</h3>
@@ -717,8 +811,8 @@ class HelloMessage extends React.Component {
         <section id="t2">
             <h1>Teil II</h1>
             <h2>Komponentenhierarchien</h2>
-            <h3>Komplette Anwendung aus Komponenten bauen</h3>
-            <a href="code/schritte/2-hierarchy/public/index.html" target="_blank">Ziel-Anwendung</a>
+            <em>Komplette Anwendung aus Komponenten bauen</em>
+            <p><a href="code/schritte/2-hierarchy/public/index.html" target="_blank">Ziel-Anwendung</a></p>
         </section>
 
         <section>
@@ -730,41 +824,36 @@ class HelloMessage extends React.Component {
         </section>
 
         <section>
-            <h2>Referenz</h2>
-            <p><a href="https://facebook.github.io/react/docs" target="_blank">
-                https://facebook.github.io/react/docs
-            </a>
-            </p>
-        </section>
-
-
-        <section>
             <h3>Themen</h3>
             <ul>
-                <li>Komponenten als Funktion
-                <li>Darstellung von Listen und Keys
-                <li>Architektur-Idee: Controller-Komponente und View-Komponente
-                <li>Durchreichen von Zustand und Callbacks
-                <li>PropTypes
+                <li class="fragment">Komponenten als Funktion
+                <li class="fragment">Darstellung von Listen und Keys
+                <li class="fragment">Architektur-Idee: Controller-Komponente und View-Komponente
+                <li class="fragment">Durchreichen von Zustand und Callbacks
+                <li class="fragment">PropTypes
             </ul>
         </section>
 
             <section>
                 <h3>Komponenten als Funktion</h3>
-                <ul class="fragment">
-                    <li>Komponente ist eine einfache Funktion</li>
-                    <li>entspricht der <code>render</code>-Methode</li>
-                    <li>Properties werden als Object per Parameter übergeben</li>
-                    <li>Zurzeit nur ohne Zustand und ohne Lifecycle-Methoden</li>
-                    <li>Empfehlung: Funktionen statt Klassen verwenden (wenn möglich)</li>
+              <em>Komponenten können auch als reguläre JavaScript Funktion geschrieben werden</em>
+                <ul>
+                    <li class="fragment">entspricht der <code>render</code>-Methode</li>
+                    <li class="fragment">Properties werden per Parameter in einem Objekt übergeben</li>
+                    <li class="fragment">Zurzeit nur ohne Zustand und ohne Lifecycle-Methoden</li>
+                    <li class="fragment">Empfehlung: Funktionen statt Klassen verwenden (wenn möglich)</li>
                 </ul>
-<pre class="fragment"><code class="javascript" contenteditable data-trim>
+              </section>
+      <section data-transition="none">
+        <h3>Komponenten als Funktion</h3><pre class="fragment"><code class="javascript" contenteditable data-trim>
+import React from 'react';
+
 function Greet(props) {
   return (
-      <div>
-          <h1>{props.greeting}</h1>
-          <h2>{props.name}</h2>
-      </div>
+      &lt;div>
+          &lt;h1>{props.greeting}&lt;/h1>
+        &lt;h2>{props.name}&lt;/h2>
+      &lt;/div>
   );
 }
 
@@ -772,7 +861,7 @@ function Greet(props) {
 &lt;Greet name="Susi" greeting="Hello" /&gt;
 
 </code></pre></section>
-                <section>
+                <section data-transition="none">
                     <h3>Komponenten als Funktion</h3>
 <pre class="fragment"><code class="javascript" contenteditable data-trim>
 // Mit Destructuring
@@ -823,7 +912,13 @@ const body = greetings.map(greeting =>
 </code></pre>
         </section>
 
-        <section>
+      <section>
+        <h3>Komponenten in Hierarchien</h3>
+        <p>Beispiel: Unsere Anwendung</p>
+        <img src="ai/greeting-hierarchy-without-callbacks.png"/>
+      </section>
+
+      <section>
             <h3>Controller und Child-Views</h3>
             <!--<img src="smart-dumb.jpg">-->
             <!--<img src="smart-dumb.png">-->
@@ -869,19 +964,20 @@ class GreetingController extends React.Component {
         </code></pre>
     </section>
 
-        <section>
-            <h3>PropTypes</h3>
-                <ul class="fragment">
-                    <li>Eine Komponente kann deklarieren, welche Properties sie erwartet
-                    <li>Auch der Typ kann angegeben werden
-                    <li>Fehlende / falsche Properties führen zu Laufzeitfehlern
-                    <li>Ab React 15.5 eigenes npm modul: <a href="https://www.npmjs.com/package/prop-types" target="_blank"><code>prop-types</code></a></li>
-                    <li><a href="https://facebook.github.io/react/docs/typechecking-with-proptypes.html" target="_blank">Mögliche Typen</a>
-                </ul>
-<pre class="fragment"><code class="javascript" contenteditable data-trim>
+      <section>
+        <h3>PropTypes</h3>
+        <em>Eine Komponente kann deklarieren, welche Properties sie erwartet</em>
+        <ul>
+
+          <li class="fragment">Name und Typ wird angegeben (<a href="https://facebook.github.io/react/docs/typechecking-with-proptypes.html" target="_blank">Mögliche Typen</a>)
+          <li class="fragment">Fehlende / falsche Properties führen zu Laufzeitfehlern
+          <li class="fragment">Ab React 15.5 eigenes npm modul: <a href="https://www.npmjs.com/package/prop-types" target="_blank"><code>prop-types</code></a></li>
+          <li class="fragment">Alternative: Typsystem (<a href="https://flow.org" target="_blank">Flow</a> oder <a href="https://typescriptlang.org" target="_blank">TypeScript</a>)
+        </ul>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
 import PropTypes from 'prop-types';
 
-export default class GreetingDetail extends React.Component { . . . };
+class GreetingDetail extends React.Component { . . . };
 
 GreetingDetail.propTypes = {
     greeting: PropTypes.shape({
@@ -891,23 +987,57 @@ GreetingDetail.propTypes = {
     onAdd: PropTypes.func.isRequired
 };
 </code></pre>
-        </section>
+      </section>
+      <section>
+        <h3>PropTypes</h3>
+        <p>Mit statischen Properties (<code>static</code> noch kein JS Standard!)</p>
+        <pre><code class="javascript" contenteditable data-trim>
+import PropTypes from 'prop-types';
 
+class GreetingDetail extends React.Component {
+  static propTypes = {
+    greeting: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      greeting: PropTypes.string.isRequired
+    }),
+    onAdd: PropTypes.func.isRequired
+  };
+
+  render() { . . . }
+};
+            </code></pre>
+      </section>
+      <section>
+        <h3>PropTypes</h3>
+        <p>Für Komponenten als Funktionen</p>
+        <pre><code class="javascript" contenteditable data-trim>
+import PropTypes from 'prop-types';
+
+function HelloMessage(text) { . . . }
+HelloMessage.propTypes = {
+  text: PropTypes.string.isRequired
+}
+            </code></pre>
+      </section>
         <section>
-            <section>
-                <h2>Übung: Eine komplette Anwendung zusammen setzen</h2>
-                <h3>Füge deinen Detail-View und einen Master-View über eine Controller-Komponente zusammen</h3>
-            </section>
-            <section>
-                <h3>Schritte</h3>
+          <section>
+            <h2>Übung: Eine komplette Anwendung zusammen setzen</h2>
+            <h3>Füge deinen bestehenden Detail-View (<code>GreetingDetail</code>) und einen Master-View über eine Controller-Komponente zusammen</h3>
+          </section>
+          <section>
+            <h3>Schritte</h3>
+            <ol>
+              <li>kopiere das Material aus <code>code/material/2-hierarchy</code> in deinen src-Ordner
+              <li>erweitere im <code>GreetingController</code> die render-Methode, so dass dein <code>GreetingDetail</code> angezeigt wird, wenn der Benutzer den Add-Button klickt:
                 <ul>
-                    <li>kopiere das Material aus <code>code/material/2-hierarchy</code> in deinen src-Ordner
-                    <li>erweitere im <code>GreetingController</code> die render-Methode, so dass dein Detail-View angezeigt wird, wenn der Benutzer den Add-Button klickt
-                    <li>dort gibt es bereits einen Kommentar, der dir die richtige Stelle anzeigt und weitere Details enthält
-                    <li>übergib einen Callback der <code>addGreeting</code> nutzt
-                    <li>im deinem <code>GreetingDetail</code> brauchst du einen neuen Knopf, der mit dem neuen Gruß den Callback aufruft
+                  <li>dort gibt es bereits einen Kommentar, der dir die richtige Stelle anzeigt und weitere Details enthält
+                  <li>übergib einen Callback der <code>addGreeting</code> nutzt
                 </ul>
-            </section>
+              <li>im deinem <code>GreetingDetail</code> brauchst du einen neuen Knopf, der mit dem neuen Gruß den Callback aufruft
+                <br><span style="font-size:85%">(Du kannst dein <code>GreetingDetail</code> verwenden, oder die Vorlage code/material/2-hierarchy/src/_GreetingDetail.js verwenden)</span>
+
+            </ol>
+          </section>
             <section>
                 <h3>Architektur Beispiel-Anwendung</h3>
                 <img src="greeting-hierarchy.png" style="border:0;box-shadow:0 0 0 0"/>
@@ -937,6 +1067,20 @@ GreetingDetail.propTypes = {
                 <li>Wo steht der Code zum initialen Laden der Grüße?
             </ul>
         </section>
+      <section>
+        <h3>Server-Calls</h3>
+        <ul>
+          <li>React macht keine Angabe, wie Server-Calls (technisch) gemacht werden</li>
+          <li>Häufig in React verwendet: <b>fetch</b> API
+            <ul>
+              <li>Browser-API zum Ausführen von HTTP Requests</li>
+              <li>Kein Standard, aber <a href="http://caniuse.com/#search=fetch" target="_blank">hohe Verbreitung</a></li>
+              <li>Spezifikation: <a href="https://fetch.spec.whatwg.org/" target="_blank">https://fetch.spec.whatwg.org/</a></li>
+              <li>Polyfill: <a href="https://github.com/github/fetch" target="_blank">https://github.com/github/fetch</a></li>
+            </ul>
+        </ul>
+      </section>
+
 
             <section>
                 <h3>fetch</h3>
@@ -957,58 +1101,58 @@ fetch(url, {
             </section>
 
 
-        <section>
-            <h2>Promises</h2>
-        </section>
-                <section>
-                        <h3>fetch</h3>
-<pre><code class="javascript" contenteditable>const url = `${BACKEND_URL}${path}`;
+      <section data-state="exkurs">
+        <h2>ES6: Promises</h2>
+      </section>
+      <section data-state="exkurs">
+        <h3>Beispiel: fetch</h3>
+        <pre><code class="javascript" contenteditable>const url = `${BACKEND_URL}${path}`;
 
 return fetch(url)
     .then(response => response.json())
     .then(json => /* ... */)
     .catch(ex => console.error('request failed', ex));
 </code></pre>
-                </section>
-                    <section>
-                        <h3>Ein Promise ist ein Versprechen auf einen Wert</h3>
-                        <h4 class="fragment">Wird evtl. erst in der Zukunft eingelöst</h4>
-                    </section>
+      </section>
+      <section data-state="exkurs">
+        <h3>Ein Promise ist ein Versprechen auf einen Wert</h3>
+        <h4 class="fragment">Wird evtl. erst in der Zukunft eingelöst</h4>
+      </section>
 
-                <section>
-                        <h3>Erzeugen und asynchron reagieren</h3>
-   <pre class="fragment"><code class="javascript" contenteditable>const promise = new Promise(resolve =>
+      <section data-state="exkurs">
+        <h3>Erzeugen und asynchron reagieren</h3>
+        <pre class="fragment"><code class="javascript" contenteditable>const promise = new Promise(resolve =>
     setTimeout(
         () => resolve('Result from promise'),
         1000)
 );
 </code></pre>
-    <pre><code class="javascript" contenteditable>promise.then(value => console.log(value));
+        <pre class="fragment"><code class="javascript" contenteditable>promise.then(value => console.log(value));
 // Output after 1 second: Result from promise
 </code></pre>
-                    </section>
-                    <section>
-                        <h3>Verkettete Ausführung</h3>
-   <pre><code class="javascript" contenteditable>const promise = new Promise(resolve =>
+      </section>
+      <section data-state="exkurs">
+        <h3>Verkettete Ausführung</h3>
+        <pre><code class="javascript" contenteditable>const promise = new Promise(resolve =>
     setTimeout(
         () => resolve('Result from promise'),
         1000)
 );
 </code></pre>
-    <pre class="fragment"><code class="javascript" contenteditable>// then returns a new promise
+        <pre class="fragment"><code class="javascript" contenteditable>// then returns a new promise
 const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
-    <pre class="fragment"><code class="javascript" contenteditable>promise2.then(value => console.log(value));
+        <pre class="fragment"><code class="javascript" contenteditable>promise2.then(value => console.log(value));
 // Output after 1 second: Result from promise plus stuff
 </code></pre>
-                    </section>
-            <section>
-                <h3>Fehler führen zum Abbruch der Chain</h3>
-                <h4 class="fragment">Allerdings muss man etwas tun, um das mitzubekommen</h4>
-            </section>
+      </section>
+      <section data-state="exkurs">
+        <h3>Fehler führen zum Abbruch der Chain</h3>
+        <h4 class="fragment">Allerdings muss man etwas tun, um das mitzubekommen</h4>
+      </section>
 
-                    <section>
-                        <h3>Catch-Klausel</h3>
-   <pre><code class="javascript" contenteditable>Promise
+      <section data-state="exkurs">
+        <h3>Catch-Klausel im Erfolgsfall</h3>
+        <pre><code class="javascript" contenteditable>Promise
     // creates and directly resolves promise
     .resolve('Result from promise')
     .then(x => {
@@ -1024,10 +1168,10 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 // Output:
 // Result from promise
 // This will be printed</code></pre>
-                    </section>
-                    <section>
-                        <h3>Catch-Klausel im Fehlerfall</h3>
-   <pre><code class="javascript" contenteditable>Promise
+      </section>
+      <section data-state="exkurs">
+        <h3>Catch-Klausel im Fehlerfall</h3>
+        <pre><code class="javascript" contenteditable>Promise
     // creates and directly resolves promise
     .resolve('Result from promise')
     .then(x => {
@@ -1044,26 +1188,77 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 // Output:
 // Result from promise
 // error:  [Error: Something went wrong]</code></pre>
-                    </section>
-                    <section>
-                        <h3>Catch-Klausel bei Ablehnung</h3>
-   <pre><code class="javascript" contenteditable>Promise
-    // creates and directly rejects promise
-    .reject('Promise rejected')
-    .then(x => {
-        // this will NOT be printed
-        console.log(x);
-    })
-    .then(() => {
-        console.log('This will NOT be printed');
-    })
-    // this will be printed
-    .catch(e => console.log('error: ', e))
+      </section>
 
-// Output:
-// error:  Promise rejected</code></pre>
-                </section>
-        <section>
+      <section>
+        <h3>fetch im Detail</h3>
+
+        <pre><code class="javascript" contenteditable data-trim>
+// 1. fetch returns a promise, that will be resolved
+// with a Response object when response is received
+// from server
+fetch('http://localhost:7000/api/greetings')
+
+// 2. the Response object contains a json() function,
+// that returns the parsed JSON from the Response body
+  .then(response => response.json())
+
+// 3. with the resolved JSON object we set the
+// component state (=&gt; leads to re-rendering)
+  .then(json => this.setState({greetings: json})
+
+// 4. in case something goes wrong (during request,
+// request processing or rendering)
+  .catch(ex => console.error('request failed', ex));
+// as an alternative we could set and render an error msg:
+//  .catch(ex => this.setState({error: ex})
+</code></pre>
+      </section>
+      <section>
+        <h3>Initiales Laden von Daten</h3>
+        <ul>
+          <li class="fragment">Komponenten können Lifecycle-Methoden haben: <a href="https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle" target="_blank">
+            https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle
+          </a> (nur Klassen!)</li>
+          <li class="fragment"><code>componentDidMount</code> wird aufgerufen, wenn Komponente ins DOM gerendert wurde</li>
+          <li class="fragment">Hier werden Daten üblicherweise initial geladen:<pre><code class="javascript" contenteditable data-trim>class GreetingController extends React.Component {
+  constructor(props) {
+    // intial state (empty now)
+    this.state = { greetings: [] };
+  }
+  componentDidMount() {
+    fetch('/api/greetings')
+      .then(response =&gt; response.json())
+      .then(json =&gt; this.setState({greetings: json})
+      .catch(. . .)
+    ;
+  }
+}
+                </code></pre>
+        </ul>
+      </section>
+      <section>
+        <h3>Speichern von Daten</h3>
+        <p>Zum Beispiel als Folge einer Benutzerinteraktion:</p>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>class GreetingController extends React.Component {
+  render() {
+    ...
+      &lt;GreetingDetail onAdd={greeting => this.saveGreeting(greeting)} />
+    ...
+  }
+  saveGreeting(greetingToBeSaved) {
+    fetch('/api/greetings', {
+      method: 'POST',
+      headers: ...,
+      body: JSON.stringify(greetingToBeSaved)
+    })
+      .then(response =&gt; response.json())
+      .then(json =&gt; ...)
+      .catch(. . .);
+  }
+}
+                </code></pre>
+      </section>
             <section>
                 <h2>Übung: Laden und Speichern der Daten von/auf einem Server</h2>
                 <p>Entwickle auf Basis von fetch eine Version, die die Daten auf dem Server laden und dort wieder speichern kann</p>
@@ -1089,7 +1284,7 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
                 <p>Viele davon sind aber nicht als React-Komponenten entwickelt worden</p>
             </div>
             <div class="fragment">
-                <p>Beispiels</p>
+                <p><b>Beispiele</b></p>
                 <p><em>jQuery</em> und <em>jQuery</em> Plugins wie z.B. <em>Bootstrap</em></p>
                 <p><em>d3</em> für interaktive SVGs und Chart Bibliotheken wie <em>nvd3</em></p>
             </div>
@@ -1118,6 +1313,30 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
                 <li>Wie räumen wir wieder auf?
             </ol>
         </section>
+      <section>
+        <h3>Hintergrund: Charts mit NVD3</h3>
+        <p>Basiert auf D3.js</p>
+        <p>Benötigt svg DOM-Element um sich zu rendern</p>
+        <p class="fragment">Stark vereinfachtes Beispiel:</p>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>import d3 from 'd3';
+import nv from 'nvd3';
+
+// Chart erzeugen
+const chart = nv.models.pieChart();
+// ...Chart Config ausgelassen ...
+
+// mit d3 rendern und mit Daten versorgen
+const element = document.getElementById('chart');
+d3.select(element);
+  .datum(data)
+  .call(chart);
+
+// Callbacks registrieren (z.B. bei Klick auf ein Element)
+chart.pie.dispatch.on("elementClick",
+                       e => console.log(e.data.label));
+            </code></pre>
+
+      </section>
 
         <section>
             <h3>Übersicht über den Komponenten-Lifecycle</h3>
@@ -1125,6 +1344,17 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
                 https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle
             </a>
         </section>
+      <section>
+        <h3>React Lifecycle Methoden</h3>
+        <ul>
+          <li class="fragment"><code><b>componentDidMount()</b></code>: Komponente wurde gerendert, Element sind im DOM (einmalig)</li>
+          <li class="fragment"><code><b>componentWillReceiveProps(nextProps)</b></code>: An die Komponente wurden neue Properties übergeben. Die neuen Properties
+            werden als Parameter übergeben</li>
+          <li class="fragment"><code><b>shouldComponentUpdate()</b></code>: Entscheidet, ob Komponente erneut gerendert werden soll (default: <code>true</code>)</li>
+          <li class="fragment"><code><b>componentWillUnmount()</b></code>: Wird aufgerufen, bevor Komponente aus dem DOM entfernt wird (einmalig)</li>
+        </ul>
+
+      </section>
 
         <section>
             <h3>React Chart Komponente #1</h3>
@@ -1189,7 +1419,7 @@ class Chart extends React.Component {
             <section>
                 <h3>Schritte</h3>
                 <ul>
-                    <li>kopiere das Material aus <code>code/material/4-3rd-party</code> in deinen src-Ordner
+                    <li>kopiere das Material aus <code>code/material/5-third-party</code> in deinen src-Ordner
                     <li>binde die Chart-Komponente in die render-Methode des <code>GreetingController</code> ein
                     <li>alle Stellen die du ändern musst sind dort bereits mit einem Kommentar versehen
                 </ul>
@@ -1238,7 +1468,7 @@ export function setFilter(filter) {
                 <li class="fragment">Action-Creators erzeugen Action-Objekte</li>
                 <li class="fragment">Actions sind Kommando-artige Strukturen von Dingen, die die Applikation tun soll
                 <li class="fragment">Über die dispatch-Methode des Stores werden sie an <em>alle</em> Reducer weiter gegeben
-                <li class="fragment">Actions bestehen aus einem Typen und einer belibiegen Nutzlast (payload)</li>
+                <li class="fragment">Actions bestehen aus einem Typen und einer beliebigen Nutzlast (payload)</li>
             </ul>
         </section>
 
@@ -1427,7 +1657,7 @@ export default connect(
                 <li>Alles Material von <code>code/material/6-redux</code> in deinem Source-Ordner kopieren
                 <li>TODOs leiten dich, die bereits in den Actions, den Reducers und dem GreetingController eingefügt sind
                 <li>Nutzen den bereits existierenden Filer-Coder als dem vorherigen Schritt
-                <li>Erzeuge einen neuen Action-Typ und einen Action-Creator für das setzen des Filters
+                <li>Erzeuge einen neuen Action-Typ und einen Action-Creator für das Setzen des Filters
                 <li>Füge einen passenden Reducer zur Behandlung einer solchen Action hinzu und füge ihn als Teil-Reducer in
                     <code>combineReducers</code> hinzu
                 <li>Reiche den Action-Creator von <code>GreetingController</code> in die Chart-Komponente in der du auf das
