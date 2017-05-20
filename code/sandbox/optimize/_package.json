@@ -6,7 +6,6 @@
     "start": "npm run devserver",
     "clean": "../../../node_modules/.bin/rimraf -rf public/dist/",
     "webpack:dist": "../../../node_modules/.bin/webpack --optimize-minimize --define process.env.NODE_ENV=\"'production'\"",
-    "webpack": "../../../node_modules/.bin/webpack --watch",
     "devserver": "../../../node_modules/.bin/webpack-dev-server --content-base public/"
   }
 }
