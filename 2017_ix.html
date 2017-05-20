@@ -1752,8 +1752,24 @@ webpack --optimize-minimize --define process.env.NODE_ENV=\"'production'\"
 webpack -p
             </code></pre>
             <p><a href="https://webpack.js.org/guides/production-build/" target="_blank">https://webpack.js.org/guides/production-build/</a></p>
+            <p style="font-size:80%">(<code>NODE_ENV="production"</code> wird nicht in der <code>webpack.config</code> gesetzt!)</p>
 
         </section>
+
+        <section>
+            <h2>Build-Optimierungen</h2>
+            <em>"Tree Shaking": Entfernt toten Code aus dem generierten JavaScript File</em>
+            <ul>
+                <li class="fragment">Reduziert die Größe der Ausgabedatei</li>
+                <li class="fragment">Verfügbar in Webpack 2.x</li>
+                <li class="fragment">Automatisch eingeschaltet, wenn mit <code>-p</code> aufgerufen</li>
+                <li class="fragment">Arbeitet auf Basis statischer Code-Analyse der ES6 Imports und Exports</li>
+                <li class="fragment">Anpassung in <code>.babelrc</code>: <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+"presets": [["es2015", { "modules": false }]
+            </code></pre>
+                </li>
+            </ul>
+
 
 
 
