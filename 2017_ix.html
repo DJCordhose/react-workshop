@@ -573,8 +573,26 @@ console.log(person.name); // Oma
    </code></pre>
       </section>
 
-
       <section data-state="exkurs">
+            <h3>ES6: Computed Properties</h3>
+          <em>Berechnete Keys in Objekten</em>
+            <pre><code class="javascript" contenteditable>const schluessel = 'name';
+const person = {
+  [schluessel]: 'Klaus'
+};
+console.log(person.name); // Klaus
+
+let id = 1;
+const personen = {
+  [`id_${id++}`]: 'Klaus',
+  [`id_${id++}`]: 'Susi'
+};
+console.log(personen); // Object {id_1: "Klaus", id_2: "Susi"}
+   </code></pre>
+        </section>
+
+
+        <section data-state="exkurs">
         <h2>ES6: Module, Importe und Exporte</h2>
       </section>
       <section data-state="exkurs">
