@@ -1,14 +1,23 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
+import { NewGreeting } from "../../types";
+
 import * as actions from "../../actions";
 import {connect} from "react-redux";
 
-class GreetingDetail extends React.Component {
+type DispatchProps = {
+	onSave: (newGreeting: NewGreeting) => void
+}
 
-    static propTypes = {
-        onSave: PropTypes.func.isRequired
-    };
+type State = {
+	name: string;
+	greeting: string;
+}
+
+class GreetingDetail extends React.Component<DispatchProps, State> {
+
+	input: HTMLInputElement|null;
 
     render() {
         const {name, greeting} = this.state;
@@ -37,7 +46,7 @@ class GreetingDetail extends React.Component {
             </div>);
     }
 
-    constructor(props) {
+    constructor(props: DispatchProps) {
         super(props);
 
         this.state = {
@@ -62,14 +71,20 @@ class GreetingDetail extends React.Component {
         });
     }
 
-    updateModel(event) {
-        this.setState({[event.target.name]: event.target.value});
+	updateModel(event: React.SyntheticEvent<HTMLInputElement>) {
+		// DOES NOT WORK WITH TS:
+		// this.setState({ [event.currentTarget.name]: event.currentTarget.value });
+		// see ==>
+		// https://github.com/Microsoft/TypeScript/issues/13948
+		// https://github.com/Microsoft/TypeScript/issues/15534
+
+		this.setState({ ...this.state, [event.currentTarget.name]: event.currentTarget.value })
     }
 }
 
-export default connect(
+export default connect<{}, DispatchProps, {}>(
     null,
     dispatch => ({
-        onSave: (greeting) => dispatch(actions.saveGreeting(greeting))
+        onSave: (greeting: NewGreeting) => dispatch(actions.saveGreeting(greeting))
     })
 )(GreetingDetail);

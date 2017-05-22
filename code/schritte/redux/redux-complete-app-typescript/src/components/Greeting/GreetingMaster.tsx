@@ -1,18 +1,19 @@
 import * as React from "react";
 import {connect} from "react-redux";
 
-import * as actions from "../../actions";
-import {MODE_DETAIL} from "../../actions";
-import {filterGreetings} from "../../selectors";
+import {Greeting, Greetings, GreetingFilter, Mode, MODE_DETAIL} from "../../types";
+import { filterGreetings } from "../../selectors";
 
-const GreetingRow = ({greeting, onRowClicked}) => (
+import { setFilter, setMode } from "../../actions";
+
+const GreetingRow = ({greeting, onRowClicked}: {greeting: Greeting, onRowClicked: (greeting: Greeting) => void}) => (
     <tr onClick={() => onRowClicked(greeting)}>
         <td>{greeting.name}</td>
         <td>{greeting.greeting}</td>
     </tr>
 );
 
-const FilterPanel = ({filter, setFilter}) => {
+const FilterPanel = ({filter, setFilter}: {filter: GreetingFilter, setFilter: (filter: GreetingFilter) => void}) => {
     if (!filter) {
         return <div className="FilterPanel">(All greetings are shown. Click a row to filter)</div>;
     }
@@ -21,8 +22,17 @@ const FilterPanel = ({filter, setFilter}) => {
         onClick={() => setFilter(null)}>Reset Filter</a>)</div>
 };
 
+type StateProps = {
+	greetings: Greetings;
+	filter: GreetingFilter;
+};
 
-const GreetingMaster = (props) => {
+type DispatchProps = {
+	setMode: typeof setMode;
+	setFilter: typeof setFilter;
+};
+
+const GreetingMaster = (props: StateProps & DispatchProps) => {
     const {greetings, setMode, filter, setFilter} = props;
     const body = greetings.map(greeting => <GreetingRow key={greeting.id} greeting={greeting}
                                                         onRowClicked={greeting => setFilter(greeting.name)}/>);
@@ -47,12 +57,12 @@ const GreetingMaster = (props) => {
         </div>
     );
 };
-GreetingMaster.displayName = 'GreetingMaster';
+// GreetingMaster.displayName = 'GreetingMaster';
 
-export default connect(
+export default connect<StateProps, DispatchProps, {}>(
     state => ({
         greetings: filterGreetings(state.greetings, state.filter),
         filter: state.filter
     }),
-    actions
+	{setMode, setFilter}
 )(GreetingMaster);

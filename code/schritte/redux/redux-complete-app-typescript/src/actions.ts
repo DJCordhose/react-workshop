@@ -1,4 +1,4 @@
-import { AppState, Greetings, Greeting, NewGreeting, GreetingId } from './types';
+import { AppState, Greetings, Greeting, NewGreeting, GreetingId, Mode, MODE_MASTER } from './types';
 import { loadGreetingsFromServer, saveGreetingToServer } from './greeting-backend';
 
 import { Dispatch } from 'redux';
@@ -9,10 +9,7 @@ export const ADD_GREETING = 'ADD_GREETING';
 export const SET_FILTER = 'SET_FILTER';
 export const SET_MODE = 'SET_MODE';
 
-export const MODE_MASTER = 'MODE_MASTER';
-export const MODE_DETAIL = 'MODE_DETAIL';
 
-export type Mode = typeof MODE_DETAIL | typeof MODE_MASTER;
 
 
 export type SetGreetingsAction = {
