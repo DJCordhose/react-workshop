@@ -1551,6 +1551,7 @@ const store = createStore(
                     'A thunk is a function that wraps an expression to delay its evaluation'
                 </a></li>
                 <li class="fragment">Middleware ist ein fortgeschrittenes Feature und meistens genügt die Thunk Middleware</li>
+                <li class="fragment">Redux Dev Tools klinken sich über denselben Mechanismus ein</li>
             </ul>
         </section>
 
@@ -1637,13 +1638,13 @@ class GreetingController extends React.Component {
         <section>
             <h3>Selektoren</h3>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-export const filterGreetings = (greetings, filter) =>
-        filter ? greetings.filter(greeting => greeting.name === filter)
+export const filterGreetings = ({greetings, filter}) => filter
+                ? greetings.filter(greeting => greeting.name === filter)
                 : greetings;
 
 export default connect(
     state => ({
-        greetings: filterGreetings(state.greetings, state.filter),
+        greetings: filterGreetings(state),
         // ...
     }),
     // ...
