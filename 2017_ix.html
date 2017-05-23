@@ -1470,7 +1470,7 @@ class Chart extends React.Component {
         <section>
             <h3>Event-Handlers werden Action-Creators</h3>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-export function setFilter(filter) {
+export const setFilter = filter => {
     return {
         type: SET_FILTER,
         filter
@@ -1488,19 +1488,20 @@ export function setFilter(filter) {
         <section>
             <h3>Action-Creators machen Server-Calls</h3>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-export const loadGreetings = dispatch => {
-    return fetch(BACKEND_URL)
+export const loadGreeting = greetingId => dispatch => {
+    fetch(BACKEND_URL+/greetingId)
         .then(response => response.json())
         .then(greetings => dispatch({
             type: SET_GREETINGS,
             greetings
         });
-    );
 };
 </code></pre>
             <ul>
-                <li class="fragment">Da der Server-Call asynchron ist, bekommen wir die dispatch Methode als Parameter, mit der wir später
+                <li class="fragment">Die Action wird nicht direkt zurück geliefert, sondenr erst später dispatched</li>
+                <li class="fragment">Da der Server-Call asynchron ist bekommen wir die dispatch Methode als Parameter, mit der wir später
                     die Action dispatchen</li>
+                <li class="fragment">Wir könnten auch die <em>getState</em> function als Parameter haben, um den kompletten State abzufragen</li>
             </ul>
             <p  class="fragment"><strong>Action-Creators sind die einzigen Teile einer Redux-Anwendung, die asynchrone Operationen
                 ausführen dürfen, wie z.B. eben Server-Calls</strong></p>
