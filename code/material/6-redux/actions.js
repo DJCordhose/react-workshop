@@ -1,42 +1,48 @@
-import {loadFromServer, saveToServer} from './backend';
-
 export const SET_GREETINGS = 'SET_GREETINGS';
 export const ADD_GREETING = 'ADD_GREETING';
 export const SET_MODE = 'SET_MODE';
 // TODO: there should be a filter action type here
 
+const BACKEND_URL = 'http://localhost:7000/greetings';
 export const MODE_MASTER = 'MODE_MASTER';
 export const MODE_DETAIL = 'MODE_DETAIL';
 
 export const loadGreetings = dispatch => {
-    loadFromServer(
-        greetings => dispatch({
+    return fetch(BACKEND_URL)
+        .then(response => response.json())
+        .then(json => dispatch({
             type: SET_GREETINGS,
-            greetings
-        }),
-        err => console.error('LOADING GREETINGS FAILED:', err)
-    );
+            greetings: json
+        }))
+        .catch(err => console.error('LOADING GREETINGS FAILED:', err));
 };
 
 export const saveGreeting = greetingToBeAdded => dispatch => {
+    fetch(BACKEND_URL, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(greetingToBeAdded)
+    }).then(response => {
+        if (response.status === 201) {
+            return response.json()
+        }
+        throw new Error('Invalid status code: ' + response.status);
+    })
+        .then(json => {
+            const newGreetingId = json.id;
+            const newGreeting = {...greetingToBeAdded, id: newGreetingId};
 
-    const _addNewGreeting = serverResponse => {
-        const newGreetingId = serverResponse.id;
-        const greeting = {
-            ...greetingToBeAdded,
-            id: newGreetingId
-        };
-        dispatch({
-            type: ADD_GREETING,
-            greeting
+            dispatch({
+                type: ADD_GREETING,
+                greeting: newGreeting
+            });
+            dispatch(setMode(MODE_MASTER));
+
+            return newGreeting;
         });
-        dispatch(setMode(MODE_MASTER));
-        return greeting;
-    };
-
-    const _reportError = err => console.error('COULD NOT SAVE GREETING: ', err);
-
-    saveToServer(greetingToBeAdded, _addNewGreeting, _reportError);
 };
 
 export const setMode = mode => ({

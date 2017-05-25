@@ -1,5 +1,6 @@
 import React from "react";
-import {loadGreetingFromServer} from "./backend";
+
+const BACKEND_URL = 'http://localhost:7000/greetings';
 
 export default class GreetingDisplayController extends React.Component {
     componentDidMount() {
@@ -9,10 +10,10 @@ export default class GreetingDisplayController extends React.Component {
     loadGreeting() {
         const {match} = this.props;
 
-        loadGreetingFromServer(match.params.greetingId,
-            greeting => this.setState({greeting}),
-            error => console.log('FAILED TO LOAD GREETING:', error)
-        );
+        fetch(`${BACKEND_URL}/${match.params.greetingId}`)
+            .then(response => response.json())
+            .then(greeting => this.setState({greeting}))
+            .catch(error => console.log('FAILED TO LOAD GREETING:', error));
     }
 
     render() {

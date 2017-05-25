@@ -28,6 +28,15 @@ app.get("/greetings/:id", (req, res) => {
     return res.json(greeting)
 });
 
+app.get("/servererror", (req, res) => {
+    return res.status(500).json({error: "Ups. Server Error."})
+});
+
+app.get("/clienterror", (req, res) => {
+    return res.status(400).json({error: "Client Error!"})
+});
+
+
 // create new greeting
 app.post("/greetings", (req, res) => {
 

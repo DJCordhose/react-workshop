@@ -1,8 +1,8 @@
 import {observable, computed, action} from "mobx";
 
-import {loadFromServer, saveToServer} from './backend';
 import {aggregateGreetings, filterGreetings} from './selectors';
 
+const BACKEND_URL = 'http://localhost:7000/greetings';
 export const MODE_MASTER = 'MODE_MASTER';
 export const MODE_DETAIL = 'MODE_DETAIL';
 
@@ -21,28 +21,36 @@ class Store {
 
     @action.bound
     loadGreetings() {
-        loadFromServer(
-            greetings => this.greetings = greetings,
-            err => console.error('LOADING GREETINGS FAILED:', err)
-        );
+        return fetch(BACKEND_URL)
+            .then(response => response.json())
+            .then(json => this.greetings = json)
+            .catch(err => console.error('LOADING GREETINGS FAILED:', err)
+            );
     }
 
     @action.bound
     saveGreeting(greetingToBeAdded) {
-        const _addNewGreeting = serverResponse => {
-            const newGreetingId = serverResponse.id;
-            const newGreeting = {
-                ...greetingToBeAdded,
-                id: newGreetingId
-            };
+        fetch(BACKEND_URL, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(greetingToBeAdded)
+        }).
+        then(response => {
+            if (response.status === 201) {
+                return response.json()
+            }
+            throw new Error('Invalid status code: ' + response.status);
+        })
+        .then(json => {
+            const newGreetingId = json.id;
+            const newGreeting = {...greetingToBeAdded, id: newGreetingId};
+
             this.greetings = [...this.greetings, newGreeting];
             this.mode = MODE_MASTER;
-            return newGreeting;
-        };
-
-        const _reportError = err => console.error('COULD NOT SAVE GREETING: ', err);
-
-        saveToServer(greetingToBeAdded, _addNewGreeting, _reportError);
+        });
     }
 
     @action.bound
