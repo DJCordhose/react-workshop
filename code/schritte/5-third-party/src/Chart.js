@@ -26,6 +26,7 @@ export default class Chart extends React.Component {
     }
 
     componentWillUnmount() {
+        console.log('Component will unmount');
         this._d3selection.remove();
     }
 
