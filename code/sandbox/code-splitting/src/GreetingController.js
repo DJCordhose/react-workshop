@@ -37,7 +37,9 @@ export default class GreetingController extends React.Component {
     }
 
     doCalculation() {
-        import('./calculator').then(calculatorModule => calculatorModule.default)
+        // https://webpack.js.org/guides/code-splitting-async/#chunk-names
+        // https://webpack.js.org/guides/code-splitting-async/#import-mode
+        import(/* webpackChunkName: "calc", webpackMode: "lazy" */ './calculator').then(calculatorModule => calculatorModule.default)
             .then(calculator => {
                 // import calculator from './calculator';
             console.log(calculator);

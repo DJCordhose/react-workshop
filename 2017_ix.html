@@ -1851,6 +1851,44 @@ webpack -p
                 </li>
             </ul>
         </section>
+
+        <section>
+            <h2>Code Splitting</h2>
+            <em>Asynchrones Nachladen von Modulen</em>
+            <p><a href="https://webpack.js.org/guides/code-splitting-async/" target="_blank">https://webpack.js.org/guides/code-splitting-async/</a></p>
+            <ul>
+                <li>Erlaubt das dynamische Nachladen von Code-Teilen
+                <li>So kann am Anfang für eine schnelle Ladezeit nur eine Minimalversion ausgespielt werden
+                <li>Basiert auf <a href="https://github.com/tc39/proposal-dynamic-import">dynamic import</a>, der bereits in Stage 3 ist
+                <li>Weitere Teile können unmittelbar oder erst nach Nutzerinteraktion nachgeladen werden
+            </ul>
+        </section>
+
+        <section>
+            <h2>Beispiel Code</h2>
+<pre><code data-trim>npm install babel-plugin-syntax-dynamic-import</code></pre>
+<pre><code data-trim>
+// .babelrc
+"plugins": ["syntax-dynamic-import", ...]
+</code></pre>
+            <pre><code data-trim>
+// calculator.js
+export default function calculator(a, b) {
+    return a+b;
+}
+           </code></pre>
+            <pre><code class="javascript" data-trim>
+import(/* webpackChunkName: "my-chunk-name" */ './calculator')
+    .then(calculatorModule => {
+    // import calculator from './calculator';
+    const calculator => calculatorModule.default
+    console.log(calculator(7, 8));
+});
+            </code></pre>
+            <p><a href="code/sandbox/code-splitting/src/GreetingController.js">Kompletter Code</a></p>
+        </section>
+
+
         <section>
             <h1>Ausblick</h1>
             <em>Weiterführende Themen, Fragen und Diskussion</em>
