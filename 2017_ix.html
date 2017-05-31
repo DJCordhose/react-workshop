@@ -1878,7 +1878,7 @@ export default function calculator(a, b) {
 }
            </code></pre>
             <pre><code class="javascript" data-trim>
-import(/* webpackChunkName: "my-chunk-name" */ './calculator')
+import('./calculator')
     .then(calculatorModule => {
     // import calculator from './calculator';
     const calculator => calculatorModule.default
@@ -1896,17 +1896,17 @@ import(/* webpackChunkName: "my-chunk-name" */ './calculator')
                 <li><em>forceUpdate</em> erzwingt ein Neuladen
             </ul>
             <pre><code class="javascript" data-trim>
-class AsyncGreetingDetail extends React.Component {
+class AsyncComponent extends React.Component {
     componentDidMount() {
-        import('./GreetingDetail').then(GreetingDetailModule => {
-            this.GreetingDetail = GreetingDetailModule.default;
+        import('./Component').then(ComponentModule => {
+            this.Component = ComponentModule.default;
             this.forceUpdate();
         });
     }
 
     render() {
-        return this.GreetingDetail ?
-                &lt;this.GreetingDetail /> :
+        return this.Component ?
+                &lt;this.Component /> :
                 &lt;span>Loading...&lt;/span>;
     }
 }
