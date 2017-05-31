@@ -361,8 +361,7 @@ const displayInPage = text => document.body.innerHTML += `${text}<br>`;
 <pre><code data-trim contenteditable>class HelloMessage extends React.Component {
   render() {
     return (&lt;div>
-            &lt;input ref={input => this.input = input}
-                   onChange={event => this.updateModel(event)}
+            &lt;input onChange={event => this.updateModel(event)}
                    value={this.state.greeting} />
             &lt;p>{this.state.greeting}, World&lt;/p>
             &lt;button
@@ -380,7 +379,6 @@ const displayInPage = text => document.body.innerHTML += `${text}<br>`;
   }
   reset() {
     this.setState({greeting: ""});
-    this.input.focus();
   }
 }</code></pre>
                 </section>
@@ -495,12 +493,12 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
                   <li class="fragment">kann HTML-artige <b>JSX</b>-Syntax nutzen</li>
                     <li class="fragment">JSX kann pures JavaScript in geschweiften Klammern enthalten (<code>{}</code>)
                 </ul>
-<pre class="fragment"><code class="xml" contenteditable data-trim>
+<pre class="fragment"><code class="jsx" contenteditable data-trim>
 class GreetingDetail extends React.Component {
   render() {
     return (
       <div>
-        &lt;input ref={input => this.input = input}
+        &lt;input
            onChange={event => this.updateModel(event.target.value)}
            value={this.state.greeting} />
         <p>{this.state.greeting}, World</p>
@@ -525,7 +523,7 @@ class GreetingDetail extends React.Component {
           <li style="font-size: 80%"  class="fragment">Kann pures JavaScript enthalten, eingeschlossen in {}:
             <pre><code class="xml" contenteditable data-trim>
 const title = 'Hello, World';
-&lt;h1>{title.toUpperCase()&lt;/h1>
+&lt;h1>{title.toUpperCase()}&lt;/h1>
                     </code></pre>
           </li>
 
@@ -786,7 +784,7 @@ class GreetingDetail extends React.Component {
 
       <section>
         <h3>React: Referenzen auf nativen DOM</h3>
-        <em class="fragment">Elementen kann eine Callback-Funktion <code>ref</code> übergeben werden</em>
+        <em>Elementen kann eine Callback-Funktion <code>ref</code> übergeben werden</em>
         <ul>
           <li class="fragment">Funktion wird nach dem Rendern mit Referenz auf DOM Element aufgerufen (oder <code>null</code>)
           <li class="fragment">Diese Referenz kann man z.B. als Member-Variable speichern
@@ -817,11 +815,11 @@ class HelloMessage extends React.Component {
           <ul>
               <li>benenne deine Komponente in <code>GreetingDetail</code> um
               <li>du brauchst zwei Eingabefelder, die <code>name</code> und <code>greeting</code> im Zustand der Komponente setzen
-              <li><em>Zusatzaufgabe: Erweitere deine Komponente so, dass man von außen Properties übergeben kann, die den Zustand initialisieren</em>
+              <li>Kannst du die Komponente so bauen, dass du mit einer einzigen update-Methode beide Felder im Zustand updaten kannst?
+              <li>Erweitere deine Komponente so, dass man von außen Properties übergeben kann, die den Zustand initialisieren
           </ul>
       </section>
     </section>
-
 
         <section id="t2">
             <h1>Teil II</h1>
