@@ -26,5 +26,11 @@ function createBoxes(number) {
 
 const boxes = createBoxes(5000);
 
+if (process.env.NODE_ENV === 'production') {
+    console.log('production');
+}
+console.log(global);
+console.log(process.env.NODE_ENV);
+
 const mountNode: HTMLElement = document.getElementById('mount');
 ReactDOM.render(<App boxes={boxes} />, mountNode);
