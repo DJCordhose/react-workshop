@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import GreetingController from './GreetingController';
+import HelloAsync from './HelloAsync';
 
 const mountNode = document.getElementById('mount');
-ReactDOM.render(<GreetingController />, mountNode);
+ReactDOM.render(<HelloAsync />, mountNode);
