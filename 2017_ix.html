@@ -1366,7 +1366,7 @@ chart.pie.dispatch.on("elementClick",
       <section>
         <h3>React Lifecycle Methoden</h3>
         <ul>
-          <li class="fragment"><code><b>componentDidMount()</b></code>: Komponente wurde gerendert, Element sind im DOM (einmalig)</li>
+          <li class="fragment"><code><b>componentDidMount()</b></code>: Komponente wurde gerendert, Elemente sind im DOM (einmalig)</li>
           <li class="fragment"><code><b>componentWillReceiveProps(nextProps)</b></code>: An die Komponente wurden neue Properties übergeben. Die neuen Properties
             werden als Parameter übergeben</li>
           <li class="fragment"><code><b>shouldComponentUpdate()</b></code>: Entscheidet, ob Komponente erneut gerendert werden soll (default: <code>true</code>)</li>
@@ -1441,6 +1441,8 @@ class Chart extends React.Component {
                     <li>kopiere das Material aus <code>code/material/5-third-party</code> in deinen src-Ordner
                     <li>binde die Chart-Komponente in die render-Methode des <code>GreetingController</code> ein
                     <li>alle Stellen die du ändern musst sind dort bereits mit einem Kommentar versehen
+                    <li>logge jeden Aufruf einer Lifecycle-Methode in der Chart-Komponente und versuche damit die Reihenfolge der
+                    Aufrufe zu durchschauen
                 </ul>
                 <p>Zusatzaufgabe: Ein zweites Mal klicken auf das Segment soll den Filter wieder löschen</p>
             </section>
@@ -1500,7 +1502,7 @@ export const setFilter = filter => {
             <h3>Action-Creators machen Server-Calls</h3>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 export const loadGreeting = greetingId => dispatch => {
-    fetch(BACKEND_URL+/greetingId)
+    fetch(BACKEND_URL+'/'+greetingId)
         .then(response => response.json())
         .then(greetings => dispatch({
             type: SET_GREETINGS,
