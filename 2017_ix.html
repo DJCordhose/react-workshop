@@ -1087,7 +1087,7 @@ HelloMessage.propTypes = {
           <li>Häufig in React verwendet: <b>fetch</b> API
             <ul>
               <li>Browser-API zum Ausführen von HTTP Requests</li>
-              <li>Kein Standard, aber <a href="http://caniuse.com/#search=fetch" target="_blank">hohe Verbreitung</a></li>
+              <li><a href="http://caniuse.com/#search=fetch" target="_blank">Hohe Verbreitung</a></li>
               <li>Spezifikation: <a href="https://fetch.spec.whatwg.org/" target="_blank">https://fetch.spec.whatwg.org/</a></li>
               <li>Polyfill: <a href="https://github.com/github/fetch" target="_blank">https://github.com/github/fetch</a></li>
             </ul>
@@ -1132,6 +1132,7 @@ return fetch(url)
         <h4 class="fragment">Wird evtl. erst in der Zukunft eingelöst</h4>
       </section>
 
+<!--
       <section data-state="exkurs">
         <h3>Erzeugen und asynchron reagieren</h3>
         <pre class="fragment"><code class="javascript" contenteditable>const promise = new Promise(resolve =>
@@ -1158,11 +1159,13 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 // Output after 1 second: Result from promise plus stuff
 </code></pre>
       </section>
+-->
       <section data-state="exkurs">
         <h3>Fehler führen zum Abbruch der Chain</h3>
         <h4 class="fragment">Allerdings muss man etwas tun, um das mitzubekommen</h4>
       </section>
 
+<!--
       <section data-state="exkurs">
         <h3>Catch-Klausel im Erfolgsfall</h3>
         <pre><code class="javascript" contenteditable>Promise
@@ -1182,6 +1185,7 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 // Result from promise
 // This will be printed</code></pre>
       </section>
+-->
       <section data-state="exkurs">
         <h3>Catch-Klausel im Fehlerfall</h3>
         <pre><code class="javascript" contenteditable>Promise
@@ -1272,17 +1276,19 @@ fetch('http://localhost:7000/api/greetings')
 }
                 </code></pre>
       </section>
+        <section>
             <section>
                 <h2>Übung: Laden und Speichern der Daten von/auf einem Server</h2>
                 <p><em>Entwickle auf Basis von fetch eine Version des GreetingControllers, der die Daten auf dem Server laden und dort wieder speichern kann</em></p>
                 <p>Der Server ist bereits vorgegeben und kann mit <code>npm start</code> im Root-Verzeichnis gestartet werden. Er ist dann unter Port 7000 erreichbar</p>
         </section>
         <section>
-            <h2>Übung: Laden und Speichern der Daten von/auf einem Server</h2>
+            <h3>Schritte</h3>
             <p>Kopiere <code>code/material/3-remote/GreetingController.js</code> in deinen Arbeitsbereich
             <p>Die Serverzugriffe sollen in <code>loadGreetings</code> und <code>saveGreeting</code> erfolgen</p>
             <p>Dort sind bereits entsprechende TODOs für dich eingetragen</p>
 
+        </section>
         </section>
         <section id="t4">
             <h1>Teil IV</h1>
