@@ -4,8 +4,7 @@ export default class HelloMessage extends React.Component {
     render() {
         return (
             <div>
-                <input ref={input => this.input = input}
-                       onChange={event => this.updateModel(event)}
+                <input onChange={event => this.updateModel(event)}
                        value={this.state.greeting} />
                 <p>{this.state.greeting}, World</p>
                 <button
@@ -20,7 +19,6 @@ export default class HelloMessage extends React.Component {
     }
     reset() {
         this.setState({greeting: ""});
-        this.input.focus();
     }
     updateModel(event) {
         this.setState({greeting: event.target.value});

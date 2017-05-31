@@ -1487,6 +1487,19 @@ class Chart extends React.Component {
         </section>
 
         <section>
+            <h2>Zwischenübung</h2>
+            <p>Schreibe die erste Hello-World Anwendung auf Redux um</p>
+            <p>Im ersten Schritt tust du dies im Plenum mit den Workshop-Leitern</p>
+            <p>Dabei lernst du anhand des Live-Codings alle Bestandteile der Redux-Architektur kennen</p>
+            <p>Dazu erstellen wir zusammen eine Übersicht über alle notwendigen Teile spezifisch für die Hello-World Anwendung</p>
+            <p>Im zweiten Schritt baust du die Anwendung unter <code>code/material/hello-world</code> selbst noch einmal um</p>
+        </section>
+
+        <section>
+            <h2>Strukturierter Überblick über alle Redux Teile</h2>
+        </section>
+
+        <section>
             <h3>Event-Handlers werden Action-Creators</h3>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 export const setFilter = filter => {
@@ -1517,13 +1530,13 @@ export const loadGreeting = greetingId => dispatch => {
 };
 </code></pre>
             <ul>
-                <li class="fragment">Die Action wird nicht direkt zurück geliefert, sondenr erst später dispatched</li>
-                <li class="fragment">Da der Server-Call asynchron ist bekommen wir die dispatch Methode als Parameter, mit der wir später
+                <li class="fragment">Die Action wird nicht direkt zurück geliefert, sondern erst später dispatched</li>
+                <li class="fragment">wir bekommen die dispatch Methode als Parameter, mit der wir später
                     die Action dispatchen</li>
-                <li class="fragment">Wir könnten auch die <em>getState</em> function als Parameter haben, um den kompletten State abzufragen</li>
+                <li class="fragment"><em>getState</em> als zweiter Parameter, um den kompletten State abzufragen</li>
             </ul>
             <p  class="fragment"><strong>Action-Creators sind die einzigen Teile einer Redux-Anwendung, die asynchrone Operationen
-                ausführen dürfen, wie z.B. eben Server-Calls</strong></p>
+                ausführen dürfen</strong></p>
         </section>
 
         <section>
@@ -1553,7 +1566,7 @@ ReactDOM.render(
         </section>
 
         <section>
-            <h3>Middleware sitzt zwischen Dispatch und Store</h3>
+            <h3>Middleware zwischen Dispatch und Store</h3>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 import { applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -1657,13 +1670,11 @@ class GreetingController extends React.Component {
         <section>
             <h3>Selektoren</h3>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-export const filterGreetings = ({greetings, filter}) => filter
-                ? greetings.filter(greeting => greeting.name === filter)
-                : greetings;
+export const selectGreetings = ({greetings}) => greetings;
 
 export default connect(
     state => ({
-        greetings: filterGreetings(state),
+        greetings: selectGreetings(state),
         // ...
     }),
     // ...
@@ -1682,8 +1693,9 @@ export default connect(
         </section>
 
         <section>
+        <section>
             <h2>Übung: eine Redux Anwendung fertig stellen</h2>
-            <h3>Es gibt bereits eine vorgebaute Redux-Anwendung, aber wir die Filterung über das Chart muss noch implementiert werden</h3>
+            <h3>Es gibt bereits eine vorgebaute Redux-Anwendung, aber die Filterung über das Chart muss noch implementiert werden</h3>
         </section>
         <section>
             <h3>Schritte</h3>
@@ -1697,7 +1709,7 @@ export default connect(
                     Filter-Event reagierst
             </ul>
         </section>
-
+        </section>
         <section id="t6">
             <h2>Laufzeit-Optimierungen</h2>
             <p><a href="https://facebook.github.io/react/docs/optimizing-performance.html" target="_blank">https://facebook.github.io/react/docs/optimizing-performance.html</a></p>
