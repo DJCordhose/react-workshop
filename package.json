@@ -73,6 +73,7 @@
     "@types/react-dom": "^0.14.23",
     "@types/react-redux": "^4.4.40",
     "@types/redux": "^3.6.0",
+    "babel-polyfill": "^6.23.0",
     "body-parser": "^1.16.1",
     "d3": "^3.5.17",
     "es6-promise": "^3.2.1",
