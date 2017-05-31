@@ -1866,7 +1866,7 @@ webpack -p
 
         <section>
             <h2>Beispiel Code</h2>
-<pre><code data-trim>npm install babel-plugin-syntax-dynamic-import</code></pre>
+<pre><code data-trim>npm install babel-plugin-syntax-dynamic-import --save</code></pre>
 <pre><code data-trim>
 // .babelrc
 "plugins": ["syntax-dynamic-import", ...]
@@ -1888,6 +1888,36 @@ import(/* webpackChunkName: "my-chunk-name" */ './calculator')
             <p><a href="code/sandbox/code-splitting/src/GreetingController.js">Kompletter Code</a></p>
         </section>
 
+        <section>
+            <h3>Nachladen von React-Komponenten</h3>
+            <ul>
+                <li>Erfordert die Darstellung von Platzhaltern, bis die eigentliche Komponente da ist
+                <li>Wenn die Komponente da ist, muss die umschließende Komponente neu dargestellt werden
+                <li><em>forceUpdate</em> erzwingt ein Neuladen
+            </ul>
+            <pre><code class="javascript" data-trim>
+class AsyncGreetingDetail extends React.Component {
+    componentDidMount() {
+        import('./GreetingDetail').then(GreetingDetailModule => {
+            this.GreetingDetail = GreetingDetailModule.default;
+            this.forceUpdate();
+        });
+    }
+
+    render() {
+        return this.GreetingDetail ?
+                &lt;this.GreetingDetail /> :
+                &lt;span>Loading...&lt;/span>;
+    }
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Übung</h2>
+            <p>Baue deine Anwendung so um, dass die Detail-Ansicht erst bei Bedarf nachgeladen wird</p>
+            <p>Beginne mit der Version in <code>code/schritte/redux/8-redux-prod-build</code>, die bereits ein Produktionsbuild bietet</p>
+        </section>
 
         <section>
             <h1>Ausblick</h1>
