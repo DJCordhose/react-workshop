@@ -1760,7 +1760,42 @@ class Box extends React.Component {
         </section>
 
         <section>
-            <h3>immutable.js</h3>
+            <h3>Naiver Code für Modifikation einer Box</h3>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+updateBox(id, x, y) {
+    const {boxes} = this.state;
+    const modifiedBox = {
+        id,
+        x,
+        y
+    };
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/
+    //            Reference/Global_Objects/Array/slice
+    const boxesBefore = boxes.slice(0, id);
+    const boxesAfter = boxes.slice(id + 1);
+    const modifiedBoxes = [...boxesBefore, modifiedBox, ...boxesAfter];
+    this.setState({
+        boxes: modifiedBoxes
+    });
+}
+               </code></pre>
+            <p><a href="code/sandbox/optimize/src/App.js">Kompletter Code</a></p>
+        </section>
+
+        <section>
+            <h3>Immutable.js</h3>
+            <p>Immutable persistent data collections for Javascript which increase efficiency and simplicity.</p>
+            <p><a href="http://facebook.github.io/immutable-js/" target="_blank">http://facebook.github.io/immutable-js/</a></p>
+            <ul>
+                <li>Bietet List, Set, Map, etc.
+                <li>Jede Modifikaton einer Collection erzeugt ein neues Collection Objekt
+                <li>Kopiert nicht die komplette Collection, sondern effiziente Erzeugung mittels
+                <a href="https://en.wikipedia.org/wiki/Persistent_data_structure" target="_blank">Persistent Data Structures</a>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Mit immutable.js</h3>
             <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
 import {List} from 'immutable';
 
@@ -1783,7 +1818,7 @@ updateBox(id, x, y) {
     });
 }
                </code></pre>
-            <p><a href="code/sandbox/optimize/src">Full code</a></p>
+            <p><a href="code/sandbox/optimize/src/AppImmutable.js">Kompletter Code</a></p>
         </section>
 
         <section>

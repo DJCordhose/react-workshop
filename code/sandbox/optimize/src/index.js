@@ -2,7 +2,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+// import App from './App';
+import App from './AppImmutable';
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -24,12 +25,11 @@ function createBoxes(number) {
     return boxes;
 }
 
-const boxes = createBoxes(5000);
+const boxes = createBoxes(50);
 
 if (process.env.NODE_ENV === 'production') {
     console.log('production');
 }
-console.log(global);
 console.log(process.env.NODE_ENV);
 
 const mountNode: HTMLElement = document.getElementById('mount');

@@ -1,15 +1,17 @@
 /* @flow */
 
 import React from 'react';
+import {List} from 'immutable';
 
 import Box from './Box';
+
 
 export default class App extends React.Component {
     constructor(props) {
         super(props);
         const {boxes} = this.props;
         this.state = {
-            boxes,
+            boxes: List(boxes),  // eslint-disable-line new-cap
             currentId: null
         };
     }
@@ -51,7 +53,7 @@ export default class App extends React.Component {
     onMouseDown(event) {
         const id = Number(event.target.getAttribute("data-id"));
         const {boxes} = this.state;
-        const box = boxes[id];
+        const box = boxes.get(id);
         const mouseX = event.clientX;
         const mouseY = event.clientY;
         this.offsetX = box.x - mouseX;
@@ -80,10 +82,7 @@ export default class App extends React.Component {
             x,
             y
         };
-        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
-        const boxesBefore = boxes.slice(0, id);
-        const boxesAfter = boxes.slice(id + 1);
-        const modifiedBoxes = [...boxesBefore, modifiedBox, ...boxesAfter];
+        const modifiedBoxes = boxes.set(id, modifiedBox);
         this.setState({
             boxes: modifiedBoxes
         });
