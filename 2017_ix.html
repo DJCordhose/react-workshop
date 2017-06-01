@@ -1214,7 +1214,7 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
 // 1. fetch returns a promise, that will be resolved
 // with a Response object when response is received
 // from server
-fetch('http://localhost:7000/api/greetings')
+fetch('http://localhost:7000/greetings')
 
 // 2. the Response object contains a json() function,
 // that returns the parsed JSON from the Response body
@@ -1244,7 +1244,7 @@ fetch('http://localhost:7000/api/greetings')
     this.state = { greetings: [] };
   }
   componentDidMount() {
-    fetch('/api/greetings')
+    fetch('/greetings')
       .then(response =&gt; response.json())
       .then(json =&gt; this.setState({greetings: json})
       .catch(. . .)
@@ -1264,7 +1264,7 @@ fetch('http://localhost:7000/api/greetings')
     ...
   }
   saveGreeting(greetingToBeSaved) {
-    fetch('/api/greetings', {
+    fetch('/greetings', {
       method: 'POST',
       headers: ...,
       body: JSON.stringify(greetingToBeSaved)
