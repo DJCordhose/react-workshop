@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run devserver",
     "clean": "../../../node_modules/.bin/rimraf -rf public/dist/",
-    "dist": "../../../node_modules/.bin/webpack",
+    "dist": "npm run clean && ../../../node_modules/.bin/webpack",
     "devserver": "../../../node_modules/.bin/webpack-dev-server --content-base public/"
   }
 }
