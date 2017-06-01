@@ -8,7 +8,7 @@ export default class GreetingDetail extends React.Component {
             name: PropTypes.string.isRequired,
             greeting: PropTypes.string.isRequired
         }),
-        onAdd: PropTypes.func.isRequired
+        onSave: PropTypes.func.isRequired
     };
 
     render() {
@@ -57,7 +57,7 @@ export default class GreetingDetail extends React.Component {
 
     save() {
         /*
-        Hier die übergebene Callback-Funktion 'onAdd' (aus den Properties) aufrufen,
+        Hier die übergebene Callback-Funktion 'onSave' (aus den Properties) aufrufen,
         und ein Objekt, bestehend aus name und greeting (jeweils aus dem State)
         übergeben
          */
