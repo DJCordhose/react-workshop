@@ -23,10 +23,9 @@ test('it should render greetings received from backend', () => {
         <GreetingController/>
     );
 
-    flushPromises().then(() => {
-        // make sure the json matches the last stored snapshot
-        // (saved on the filesystem in __snapshots__)
-        expect(tree.toJSON()).toMatchSnapshot();
+    return flushPromises().then(() => {
+        // very simple check to make sure at least the rows are rendered
+        expect(tree.find('tbody tr')).toHaveLength(2);
     });
 
 });
@@ -37,7 +36,7 @@ test('it should open detail view on button click', () => {
     // mount the component into a real dom (implemented by JSDom)
     const component = mount(<GreetingController  />);
 
-    flushPromises().then(() => {
+    return flushPromises().then(() => {
         // on initial render the list with greetings (GreetingMaster)
         // is visible but no GreetingDetail
         expect(component.find(GreetingDetail)).toHaveLength(0);

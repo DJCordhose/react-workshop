@@ -21,7 +21,7 @@ export default class GreetingDetail extends React.Component {
                        onChange={event => this.updateModel(event)}
                        name="name"
                        value={name}
-                       placeholder="Another Name"/>
+                       placeholder="Name"/>
                 <input onChange={event => this.updateModel(event)}
                        name="greeting"
                        value={greeting}
