@@ -1346,7 +1346,7 @@ const chart = nv.models.pieChart();
 
 // mit d3 rendern und mit Daten versorgen
 const element = document.getElementById('chart');
-d3.select(element);
+d3.select(element)
   .datum(data)
   .call(chart);
 
