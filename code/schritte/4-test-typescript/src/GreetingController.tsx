@@ -1,13 +1,23 @@
-import React from 'react';
+import * as React from 'react';
 
 import GreetingMaster from './GreetingMaster';
 import GreetingDetail from './GreetingDetail';
+import {Greeting, NewGreeting} from "./types";
 
 const BACKEND_URL = 'http://localhost:7000/greetings';
 const MODE_MASTER = 'MODE_MASTER';
 const MODE_DETAIL = 'MODE_DETAIL';
 
-export default class GreetingController extends React.Component {
+type GreetingControllerProps = {
+}
+
+type GreetingControllerState = {
+    mode: typeof MODE_MASTER | typeof MODE_DETAIL,
+    greetings: Greeting[]
+}
+
+
+export default class GreetingController extends React.Component<GreetingControllerProps, GreetingControllerState> {
     render() {
         const {mode, greetings} = this.state;
         return (
@@ -16,12 +26,12 @@ export default class GreetingController extends React.Component {
                     <GreetingMaster greetings={greetings}
                                     onAdd={() => this.setState({mode: MODE_DETAIL})}
                     /> :
-                    <GreetingDetail onSave={(greeting) => this.saveGreeting(greeting)}/>
+                    <GreetingDetail onSave={greeting => this.saveGreeting(greeting)} />
                 }
             </div>);
     }
 
-    constructor(props) {
+    constructor(props: GreetingControllerProps) {
         super(props);
         this.state = {
             greetings: [],
@@ -42,7 +52,7 @@ export default class GreetingController extends React.Component {
     }
 
 
-    saveGreeting(greetingToBeAdded) {
+    saveGreeting(greetingToBeAdded: NewGreeting) {
         fetch(BACKEND_URL, {
             method: 'POST',
             headers: {
