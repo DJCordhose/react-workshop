@@ -1,8 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import GreetingDetail from '../src/GreetingDetail';
 import GreetingController from '../src/GreetingController';
-import renderer from 'react-test-renderer';
+import * as renderer from 'react-test-renderer';
 import {mount} from 'enzyme';
+import {Promise} from "es6-promise";
 
 
 // Test data
@@ -17,7 +18,7 @@ function flushPromises() {
 }
 
 test('it should render greetings received from backend', () => {
-    fetch.mockResponse(JSON.stringify(someGreetings), {status: 200});
+    (fetch as any).mockResponse(JSON.stringify(someGreetings), {status: 200});
     // render the component we want to test
     const tree = mount(
         <GreetingController/>
@@ -31,7 +32,7 @@ test('it should render greetings received from backend', () => {
 });
 
 test('it should open detail view on button click', () => {
-    fetch.mockResponse(JSON.stringify(someGreetings), {status: 200});
+    (fetch as any).mockResponse(JSON.stringify(someGreetings), {status: 200});
 
     // mount the component into a real dom (implemented by JSDom)
     const component = mount(<GreetingController  />);
