@@ -1,6 +1,12 @@
-import React from 'react';
+import * as React from 'react';
+import {Greeting} from "./types";
 
-const GreetingMaster = (props) => {
+type GreetingMasterProps = {
+    greetings: Greeting[]
+    onAdd: () => void
+};
+
+const GreetingMaster = (props: GreetingMasterProps) => {
     const {greetings, onAdd} = props;
     const body = greetings.map(greeting => <tr key={greeting.id}><td>{greeting.name}</td><td>{greeting.greeting}</td></tr>);
     return (
