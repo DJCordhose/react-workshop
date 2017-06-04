@@ -1,97 +1,80 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const server = require('../src/server');
-const db = require('../src/db');
-const should = chai.should();
+const request = require('supertest');
 
-chai.use(chaiHttp);
+const app = require('../src/app');
+const db = require('../src/db');
+
 
 function expectError(res, code) {
-    res.should.have.status(code);
-    res.body.should.include.key('error');
+    expect(res.status).toBe(code);
+    expect(res.body.error).toBeDefined();
 }
 
-describe('GreetingServer', () => {
-    beforeEach(() => {
-        db.initialize();
+beforeEach(() => {
+    db.initialize();
+});
+
+describe('GET', () => {
+    test('GET /greetings should return all greetings', () => {
+        return request(app).get('/greetings').then(response => {
+            expect(response.status).toBe(200);
+            expect(response.body).toMatchSnapshot();
+        });
     });
-
-    describe('GET', () => {
-        it('GET /greetings should return all greetings', done => {
-            chai.request(server)
-                .get('/greetings')
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('array');
-                    res.body.length.should.be.eql(10);
-                    done();
-                });
-        });
-
-        it('GET /greetings/id should return a single greeting by id', done => {
-            chai.request(server)
-                .get('/greetings/2')
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.eql(db._greetings[1]);
-                    done();
-                });
-        });
-
-        it('GET /greetings/id should return 404 for an unknown id', done => {
-            chai.request(server)
-                .get('/greetings/666')
-                .end((err, res) => {
-                    expectError(res, 404);
-                    done();
-                });
-        });
-
+//
+    test('GET /greetings/id should return a single greeting by id', () => {
+        return request(app).get('/greetings/2').then(response => {
+            expect(response.status).toBe(200);
+            expect(response.body).toMatchSnapshot();
+        })
     });
-
+    //
+    test('GET /greetings/id should return 404 for an unknown id', () => {
+        return request(app)
+            .get('/greetings/666')
+            .then(response => {
+                expectError(response, 404);
+            })
+    });
+    //
+    // });
+    //
     describe('POST', () => {
-        it('POST /greetings with new greeting should save it and return new id', done => {
-            chai.request(server)
+        test('POST /greetings with new greeting should save it and return new id', () => {
+            return request(app)
                 .post('/greetings')
                 .send({name: 'Moni', greeting: 'Huhu!'})
-                .end((err, res) => {
-                    res.should.have.status(201);
-                    res.body.should.eql({id: 11});
+                .then(res => {
+                    expect(res.status).toBe(201);
+                    expect(res.body).toMatchSnapshot();
                     const newGreetingInDatabase = db._greetings[10];
-                    newGreetingInDatabase.should.be.eql({
+                    expect(newGreetingInDatabase).toEqual({
                         id: 11, name: 'Moni', greeting: 'Huhu!'
                     });
-                    done();
                 });
         });
 
-        it('POST /greetings with empty body  should fail with HTTP 400', done => {
-            chai.request(server)
+        test('POST /greetings with empty body  should fail with HTTP 400', () => {
+            return request(app)
                 .post('/greetings')
-                .end((err, res) => {
+                .then(res => {
                     expectError(res, 400);
-                    done();
-                });
+            });
         });
 
-        it('POST /greetings with empty name should fail with HTTP 400', done => {
-            chai.request(server)
+        test('POST /greetings with empty name should fail with HTTP 400', () => {
+            return request(app)
                 .post('/greetings')
                 .send({greeting: 'Huhu!'})
-                .end((err, res) => {
-                    expectError(res, 400);
-                    done();
-                });
+                .then(res => expectError(res, 400))
+            ;
         });
 
-        it('POST /greetings with empty greeting should fail with HTTP 400', done => {
-            chai.request(server)
+        test('POST /greetings with empty greeting should fail with HTTP 400', () => {
+            return request(app)
                 .post('/greetings')
                 .send({name: 'Moni'})
-                .end((err, res) => {
-                    expectError(res, 400);
-                    done();
-                });
+                .then(res => expectError(res, 400))
+            ;
         });
     });
 });

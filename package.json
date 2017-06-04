@@ -47,6 +47,8 @@
     "rimraf": "^2.5.2",
     "source-map-loader": "^0.2.0",
     "style-loader": "^0.16.1",
+    "superagent": "^3.5.2",
+    "supertest": "^3.0.0",
     "ts-jest": "^20.0.5",
     "ts-loader": "^2.0.0",
     "ts-node": "^3.0.2",
