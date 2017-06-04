@@ -10,6 +10,23 @@
     "test": "../../../node_modules/.bin/jest --setupTestFrameworkScriptFile=./test/setup-jest.js --watchAll",
     "testreport": "../../../node_modules/.bin/jest --coverage --setupTestFrameworkScriptFile=./test/setup-jest.js"
   },
+  "devDependencies": {
+    "@types/chai": "^3.5.0",
+    "@types/mocha": "^2.2.40",
+    "karma": "^1.6.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-firefox-launcher": "^1.0.1",
+    "karma-junit-reporter": "^1.2.0",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.3",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-webpack": "^2.0.3",
+    "mocha": "^3.2.0",
+    "mocha-jsdom": "^1.1.0",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "phantomjs": "^2.1.7"
+  },
   "jest": {
     "testResultsProcessor": "../../../node_modules/jest-html-reporter",
     "transform": {
