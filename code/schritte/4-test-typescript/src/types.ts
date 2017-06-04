@@ -3,6 +3,6 @@ export type NewGreeting = {
     name: string;
 }
 
-export interface Greeting extends NewGreeting {
+export type Greeting = NewGreeting & {
     id: number;
 }
