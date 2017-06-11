@@ -95,8 +95,8 @@
             <ol>
                 <li><a href="#state">Zustands-Management</a>
                 <!--<li><a href="#types">Typen-Systeme für React-Anwendungen</a>-->
-                <li><a href="#optimize">Laufzeit-Optimierungen</a>
                 <li><a href="#third">Integration mit 3rd-Party Bibliotheken</a>
+                <li><a href="#optimize">Laufzeit-Optimierungen</a>
             </ol>
         </section>
 
@@ -144,7 +144,7 @@
         </section>
 
         <section>
-            <img src="ai/mobx.png" height="600px">
+            <img src="ai/mobx.png" height="500px">
         </section>
 
         <section>
@@ -278,6 +278,150 @@
             <!--</a></p>-->
         <!--</section>-->
 
+
+        <section id="third">
+            <h2>Integration mit 3rd-Party Bibliotheken</h2>
+        </section>
+
+        <section>
+            <h2>3rd Party Libs?</h2>
+            <div class="fragment">
+                <p>Es gibt eine große Anzahl von sehr praktischen JavaScript-Bibliotheken</p>
+                <p>Viele davon sind aber nicht als React-Komponenten entwickelt worden</p>
+            </div>
+            <div class="fragment">
+                <p><b>Beispiele</b></p>
+                <p><em>jQuery</em> und <em>jQuery</em> Plugins wie z.B. <em>Bootstrap</em></p>
+                <p><em>d3</em> für interaktive SVGs und Chart Bibliotheken wie <em>nvd3</em></p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Unser Beispiel: Verteilung der Grüße</h3>
+            <a href="code/schritte/5-third-party/public/index.html" target="_blank">
+                <img src="screenshot-nvd3.png" height="400px">
+            </a>
+            <p><em>nvd3</em> Pie Chart mit <em>d3</em></p>
+        </section>
+
+        <section>
+            <h3>Aufgabe: Einbetten des Pie Charts in eine React-Komponente</h3>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Herausforderungen?</h3>-->
+            <!--<ol>-->
+                <!--<li>Wie kommen wir an den DOM Knoten der React-Komponente?-->
+                <!--<li>Wie sagen wir React, dass nun NVD3 den Rest macht? Also, dass React nicht mehr neu rendern soll.-->
+                <!--<li>Änderungen des Zustands sollen nach wie vor richtig dargestellt werden-->
+                <!--<li>Ab welchem Zeitpunkt soll NVD3 das Rendern übernehmen?-->
+                <!--<li>Wie können wir aus NVD3 heraus auch wieder andere React-Komponenten beeinflussen?-->
+                <!--<li>Wie räumen wir wieder auf?-->
+            <!--</ol>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h3>Hintergrund: Charts mit NVD3</h3>-->
+            <!--<p>Basiert auf D3.js</p>-->
+            <!--<p>Benötigt svg DOM-Element um sich zu rendern</p>-->
+            <!--<p class="fragment">Stark vereinfachtes Beispiel:</p>-->
+            <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import d3 from 'd3';-->
+<!--import nv from 'nvd3';-->
+
+<!--// Chart erzeugen-->
+<!--const chart = nv.models.pieChart();-->
+<!--// ...Chart Config ausgelassen ...-->
+
+<!--// mit d3 rendern und mit Daten versorgen-->
+<!--const element = document.getElementById('chart');-->
+<!--d3.select(element)-->
+  <!--.datum(data)-->
+  <!--.call(chart);-->
+
+<!--// Callbacks registrieren (z.B. bei Klick auf ein Element)-->
+<!--chart.pie.dispatch.on("elementClick",-->
+                       <!--e => console.log(e.data.label));-->
+            <!--</code></pre>-->
+
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Übersicht über den Komponenten-Lifecycle</h3>-->
+            <!--<a href="https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle" target="_blank">-->
+                <!--https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle-->
+            <!--</a>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<img src="ai/lifecycle-methods-1.png" height="600px"/>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<img src="ai/lifecycle-methods-2.png" height="600px" />-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h3>React Lifecycle Methoden</h3>-->
+            <!--<ul>-->
+                <!--<li class="fragment"><code><b>componentDidMount()</b></code>: Komponente wurde gerendert, Elemente sind im DOM (einmalig)</li>-->
+                <!--<li class="fragment"><code><b>componentWillReceiveProps(nextProps)</b></code>: An die Komponente wurden neue Properties übergeben. Die neuen Properties-->
+                    <!--werden als Parameter übergeben</li>-->
+                <!--<li class="fragment"><code><b>shouldComponentUpdate()</b></code>: Entscheidet, ob Komponente erneut gerendert werden soll (default: <code>true</code>)</li>-->
+                <!--<li class="fragment"><code><b>componentWillUnmount()</b></code>: Wird aufgerufen, bevor Komponente aus dem DOM entfernt wird (einmalig)</li>-->
+            <!--</ul>-->
+
+        <!--</section>-->
+
+        <section>
+            <h3>React Chart Komponente #1</h3>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+class Chart extends React.Component {
+    render() {
+        //  we render an empty svg and
+        //  remember the reference to the DOM node
+        return &lt;svg ref={c => this._chart = c}>&lt;/svg>
+    }
+
+    // called directly after first render
+    componentDidMount() {
+        const {data, onSegmentSelected} = this.props;
+
+        // once rendered by react we create the nvd3 chart
+        const chart = createNvd3Chart(this._chart, data);
+
+        // we delegate the label of clicked segment
+        // back to parent component
+        chart.pie.dispatch.on("elementClick",
+                              e => onSegmentSelected(e.data.label));
+    }
+
+    // ...
+}
+       </code></pre>
+        </section>
+
+        <section>
+            <h3>React Chart Komponent #2</h3>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+class Chart extends React.Component {
+    // ...
+
+    // if it returns false, component will not be rendered
+    shouldComponentUpdate() {
+        // once rendered react never renders again
+        return false;
+    }
+
+    // called when properties update
+    componentWillReceiveProps(nextProps) {
+        const {data} = nextProps;
+        // we still get updates of properties making it reactive
+        updateNvd3Chart(this._chart, data);
+    }
+
+    // called just before destroying component
+    componentWillUnmount() {
+        this._d3selection.remove();
+    }
+}
+       </code></pre>
+        </section>
         <section id="optimize">
             <h2>Laufzeit-Optimierungen</h2>
             <!--<p><a href="https://facebook.github.io/react/docs/optimizing-performance.html" target="_blank">https://facebook.github.io/react/docs/optimizing-performance.html</a></p>-->
@@ -431,27 +575,27 @@ webpack -p
         </section>
 
         <!--<section>-->
-            <!--<h2>Beispiel Code</h2>-->
-            <!--<pre><code data-trim>npm install babel-plugin-syntax-dynamic-import &#45;&#45;save</code></pre>-->
-            <!--<pre><code data-trim>-->
-<!--// .babelrc-->
-<!--"plugins": ["syntax-dynamic-import", ...]-->
-<!--</code></pre>-->
-            <!--<pre><code data-trim>-->
-<!--// calculator.js-->
-<!--export default function calculator(a, b) {-->
-    <!--return a+b;-->
-<!--}-->
-           <!--</code></pre>-->
-            <!--<pre><code class="javascript" data-trim>-->
-<!--import('./calculator')-->
-    <!--.then(calculatorModule => {-->
-    <!--// import calculator from './calculator';-->
-    <!--const calculator => calculatorModule.default-->
-    <!--console.log(calculator(7, 8));-->
-<!--});-->
-            <!--</code></pre>-->
-            <!--<p><a href="code/sandbox/code-splitting/src/GreetingController.js">Kompletter Code</a></p>-->
+        <!--<h2>Beispiel Code</h2>-->
+        <!--<pre><code data-trim>npm install babel-plugin-syntax-dynamic-import &#45;&#45;save</code></pre>-->
+        <!--<pre><code data-trim>-->
+        <!--// .babelrc-->
+        <!--"plugins": ["syntax-dynamic-import", ...]-->
+        <!--</code></pre>-->
+        <!--<pre><code data-trim>-->
+        <!--// calculator.js-->
+        <!--export default function calculator(a, b) {-->
+        <!--return a+b;-->
+        <!--}-->
+        <!--</code></pre>-->
+        <!--<pre><code class="javascript" data-trim>-->
+        <!--import('./calculator')-->
+        <!--.then(calculatorModule => {-->
+        <!--// import calculator from './calculator';-->
+        <!--const calculator => calculatorModule.default-->
+        <!--console.log(calculator(7, 8));-->
+        <!--});-->
+        <!--</code></pre>-->
+        <!--<p><a href="code/sandbox/code-splitting/src/GreetingController.js">Kompletter Code</a></p>-->
         <!--</section>-->
 
         <section>
@@ -479,153 +623,16 @@ class AsyncComponent extends React.Component {
             </code></pre>
         </section>
 
-        <section id="third">
-            <h2>Integration mit 3rd-Party Bibliotheken</h2>
-        </section>
-
-        <section>
-            <h2>3rd Party Libs?</h2>
-            <div class="fragment">
-                <p>Es gibt eine große Anzahl von sehr praktischen JavaScript-Bibliotheken</p>
-                <p>Viele davon sind aber nicht als React-Komponenten entwickelt worden</p>
-            </div>
-            <div class="fragment">
-                <p><b>Beispiele</b></p>
-                <p><em>jQuery</em> und <em>jQuery</em> Plugins wie z.B. <em>Bootstrap</em></p>
-                <p><em>d3</em> für interaktive SVGs und Chart Bibliotheken wie <em>nvd3</em></p>
-            </div>
-        </section>
-
-        <section>
-            <h3>Unser Beispiel: Verteilung der Grüße</h3>
-            <a href="code/schritte/5-third-party/public/index.html" target="_blank">
-                <img src="screenshot-nvd3.png" height="400px">
-            </a>
-            <p><em>nvd3</em> Pie Chart mit <em>d3</em></p>
-        </section>
-
-        <section>
-            <h3>Aufgabe: Einbetten des Pie Charts in eine React-Komponente</h3>
-        </section>
-
-        <!--<section>-->
-            <!--<h3>Herausforderungen?</h3>-->
-            <!--<ol>-->
-                <!--<li>Wie kommen wir an den DOM Knoten der React-Komponente?-->
-                <!--<li>Wie sagen wir React, dass nun NVD3 den Rest macht? Also, dass React nicht mehr neu rendern soll.-->
-                <!--<li>Änderungen des Zustands sollen nach wie vor richtig dargestellt werden-->
-                <!--<li>Ab welchem Zeitpunkt soll NVD3 das Rendern übernehmen?-->
-                <!--<li>Wie können wir aus NVD3 heraus auch wieder andere React-Komponenten beeinflussen?-->
-                <!--<li>Wie räumen wir wieder auf?-->
-            <!--</ol>-->
-        <!--</section>-->
-        <!--<section>-->
-            <!--<h3>Hintergrund: Charts mit NVD3</h3>-->
-            <!--<p>Basiert auf D3.js</p>-->
-            <!--<p>Benötigt svg DOM-Element um sich zu rendern</p>-->
-            <!--<p class="fragment">Stark vereinfachtes Beispiel:</p>-->
-            <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import d3 from 'd3';-->
-<!--import nv from 'nvd3';-->
-
-<!--// Chart erzeugen-->
-<!--const chart = nv.models.pieChart();-->
-<!--// ...Chart Config ausgelassen ...-->
-
-<!--// mit d3 rendern und mit Daten versorgen-->
-<!--const element = document.getElementById('chart');-->
-<!--d3.select(element)-->
-  <!--.datum(data)-->
-  <!--.call(chart);-->
-
-<!--// Callbacks registrieren (z.B. bei Klick auf ein Element)-->
-<!--chart.pie.dispatch.on("elementClick",-->
-                       <!--e => console.log(e.data.label));-->
-            <!--</code></pre>-->
-
-        <!--</section>-->
-
-        <!--<section>-->
-            <!--<h3>Übersicht über den Komponenten-Lifecycle</h3>-->
-            <!--<a href="https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle" target="_blank">-->
-                <!--https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle-->
-            <!--</a>-->
-        <!--</section>-->
-        <!--<section>-->
-            <!--<img src="ai/lifecycle-methods-1.png" height="600px"/>-->
-        <!--</section>-->
-        <!--<section>-->
-            <!--<img src="ai/lifecycle-methods-2.png" height="600px" />-->
-        <!--</section>-->
-        <!--<section>-->
-            <!--<h3>React Lifecycle Methoden</h3>-->
-            <!--<ul>-->
-                <!--<li class="fragment"><code><b>componentDidMount()</b></code>: Komponente wurde gerendert, Elemente sind im DOM (einmalig)</li>-->
-                <!--<li class="fragment"><code><b>componentWillReceiveProps(nextProps)</b></code>: An die Komponente wurden neue Properties übergeben. Die neuen Properties-->
-                    <!--werden als Parameter übergeben</li>-->
-                <!--<li class="fragment"><code><b>shouldComponentUpdate()</b></code>: Entscheidet, ob Komponente erneut gerendert werden soll (default: <code>true</code>)</li>-->
-                <!--<li class="fragment"><code><b>componentWillUnmount()</b></code>: Wird aufgerufen, bevor Komponente aus dem DOM entfernt wird (einmalig)</li>-->
-            <!--</ul>-->
-
-        <!--</section>-->
-
-        <section>
-            <h3>React Chart Komponente #1</h3>
-            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-class Chart extends React.Component {
-    render() {
-        //  we render an empty svg and
-        //  remember the reference to the DOM node
-        return &lt;svg ref={c => this._chart = c}>&lt;/svg>
-    }
-
-    // called directly after first render
-    componentDidMount() {
-        const {data, onSegmentSelected} = this.props;
-
-        // once rendered by react we create the nvd3 chart
-        const chart = createNvd3Chart(this._chart, data);
-
-        // we delegate the label of clicked segment
-        // back to parent component
-        chart.pie.dispatch.on("elementClick",
-                              e => onSegmentSelected(e.data.label));
-    }
-
-    // ...
-}
-       </code></pre>
-        </section>
-
-        <section>
-            <h3>React Chart Komponent #2</h3>
-            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-class Chart extends React.Component {
-    // ...
-
-    // if it returns false, component will not be rendered
-    shouldComponentUpdate() {
-        // once rendered react never renders again
-        return false;
-    }
-
-    // called when properties update
-    componentWillReceiveProps(nextProps) {
-        const {data} = nextProps;
-        // we still get updates of properties making it reactive
-        updateNvd3Chart(this._chart, data);
-    }
-
-    // called just before destroying component
-    componentWillUnmount() {
-        this._d3selection.remove();
-    }
-}
-       </code></pre>
-        </section>
-
         <section>
             <h2>Geschafft ;-)</h2>
             <h3>Vielen Dank für Eure Aufmerksamkeit!</h3>
+            <p>
+                <a href="http://nilshartmann.net">Nils Hartmann</a> / <a href="http://twitter.com/nilshartmann">@nilshartmann</a>
+            </p>
+            <p>
+                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </p>
+
         </section>
 
     </div>
