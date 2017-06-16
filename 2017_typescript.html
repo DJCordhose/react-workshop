@@ -88,7 +88,7 @@
                 <li>Browser öffnen: <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
                 <li>Wenn dort ein Hello-World-Text erscheint ist alles gut
             </ol>
-            <p>Folien: Im geklonten Verzeichnis <code>2017_2_tage.html</code>
+            <p>Folien: Im geklonten Verzeichnis <code>2017_typescript.html</code>
             </p>
         </section>
 
@@ -1318,42 +1318,132 @@ test('it should open detail view on button click', () => {
 
         <section id="t5">
             <h1>Teil V</h1>
-            <h2>Typen-Systeme für React-Anwendungen</h2>
+            <h2>React mit TypeScript entwickeln</h2>
         </section>
 
         <section>
-            <h2>Typen-Systeme???</h2>
-            <p class="fragment">TypeScript erweitert JavaScript um ein Typen-System</p>
-            <p class="fragment">Ein Typen-System ist Vorraussetzung für wartbare Projekte</p>
+            <h2>Hintergrund: TypeScript</h2>
+            <p><em>TypeScript is a superset of JavaScript that compiles to plain JavaScript </em>(<a href="http://www.typescriptlang.org/" target="_blank">http://www.typescriptlang.org/</a>)</p>
+            <ul>
+                <li>Erweitert JavaScript um ein Typen System</li>
+                <li>Jeder gültige JavaScript Code ist auch gültiger TypeScript Code</li>
+                <li>Mittels des TypeScript Compilers wird aus TS Code JavaScript Code</li>
+                <li>Entwickelt von Microsoft (!)</li>
+                <li>Unterstützung in vielen IDEs (z.B. Anzeige von Fehlern, Refactoring, ...) </li>
+            </ul>
         </section>
 
         <section>
-        <h3>Grundlagen mit TypeScript</h3>
+            <h2>Typen-Systeme</h2>
+            <p class="fragment"><em>TypeScript erweitert JavaScript um ein Typen-System</em></p>
+            <p class="fragment">Ein Typen-System ist Voraussetzung für wartbare Projekte:</p>
+            <ul>
+                <li>Erhöht die Verständlichkeit des Codes</li>
+                <li>Erlaubt sicheres Refactoring</li>
+            </ul>
+        </section>
+
+        <section>
+        <h3>TypeScript Grundlagen</h3>
+            <p>Typ-Angaben werden hinter einen Bezeichner geschrieben</p>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// variables can have type information
+// Variablen können Typ-Informationen bekommen
 let foo: string;
 foo = 'yo';
 // Error: number: This type is incompatible with string
 foo = 10;
+               </code></pre>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+// Funktionen
+function sayIt(what: string): string {
+  return `Saying: ${what}`;
+}
 
+sayIt('Klaus'); // ok
+sayIt(10); // error
+</code></pre>
+
+
+        <pre><code class="typescript line-numbers" contenteditable data-trim>
+// Arrow Funktionen
+const sayIt = (what: string): string => `Saying: ${what}`;
+
+sayIt('Moin');
+sayIt(123); // [ts] Argument of type '123' is not assignable to parameter of type 'string'.
+</code></pre>
+        </section>
+        <section>
+            <h2>Typen TODO</h2>
+            <p>Primitive typen</p>
+            <p>null, undefined, void, object</p>
+            <p>array</p>
+            <p>class, interface</p>
+        </section>
+
+        <section>
+            <h2>null und undefined</h2>
+            <p><code>null</code> muss explizit zugelassen werden:</p>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+let city:string = null; //Type 'null' is not assignable to type 'string'.
+
+let optionalCity:string|null = null; // OK
+            </code></pre>
+            <p>Optionale Parameter können mit ? gekennzeichnet werden (erlauben dann auch <code>undefined</code>)</p>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+function greet(name: string, greeting?: string) {
+  console.log(`${greeting || 'Hello'}, {name}`);
+}
+
+greet('Susi', 'Moin')// Moin, Susi
+
+// 2. Parameter ist optional:
+greet('Klaus'); // Hello, Klaus
+
+greet('Peter', null); // Argument of type 'null' is not assignable
+                      // to parameter of type 'string | undefined'.
+            </code></pre>
+
+        </section>
+
+        <section>
+            <h2>Typ-Angaben sind optional  TODO</h2>
+            <p>any, strict</p>
+            <p>Implicit any</p>
+            <p>Fehler, wenn Typ nicht abgeleitet wird</p>
+        </section>
+        <section>
+            <h2>Typen können abgeleitet werden</h2>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+let city = 'Hamburg'; // city ist ein String
+
+city = 42;
+// Fehler: [ts] Type '42' is not assignable to type 'string'.
 </code></pre>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// types can be explicit (parameter) or inferred (return type)
+// Explizite Angabe eines Types (parameter)
+// und abgeleiteter Typ (Return Type der Funktion)
+
 function sayIt(what: string) {
     return `Saying: ${what}`;
 }
-const said: string = sayIt(obj);
+
+const said: string = sayIt('Hello TypeScript'); // ok
+const saidItWrong: number = sayIt('Hello TypeScript'); // error!
+
 
 </code></pre>
+        </section>
+        <section>
+            <h2>Klassen</h2>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 class Sayer {
-    what: string; // type also mandatory
+    what: string; // Typ-Angabe für Felder ist erforderlich
 
-    constructor(what: string) {
+    constructor(what: string) { // Typ-Angabe für Parameter ist erforderlich
         this.what = what;
     }
 
-    // return type if you want to
+    // Angabe des Return-Types optional
     sayIt(): string {
         return `Saying: ${this.what}`;
     }
@@ -1361,6 +1451,74 @@ class Sayer {
 
 </code></pre>
       </section>
+        <section>
+            <h2>Null TODO</h2>
+            <p>Strict null check</p>
+            <p>Optionale Typen?</p>
+        </section>
+        <section>
+            <h2>Eigene Typen</h2>
+            <p>Mit <code>type</code> können eigene Typen gebaut werden:</p>
+                <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+type Sentence = string; // type alias
+function sayIt(what: Sentence) { // . . . }
+sayIt('Moin');
+                </code></pre>
+            <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+// Komplexer Typ
+type Person = {
+	name: string; // Pflicht
+	livesIn?: string; // Optional
+}
+
+const susi: Person = { // OK
+	name: 'Klaus',
+	livesIn: 'Hamburg'
+};
+const klaus: Person = { // OK (livesIn ist optional)
+	name: 'Klaus'
+}
+
+const helmut: Person = {} // Error: Property 'name' is missing
+
+const lukas: Person = { // Error: 'profession' does not exist in type 'Person'.
+	name: 'Lukas',
+	profession: 'Lokführer'
+}
+               </code></pre>
+
+        </section>
+        <section>
+            <h2>Typ Kompatibilität</h2>
+            <em>Im Gegensatz zu Java ("nominal typing") sind bei TypeScript zwei Typen kompatibel,
+                sofern sie <b>dieselbe Struktur</b> haben ("structural typing")</em>
+            <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+type Book = {
+	title: string
+}
+
+type Movie = {
+	title: string
+}
+
+const book:Book = { title: "Das Kapital" };
+const movie:Movie = book; // OK, obwohl Book !== Movie
+               </code></pre>
+        </section>
+        <section>
+            <h2>Generics TODO</h2>
+            <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+            let persons:Array&lt;Person&gt; = [];
+            let movies:Array&lt;Movie&gt; = [];
+
+                persons.push({name: 'Klaus'});
+                movies.push({title: 'Batman'});
+                persons.push({title: 'Casablanca'}) // error
+
+                persons = movies; // error
+                </code></pre>
+        </section>
+
         <section>
             <h3>TypeScript mit React</h3>
             <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
