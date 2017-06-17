@@ -1319,6 +1319,7 @@ test('it should open detail view on button click', () => {
         <section id="t5">
             <h1>Teil V</h1>
             <h2>React mit TypeScript entwickeln</h2>
+          <p><a href="code/schritte/4-test-typescript/public/index.html" target="_blank">Ziel-Anwendung</a></p>
         </section>
 
         <section>
@@ -1401,7 +1402,28 @@ function log(s: string): void { /* ... */ }
             </code></pre>
 
       </section>
+      <section>
+        <h2>Typen können abgeleitet (inferred?) werden</h2>
+        <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+let city = 'Hamburg'; // city ist ein String
 
+city = 42;
+// Fehler: [ts] Type '42' is not assignable to type 'string'.
+</code></pre>
+        <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// Explizite Angabe eines Types (parameter)
+// und abgeleiteter Typ (Return Type der Funktion)
+
+function sayIt(what: string) {
+    return `Saying: ${what}`;
+}
+
+const said: string = sayIt('Hello TypeScript'); // ok
+const saidItWrong: number = sayIt('Hello TypeScript'); // error!
+
+
+</code></pre>
+      </section>
         <section>
             <h2>null und undefined</h2>
             <p><code>null</code> muss explizit zugelassen werden:</p>
@@ -1427,28 +1449,7 @@ greet('Peter', null); // Argument of type 'null' is not assignable
 
         </section>
 
-        <section>
-            <h2>Typen können abgeleitet (inferred?) werden</h2>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-let city = 'Hamburg'; // city ist ein String
 
-city = 42;
-// Fehler: [ts] Type '42' is not assignable to type 'string'.
-</code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// Explizite Angabe eines Types (parameter)
-// und abgeleiteter Typ (Return Type der Funktion)
-
-function sayIt(what: string) {
-    return `Saying: ${what}`;
-}
-
-const said: string = sayIt('Hello TypeScript'); // ok
-const saidItWrong: number = sayIt('Hello TypeScript'); // error!
-
-
-</code></pre>
-        </section>
        <section>
             <h2>Klassen</h2>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
@@ -1496,9 +1497,88 @@ const lukas: Person = {
 
         </section>
       <section>
-        <h2>TODO Typen 2</h2>
-        <p>Intersection Types  Aaa &amp; Bbb       </p>
-        <p>Union types a | b</p>
+        <h2>Function Types</h2>
+        <p>Funktionen können beschrieben werden, um sicherzustellen, dass sie einer definierten Signatur entsprechen</p>
+        <em>(paramter1: type, parameter-n: type) => returnType</em>
+        <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+type CalcOperation = (a: number, b: number) => number;
+
+const AddOperation:CalcOperation = function(a,b) { return a + b };
+const DivideOperation:CalcOperation = function(a,b) { return a / b };
+const SqrtOperation = function (a: number) { return Math.sqrt(a) };
+
+function calculator(operation: CalcOperation, a: number, b: number) {
+  operation(a, b);
+}
+
+calculator(AddOperation, 2, 3); // 5
+calculator(SqrtOperation, 3); // ERROR
+        </code></pre>
+
+      </section>
+      <section>
+        <h2>Intersection Types</h2>
+        <p><em>Intersection Types</em> kombinieren zwei oder mehr Typen zu einem neuen:</p>
+        <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+type Person = { name: string; }
+
+type Musician = Person & {
+  instrument: string;
+}
+
+const klaus: Person = { name: 'Klaus' };
+const hans: Musician = { name: 'Hans',  instrument: 'Guitar' };
+        </code></pre>
+      </section>
+      <section>
+        <h2>Union Types I</h2>
+        <p><em>Union Types</em> beschreiben einen Wert, der <b>einem</b> Typ aus einer Menge von Typen entsprechen muss</p>
+        <p>Verwendet können nur die Eigenschaften, die in <b>allen</b> Typen vorhanden sind:</p>
+        <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+type Musician = { name: string, instrument: string };
+type Programmer = { name: string, language: string };
+
+function sayHello(who: Musician|Programmer): void {
+	console.log(`Hello, ${who.name}`); // OK
+	console.log(`You play ${who.instrument}`);
+		// ERR: Property 'instrument' does not exist on type 'Musician | Programmer'.
+		// ERR: Property 'instrument' does not exist on type 'Programmer'.
+}
+
+sayHello({name: 'Jimmi', instrument: 'Guitar'}); // OK
+sayHello({name: 'Susi', language: 'TypeScript'}); // OK
+sayHello({name: 'Dieter', city: 'Hamburg'}); // ERROR
+
+        </code></pre>
+      </section>
+    <section>
+      <h2>Union Types II</h2>
+      <p>Union Types erlauben <em>typsichere Unterscheidungen</em>:</p>
+        <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+type SPEAK_ACTION = { type: 'SPEAK', sentence: string};
+type SING_ACTION = { type: 'SING', song: string };
+
+function runAction(action: SPEAK_ACTION | SING_ACTION): void {
+  if (action.type === 'SPEAK') {
+    console.log(action.sentence); // OK
+    console.log(action.song);
+      // ERROR: Property 'song' does not exist on type 'SPEAK_ACTION'.
+  } else if (action.type === 'SING') {
+    console.log(action.song); // OK;
+  } else if (action.type === 'DANCE') {
+    // ERROR: Property 'type' does not exist on type 'never'
+  }
+
+  if (action.type === 'DANCE') {
+    // ERROR: Operator '===' cannot be applied to
+    // types '"SING"' and '"DANCE"'.
+  }
+}
+
+runAction({type: 'SPEAK', sentence: 'Hello World'}); // OK
+runAction({type: 'SPEAK', song: 'Final countdown'}) // ERROR
+        </code></pre>
+
       </section>
         <section>
             <h2>Typ Kompatibilität</h2>
@@ -1535,6 +1615,11 @@ persons.push({title: 'Casablanca'}) // error ('title' not in Person)
 persons = movies; // error
       </code></pre>
         </section>
+      <section>
+        <h2>Types vs Interfaces</h2>
+        <p>Vieles, was mit Types geht, geht auch mit Interfaces</p>
+        <p>TODO: wann das eine und wann das andere?</p>
+      </section>
       <section>
         <h2>TODO: Arbeiten mit externen Bibliotheken</h2>
         <p>Typings installieren und verwenden</p>
@@ -1573,6 +1658,50 @@ constructor(props) {
 }
                </code></pre>
         </section>
+      <section>
+        <h2>React Events in TypeScript</h2>
+        <b>TODO!!!!!</b>
+        <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+class GreetingDetail extends React.Component&lt;Props, State> {
+  // . . .
+  updateModel(event: React.SyntheticEvent&lt;HTMLInputElement>) {
+    // 'currentTarget' anstatt 'target' verwenden:
+    const { name, value } = event.currentTarget;
+    // . . .
+  }
+}
+
+        </code></pre>
+
+      </section>
+      <section>
+        <h2>Übung: Eine Komponente auf TypeScript umstellen</h2>
+        <h3><em>Stelle die GreetingDetail Komponente auf TypeScript um</em></h3>
+        <div style="font-size: 80%">
+        <p><b>Hinweis: </b> Bitte arbeite dazu in dem neuen Workspace <code>code/workspace-typescript</code>:</p>
+        <ul>
+        <li>Dieses Verzeichnis enthält die Anwendung aus unserem letzten Schritt, aber in TypeScript implementiert</li>
+        <li>Lediglich das <code>GreetingDetail</code> ist noch in JavaScript implementiert</li>
+          <li>Du kannst den Webpack Server in diesem Verzeichnis ebenfalls mit <code>npm start</code> starten</li>
+          <li>Denk dran, deinen laufenden Webpack Server vorher zu beenden</li>
+        </ul>
+          </div>
+      </section>
+      <section>
+        <h2>Schritte</h2>
+        <ol style="font-size:80%">
+          <li>Bennene <code>GreetingDetail.js</code> in <code>GreetingDetail.tsx</code> um (danach Webpack neu starten)</li>
+          <li>Definiere einen Typen für die Properties und den State und passe die <code>GreetingDetail</code>-Klasse an</li>
+          <li>Füge der Komponente die <code>input</code>-Variable hinzu (Typ: <code>HTMLInputElement</code>)</li>
+          <li>Experimentiere (optional):
+          <ul>
+            <li>Was passiert, wenn Du im <code>GreetingDetail</code> auf eine nicht bekanntes Property zugreifst?</li>
+            <li>Was passiert, wenn Du im <code>GreetingDetail</code> den State mit <code>this.state = { . . .}</code> neu setzt?</code></li>
+            <li>Was passiert wenn Du beim Aufrufen des <code>GreetingDetail</code> (<code>GreetingController</code>) ein zusätzliches Property übergibst?</li>
+          </ul>
+          </li>
+        </ol>
+      </section>
 
         <section id="t6">
             <h1>Teil VI (Überblick)</h1>

@@ -140,10 +140,7 @@
 95
 96
 97
-98
-99
-100
-101</td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+98</td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -226,9 +223,6 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -244,26 +238,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import {Greeting, NewGreeting} from "./types";
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-2 cbranch-no" title="branch not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ></span></span></span></span>
-type Gre<span class="fstat-no" title="function not covered" ><span class="branch-3 cbranch-no" title="branch not covered" >et</span>ingDetailProps =<span class="cstat-no" title="statement not covered" > {<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-    greeting?: Greeting
+&nbsp;
+type Gree<span class="branch-1 cbranch-no" title="branch not covered" >tingDetailProps = {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-2 cbranch-no" title="branch not covered" ></span></span></span></span>
+    gree<span class="fstat-no" title="function not covered" ><span class="branch-3 cbranch-no" title="branch not covered" >ti</span>ng?: Greeting<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
     onSave: (newGreeting: NewGreeting) =&gt; void
 }
-<span class="branch-0 cbranch-no" title="branch not covered" ></span>
-type GreetingDetailState = {
-    name: string,
-    greeting: string<span class="fstat-no" title="function not covered" ><span class="branch-3 cbranch-no" title="branch not covered" ></span></span>
-}<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" ></span>
-export default class GreetingDetail extends React.Component&lt;GreetingDetailProps, GreetingDetailState&gt; {
-<span class="cstat-no" title="statement not covered" >    input?: HT</span>MLInputElement;
 &nbsp;
+type GreetingDetailState = {<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+    name: string,
+    greeting: string
+}<span class="fstat-no" title="function not covered" ><span class="branch-3 cbranch-no" title="branch not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" ></span>
+export d<span class="cstat-no" title="statement not covered" >efault class Greet</span>ingDetail extends React.Component&lt;GreetingDetailProps, GreetingDetailState&gt; {
+    inpu<span class="cstat-no" title="statement not covered" >t?: HTMLInputElem<span class="cstat-no" title="statement not covered" >ent;</span></span>
+<span class="cstat-no" title="statement not covered" ></span>
     render() {
-        const {name, greeting} = this.state;
+<span class="cstat-no" title="statement not covered" >        const </span>{name, greeting} = this.state;
         const saveDisabled = !(name &amp;&amp; greeting);
 &nbsp;
         return (
@@ -287,11 +278,11 @@ export default class GreetingDetail extends React.Component&lt;GreetingDetailPro
                     Save
                 &lt;/button&gt;
             &lt;/div&gt;);
-    }<span class="missing-if-branch" title="if path not taken" >I</span>
-<span class="cstat-no" title="statement not covered" ></span>
+    }
+&nbsp;
     constructor(props: GreetingDetailProps) {
-        super(props);
-        const {name, greeting} = this.props.greeting || {name: '', greeting: ''};
+        <span class="missing-if-branch" title="if path not taken" >I</span>super(props);
+        cons<span class="cstat-no" title="statement not covered" >t {name, greeting} =</span> this.props.greeting || {name: '', greeting: ''};
         this.state = {
             name,
             greeting
@@ -299,20 +290,20 @@ export default class GreetingDetail extends React.Component&lt;GreetingDetailPro
     }
 &nbsp;
     reset() {
-        this.setState({name: '', greeting: ''});<span class="fstat-no" title="function not covered" ></span>
+        this.setState({name: '', greeting: ''});
         if (this.input) {
             this.input.focus();
-        }
+        }<span class="fstat-no" title="function not covered" ></span>
     }
 &nbsp;
     save() {
         const {onSave} = this.props;
         const {name, greeting} = this.state;
         onSave({
-<span class="cstat-no" title="statement not covered" >            name,</span>
+            name,
             greeting
         });
-    }
+    }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
     updateModelDoesNotWorkWithTS(event: React.SyntheticEvent&lt;HTMLInputElement&gt;) {
         // DOES NOT WORK WITH TS:
@@ -349,7 +340,7 @@ export default class GreetingDetail extends React.Component&lt;GreetingDetailPro
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Jun 03 2017 19:14:32 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Jun 17 2017 23:00:46 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../prettify.js"></script>

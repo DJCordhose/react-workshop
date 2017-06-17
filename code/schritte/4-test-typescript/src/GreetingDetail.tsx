@@ -11,8 +11,6 @@ type GreetingDetailState = {
     greeting: string
 }
 
-
-
 export default class GreetingDetail extends React.Component<GreetingDetailProps, GreetingDetailState> {
     input?: HTMLInputElement;
 
