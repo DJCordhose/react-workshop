@@ -1369,16 +1369,38 @@ sayIt(10); // error
 const sayIt = (what: string): string => `Saying: ${what}`;
 
 sayIt('Moin');
-sayIt(123); // [ts] Argument of type '123' is not assignable to parameter of type 'string'.
+sayIt(123); // Error: Argument of type '123' is not assignable
+            // to parameter of type 'string'.
 </code></pre>
         </section>
-        <section>
-            <h2>Typen TODO</h2>
-            <p>Primitive typen</p>
-            <p>null, undefined, void, object</p>
-            <p>array</p>
-            <p>class, interface</p>
-        </section>
+
+      <section>
+        <h2>Eingebaute Typen</h2>
+        <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// string
+let city: string = 'Hamburg';
+
+// boolean
+let isDone: boolean = false;
+
+// number
+let theAnswer: number = 42;
+
+// array (note the [])
+let cities: string[] = ['Hamburg', 'Barcelona'];
+// alternative:
+let languages: Array&lt;string> = ['JavaScript', 'TypeScript'];
+
+// any
+let theUnknown: any = 'Who cares';
+theUnknown = 666; // ok
+theUnknown = true; // ok
+
+// void
+function log(s: string): void { /* ... */ }
+            </code></pre>
+
+      </section>
 
         <section>
             <h2>null und undefined</h2>
@@ -1406,13 +1428,7 @@ greet('Peter', null); // Argument of type 'null' is not assignable
         </section>
 
         <section>
-            <h2>Typ-Angaben sind optional  TODO</h2>
-            <p>any, strict</p>
-            <p>Implicit any</p>
-            <p>Fehler, wenn Typ nicht abgeleitet wird</p>
-        </section>
-        <section>
-            <h2>Typen können abgeleitet werden</h2>
+            <h2>Typen können abgeleitet (inferred?) werden</h2>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 let city = 'Hamburg'; // city ist ein String
 
@@ -1433,7 +1449,7 @@ const saidItWrong: number = sayIt('Hello TypeScript'); // error!
 
 </code></pre>
         </section>
-        <section>
+       <section>
             <h2>Klassen</h2>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 class Sayer {
@@ -1452,18 +1468,9 @@ class Sayer {
 </code></pre>
       </section>
         <section>
-            <h2>Null TODO</h2>
-            <p>Strict null check</p>
-            <p>Optionale Typen?</p>
-        </section>
-        <section>
             <h2>Eigene Typen</h2>
             <p>Mit <code>type</code> können eigene Typen gebaut werden:</p>
-                <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
-type Sentence = string; // type alias
-function sayIt(what: Sentence) { // . . . }
-sayIt('Moin');
-                </code></pre>
+
             <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
 // Komplexer Typ
 type Person = {
@@ -1481,13 +1488,18 @@ const klaus: Person = { // OK (livesIn ist optional)
 
 const helmut: Person = {} // Error: Property 'name' is missing
 
-const lukas: Person = { // Error: 'profession' does not exist in type 'Person'.
+const lukas: Person = {
 	name: 'Lukas',
 	profession: 'Lokführer'
-}
+} // Error: 'profession' does not exist in type 'Person'.
                </code></pre>
 
         </section>
+      <section>
+        <h2>TODO Typen 2</h2>
+        <p>Intersection Types  Aaa &amp; Bbb       </p>
+        <p>Union types a | b</p>
+      </section>
         <section>
             <h2>Typ Kompatibilität</h2>
             <em>Im Gegensatz zu Java ("nominal typing") sind bei TypeScript zwei Typen kompatibel,
@@ -1506,22 +1518,33 @@ const movie:Movie = book; // OK, obwohl Book !== Movie
                </code></pre>
         </section>
         <section>
-            <h2>Generics TODO</h2>
+            <h2>Generics</h2>
+          <p><b>TODO: Beispiel mit Klassen?</b></p>
             <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
-            let persons:Array&lt;Person&gt; = [];
-            let movies:Array&lt;Movie&gt; = [];
+type Person = { name: string };
+type Movie = { title: string };
 
-                persons.push({name: 'Klaus'});
-                movies.push({title: 'Batman'});
-                persons.push({title: 'Casablanca'}) // error
+let persons:Array&lt;Person&gt; = [];
+let movies:Array&lt;Movie&gt; = [];
 
-                persons = movies; // error
-                </code></pre>
+persons.push({name: 'Klaus'});
+movies.push({title: 'Batman'});
+
+persons.push({title: 'Casablanca'}) // error ('title' not in Person)
+
+persons = movies; // error
+      </code></pre>
         </section>
+      <section>
+        <h2>TODO: Arbeiten mit externen Bibliotheken</h2>
+        <p>Typings installieren und verwenden</p>
+      </section>
 
         <section>
             <h3>TypeScript mit React</h3>
+          <p>TODO: import * as React ODER allowSyntheticDefaultImports</p>
             <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+
 class HelloMessage extends React.Component&lt;Props, State> {
   // ...
 }
