@@ -51,6 +51,11 @@
             box-shadow:0 0 0 0 !important;
         }
 
+        .reveal {
+            -ms-touch-action: auto !important;
+            touch-action: auto !important;
+        }
+
     </style>
 
     <!-- Printing and PDF exports -->
@@ -91,6 +96,58 @@ Verständnis für die Herausforderungen moderner, clientseitiger Webanwendungen.
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
+        <section class="todo">
+<pre>
+### Motivation / Setting / Herausforderung:
+* Komplexe, Interaktive App mit Abhägigkeiten
+* Beispiele zeigen wo Counter überall nicht gehen
+    * XING
+    * LinkedIn
+    * Facebook
+* Liste mit Grüßen
+* Counter aller Grüße in Form eines Pie-Charts
+* Verbindung in Beide Richtungen
+    * Hinzufügen der Liste updated Pie-Chart
+    * Click auf Pie-Chart Filtert liste
+
+### Schritte
+* Gewünschte Endanwendung zeigen inkl. Filter-Reset: höchst Interaktiv
+* Nur Express
+    * Loose focus and Scrollposition, no animation
+* Plus JQuery per Script
+    * Listener hin und her
+    * Wo hält man State?
+        * Wie speichert man die Liste?
+* Spa mit Web Components
+    * State immer auf dem Client
+    * Immer noch Listener hin und her
+* React
+* Redux
+* Universal
+
+### Von anderen Talks klauen
+- C64
+- Framework Vergleich
+
+### Links auswerten
+* https://twitter.com/sebmarkbage/status/855282385901936643?s=03
+* http://microservices.io
+* Frontend Architecture for big teams: https://youtu.be/q8jYs79ZW70
+    * https://www.slideshare.net/ChadchapolVittavutka/frontend-architecture-design-for-larger-team-final
+* https://staltz.com/unidirectional-user-interface-architectures.html
+* https://twitter.com/mxstbr/status/865490858967158784
+* https://twitter.com/acdlite/status/868409407356325889?s=03
+* http://vuejsdevelopers.com/2017/05/28/switch-from-react-to-vue-js/
+</pre>
+        </section>
+
+        <section data-markdown class="preparation">
+            <script type="text/template">
+                # Preparation
+
+            </script>
+        </section>
+
         <section>
             <h2>Überblick über moderne (JavaScript-)Frontend-Architektur</h2>
             <h3><a href="https://www.herbstcampus.de/veranstaltung-5928-%C3%9Cberblick-%C3%BCber-moderne-%28javascript-%29frontend-architektur.html?id=5928" target="_blank">
@@ -101,11 +158,6 @@ Verständnis für die Herausforderungen moderner, clientseitiger Webanwendungen.
             <p><small>Folien: <a href="http://djcordhose.github.io/react-workshop/2017_herbstcampus.html">
                 http://djcordhose.github.io/react-workshop/2017_herbstcampus.html</a></small></p>
         </section>
-
-        <!--<section class="todo">-->
-            <!--<pre>-->
-            <!--</pre>-->
-        <!--</section>-->
 
         <section>
             <h2>Was macht Frontend-Architektur schwierig?</h2>
@@ -180,6 +232,11 @@ Verständnis für die Herausforderungen moderner, clientseitiger Webanwendungen.
 <script src="reveal.js/js/reveal.js"></script>
 <script src="lib/jquery-2.2.4.js"></script>
 <script>
+    if (window.location.hostname.indexOf('localhost') !== -1) {
+    } else {
+        // only applies to public version
+        $('.preparation').remove();
+    }
     Reveal.addEventListener( 'ready', function( event ) {
         if (window.location.hostname.indexOf('localhost') !== -1) {
             // only applies to presentation version
