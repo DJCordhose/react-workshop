@@ -98,12 +98,144 @@
         <section>
             <h1>Themen</h1>
             <ol>
+                <li><a href="#optimizeruntime">Optimierungen (I): Rendering</a>
                 <li><a href="#state">Zustands-Management</a>
                 <!--<li><a href="#types">Typen-Systeme für React-Anwendungen</a>-->
                 <li><a href="#third">Integration mit 3rd-Party Bibliotheken</a>
-                <li><a href="#optimize">Laufzeit-Optimierungen</a>
+                <li><a href="#optimize-build">Optimierungen (II): Build</a>
             </ol>
         </section>
+
+      <section id="optimizeruntime">
+        <h2>Optimierungen (I): Rendering</h2>
+      </section>
+
+      <section>
+        <h2>Problem: React rendert immer <b>alles</b></h2>
+      </section>
+
+      <section>
+        <h3>Komponentenhierarchie</h3>
+        <img src="ai/optimize-01-initial.png" />
+      </section>
+      <section>
+        <h3>Rendering <b>aller</b> Komponenten</h3>
+        <img src="ai/optimize-02-after-event.png" />
+      </section>
+
+
+      <section>
+        <h3>Beispiel: SVG Boxes</h3>
+        <a href="code/sandbox/optimize/public" target="_blank">
+          <img src="screenshot_svg.png" height="500px">
+        </a>
+        <p>Eine einzelne Box mit D'n'D verschieben</p>
+      </section>
+
+      <section>
+        <h3>SVG Boxes</h3>
+        <img src="ai/box-app-01-initial.png" />
+      </section>
+      <section>
+        <h3>Rendering <b>aller</b> Komponenten</h3>
+        <img src="ai/box-app-02-after-mouse-event.png" />
+      </section>
+
+      <section>
+        <h2>Change Detection auf der Ebene des Virtual DOM</h2>
+        <p>bei jeder Bewegung der Maus werden alle Boxen neu gerendert</p>
+        <p>Nicht direkt im DOM, sondern in einer leichtgewichtigen Datenstruktur (Virtual DOM)</p>
+        <p>Änderungen im echten DOM werden aus Änderungen im Virtual DOM errechnet</p>
+      </section>
+
+      <section>
+        <h2>Change Detection auf der Ebene des Models</h2>
+        <p><strong>shouldComponentUpdate</strong> ist eine Lifecycle-Methode einer Komponente
+          die diese Prozedur abkürzen kann</p>
+        <p>das alte Modell kann mit dem neuen verglichen werden</p>
+      </section>
+
+      <section>
+        <h3>Die Box Component</h3>
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+class Box extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    // simple check: every change to a box creates a new object
+    const changed = this.props.box !== nextProps.box;
+    return changed;
+  }
+
+  render() {
+    const {box} = this.props;
+    return &lt;rect data-id={box.id} x={box.x} y={box.y}
+                 width="10" height="10"
+                 stroke="black" fill="transparent" strokeWidth="1"/>;
+  }
+}
+               </code></pre>
+      </section>
+
+      <section>
+        <h3>Naiver Code für Modifikation einer Box</h3>
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+updateBox(id, x, y) {
+    const {boxes} = this.state;
+    const modifiedBox = {
+        id,
+        x,
+        y
+    };
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/
+    //            Reference/Global_Objects/Array/slice
+    const boxesBefore = boxes.slice(0, id);
+    const boxesAfter = boxes.slice(id + 1);
+    const modifiedBoxes = [...boxesBefore, modifiedBox, ...boxesAfter];
+    this.setState({
+        boxes: modifiedBoxes
+    });
+}
+               </code></pre>
+        <p><a href="code/sandbox/optimize/src/App.js">Kompletter Code</a></p>
+      </section>
+
+      <section>
+        <h3>Immutable.js</h3>
+        <p>Immutable persistent data collections for Javascript which increase efficiency and simplicity.</p>
+        <p><a href="http://facebook.github.io/immutable-js/" target="_blank">http://facebook.github.io/immutable-js/</a></p>
+        <ul>
+          <li>Bietet List, Set, Map, etc.
+          <li>Jede Modifikaton einer Collection erzeugt ein neues Collection Objekt
+          <li>Kopiert nicht die komplette Collection, sondern effiziente Erzeugung mittels
+            <a href="https://en.wikipedia.org/wiki/Persistent_data_structure" target="_blank">Persistent Data Structures</a>
+        </ul>
+      </section>
+
+      <section>
+        <h3>Mit immutable.js</h3>
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+import {List} from 'immutable';
+
+this.state = {
+    boxes: List(boxes)
+};
+   </code></pre>
+
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+updateBox(id, x, y) {
+    const {boxes} = this.state;
+    const modifiedBox = {
+        id,
+        x,
+        y
+    };
+    const modifiedBoxes = boxes.set(id, modifiedBox);
+    this.setState({
+        boxes: modifiedBoxes
+    });
+}
+               </code></pre>
+        <p><a href="code/sandbox/optimize/src/AppImmutable.js">Kompletter Code</a></p>
+      </section>
 
         <section id="state">
             <h2>Bibliotheken für Zustands-Management</h2>
@@ -427,126 +559,12 @@ class Chart extends React.Component {
 }
        </code></pre>
         </section>
-        <section id="optimize">
-            <h2>Laufzeit-Optimierungen</h2>
-            <!--<p><a href="https://facebook.github.io/react/docs/optimizing-performance.html" target="_blank">https://facebook.github.io/react/docs/optimizing-performance.html</a></p>-->
-        </section>
 
-        <section>
-            <h3>Beispiel: SVG Boxes</h3>
-            <a href="code/sandbox/optimize/public" target="_blank">
-                <img src="screenshot_svg.png" height="500px">
-            </a>
-            <p>Eine einzelne Box mit D'n'D verschieben</p>
+        <section id="optimize-build">
+            <h2>Optimierungen (II): Build</h2>
         </section>
-
       <section>
-        <h3>SVG Boxes</h3>
-        <img src="ai/box-app-01-initial.png" />
-      </section>
-      <section>
-        <h3>Rendering aller Komponenten</h3>
-        <img src="ai/box-app-02-after-mouse-event.png" />
-      </section>
-
-        <section>
-            <h2>Change Detection auf der Ebene des Virtual DOM</h2>
-            <p>bei jeder Bewegung der Maus werden alle Boxen neu gerendert</p>
-            <p>Nicht direkt im DOM, sondern in einer leichtgewichtigen Datenstruktur (Virtual DOM)</p>
-            <p>Änderungen im echten DOM werden aus Änderungen im Virtual DOM errechnet</p>
-        </section>
-
-        <section>
-            <h2>Change Detection auf der Ebene des Models</h2>
-            <p><strong>shouldComponentUpdate</strong> ist eine Lifecycle-Methode einer Komponente
-                die diese Prozedur abkürzen kann</p>
-            <p>das alte Modell kann mit dem neuen verglichen werden</p>
-        </section>
-
-        <section>
-            <h3>Die Box Component</h3>
-            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-class Box extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    // simple check: every change to a box creates a new object
-    const changed = this.props.box !== nextProps.box;
-    return changed;
-  }
-
-  render() {
-    const {box} = this.props;
-    return &lt;rect data-id={box.id} x={box.x} y={box.y}
-                 width="10" height="10"
-                 stroke="black" fill="transparent" strokeWidth="1"/>;
-  }
-}
-               </code></pre>
-        </section>
-
-        <section>
-            <h3>Naiver Code für Modifikation einer Box</h3>
-            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-updateBox(id, x, y) {
-    const {boxes} = this.state;
-    const modifiedBox = {
-        id,
-        x,
-        y
-    };
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/
-    //            Reference/Global_Objects/Array/slice
-    const boxesBefore = boxes.slice(0, id);
-    const boxesAfter = boxes.slice(id + 1);
-    const modifiedBoxes = [...boxesBefore, modifiedBox, ...boxesAfter];
-    this.setState({
-        boxes: modifiedBoxes
-    });
-}
-               </code></pre>
-            <p><a href="code/sandbox/optimize/src/App.js">Kompletter Code</a></p>
-        </section>
-
-        <section>
-            <h3>Immutable.js</h3>
-            <p>Immutable persistent data collections for Javascript which increase efficiency and simplicity.</p>
-            <p><a href="http://facebook.github.io/immutable-js/" target="_blank">http://facebook.github.io/immutable-js/</a></p>
-            <ul>
-                <li>Bietet List, Set, Map, etc.
-                <li>Jede Modifikaton einer Collection erzeugt ein neues Collection Objekt
-                <li>Kopiert nicht die komplette Collection, sondern effiziente Erzeugung mittels
-                    <a href="https://en.wikipedia.org/wiki/Persistent_data_structure" target="_blank">Persistent Data Structures</a>
-            </ul>
-        </section>
-
-        <section>
-            <h3>Mit immutable.js</h3>
-            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-import {List} from 'immutable';
-
-this.state = {
-    boxes: List(boxes)
-};
-   </code></pre>
-
-            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-updateBox(id, x, y) {
-    const {boxes} = this.state;
-    const modifiedBox = {
-        id,
-        x,
-        y
-    };
-    const modifiedBoxes = boxes.set(id, modifiedBox);
-    this.setState({
-        boxes: modifiedBoxes
-    });
-}
-               </code></pre>
-            <p><a href="code/sandbox/optimize/src/AppImmutable.js">Kompletter Code</a></p>
-        </section>
-
-        <section>
-            <h2>Build-Optimierungen</h2>
+        <h3>Produktionsbuild</h3>
             <p>Minifizieren, Optimieren und alle React-Warnungen herauskompilieren:</p>
             <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
 webpack --optimize-minimize --define process.env.NODE_ENV=\"'production'\"
