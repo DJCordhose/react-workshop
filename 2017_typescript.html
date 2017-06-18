@@ -1415,7 +1415,7 @@ city = 42;
 // und abgeleiteter Typ (Return Type der Funktion)
 
 function sayIt(what: string) {
-    return `Saying: ${what}`;
+  return `Saying: ${what}`;
 }
 
 const said: string = sayIt('Hello TypeScript'); // ok
@@ -1424,9 +1424,21 @@ const saidItWrong: number = sayIt('Hello TypeScript'); // error!
 
 </code></pre>
       </section>
+      <section>
+        <h2>Strict Mode</h2>
+        <ul>
+          <li>seit TypeScript 2.3</li>
+          <li>Shortcut u.a. für:
+          <ul>
+          <li><b>noImplicitAny</b>: <code>any</code> muss explizit hingeschrieben werden</li>
+          <li><b>strictNullChecks</b>: Null muss explizit erlaubt werden (z.B. bei Rückgabewerten)</li>
+          </ul></li>
+          <li>Empfehlung: für neue Projekte einschalten, sonst Schrittweise</li>
+        </ul>
+      </section>
         <section>
             <h2>null und undefined</h2>
-            <p><code>null</code> muss explizit zugelassen werden:</p>
+            <p><code>null</code> muss explizit zugelassen werden (<em>strictNullChecks</em>):</p>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 let city:string = null; //Type 'null' is not assignable to type 'string'.
 
@@ -1454,16 +1466,16 @@ greet('Peter', null); // Argument of type 'null' is not assignable
             <h2>Klassen</h2>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 class Sayer {
-    what: string; // Typ-Angabe für Felder ist erforderlich
+  what: string; // Typ-Angabe für Felder ist erforderlich
 
-    constructor(what: string) { // Typ-Angabe für Parameter ist erforderlich
-        this.what = what;
-    }
+  constructor(what: string) { // Typ-Angabe für Parameter ist erforderlich
+    this.what = what;
+  }
 
-    // Angabe des Return-Types optional
-    sayIt(): string {
-        return `Saying: ${this.what}`;
-    }
+  // Angabe des Return-Types optional
+  sayIt(): string {
+    return `Saying: ${this.what}`;
+  }
 }
 
 </code></pre>
@@ -1499,7 +1511,7 @@ const lukas: Person = {
       <section>
         <h2>Function Types</h2>
         <p>Funktionen können beschrieben werden, um sicherzustellen, dass sie einer definierten Signatur entsprechen</p>
-        <em>(paramter1: type, parameter-n: type) => returnType</em>
+        <em>(parameter1: type, parameter-n: type) => returnType</em>
         <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
 type CalcOperation = (a: number, b: number) => number;
 
@@ -1512,7 +1524,7 @@ function calculator(operation: CalcOperation, a: number, b: number) {
 }
 
 calculator(AddOperation, 2, 3); // 5
-calculator(SqrtOperation, 3); // ERROR
+calculator(SqrtOperation, 9); // ERROR
         </code></pre>
 
       </section>
@@ -1539,10 +1551,10 @@ type Musician = { name: string, instrument: string };
 type Programmer = { name: string, language: string };
 
 function sayHello(who: Musician|Programmer): void {
-	console.log(`Hello, ${who.name}`); // OK
-	console.log(`You play ${who.instrument}`);
-		// ERR: Property 'instrument' does not exist on type 'Musician | Programmer'.
-		// ERR: Property 'instrument' does not exist on type 'Programmer'.
+  console.log(`Hello, ${who.name}`); // OK
+  console.log(`You play ${who.instrument}`);
+    // ERR: Property 'instrument' does not exist on type 'Musician | Programmer'.
+    // ERR: Property 'instrument' does not exist on type 'Programmer'.
 }
 
 sayHello({name: 'Jimmi', instrument: 'Guitar'}); // OK
@@ -1580,6 +1592,12 @@ runAction({type: 'SPEAK', song: 'Final countdown'}) // ERROR
         </code></pre>
 
       </section>
+      <section>
+        <h2>Advanced Types</h2>
+        <p>TODO? Wirklich rein?</p>
+        <p>ReadOnly</p>
+        <p>Partial</p>
+      </section>
         <section>
             <h2>Typ Kompatibilität</h2>
             <em>Im Gegensatz zu Java ("nominal typing") sind bei TypeScript zwei Typen kompatibel,
@@ -1599,7 +1617,7 @@ const movie:Movie = book; // OK, obwohl Book !== Movie
         </section>
         <section>
             <h2>Generics</h2>
-          <p><b>TODO: Beispiel mit Klassen?</b></p>
+          <p>Generische Typen verwenden</p>
             <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
 type Person = { name: string };
 type Movie = { title: string };
@@ -1613,7 +1631,15 @@ movies.push({title: 'Batman'});
 persons.push({title: 'Casablanca'}) // error ('title' not in Person)
 
 persons = movies; // error
+
       </code></pre>
+          <p>Eigene generische Typen</p>
+          <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+type Nullable&lt;T> = T|null;
+
+const nullPerson:Nullable&lt;Person> = null; // OK
+const peter:Nullable&lt;Person> = {name: 'Peter'}; // OK
+          </code></pre>
         </section>
       <section>
         <h2>Types vs Interfaces</h2>
@@ -1626,38 +1652,78 @@ persons = movies; // error
       </section>
 
         <section>
-            <h3>TypeScript mit React</h3>
-          <p>TODO: import * as React ODER allowSyntheticDefaultImports</p>
+            <h2>React-Komponenten mit TypeScript</h2>
+            <em>State und Properties von Komponenten werden mit Typen beschrieben</em>
+        </section>
+      <section>
+        <h2>Vorraussetzungen</h2>
+        <ul>
+        <li>React Type Deklarationen installieren:
+        <pre><code data-trim contenteditable class="line-numbers bash" data-leftpad>
+npm install --save @types/react @types/react-dom
+        </code></pre>
+        </li>
+        <li>(Externe) Module, die kein Default-Export haben müssen mit <code>import *</code> importiert werden:
+        <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+// JavaScript/Babel:
+import React from 'react';
+
+// TypeScript
+import * as React from 'react';
+        </code></pre>
+        </li>
+          <li>Dateien, die JSX-Code enthalten, müssen mit <code>.tsx</code> enden</li>
+          <li>Compiliert wird mit TypeScript (statt Babel). Integration in Webpack mit <a href="https://github.com/s-panferov/awesome-typescript-loader" target="_blank"><code>awesome-typescript-loader</code></a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Getypte React Komponenten</h2>
+        <p><code>React.Component</code> ist eine generische Klasse, die einen Typ für Properties und State erwartet</p>
             <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
 
-class HelloMessage extends React.Component&lt;Props, State> {
+class GreetingDetail extends React.Component&lt;Props, State> {
   // ...
 }
             </code></pre>
             <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+type Greeting = {name: string, greeting: string};
 type Props = {
-    greeting: string;
-    repeat?: boolean;
-};
+    greeting?: Greeting,
+    onSave: (newGreeting: NewGreeting) => void
+}
 
 type State = {
-    greeting: string;
+    name: string,
+    greeting: string
 }
             </code></pre>
 
-            <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
-constructor(props) {
+
+        </section>
+      <section>
+        <h3>Typsicherheit in React Komponenten</h3>
+        <p>Properties und State sind typsicher</p>
+        <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+constructor(props: Props) {
     super(props);
+
+    this.state = { name: '', greeting: ''} // OK
+
     // ERROR: Object literal may only specify known properties,
     // and 'aha' does not exist in type 'Readonly&lt;State>'
-    this.state = {greeting: this.props.greeting, aha: 10};
+    this.state = {name: '', greeting: '', aha: 10};
 
     // ERROR: Cannot assign to 'greeting' because
     // it is a constant or a read-only property.
     this.state.greeting = 'no way';
 }
+
+render() {
+  // ERROR: Property 'nothere' does not exist on type...
+  return &lt;div>{this.props.nothere}&lt;/iv>;
+}
                </code></pre>
-        </section>
+      </section>
       <section>
         <h2>React Events in TypeScript</h2>
         <b>TODO!!!!!</b>
@@ -1673,6 +1739,10 @@ class GreetingDetail extends React.Component&lt;Props, State> {
 
         </code></pre>
 
+      </section>
+      <section>
+        <h2>TODO: Functional Components</h2>
+        <p>React.SFC</p>
       </section>
       <section>
         <h2>Übung: Eine Komponente auf TypeScript umstellen</h2>
