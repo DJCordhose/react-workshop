@@ -82,6 +82,13 @@
 Zeiten:
 Teil 1: 10 Minuten
 -->
+        <section data-markdown class="preparation">
+            <script type="text/template">
+# Vorbereitung
+- Server Starten (Demos brauchen den)
+            </script>
+        </section>
+
 
         <section>
             <h1>Fortgeschrittene React-Patterns</h1>
@@ -449,7 +456,7 @@ updateBox(id, x, y) {
         </section>
 
         <section>
-            <h3>Aufgabe: Einbetten des Pie Charts in eine React-Komponente</h3>
+            <h3>Aufgabe: Einbetten des d3/nvd3 Pie Charts in eine React-Komponente</h3>
         </section>
 
         <!--<section>-->
@@ -524,15 +531,13 @@ class Chart extends React.Component {
 
     // called directly after first render
     componentDidMount() {
-        const {data, onSegmentSelected} = this.props;
-
         // once rendered by react we create the nvd3 chart
-        const chart = createNvd3Chart(this._chart, data);
+        const chart = createNvd3Chart(this._chart, this.props.data);
 
         // we delegate the label of clicked segment
         // back to parent component
         chart.pie.dispatch.on("elementClick",
-                              e => onSegmentSelected(e.data.label));
+                              e => this.props.onSegmentSelected(e.data.label));
     }
 
     // ...
@@ -682,6 +687,11 @@ class AsyncComponent extends React.Component {
 <script src="reveal.js/js/reveal.js"></script>
 <script src="lib/jquery-2.2.4.js"></script>
 <script>
+    if (window.location.hostname.indexOf('localhost') !== -1) {
+    } else {
+        // only applies to public version
+        $('.preparation').remove();
+    }
     Reveal.addEventListener( 'ready', function( event ) {
         if (window.location.hostname.indexOf('localhost') !== -1) {
             // only applies to presentation version
