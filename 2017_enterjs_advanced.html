@@ -78,6 +78,11 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
+<!--
+Zeiten:
+Teil 1: 10 Minuten
+-->
+
         <section>
             <h1>Fortgeschrittene React-Patterns</h1>
             <h2><a href="https://www.enterjs.de/abstracts#fortgeschrittene-patterns-fur-react-anwendungen" target="_blank">enterjs 2017</a></h2>
@@ -111,17 +116,17 @@
       </section>
 
       <section>
-        <h2>Problem: React rendert immer <b>alles</b></h2>
+        <h2>Problem: React rendert oft <b>zu viel</b></h2>
       </section>
 
-      <section>
-        <h3>Komponentenhierarchie</h3>
-        <img src="ai/optimize-01-initial.png" />
-      </section>
-      <section>
-        <h3>Rendering <b>aller</b> Komponenten</h3>
-        <img src="ai/optimize-02-after-event.png" />
-      </section>
+      <!--<section>-->
+        <!--<h3>Komponentenhierarchie</h3>-->
+        <!--<img src="ai/optimize-01-initial.png" />-->
+      <!--</section>-->
+      <!--<section>-->
+        <!--<h3>Rendering <b>aller</b> Komponenten</h3>-->
+        <!--<img src="ai/optimize-02-after-event.png" />-->
+      <!--</section>-->
 
 
       <section>
@@ -153,6 +158,8 @@
         <p><strong>shouldComponentUpdate</strong> ist eine Lifecycle-Methode einer Komponente
           die diese Prozedur abkürzen kann</p>
         <p>das alte Modell kann mit dem neuen verglichen werden</p>
+          <p>Das reduziert das Neu-Rendering auf genau die <strong>notwendigen Elemente</strong></p>
+          <p>Macht nur Sinn, wenn der Check auf Modell-Änderung sehr billig ist, typischerweise <em><strong>===</strong></em></p>
       </section>
 
       <section>

@@ -25,11 +25,12 @@ function createBoxes(number) {
     return boxes;
 }
 
-const boxes = createBoxes(50);
+const boxes = createBoxes(5000);
 
 if (process.env.NODE_ENV === 'production') {
     console.log('production');
 }
+console.log(global);
 console.log(process.env.NODE_ENV);
 
 const mountNode: HTMLElement = document.getElementById('mount');
