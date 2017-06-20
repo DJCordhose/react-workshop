@@ -1,9 +1,14 @@
+const webpack = require('webpack');
+
 module.exports = {
     entry: "./src/main.js",
     output: {
         path: __dirname + '/public/dist-dev/',
         filename: "main.js",
-        publicPath: 'dist/'
+        publicPath: 'dist-dev/',
+        // https://github.com/webpack/webpack/issues/4861#issuecomment-304269150
+        // https://webpack.js.org/configuration/output/#output-chunkfilename
+        chunkFilename: '[name]-[chunkhash].js'
     },
     module: {
         rules: [
@@ -14,5 +19,8 @@ module.exports = {
             }
         ]
     },
-    devtool: 'inline-source-map'
+    devtool: 'inline-source-map',
+    plugins: [
+        new webpack.optimize.ModuleConcatenationPlugin()
+    ]
 };

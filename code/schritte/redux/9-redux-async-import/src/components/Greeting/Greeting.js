@@ -8,7 +8,7 @@ import {MODE_MASTER} from '../../actions';
 class AsyncGreetingDetail extends React.Component {
 
     loadGreetingDetail() {
-        import('./GreetingDetail').then(GreetingDetailModule => {
+        import(/* webpackChunkName: "greeting" */ './GreetingDetail').then(GreetingDetailModule => {
             this.GreetingDetail = GreetingDetailModule.default;
             this.forceUpdate();
         });

@@ -652,7 +652,7 @@ webpack -p
             <pre><code class="javascript" data-trim>
 class AsyncComponent extends React.Component {
     componentDidMount() {
-        import('./Component').then(ComponentModule => {
+        import(/* webpackChunkName: "component" */ './Component').then(ComponentModule => {
             this.Component = ComponentModule.default;
             this.forceUpdate();
         });
