@@ -668,6 +668,36 @@ class AsyncComponent extends React.Component {
         </section>
 
         <section>
+            <h3>Externals</h3>
+            <p>Allgemeine Bibliotheken können von CDNs geladen werden und landen nicht im Webpack build</p>
+            <p>Vorteil: Allgemeines Caching (sowohl im Browser als auch in mittleren Schichten) , mehrere parallele Requests</p>
+            <pre><code class="javascript" data-trim>
+externals: {
+    "react": "React",
+    "react-dom": "ReactDOM",
+    "prop-types": "PropTypes",
+    "d3": "d3",
+    "nvd3": "nv"
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Prod-Build Größe #1: Mit allen Abhängigkeiten</h3>
+            <img src="screenshots/screenshot-dist.png">
+        </section>
+
+        <section>
+            <h3>Prod-Build Größe #2: Ohne React</h3>
+            <img src="screenshots/screenshot-dist-no-react.png">
+        </section>
+
+        <section>
+            <h3>Prod-Build Größe #3: Ohne externe Abhängigkeiten</h3>
+            <img src="screenshots/screenshot-dist-minimal.png">
+        </section>
+
+        <section>
             <h2>Geschafft ;-)</h2>
             <h3>Vielen Dank für Eure Aufmerksamkeit!</h3>
             <p>
