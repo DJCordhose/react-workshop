@@ -1396,6 +1396,7 @@ let languages: Array&lt;string> = ['JavaScript', 'TypeScript'];
 let theUnknown: any = 'Who cares';
 theUnknown = 666; // ok
 theUnknown = true; // ok
+let a: number = theUnknown; // ok
 
 // void
 function log(s: string): void { /* ... */ }
@@ -1740,7 +1741,6 @@ render() {
       </section>
       <section>
         <h2>React Events in TypeScript</h2>
-        <b>TODO!!!!!</b>
         <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
 class GreetingDetail extends React.Component&lt;Props, State> {
   // . . .
@@ -1755,8 +1755,34 @@ class GreetingDetail extends React.Component&lt;Props, State> {
 
       </section>
       <section>
-        <h2>TODO: Functional Components</h2>
-        <p>React.SFC</p>
+        <h2>Functional Components</h2>
+        <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+type GreetingMasterProps = {
+    greetings: Greeting[]
+    onAdd: () => void
+};
+        </code></pre>
+          <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+const GreetingMaster = (props: GreetingMasterProps) => {
+    const {greetings, onAdd} = props;
+    // . . .
+}
+
+        </code></pre>
+          <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+// or
+const GreetingMaster = ({greetings, onAdd}: GreetingMasterProps) => {
+    // . . .
+}
+
+        </code></pre>
+          <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+// or
+const GreetingMaster: React.SFC&lt;GreetingMasterProps> = props => {
+    const {greetings, onAdd} = props;
+    // . . .
+}
+        </code></pre>
       </section>
       <section>
         <h2>Übung: Eine Komponente auf TypeScript umstellen</h2>

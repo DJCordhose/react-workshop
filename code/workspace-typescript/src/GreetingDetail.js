@@ -64,6 +64,7 @@ export default class GreetingDetail extends React.Component {
     }
 
     updateModel(event) {
+        // in TypeScript: this.setState({ [event.currentTarget.name as any]: event.currentTarget.value });
         this.setState({[event.target.name]: event.target.value});
     }
 }

@@ -6,6 +6,8 @@ type GreetingMasterProps = {
     onAdd: () => void
 };
 
+// const GreetingMaster: React.SFC<GreetingMasterProps> = props => {
+// or
 const GreetingMaster = (props: GreetingMasterProps) => {
     const {greetings, onAdd} = props;
     const body = greetings.map(greeting => <tr key={greeting.id}><td>{greeting.name}</td><td>{greeting.greeting}</td></tr>);
