@@ -1403,7 +1403,7 @@ function log(s: string): void { /* ... */ }
 
       </section>
       <section>
-        <h2>Typen können abgeleitet (inferred?) werden</h2>
+        <h2>Typen können abgeleitet (inferred) werden</h2>
         <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 let city = 'Hamburg'; // city ist ein String
 
@@ -1427,13 +1427,14 @@ const saidItWrong: number = sayIt('Hello TypeScript'); // error!
       <section>
         <h2>Strict Mode</h2>
         <ul>
-          <li>seit TypeScript 2.3</li>
+          <li><b>strict</b>: seit TypeScript 2.3</li>
           <li>Shortcut u.a. für:
           <ul>
           <li><b>noImplicitAny</b>: <code>any</code> muss explizit hingeschrieben werden</li>
           <li><b>strictNullChecks</b>: Null muss explizit erlaubt werden (z.B. bei Rückgabewerten)</li>
           </ul></li>
           <li>Empfehlung: für neue Projekte einschalten, sonst Schrittweise</li>
+            <p><a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html" target="_blank">https://www.typescriptlang.org/docs/handbook/compiler-options.html</a></p>
         </ul>
       </section>
         <section>
@@ -1482,7 +1483,7 @@ class Sayer {
       </section>
         <section>
             <h2>Eigene Typen</h2>
-            <p>Mit <code>type</code> können eigene Typen gebaut werden:</p>
+            <p>Mit <code>type</code> können eigene Typen defniert werden:</p>
 
             <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
 // Komplexer Typ
@@ -1508,6 +1509,8 @@ const lukas: Person = {
                </code></pre>
 
         </section>
+
+<!--
       <section>
         <h2>Function Types</h2>
         <p>Funktionen können beschrieben werden, um sicherzustellen, dass sie einer definierten Signatur entsprechen</p>
@@ -1598,6 +1601,7 @@ runAction({type: 'SPEAK', song: 'Final countdown'}) // ERROR
         <p>ReadOnly</p>
         <p>Partial</p>
       </section>
+-->
         <section>
             <h2>Typ Kompatibilität</h2>
             <em>Im Gegensatz zu Java ("nominal typing") sind bei TypeScript zwei Typen kompatibel,
@@ -1641,14 +1645,24 @@ const nullPerson:Nullable&lt;Person> = null; // OK
 const peter:Nullable&lt;Person> = {name: 'Peter'}; // OK
           </code></pre>
         </section>
+<!--
       <section>
         <h2>Types vs Interfaces</h2>
         <p>Vieles, was mit Types geht, geht auch mit Interfaces</p>
         <p>TODO: wann das eine und wann das andere?</p>
       </section>
+-->
       <section>
-        <h2>TODO: Arbeiten mit externen Bibliotheken</h2>
+        <h2>Arbeiten mit externen Bibliotheken</h2>
         <p>Typings installieren und verwenden</p>
+              <ul>
+                  <li>Typings sind optional, können aber über zusätzliches Deklarations-File hinzugefügt werden
+                  <li>Typings für Kern-Bibliotheken kommen mit TypeScript Compiler
+                  <li>Manche Bibliotheken werden bereits mit TypeScript Deklarations-Files ausgeliefert (z.B. Redux)
+                  <li>Typen können über <a href="https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/" target="_blank">npm</a> installiert werden und sind dann ohne weiter Schritte nutzbar
+
+                          (z.B. <em>npm install @types/react --save</em>)
+              </ul>
       </section>
 
         <section>
