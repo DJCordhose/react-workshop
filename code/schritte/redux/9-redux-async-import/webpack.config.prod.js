@@ -8,7 +8,7 @@ module.exports = {
         publicPath: 'dist/',
         // https://github.com/webpack/webpack/issues/4861#issuecomment-304269150
         // https://webpack.js.org/configuration/output/#output-chunkfilename
-        chunkFilename: '[name]-[chunkhash].js'
+        chunkFilename: '[name].js'
     },
     module: {
         rules: [
