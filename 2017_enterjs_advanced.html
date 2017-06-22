@@ -296,7 +296,7 @@ updateBox(id, x, y) {
         </section>
 
         <section>
-            <img src="redux-03-resulting-redux-architecture.png" style="border:0;box-shadow:0 0 0 0"/>
+            <img src="redux-04-react-to-redux-resulting-architecture.png" style="border:0;box-shadow:0 0 0 0"/>
         </section>
 
         <section>
@@ -601,13 +601,16 @@ class Chart extends React.Component {
             <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
 webpack --optimize-minimize --define process.env.NODE_ENV=\"'production'\"
             </code></pre>
-            <p><a href="http://lisperator.net/uglifyjs/" target="_blank">Nutzt Uglify</a></p>
-            <p>Oder als Kurzform:</p>
-            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+        <p style="font-size:80%">Oder als Kurzform:</p>
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
 webpack -p
             </code></pre>
+            <p style="font-size:80%">(<a href="http://lisperator.net/uglifyjs/" target="_blank">Nutzt Uglify</a>)</p>
             <p><a href="https://webpack.js.org/guides/production-build/" target="_blank">https://webpack.js.org/guides/production-build/</a></p>
-            <p style="font-size:80%">(<code>NODE_ENV="production"</code> wird nicht in der <code>webpack.config</code> gesetzt!)</p>
+        <p>SourceMaps in eigene Datei schreiben (Webpack Konfiguration):</p>
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+          devtool: 'source-map'
+        </code></pre>
 
         </section>
 
@@ -623,6 +626,7 @@ webpack -p
 "presets": [["es2015", { "modules": false }]
             </code></pre>
                 </li>
+              <li><a href="https://webpack.js.org/guides/tree-shaking/" target="_blank">https://webpack.js.org/guides/tree-shaking/</a> </li>
             </ul>
         </section>
 
@@ -706,7 +710,7 @@ externals: {
         </section>
 
         <section>
-            <h3>Dev-Build Größe</h3>
+          <h3>Dev-Build Größe: Ohne Optimierungen</h3>
             <img src="screenshots/screenshot-dist-dev.png">
         </section>
 
@@ -721,13 +725,14 @@ externals: {
         </section>
 
         <section>
-            <h3>Prod-Build Größe #3: Ohne externe Abhängigkeiten</h3>
+            <h3>Prod-Build Größe #3: Ohne externe Abhängigkeiten (D3, NVD3)</h3>
             <img src="screenshots/screenshot-dist-minimal.png">
         </section>
 
         <section>
             <h2>Geschafft ;-)</h2>
             <h3>Vielen Dank für Eure Aufmerksamkeit!</h3>
+          <h3><b><em>Fragen ?</em></b></h3>
             <p>
                 <a href="http://nilshartmann.net">Nils Hartmann</a> / <a href="http://twitter.com/nilshartmann">@nilshartmann</a>
             </p>
