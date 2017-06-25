@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Frontend-Architektur</title>
+    <title>Frontend Architecture</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -98,54 +98,16 @@ Verständnis für die Herausforderungen moderner, clientseitiger Webanwendungen.
 
         <section class="todo">
 <pre>
-### Motivation / Setting / Herausforderung:
-* Häufiges Missverständnis: Webapp vs Web Application
-* Komplexe, Interaktive App mit Abhägigkeiten
-* Beispiele zeigen wo Counter überall nicht gehen
-    * XING
-    * LinkedIn
-    * Facebook
-* Liste mit Grüßen
-* Counter aller Grüße in Form eines Pie-Charts
-* Verbindung in Beide Richtungen
-    * Hinzufügen der Liste updated Pie-Chart
-    * Click auf Pie-Chart Filtert liste
+Das hier auf Englisch
 
-### Schritte
-* Gewünschte Endanwendung zeigen inkl. Filter-Reset: höchst Interaktiv
-* Nur Express
-    * Loose focus and Scrollposition, no animation
-* Optional so etwas wie Dash: https://medium.com/@plotlygraphs/introducing-dash-5ecf7191b503
-* Plus JQuery per Script
-    * Listener hin und her
-    * Wo hält man State?
-        * Wie speichert man die Liste?
-* Spa mit Web Components
-    * State immer auf dem Client
-    * Immer noch Listener hin und her
-* React
-* Redux
-* Universal
-
-### MicroService-Ansatz
-* Wie baut man eine komplexe App aus mehreren Modulen zusammen?
-  * Integriert: Tab innerhalb einer App
-  * Lazy / On Demand: Tab lädt Modul nach
-  * Integraion über Link: Tab mit externem Link lädt neue Anwendung mit gleicher Navigation
-
-### Von anderen Talks klauen
-- C64
-- Framework Vergleich
-
-### Links auswerten
-* https://twitter.com/sebmarkbage/status/855282385901936643?s=03
-* http://microservices.io
-* Frontend Architecture for big teams: https://youtu.be/q8jYs79ZW70
-    * https://www.slideshare.net/ChadchapolVittavutka/frontend-architecture-design-for-larger-team-final
-* https://staltz.com/unidirectional-user-interface-architectures.html
-* https://twitter.com/mxstbr/status/865490858967158784
-* https://twitter.com/acdlite/status/868409407356325889?s=03
-* http://vuejsdevelopers.com/2017/05/28/switch-from-react-to-vue-js/
+Based on:
+* 2017_herbstcampus.html
+* http://djcordhose.github.io/javascript-web-frameworks/2017.html#
+* http://djcordhose.github.io/architecture/2016-c64-web-architecture.html#/
+  * plus letzter Teil MicroServices
+    - BackendForFrontend (API Gateway)
+    - GraphQL als single Entry Point
+  * inkl. the Doctor is In
 </pre>
         </section>
 
@@ -157,7 +119,7 @@ Verständnis für die Herausforderungen moderner, clientseitiger Webanwendungen.
         </section>
 
         <section>
-            <h2>Überblick über moderne (JavaScript-)Frontend-Architektur</h2>
+            <h2>Frontend Architecture</h2>
             <h3><a href="https://www.herbstcampus.de/veranstaltung-5928-%C3%9Cberblick-%C3%BCber-moderne-%28javascript-%29frontend-architektur.html?id=5928" target="_blank">
                 Herbstcampus 2017</a></h3>
             <p>
