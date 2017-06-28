@@ -12,7 +12,7 @@ type GreetingDetailState = {
 }
 
 export default class GreetingDetail extends React.Component<GreetingDetailProps, GreetingDetailState> {
-    input?: HTMLInputElement;
+    input?: HTMLInputElement|null;
 
     render() {
         const {name, greeting} = this.state;
@@ -64,22 +64,6 @@ export default class GreetingDetail extends React.Component<GreetingDetailProps,
             name,
             greeting
         });
-    }
-
-    updateModelDoesNotWorkWithTS(event: React.SyntheticEvent<HTMLInputElement>) {
-        // DOES NOT WORK WITH TS:
-        // this.setState({ [event.currentTarget.name]: event.currentTarget.value });
-
-        // EVEN THIS WOULD NOT WORK:
-        // const prop: keyof GreetingDetailState = ...;
-        // this.setState({ [prop]: event.currentTarget.value });
-
-        // see ==>
-        // https://github.com/Microsoft/TypeScript/issues/13948
-        // https://github.com/Microsoft/TypeScript/issues/15534
-
-        // This would work:
-        this.setState({ ...this.state, [event.currentTarget.name]: event.currentTarget.value })
     }
 
     updateModel(event: React.SyntheticEvent<HTMLInputElement>) {
