@@ -4,11 +4,15 @@ const BACKEND_URL = 'http://localhost:7000/greetings';
 
 export default class GreetingDisplayController extends React.Component {
     componentDidMount() {
-        this.loadGreeting();
+        this.loadGreeting(this.props);
     }
 
-    loadGreeting() {
-        const {match} = this.props;
+    componentWillReceiveProps(nextProps) {
+        this.loadGreeting(nextProps);
+    }
+
+    loadGreeting(props) {
+        const {match} = props;
 
         fetch(`${BACKEND_URL}/${match.params.greetingId}`)
             .then(response => response.json())
