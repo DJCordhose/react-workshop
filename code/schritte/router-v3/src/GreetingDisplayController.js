@@ -12,7 +12,7 @@ export default class GreetingDisplayController extends React.Component {
     }
 
     loadGreeting(props) {
-        const {params} = this.props;
+        const {params} = props;
 
         fetch(`${BACKEND_URL}/${params.greetingId}`)
             .then(response => response.json())
