@@ -716,19 +716,22 @@ export default function Greet(props) {
 // Mit Destructuring
 export default function Greet({greeting, name}) {
   return (
-      <div>
-          <h1>{greeting}</h1>
-          <h2>{name}</h2>
-      </div>
+      &lt;div>
+          &lt;h1>{greeting}&lt;/h1>
+          &lt;h2>{name}&lt;/h2>
+      &lt;/div>
   );
 }
 </code></pre>
 <pre class="fragment"><code class="javascript" contenteditable data-trim>
 // Als Arrow Function
-const Greet = ({greeting, name}) => <div>
-    <h1>{greeting}</h1>
-    <h2>{name}</h2>
-  </div>;
+const Greet = ({greeting, name}) => (
+  &lt;div>
+    &lt;h1>{greeting}&lt;/h1>
+    &lt;h2>{name}&lt;/h2>
+  &lt;/div>
+);
+
 export default Greet;
 </code></pre>
 
@@ -742,22 +745,23 @@ export default Greet;
                     <li>Elemente einer Liste brauchen einen eindeutigen Key
                 </ul>
 <pre class="fragment"><code class="javascript" contenteditable data-trim>
-const greetings = [{
-    id: 0,
-    name: 'Olli',
-    greeting: 'Huhu'
-},
-{
-    id: 1,
-    name: 'Oma',
-    greeting: 'Hallo'
-}
+const greetings = [
+  { id: 0, name: 'Olli', greeting: 'Huhu' },
+  { id: 1, name: 'Oma', greeting: 'Hallo' }
 ];
-const body = greetings.map(greeting =>
-    &lt;tr key={greeting.id}>
-        &lt;td>{greeting.name}</td>
-        &lt;td>{greeting.greeting}</td>
-    &lt;/tr>);
+
+function MyTable({greetings}) {
+  return (
+    &lt;table>
+      greetings.map(greeting =>
+        &lt;tr key={greeting.id}>
+            &lt;td>{greeting.name}</td>
+            &lt;td>{greeting.greeting}</td>
+        &lt;/tr>
+      )
+    &lt;/table>
+  );
+}
 </code></pre>
         </section>
 
