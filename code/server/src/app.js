@@ -1,59 +1,64 @@
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
-const db = require('./db');
 
-app.use(bodyParser.json());
+const createApp = db => {
+	const app = express();
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+	app.use(bodyParser.json());
 
-// Return all greetings
-app.get("/greetings", (req, res) => res.json(db.findAll()));
+	app.use((req, res, next) => {
+		res.header("Access-Control-Allow-Origin", "http://localhost:8080");
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		res.header("Access-Control-Allow-Credentials", "true");
+		next();
+	});
 
-// Return greeting with specified id (or 404)
-app.get("/greetings/:id", (req, res) => {
-    const id = parseInt(req.params.id);
+	// Return all greetings
+	app.get("/greetings", (req, res) => res.json(db.findAll()));
 
-    const greeting = db.findById(id);
+	// Return greeting with specified id (or 404)
+	app.get("/greetings/:id", (req, res) => {
+		const id = parseInt(req.params.id);
 
-    if (!greeting) {
-        return res.status(404).json({error: `Greeting '${id}' not found`});
-    }
+		const greeting = db.findById(id);
 
-    return res.json(greeting)
-});
+		if (!greeting) {
+			return res.status(404).json({ error: `Greeting '${id}' not found` });
+		}
 
-app.get("/servererror", (req, res) => {
-    return res.status(500).json({error: "Ups. Server Error."})
-});
+		return res.json(greeting)
+	});
 
-app.get("/clienterror", (req, res) => {
-    return res.status(400).json({error: "Client Error!"})
-});
+	app.get("/servererror", (req, res) => {
+		return res.status(500).json({ error: "Ups. Server Error." })
+	});
+
+	app.get("/clienterror", (req, res) => {
+		return res.status(400).json({ error: "Client Error!" })
+	});
 
 
-// create new greeting
-app.post("/greetings", (req, res) => {
+	// create new greeting
+	app.post("/greetings", (req, res) => {
 
-    const greeting = req.body;
-    if (!greeting) {
-        return res.status(400).json({error: 'Greeting must be defined'});
-    }
+		const greeting = req.body;
+		if (!greeting) {
+			return res.status(400).json({ error: 'Greeting must be defined' });
+		}
 
-    if (!greeting.name) {
-        return res.status(400).json({error: 'greeting.name must be defined'});
-    }
+		if (!greeting.name) {
+			return res.status(400).json({ error: 'greeting.name must be defined' });
+		}
 
-    if (!greeting.greeting) {
-        return res.status(400).json({error: 'greeting.greeting must be defined'});
-    }
+		if (!greeting.greeting) {
+			return res.status(400).json({ error: 'greeting.greeting must be defined' });
+		}
 
-    const newId = db.insert(req.body);
-    return res.status(201).json({id: newId});
-});
+		const newId = db.insert(req.body);
+		return res.status(201).json({ id: newId });
+	});
 
-module.exports = app;
+	return app;
+}
+
+module.exports = createApp;

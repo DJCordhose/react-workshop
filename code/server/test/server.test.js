@@ -1,7 +1,7 @@
 const request = require('supertest');
 
-const app = require('../src/app');
 const db = require('../src/db');
+const app = require('../src/app')(db);
 
 
 function expectError(res, code) {
@@ -78,3 +78,18 @@ describe('GET', () => {
         });
     });
 });
+
+describe('EventEmitter', () => {
+	const listener = jest.fn();
+
+	test('received notification on insert', done => {
+		listener.mockImplementation(() => done());
+		db.on('insert', listener);
+		db.insert({ greeting: 'Hello', name: 'Listener' });
+	});
+
+	afterEach(() => {
+		db.removeListener('insert', listener);
+	})
+
+})
