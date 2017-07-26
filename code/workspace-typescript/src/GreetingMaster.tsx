@@ -1,13 +1,21 @@
 import * as React from 'react';
 import {Greeting} from "./types";
 
-type GreetingMasterProps = {
+interface GreetingMasterProps {
+    /**
+     * Array of greetings to display
+     */
     greetings: Greeting[]
     onAdd: () => void
 };
 
 // const GreetingMaster: React.SFC<GreetingMasterProps> = props => {
 // or
+/**
+ * Master View.
+ * 
+ * @param props 
+ */
 const GreetingMaster = (props: GreetingMasterProps) => {
     const {greetings, onAdd} = props;
     const body = greetings.map(greeting => <tr key={greeting.id}><td>{greeting.name}</td><td>{greeting.greeting}</td></tr>);

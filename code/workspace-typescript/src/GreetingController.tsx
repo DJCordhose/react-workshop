@@ -8,14 +8,13 @@ const BACKEND_URL = 'http://localhost:7000/greetings';
 const MODE_MASTER = 'MODE_MASTER';
 const MODE_DETAIL = 'MODE_DETAIL';
 
-type GreetingControllerProps = {
+interface GreetingControllerProps {
 }
 
-type GreetingControllerState = {
+interface GreetingControllerState {
     mode: typeof MODE_MASTER | typeof MODE_DETAIL,
     greetings: Greeting[]
 }
-
 
 export default class GreetingController extends React.Component<GreetingControllerProps, GreetingControllerState> {
     render() {
