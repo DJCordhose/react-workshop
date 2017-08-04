@@ -136,17 +136,17 @@ Universal
 
         <section>
             <h2>Overview of current (JavaScript) frontend architectures</h2>
-            <h3><a href="https://2017.javazone.no/program/5ddf7fcd3cdd41d78091f0677eb4eec0" target="_blank">
-                JavaZone, Oslo 2017</a></h3>
-            <p>
+            <p><a href="https://2017.javazone.no/program/5ddf7fcd3cdd41d78091f0677eb4eec0" target="_blank">
+                JavaZone, Oslo 2017</a></p>
+            <p><small>
                 <a href="http://nilshartmann.net">Nils Hartmann</a> / <a href="http://twitter.com/nilshartmann">@nilshartmann</a>
-            </p>
-            <p>
+            </small></p>
+            <p><small>
                 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-            </p>
+            </small></p>
 
-            <p><small>Slides: <a href="http://djcordhose.github.io/react-workshop/2017_javazone.html">
-                http://djcordhose.github.io/react-workshop/2017_javazone.html</a></small></p>
+            <p>Slides: <a href="http://bit.ly/ui-architecture-javazone">
+                http://bit.ly/ui-architecture-javazone</a></p>
         </section>
 
         <section>
@@ -160,63 +160,38 @@ Universal
         </section>
 
         <section>
-            <h2>Grundproblem bei einer komplexen Web-Anwendung</h2>
-            <h3>Beste UI/UX beißt sich mit Anforderungen an Wartbarkeit</h3>
+            <h2>Central challenge with a complex Web Application</h2>
+            <h3>Best UI/UX opposes requirement for maintainability</h3>
         </section>
 
         <section>
-            <h2>Was macht Frontend-Architektur schwierig?</h2>
-            <h3 class="fragment">Das "Problem" ist der <em>Benutzer!</em></h3>
+            <h2>What makes Frontend Architecture so hard?</h2>
+            <h3 class="fragment">The "problem" sits in front of the keyboard!</h3>
 
             <ul>
-                <li class="fragment">alles soll wirken wie aus einem Guss
+                <li class="fragment">everything should be consistent
                     <ul>
-                        <li>einheitliches Layout (UI)
-                        <li>einheitliches Bedienkonzept (UX)
+                        <li>consistent Layout (UI)
+                        <li>consistent Behvaior and Interaction (UX)
+                        <li>consistent Disaply of Data in all Components
                     </ul>
                 </li>
-                <li class="fragment">reaktionsschnelles UI, auch unter Last
-                <li class="fragment">Anzeige soll jederzeit über alle Komponenten konsistent sein
-                <li class="fragment">alles von Anfang an da, ohne Verzögerung
-            </ul>
-            <!--<p class="fragment"><small>Oder man nimmt auf den Benutzer keine Rücksicht wenn es das Geschäftsmodell zulässt</small></p>-->
-        </section>
-
-        <section>
-            <h2>Wo ist das Problem? Das ist doch einfach oder?</h2>
-            <h3 class="fragment">Prominente Gegenbeispiele</h3>
-            <ul>
-                <li class="fragment">Facebook, LinkedIn, Twitter: Alle kämpfen mit uneinheitlichem Anzeigestand
-                <!--Add screenshot from LinkedIn-->
-                <li class="fragment">Gmail: Ladebalken am Anfang, langsamere erste Page Impression
-                <li class="fragment">Amazon: uneinheitliches Layout und Bedienkonzept
-                <li class="fragment">Viele seiten von Behörden/Ämtern/Großkonzernen etc.: zähes UI, validieren der Eingaben erst nach Submit
+                <li class="fragment">responsive UI even under load
+                <li class="fragment">everthing loads without delay
             </ul>
         </section>
 
         <section>
-            <h2>Sind die alle unfähig?</h2>
-            <p class="fragment">Oder liegt das eher an Konflikten mit anderen typischen Anforderungen?</p>
-            <p class="fragment">Natürlich soll das alles auch</p>
+            <h2>The Flipside: Maintainability</h2>
+            <p class="fragment">Of course (TM) everthng shall also be</p>
             <ul>
-                <li class="fragment">schnell und kostengünstig entwickelt werden
-                <li class="fragment">über Jahrzehnte wartbar sein
-                <li class="fragment">als Komponenten oder Teilprojekte entwickelbar sein
-                <li class="fragment">eine einheitliche Architektur haben
-                <li class="fragment">zum Skillset der vorhandenen Entwickler passen
+                <li class="fragment">fast and cheap to develop
+                <li class="fragment">maintainable for decades
+                <li class="fragment">developed in autonomous teams
+                <li class="fragment">developed having a consistent architectural vision
+                <li class="fragment">matched with skill set of existing developers
             </ul>
         </section>
-
-        <!--<section>-->
-            <!--<h2>Typische Szenarien</h2>-->
-            <!--<p>Das gucken wir uns heute an</p>-->
-            <!--<ul>-->
-                <!--<li class="fragment"><strong>Was alle wissen wollen</strong>: Microservices im Backend (Monolithischer Client vs Vertikalen)-->
-                <!--<li class="fragment"><strong>Das Geheimnis der Single-Page Apps</strong>: Komplexes Zusammenspiel von Komponenten (State Management, Wartbarkeit)-->
-                <!--<li class="fragment"><strong>Quadratur des Kreises</strong>: Schnelle erste Anzeige bei gleichzeitig hoher Interaktivität (Universal Rendering)-->
-                <!--<li class="fragment"><strong>Uncool, aber häufig Hauptbestandteil der Anwendung</strong>: Effiziente, aber funktionale Formulare (Redux-Form)-->
-            <!--</ul>-->
-        <!--</section>-->
 
         <section>
             <h3>Klassiche Webanwendung</h3>
@@ -636,6 +611,7 @@ export const loadGreetings = dispatch => {
         </section>
 
         <section>
+            <h1 class="todo">Nils</h1>
             <h3>Integration mit Microservices</h3>
             <ul>
                 <li class="fragment">Integration im Browser
@@ -657,108 +633,59 @@ export const loadGreetings = dispatch => {
         </section>
 
         <section>
-            <h3>Was ist mit meiner guten alten Web-Anwendung passiert?</h3>
-            <p class="fragment">Ist das nicht alles zu kompliziert?</p>
-            <ul>
-                <li class="fragment">Klassische, serverseitig gerenderte Anwendungen,
-                    sind häufig wirklich einfacher und besser modularisierbar
-                <li class="fragment">Hohe Anforderungen an UX und UI sind allerdings nicht mit sinnvollem Aufwand mit klassischen Web-Anwendungen umsetzbar
-                <li class="fragment">die Komplexitäten einer Single Page App entspringen aus diesen Anforderungen an UX und UI
-                <li class="fragment"><strong>Das Grundproblem ist der Widerspruch zwischen ganzheitlicher UX und Aufteilung in Komponenten / Module / Teams</strong>
-            </ul>
-        </section>
-
-        <!--<section>-->
-            <!--<h3>Welcher Anforderungen kommen durch das Web hinzu?</h3>-->
-            <!--<ul>-->
-                <!--<li class="fragment">Wie kann man wartbar JavaScript entwickeln?-->
-                <!--<li class="fragment">Wie geht man mit der schnellen Entwicklung der Web-Frameworks um?-->
-                <!--<li class="fragment">JavaScript im Browser, aber meist nicht auch auf dem Server - -->
-                    <!--wie bekommt man damit eine einheitliche Architektur hin?-->
-            <!--</ul>-->
-        <!--</section>-->
-
-        <section>
-            <h3>Legenden und Mythen #1: Single Page Applications (SPA)</h3>
-            <ul>
-                <li class="fragment"><strong>In SPAs kann ich keine Links teilen und auch nicht sinnvoll verlinken: </strong>
-                    <span class="fragment">Links werden im Browser aufgelöst und geroutet</span>
-                <li class="fragment"><strong>Back-Button geht nicht: </strong><span class="fragment">siehe oben</span>
-                <li class="fragment"><strong>SPA hat immer eine schlechte First Page Impression: </strong><span class="fragment">Universal App oder Code-Splitting hilft</span>
-                <li class="fragment"><strong>SPA ist unstrukturierter Monolith: </strong>
-                <span class="fragment">Trennung, Isolation in Module und Teams ist mit gezeigten Ansätzen möglich</span>
-                <li class="fragment"><strong>HTML/HTTP sind langlebig, Investition in SPA-Frameworks nicht lohnend, veraltet innerhalb einer Woche: </strong>
-                <span class="fragment">Framework-Krieg ist wahrscheinlich beendet, Business relevante Teile ohnehin außerhalb des SPA-Webframeworks</span>
-            </ul>
-        </section>
-
-        <section>
-            <h3>Legenden und Mythen #2: JavaScript</h3>
-            <p class="fragment">Ist JavaScript-Code nicht unwartbar?</p>
-            <ul>
-                <li class="fragment"><strong>keine Lesbarkeit: </strong><span class="fragment">moderner JavaScript-Code ist auf Python-Niveau, JSDoc ist Standard</span>
-                <li class="fragment"><strong>keine Analysierbarkeit: </strong><span class="fragment">
-                wird durch zusätzliche mächtige Typensysteme TypeScript oder Flow erlaubt</span>
-                <li class="fragment"><strong>kein Refactoring: </strong><span class="fragment">folgt aus Analysierbarkeit</span>
-                <li class="fragment"><strong>keine Testbarkeit: </strong><span class="fragment">gezeigte Ansätze erlauben allerbeste Testbarkeit aller Teile</span>
-                <li class="fragment"><strong>keine Wiederverwendung: </strong><span class="fragment">
-                Dumb Componentes jederzeit wiederverwendbar, bei Smart Components nicht sinnvoll</span>
-                <li class="fragment"><strong>keine Möglichkeit zur Strukturieren: </strong>
-                <span class="fragment">Das moderne JavaScript Modul-System ist mächtig
-                    und erlaubt Strukturierung wie in Java</span>
-            </ul>
-        </section>
-
-        <section>
             <h3>The Doctor is In</h3>
             <small>
             <table>
                 <tr>
-                    <th></th><th>Wissen</th><th>Anforderungen</th><th>A-Z</th>
+                    <th></th><th>UI / UX</th><th>Myths</th><th>Architecture</th>
                 </tr>
                 <tr>
                     <th>20</th>
-                    <td>Muss man für SPAs und Universal Apps JavaScript programmieren?</td>
-                    <td>Warum soll man überhaupt JavaScript machen?
+                    <td>
+                        Can I use links in SPAs? And the back button?
                     </td>
-                    <td>Muss ich immer wählen zwischen Frontend-Monolithen odert UX Katastrophe?
+                    <td>Isn't the life time of a JavaScript Frontend Framework measured in weeks?
                     </td>
+                    <td>Why should I use frontend logic in the first place?</td>
                 </tr>
                 <tr>
                     <th>40</th>
-                    <td>Wie realisiert man komplexe UI-Komponenten (ala TreeGrid)?</td>
-                    <td>Sollte ich nicht jede SPA als Universal App schreiben?
+                    <td>Should I write every SPA as a Universal Application?</td>
+                    <td>Can I refactor and analyze JavaScript code?
                     </td>
-                    <td>Widersprechen SPAs nicht der Grundidee es Webs?
-                    </td>
+                    <td>Is there a way to structure a JavaScript application?</td>
                 </tr>
                 <tr>
                     <th>60</th>
-
-                    <td><b>Risiko: Frage eurer Wahl</b></td>
-                    <td><b>Risiko: Frage eurer Wahl</b></td>
-                    <td><b>Risiko: Frage eurer Wahl</b></td>
+                    <td><b>Choose your question</b></td>
+                    <td><b>Choose your question</b></td>
+                    <td><b>Choose your question</b></td>
                 </tr>
                 <tr>
                     <th>80</th>
-                    <td>Wie schneide ich Module in einer SPA? Geht das mit DDD Aggregate Root?
+                    <td>When should I use a classic Web Application rather than an SPA?
                     </td>
-                    <td>Wann passt eine klassische WebApp besser als eine SPA?
+                    <td>Can I reuse JavaScript Code?
                     </td>
-                    <td>Wieso funktioniert für SPAs kein Schichtenmodell?
+                    <td>Why is there no established layer model in SPAs?
                     </td>
                 </tr>
                 <tr>
                     <th>100</th>
-                    <td>Was kann man retten, wenn man das UI-Framework wechselt?</td>
-                    <td>Wie kann ich sicher sein, dass ich den richtigen Architektur-Ansatz habe?</td>
-                    <td>Muss ich das immer so machen, oder kann ich auch Web Components nutzen?</td>
+                    <td>
+                        Do I always have to choose between frontend monolith or UX catastrophe?
+                    </td>
+                    <td>SPAs always have a bad first page impression</td>
+                    <td>Isn't all my investment lost if I have to change the UI framework?</td>
                 </tr>
             </table></small>
             <p><small>
-                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>,
-                <a href="http://bit.ly/architektur-herbstcampus">
-                http://bit.ly/architektur-herbstcampus</a></small></p>
+                <a href="http://nilshartmann.net">Nils Hartmann</a> / <a href="http://twitter.com/nilshartmann">@nilshartmann</a>
+                <br>
+                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                <br>
+                <a href="http://bit.ly/ui-architecture-javazone">
+                    http://bit.ly/ui-architecture-javazone</a></small></p>
         </section>
 
     </div>
