@@ -446,6 +446,40 @@ export class SubComponent {
         </section>
 
         <section>
+            <h2>Code Sample: Reducer</h2>
+            <h3>Independent of UI Framework</h3>
+            <pre><code data-trim>
+const greetings = (state = [], action) => {
+    switch (action.type) {
+        case ADD_GREETING:
+            // immutable operation, creating new state
+            return [...state, action.greeting];
+        default:
+            return state;
+    }
+};
+            </code></pre>
+            <p>Just a function</p>
+        </section>
+
+        <section>
+            <h2>Code Sample: Action Creator</h2>
+            <h3>Independent of UI Framework</h3>
+            <pre><code data-trim>
+export const loadGreetings = dispatch => {
+    return fetch(BACKEND_URL)
+        .then(response => response.json())
+        .then(json => dispatch({
+            type: SET_GREETINGS,
+            greetings: json
+        }))
+        .catch(err => console.error('LOADING GREETINGS FAILED:', err));
+};
+            </code></pre>
+            <p>Again, just a function</p>
+        </section>
+
+        <section>
             <h3>Ist das nur eine spinnige Idee, oder nutzt das echt jemand?</h3>
             <div class="fragment">
                 <a href="https://www.xing.com/messenger" target="_blank">
@@ -455,8 +489,23 @@ export class SubComponent {
         </section>
 
         <section>
-            <h3>Zusammenfassung Redux</h3>
+            <h3>Demo: Magic Redux Dev-Tools</h3>
+            <a href="code/schritte/redux/7-redux-complete-app/public" target="_blank">
+                <img src="redux-dev-tools.png" height="500px">
+            </a>
+        </section>
+
+        <section>
+            <h3>Wrap Up Redux</h3>
             <ul class="fragment">
+                <li>A UI patterns for User Interfaces
+                <li>Main Stream Solution
+                <li>Independent of Framework
+                <li>Allows for very easy testing of business logic
+                <li>Great Debugging because of Dev Tools
+                <li>Works great in large applications with many dependencies between parts / components
+                <li>Gives strong and clear architectural guidance
+                <li>
                 <li>Ein Architektur-Muster für UIs
                 <li>Kontroll-/Datenfluss in eine Richtung
                 <li>Zustand wandert aus Smart Components in zentralen State
@@ -466,6 +515,37 @@ export class SubComponent {
                 <li>Business Logik ausschließlich in puren Funktionen - Reducer (beste Testbarkeit)
                 <li>Nur Reducer dürfen State verändern
                 <li>Initialisierung durch initiale Aktion
+            </ul>
+        </section>
+
+        <section>
+            <h1>MobX</h1>
+            <h2>Simple Alternative for State Management</h2>
+            <h3><a href="https://mobx.js.org/" target="_blank">https://mobx.js.org/</a></h3>
+
+        </section>
+
+        <section>
+            <img src="mobx.png" height="500px">
+        </section>
+
+        <section>
+            <h2>Redux vs MobX</h2>
+            <p><strong>MobX</strong></p>
+            <ul>
+                <li>Fully embraces idea of Transparent Reactive Programming
+                <li>Embraces mutability
+                <li>Allows for more than one store, also supports nested stores
+                <li>Probably closer to what OO programmers are comfortable with
+                <li>Easy to get started
+                <li>Works with React only
+            </ul>
+            <p><strong>Redux</strong></p>
+            <ul>
+                <li>Often overkill for small applications
+                <li>Idea of central state at its core
+                <li>Might be overwhelming for people not familiar with functional ideas
+                <li>Initially produces a lot of boiler plate code
             </ul>
         </section>
 
