@@ -74,45 +74,41 @@
 
 <body>
 
-<!--
-Überblick über moderne (JavaScript-)Frontend-Architektur
-
-https://www.herbstcampus.de/veranstaltung-5928-%C3%9Cberblick-%C3%BCber-moderne-%28javascript-%29frontend-architektur.html?id=5928
-
-70 Minuten
-
-Die Anforderungen an eine moderne, clientseitige Architektur für Webanwendungen sind typischerweise deutlich höher als die an die zugehörige Backendarchitektur. Backendarchitekturen sind zudem seit Jahren Thema und gut durchschaut. Im Gegensatz dazu ist der Wissensstand zu Architekturansätzen und deren Verständnis oft erschreckend niedrig.
-
-In diesem Vortrag wird erklärt, warum moderne Webanwendungen komplexe Architekturanforderungen haben und mit welchen Konzepten und auch mit welchen konkreten Technologien man darauf reagieren kann. Es wird auch Code gezeigt.
-
-Skills
-Grundsätzliches Verständnis von Web-Anwendung und deren Architektur
-
-Lernziele
-Verständnis für die Herausforderungen moderner, clientseitiger Webanwendungen. Warum sind diese so anders als klassische Architekturen?
--->
-
 <div class="reveal">
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
-        <section class="todo">
-<pre>
-ALWAYS finish your talk on a slide that's easily photographed and tells people where to get more info. Leave it up while you take Qs
-https://twitter.com/hadleywickham/status/888367562190409728?s=03
+<!--ALWAYS finish your talk on a slide that's easily photographed and tells people where to get more info. Leave it up while you take Qs-->
+<!--https://twitter.com/hadleywickham/status/888367562190409728?s=03-->
 
-Das hier auf Englisch
+<!--https://2017.javazone.no/program/5ddf7fcd3cdd41d78091f0677eb4eec0-->
 
-Based on:
-* 2017_herbstcampus.html
-* http://djcordhose.github.io/javascript-web-frameworks/2017.html#
-* http://djcordhose.github.io/architecture/2016-c64-web-architecture.html#/
-  * plus letzter Teil MicroServices
-    - BackendForFrontend (API Gateway)
-    - GraphQL als single Entry Point
-  * inkl. the Doctor is In
-</pre>
-        </section>
+        60 Minutes
+
+        React, Angular 2, and lately also Vue govern the realm of modern frontend frameworks.
+        Largely independent of which framework you choose there is a variety of architectural
+        approaches you can use. The challenges you face in frontend architecture are very different from
+        backend architectures in that the control and data flow rather goes in cycles than traversing through layers.
+        Additionally, decoupling of parts of the application must not impact the user experience,
+        so that the user has the impression of one consistent and coherent system.
+        These challenges are often underestimated and most attention goes to the backend.
+
+        We will shed some light into the matter and talk about MVC, Transparent Reactive Programming, State Management, Reactive Streams. We will also cover the main architectural challenges including
+
+        * where to maintain state
+        * how to change relevant parts of the UI when state changes
+        * how to structure your application when it grows
+        * there is no ideal solution, but you can still choose which compromise you are willing to take
+
+
+        If you are not interested in JavaScript or the browser,
+        this session can still be interesting as all these patterns are applicable to any other
+        language and any other runtime environment.
+
+<!--Das hier auf Englisch-->
+
+<!--Based on:-->
+<!--* 2017_herbstcampus.html-->
 
         <section data-markdown class="preparation">
             <script type="text/template">
@@ -122,14 +118,18 @@ Based on:
         </section>
 
         <section>
-            <h2>Frontend Architecture</h2>
-            <h3><a href="https://www.herbstcampus.de/veranstaltung-5928-%C3%9Cberblick-%C3%BCber-moderne-%28javascript-%29frontend-architektur.html?id=5928" target="_blank">
-                Herbstcampus 2017</a></h3>
+            <h2>Overview of current (JavaScript) frontend architectures</h2>
+            <h3><a href="https://2017.javazone.no/program/5ddf7fcd3cdd41d78091f0677eb4eec0" target="_blank">
+                JavaZone, Oslo 2017</a></h3>
+            <p>
+                <a href="http://nilshartmann.net">Nils Hartmann</a> / <a href="http://twitter.com/nilshartmann">@nilshartmann</a>
+            </p>
             <p>
                 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </p>
-            <p><small>Folien: <a href="http://djcordhose.github.io/react-workshop/2017_herbstcampus.html">
-                http://djcordhose.github.io/react-workshop/2017_herbstcampus.html</a></small></p>
+
+            <p><small>Slides: <a href="http://djcordhose.github.io/react-workshop/2017_javazone.html">
+                http://djcordhose.github.io/react-workshop/2017_javazone.html</a></small></p>
         </section>
 
         <section class="todo">
