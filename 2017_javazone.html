@@ -114,8 +114,23 @@
 
         <section data-markdown class="preparation">
             <script type="text/template">
-                # Preparation
+### Preparation
 
+Komplex SPA
+
+- cd ~/Development/js/react-workshop
+- npm install
+- npm start
+- cd code/schritte/redux/redux-complete-app-typescript
+- npm start
+- Checken, dass localhost:8080 im Browser läuft
+
+Universal
+
+- cd code/universal
+- npm install
+- npm start
+- Checken, dass localhost:3000 im Browser läuft
             </script>
         </section>
 
@@ -149,8 +164,6 @@
             <h3>Beste UI/UX beißt sich mit Anforderungen an Wartbarkeit</h3>
         </section>
 
-
-
         <section>
             <h2>Was macht Frontend-Architektur schwierig?</h2>
             <h3 class="fragment">Das "Problem" ist der <em>Benutzer!</em></h3>
@@ -173,7 +186,7 @@
             <h2>Wo ist das Problem? Das ist doch einfach oder?</h2>
             <h3 class="fragment">Prominente Gegenbeispiele</h3>
             <ul>
-                <li class="fragment">Facebook, LinkedIn, XING: Alle kämpfen mit uneinheitlichem Anzeigestand
+                <li class="fragment">Facebook, LinkedIn, Twitter: Alle kämpfen mit uneinheitlichem Anzeigestand
                 <!--Add screenshot from LinkedIn-->
                 <li class="fragment">Gmail: Ladebalken am Anfang, langsamere erste Page Impression
                 <li class="fragment">Amazon: uneinheitliches Layout und Bedienkonzept
@@ -319,6 +332,58 @@
             <p><small>
                 Copyright 2017, Nils Hartmann
             </small></p>
+            <p class="todo">Make independent of React, replace props with e.g. props/@Input </p>
+        </section>
+
+        <section>
+            <h2>Code Sample Angular</h2>
+            <p>Using rxjs for communication between Smart and Dumb Component</p>
+            <p class="todo">Short Intro rxjs</p>
+        </section>
+
+        <section>
+            <h2>Smart Component</h2>
+            <pre><code data-trim>
+@Component({
+  template: `<sub greeting={{greeting}} (onSend)="sent($event)"></sub>`
+})
+export class AppComponent {
+  private greeting: string = 'Hiho';
+
+  constructor(private greetingService: GreetingService) {
+  }
+
+  // "Business Logic" delegated to service
+  sent(greeting) {
+    this.greeting = this.greetingService.greetBack(greeting);
+  }
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Dumb Component</h2>
+            <pre><code data-trim>
+@Component({
+  selector: 'sub',
+  template: `
+<input [(ngModel)]="greeting">
+<p>{{greeting}}, World</p>
+<button (click)="send()">Send</button>
+`,
+})
+export class SubComponent {
+  @Input() greeting: string;
+
+   // rxjs observer
+  @Output() onSend = new EventEmitter();
+
+  // no business logic, just event emitting
+  send() {
+    this.onSend.emit(this.greeting);
+  }
+}
+            </code></pre>
         </section>
 
         <section>
