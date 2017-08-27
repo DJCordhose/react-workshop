@@ -187,13 +187,13 @@ Universal
                     </ul>
                 </li>
                 <li class="fragment">responsive UI even under load
-                <li class="fragment">everthing loads without delay
+                <li class="fragment">everything loads without delay
             </ul>
         </section>
 
         <section>
             <h2>The Flipside: Maintainability</h2>
-            <p class="fragment">Of course (TM) everthng shall also be</p>
+            <p class="fragment">Of course (TM) everything shall also be</p>
             <ul>
                 <li class="fragment">fast and cheap to develop
                 <li class="fragment">maintainable for decades
@@ -204,81 +204,88 @@ Universal
         </section>
 
         <section>
-            <h3>Klassiche Webanwendung</h3>
-            <p><small>jeder Boot tut gut, jeder Roundtrip setzt Zustand zurück</small></p>
+            <h3>Classic Web Applications</h3>
+            <p><small>Each round-trip resets whole Application state </small></p>
 
             <img src="webapp-architecture-classic.png" style="height: 450px;">
         </section>
 
         <section>
-            <h2>Klassichen Webanwendungen</h2>
-            <ul class="fragment">
-                <li>Browser sendet HTTP-Request und empfängt HTML
-                <li>Content wird auf der Server-Seite gerendert
-                <li>Jede Interaktion wiederholt diesen Zyklus
+						<h2>Classic Web Applications</h2>
+						<img src="webapp-architecture-classic.png" style="max-width: 40%; float: left">
+            <ol class="fragment"  style="max-width: 50%; float: right">
+                <li>Browser sends HTTP Request
+                <li>Content is rendered on the Server
+								<li>HTML is sent back to the Browser</li>
+                <li>Each interaction repeats this round-trip
             </ul>
         </section>
 
         <section>
-            <h2>Klassische Webanwendung: Oft ein nahe liegender Ansatz</h2>
+						<h3>Classic Web Apps</h3>
+						<h2>Many times an obvious approach...</h2>
             <ul class="fragment">
                 <li>Klassische Webanwendung sind für viele Enterprise-Entwicklungen der natürliche Ausgangspunkt
-                <li>Server-Seitige Entwicklung mit Java/C# und HTTP und HTML sind gut verstanden
-                <li>kleinere UI-Änderungen können auf Client-Seite mit JavaScript-Schnippseln (jQuery) realisiert werden
-                <li>häufig ist dies völlig ausreichend
+                <li>Server-side development using Java/C#/... and HTTP/HTML are very well known and understood
+                <li>UI-Improvements (like simple validations, animations) can be implemented on the Client with JavaScript-Snipets (jQuery)
+                <li>in many cases this might be sufficient
             </ul>
         </section>
 
         <section>
-            <h2>Grenzen</h2>
+						<h3>Classic Web Apps</h3>
+						<h2>...but: UI/UX capabilities are limited</h2>
+						<p>so:</p>
             <ul class="fragment">
-                <li>UI/UX ist grunsätzlich eingeschränkt
-                <li>selbst in vermeintlich klassischen Anwendungen verstecken sich SPAs oft als Teile
-                <li>z.B. JSF Komponenten mit einem komplexen UI
-                <li>Vermischung von client- und serverseitigem Rendering macht Anwendungsarchitektur und Programmiermodell abenteuerlich
+                <li>Even Classic Web Apps often contain "SPA-like" parts<br/>(for example when using JSF components)
+								<li>Mixing client- and server-side rendering leads to confusing architecture and programming model</li>
+								<li>Real costs of this "mixed" approach getting visible during development (when it's too late...)</li>
             </ul>
-            <p class="fragment"><em>Perfide, da zuerst die Aufwände zur Umsetzung ansteigen und der Code immer unübersichtlicher wird.</em></p>
         </section>
 
         <section>
-            <h2>Was geht nicht mehr? Ein Beispiel</h2>
+						<h3>Classic Web Apps</h3>
+            <h2>Limitations? An Example...</h2>
                 <div>
                     <a href="http://localhost:8080/" target="_blank">
-                        <img src="greeting-app-complex.png" style="height: 500px;">
+                        <img src="greeting-app-complex.png" style="height: 350px;">
                     </a>
                 </div>
-            <p><small>Gar nicht mal so komplex...</small></p>
+            <p><small>And that's not even <em>that</em> complex...</small></p>
         </section>
 
         <section>
-            <h3>Nächster Schritt</h3>
-            <h2>Single-Page Application</h2>
+            <h3>Next Step</h3>
+            <h2>Single-Page Applications</h2>
         </section>
 
         <section>
-            <h3>Überblick: Single-Page Application</h3>
+            <h3>Single-Page Applications</h3>
             <img src="webapp-architecture-spa.png" style="height: 500px;">
         </section>
         <section>
-            <h3>Single-Page Applications (SPAs) verschieben eure Anwendung in den Browser</h3>
+						<h3>Single-Page Applications (SPAs)</h3>
+						<h2>The app runs completely in the browser</h2>
             <ul class="fragment">
-                <li>eine einzige Seite pro Anwendung/Modul
-                <li>läuft ohne signifikanten Server-Anteil
-                <li>kann auch als statische Web-Seite laufen
-                <li>ermöglicht Offline-Betrieb
-                <li>Bedienbarkeit wie Desktop
-                <li>Browser bietet mächtige Speicherungsmöglichkeiten
+                <li>only one (single) HTML page per Application
+                <li>runs without significant Server part
+								<li>Server only receives and sends data</li>
+                <li>can even work offline
+                <li>can be same UI/UX experience as a Desktop App
+                <li>Browser even provides storage capabilities <span style="color: red">(OLLI????)</span>
             </ul>
         </section>
 
         <section>
-            <h3>Komponenten basierte Ansätze mit Templates</h3>
+						<h3>Single-Page Applications (SPAs)</h3>
+						<h2>Components with Templates</h2>
+						<p>Application is structured around (business) components:</p>
             <ul class="fragment">
-                <li>Templates nun auf der Clientseite
-                <li>Anwendung bekommt Struktur
-                <li>Logik hängt an Komponenten, ist keine lose Schnippsel-Sammlung wie bei jQuery
+								<li>Templates describe the UI of the component
+                <li>Logic is now part of the components, no longer "loose" snippets (like in jQuery)
+									<li>Both Logic and Template run on the client</li>
             </ul>
-            <p class="fragment">Findet sich wieder in React, Angular und Vue</p>
+            <p class="fragment">Prominent Examples: React, Angular and Vue</p>
         </section>
 
         <section>
