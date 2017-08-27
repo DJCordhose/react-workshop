@@ -46,6 +46,7 @@
         .reveal pre code {
             max-height: 1000px !important;
         }
+
         img {
             border: 0 !important;
             box-shadow:0 0 0 0 !important;
@@ -55,6 +56,17 @@
             -ms-touch-action: auto !important;
             touch-action: auto !important;
         }
+
+				.reveal .step-subtitle {
+					text-transform: none;
+					font-style: italic;
+					font-weight: bold;
+					font-family: 'Amiri', serif;
+					letter-spacing: 1px;
+					color: #2aa198;
+					text-decoration: underline;
+					/* font-variant:small-caps */
+				}
 
     </style>
 
@@ -201,14 +213,12 @@ Universal
                 <li class="fragment">developed having a consistent architectural vision
                 <li class="fragment">matched with skill set of existing developers
             </ul>
-        </section>
+				</section>
 
-        <section>
-            <h3>Classic Web Applications</h3>
-            <p><small>Each round-trip resets whole Application state </small></p>
-
-            <img src="webapp-architecture-classic.png" style="height: 450px;">
-        </section>
+				<section>
+					<h2 class="step-subtitle">The origin</h2>
+					<h1>Classic Web Applications</h1>
+				</section>
 
         <section>
 						<h2>Classic Web Applications</h2>
@@ -255,8 +265,8 @@ Universal
         </section>
 
         <section>
-            <h3>Next Step</h3>
-            <h2>Single-Page Applications</h2>
+            <h2 class="step-subtitle">Next Step</h2>
+            <h1>Single-Page Applications</h1>
         </section>
 
         <section>
@@ -264,7 +274,7 @@ Universal
             <img src="webapp-architecture-spa.png" style="height: 500px;">
         </section>
         <section>
-						<h3>Single-Page Applications (SPAs)</h3>
+						<h3>Single-Page Applications</h3>
 						<h2>The app runs completely in the browser</h2>
             <ul class="fragment">
                 <li>only one (single) HTML page per Application
@@ -289,8 +299,8 @@ Universal
         </section>
 
         <section>
+						<h3 class="step-subtitle">Architecture Pattern</h3>
             <h1>Smart and Dumb Components</h1>
-            <h2>Klares Architektur Pattern</h2>
         </section>
 
         <section>
@@ -402,8 +412,8 @@ export class SubComponent {
         <!--</section>-->
 
         <section>
-            <h3>Nächster Schritt</h3>
-            <h2>Redux als Architektur-Muster</h2>
+            <h3 class="step-subtitle">Next Step</h3>
+            <h2>Redux as an Architecture Pattern</h2>
         </section>
 
         <section>
@@ -531,18 +541,20 @@ export const loadGreetings = dispatch => {
         </section>
 
         <section>
-            <h2>Grenzen: SPA Ansatz selbst</h2>
+					<h3>
+						Single-Page Apps
+					</h3>
+            <h2>Limitations</h2>
         <!--</section>-->
 
         <!--<section>-->
-            <!--<h3>Probleme von Single-Page Applications</h3>-->
             <ul class="fragment">
                 <li>SEO
                 <li>First-Page-Impressions
-                <li>Preview, z.B.
+                <li>Previewing content, for example:
                     <ul>
-                        <li>bei der Vorschau von Suchergebnissen
-                        <li> oder dem Teilen von Links durch Social Media
+                        <li>Preview in Search Result Lists
+                        <li>Sharing of Links in Social Media Apps
                     </ul>
 
                 </li>
@@ -551,17 +563,20 @@ export const loadGreetings = dispatch => {
         </section>
 
         <section>
-            <h3>SPA: First-Page-Impression</h3>
-            <div>
-                <a href="code/spa/public/index.html" target="_blank">
-                    <img src="spa-first-page-impression.png" style="height: 500px;">
-                </a>
-            </div>
-            <p><small>Selbst für eine einfachte Web Application kann das Laden das Aufbauen der Anwendung einige Zeit kosten</small></p>
+					<h3>Single-Page Apps</h3>
+					<h2>First-Page-Impression</h2>
+					<h1 class="todo">Olli: welches Beispiel ist das?</h1>
+          <div>
+          	<a href="code/spa/public/index.html" target="_blank">
+            	<img src="spa-first-page-impression.png" style="height: 350px;">
+            </a>
+          </div>
+          <p><small><em>Even for a simple Application it can take a while to load and bootstrap until the app is responsive</em></small></p>
         </section>
 
         <section>
-            <h2>Nächster Schritt: Universal Web Apps</h2>
+					<h2 class="step-subtitle">Next Step</h2>
+            <h1>Universal Web Apps</h1>
         </section>
 
         <section>
@@ -576,14 +591,13 @@ export const loadGreetings = dispatch => {
         <section>
             <h3>Universal Rendering</h3>
             <ul class="fragment">
-                <li>First-Page-Impression wird auf dem Server gerendert
-                <li>Links werden als normale HTML-Links in die Seite gerendert
-                <li>Beliebig viele andere Seiten werden ebenfalls statisch gerendert
-                <li>Läuft dann (zumindest zum Teil) auch ohne JavaScript
-                <li>Code fast 100% geteilt zwischen Client und Server
-                <li>serverseitiges Rendering mit <a href="https://nodejs.org" target="_blank">https://nodejs.org</a>
-                <li>Neben Markup liefert der Browser ebenso Zustand
-                <li>Wird von JS-Frameworks React, Angular und Vue unterstützt
+                <li>First-Page-Impression is rendered on the server
+								<li>Not only the Markup but also the State is returned from the Server
+								<li>(following pages can be rendered on server as well)</li>
+                <li>Links have to be "real" HTML links (no click handlers)
+                <li>Runs without JavaScript (at least partial)
+                <li>Code shared almost 100% between Client and Server
+                <li>Supported by React, Angular and Vue
             </ul>
         </section>
 
@@ -603,16 +617,16 @@ export const loadGreetings = dispatch => {
         </section>
 
         <section>
-            <h3>Herausforderungen</h3>
+            <h3>Challenges</h3>
             <ul class="fragment">
-                <li>Aller Zustand muss beim serverseitigen Rendering komplett vorliegen
-                <li>First Page Impression ungültig: Flackern bei Neurendering im Client
+                <li>Complete State must be available on the Server
+                <li>If First-Page-Impression is invalid: Flickering due to re-rendering on the Client
                     <ul>
-                        <li>Unterschiedliche Locales auf Server und Client
-                        <li>Zeitliche veränderliche Daten (Timestamp, Börsenkurs)
+                        <li>Different Locales on Server and Client
+                        <li>(Rapidly) Changing data (Timestamps, Market Rates)
                     </ul>
                 </li>
-                <li>Auch auf dem Server muss JavaScript laufen (zumindest für das Rendering Layer)
+                <li>The Server must be able to run JavaScript (typically it will be <a href="https://nodejs.org" target="_blank">https://nodejs.org</a>)
             </ul>
         </section>
 
