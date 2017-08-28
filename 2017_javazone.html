@@ -57,13 +57,37 @@
         .reveal {
             -ms-touch-action: auto !important;
             touch-action: auto !important;
-        }
+				}
 
-				.reveal .step-subtitle {
+				.reveal h2,
+				.reveal h3 {
+					letter-spacing: 2px;
+				}
+
+				.reveal h2 {
+				font-family: 'Amiri', serif;
+				/* font-family: 'Times New Roman', Times, serif; */
+				font-weight: bold;
+				font-style: italic;
+				letter-spacing: -2px;
+				text-transform: none !important;
+			}
+
+			.reveal em {
+				font-weight: bold;
+			}
+
+				.reveal .step-subtitle h1 {
+					letter-spacing: 1px;
+				}
+				.reveal .step-subtitle h2,
+				.reveal .step-subtitle h3 {
 					text-transform: none;
 					font-style: italic;
-					font-weight: bold;
-					font-family: 'Amiri', serif;
+					font-weight: normal;
+					/* font-weight: 400; */
+					/* font-family: 'Amiri', serif; */
+					font-family: 'Lobster', serif;
 					letter-spacing: 1px;
 					color: #2aa198;
 					text-decoration: underline;
@@ -159,7 +183,8 @@ Komplex SPA
 - npm start
 - cd code/schritte/redux/redux-complete-app-typescript
 - npm start
-- Checken, dass localhost:8080 im Browser läuft
+- Checken, dass localhost:7000 läuft (API)
+- Checken, dass localhost:8080 im Browser läuft (Frontend)
 
 Universal
 
@@ -229,8 +254,8 @@ Universal
             </ul>
 				</section>
 
-				<section>
-					<h2 class="step-subtitle">In the beginning...</h2>
+				<section class="step-subtitle">
+					<h2>In the beginning...</h2>
 					<h1>Classic Web Apps</h1>
 				</section>
 
@@ -248,12 +273,15 @@ Universal
         <section>
 						<h3>Classic Web Apps</h3>
 						<h2>Many times an obvious approach...</h2>
-            <ul class="fragment">
-                <li>Klassische Webanwendung sind für viele Enterprise-Entwicklungen der natürliche Ausgangspunkt
-                <li>Server-side development using Java/C#/... and HTTP/HTML are very well known and understood
-                <li>UI-Improvements (like simple validations, animations) can be implemented on the Client with JavaScript-Snipets (jQuery)
-                <li>in many cases this might be sufficient
-            </ul>
+						<span  style="font-size: 80%">
+							<p>In enterprise projects, Classic Web Apps are often the "natural" beginning:</p>
+	            <ul class="fragment">
+									<li>Java/C# is the language of choice in the backend anyway</li>
+	                <li>Java/C# and HTTP/HTML are very well known and understood
+	                <li>UI-Improvements (like simple validations, animations) can be implemented on the Client with JavaScript-Snippets (jQuery)
+	                <li>in many cases this might be sufficient
+							</ul>
+						</span>
         </section>
 
         <section>
@@ -277,66 +305,67 @@ Universal
             <p><small>And our Example is not even <em>that</em> complex...</small></p>
         </section>
 
-        <section>
-            <h2 class="step-subtitle">Next Step</h2>
+        <section class="step-subtitle">
+            <h2>Next Step</h2>
             <h1>Single-Page Applications</h1>
         </section>
 
         <section>
-            <h3>Single-Page Applications</h3>
-            <img src="webapp-architecture-spa.png" style="height: 500px;">
-        </section>
-        <section>
 						<h3>Single-Page Applications</h3>
-						<h2>The app runs completely in the browser</h2>
-            <ul class="fragment">
+						<h2 style="font-size: 1.8em">The app runs completely in the browser</h2>
+						<img src="webapp-architecture-spa.png" style="max-width: 40%; float: left">
+            <ul class="fragment" style="width: 50%; float: right; font-size: 80%">
                 <li>only one (single) HTML page per Application
                 <li>runs without significant Server part
-								<li>Server only receives and sends data</li>
+								<li>Server only receives and sends data (JSON/REST API)</li>
                 <li>can even work offline
                 <li>can be same UI/UX experience as a Desktop App
-                <li>Browser even provides storage capabilities <span style="color: red">(OLLI????)</span>
             </ul>
         </section>
 
         <section>
-						<h3>Single-Page Applications (SPAs)</h3>
+						<h3>Single-Page Applications</h3>
 						<h2>Components with Templates</h2>
-						<p>Application is structured around (business) components:</p>
+						<p>A SPA is composed of (business) components:</p>
             <ul class="fragment">
-								<li>Templates describe the UI of the component
-                <li>Logic is now part of the components, no longer "loose" snippets (like in jQuery)
-									<li>Both Logic and Template run on the client</li>
+								<li>Templates still describe the UI of the component
+								<li>But:
+									<ul>
+										<li>Logic is part of the component</li>
+										<li>Logic is a "first-class" citizen and no longer a "loose" snippet (like in jQuery)
+										<li><em>Logic is fully executed on the client</em></li>
+									</ul>
+									<li class="fragment">Prominent Frameworks: React, Angular and Vue</li>
             </ul>
-            <p class="fragment">Prominent Examples: React, Angular and Vue</p>
         </section>
 
-        <section>
-						<h3 class="step-subtitle">Architecture Pattern</h3>
+        <section class="step-subtitle">
+						<h3>Architecture Pattern</h3>
             <h1>Smart and Dumb Components</h1>
         </section>
 
         <section>
             <h3>Smart Components</h3>
             <ul>
-                <li>Verwalten Teilzustand der Anwendung
-                <li>Reichen Teile des Zustands als unveränderliche Daten an Unterkomponente weiter
-                <li>Enthalten UI Logik, die sie als Callbacks an ihre Unterkomponenten weiter geben können
-                <li>Meist spezifisch für eine Domäne
-                <li>Nicht außerhalb der Domäne wiederverwendbar
+                <li>Managing (part of) the application state
+								<li>Contain UI logic</li>
+								<li>Pass parts of the state as immutable data to subcomponents</li>
+								<li>Pass callbacks to subcomponents for interaction</li>
+                <li>Mostly domain-specific, not intended to be reusable
             </ul>
         </section>
 
         <section>
             <h3>Dumb Components</h3>
             <ul>
-                <li>Managen höchstens transienten State
-                <li>enthalten keine Logik
-                <li>Unterkomponente sind meist selbst nur Dumb Components (es gibt
+                <li>Can optionally contain own ("transient") state
+                <li>only presentation, contain no logic
+								<li>Usually Dumb Components only contain other Dump Components as children
+								(but there are
                     <a target="_blank" href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.z8xy5zvhs">
-                        Ausnahmen</a>)
-                <li>haben kein Wissen oder Abhängigkeit zu Oberkomponenten
-                <li>wievervwendbar
+											exceptions</a>)
+                <li>have no knowledge or dependencies to their upper components
+                <li>reusable
             </ul>
         </section>
 
@@ -424,20 +453,23 @@ export class SubComponent {
             <!--</a></small></p>-->
         <!--</section>-->
 
-        <section>
-            <h3 class="step-subtitle">Next Step</h3>
-            <h2>Redux as an Architecture Pattern</h2>
+        <section class="step-subtitle">
+            <h2>Next Step</h2>
+            <h1>Redux as an Architecture Pattern</h1>
         </section>
 
         <section>
-            <h1>Redux</h1>
-            <h2>Zustand wird zentral gehalten, UI-Logik geht aus den Komponenten</h2>
-            <h3>Selbst kein Framework, sondern nur ein Muster (wie z.B. MVC)</h3>
+						<h1>Redux</h1>
+						<ul>
+							<li><b>Central</b> state management: one store for whole app, like a database</li>
+							<li><b>External</b> state management: extract logic from the (UI-)components</li>
+						</ul>
+            <em>It's not a framework, it's a pattern (like MVC)<span class="todo">OLLI: so stehen lassen?</span></em>
         </section>
 
         <section>
-            <h2>Redux ist unabhängig vom Framework</h2>
-            <p>Implementierungen existieren für alle wichtigen UI-Frameworks</p>
+            <h2>Redux is UI framework independent</h2>
+						<p>Bindings exist for popular UI frameworks</p>
             <ul>
                 <li>React: <a href="http://redux.js.org/docs/basics/UsageWithReact.html" target="_blank">
                     http://redux.js.org/docs/basics/UsageWithReact.html
@@ -495,7 +527,7 @@ export const loadGreetings = dispatch => {
         <section>
             <h3>Demo: Magic Redux Dev-Tools</h3>
             <a href="code/schritte/redux/7-redux-complete-app/public" target="_blank">
-                <img src="redux-dev-tools.png" height="500px">
+                <img src="redux-dev-tools.png" class="with-border" height="500px">
             </a>
         </section>
 
@@ -580,24 +612,24 @@ export const loadGreetings = dispatch => {
 					<h2>First-Page-Impression</h2>
           <div>
           	<a href="code/architecture/spa/public/index.html" target="_blank">
-            	<img src="spa-first-page-impression.png" style="height: 350px;">
+            	<img src="spa-first-page-impression.png"  class="with-border" style="height: 350px;">
             </a>
           </div>
-          <p><small><em>Even for a simple Application it can take a while to load and bootstrap until the app is responsive</em></small></p>
+          <p><em>Even for a simple Application it can take a while to load and bootstrap until the app is responsive</em></p>
         </section>
 
-        <section>
-					<h2 class="step-subtitle">Next Step</h2>
+        <section class="step-subtitle">
+					<h2>Next Step</h2>
             <h1>Universal Web Apps</h1>
         </section>
-
-        <section>
+				<section>
             <h3>Universal Rendering: First-Page-Impression</h3>
             <div>
                 <a href="http://localhost:3000/" target="_blank">
-                    <img src="universal-first-page-impression.png" style="height: 500px;">
+                    <img src="universal-first-page-impression.png" class="with-border" style="height: 500px;">
                 </a>
-            </div>
+						</div>
+						<div class="todo">Nils / Olli: universal webapp baut nicht im workspace, wg fehlender package.json + dependencies</div>
         </section>
 
         <section>
@@ -624,7 +656,7 @@ export const loadGreetings = dispatch => {
         <section>
             <a target="_blank"
                href="https://twitter.com/mxstbr/status/776812185276284928">
-                <img src="twitter_universal.png">
+                <img src="twitter_universal.png" class="with-border">
             </a>
         </section>
 
@@ -632,13 +664,15 @@ export const loadGreetings = dispatch => {
             <h3>Challenges</h3>
             <ul class="fragment">
                 <li>Complete State must be available on the Server
-                <li>If First-Page-Impression is invalid: Flickering due to re-rendering on the Client
+									<ul><li>Need to wait until all async code has been processed</ul>
+									</li>
+                <li>If returned page is invalid: Flickering due to re-rendering on the Client
                     <ul>
                         <li>Different Locales on Server and Client
                         <li>(Rapidly) Changing data (Timestamps, Market Rates)
                     </ul>
                 </li>
-                <li>The Server must be able to run JavaScript (typically it will be <a href="https://nodejs.org" target="_blank">https://nodejs.org</a>)
+                <li>The Server must be able to run JavaScript (typically it will be <a href="https://nodejs.org" target="_blank">Node.js</a>)
             </ul>
         </section>
 
@@ -654,23 +688,24 @@ export const loadGreetings = dispatch => {
                         <li>"Echt" getrennte Anwendung über iFrame und EventBus
                     </ul>
                 </li>
-                <li class="fragment">Integration über Links, die eine neue Anwendung öffnen und die alte ersetzen
-                    <ul>
-                        <li>jedes Modul ist eine eigene SPA Anwendung
-                        <li>erlaubt Vertikalen wie eine klassische Web-App
-                        <li>Modul-Wechsel setzt Zustand zurück wenn nicht explizit übertragen
+                <li class="fragment">Split into several indepentend applications
+									                    <ul>
+																					<li>Can be used for (strictly) separated parts of the app (e.g. user settings)</li>
+																					<li>Link opens a new, own SPA</li>
+																				<li>State is not shared between apps</li>
                     </ul>
                 </li>
             </ul>
         </section>
 
-        <section class="todo">
+        <section class="step-subtitlep">
             <h2>Who uses modern SPAs?</h2>
             <ul>
                 <li>Twitter Mobile Client: React with Redux
                 <li>Facebook: React
-                <li>XING: React with Redux
+                <li>Spotify Web Player: React with Redux
                 <li>JavaZone: React with Redux
+									<li>New York Times: React</li>
             </ul>
         </section>
 
