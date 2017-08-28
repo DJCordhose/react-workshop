@@ -10,7 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+					content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="reveal.js/css/reveal.css">
     <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
@@ -65,9 +67,21 @@
 					letter-spacing: 1px;
 					color: #2aa198;
 					text-decoration: underline;
-					/* font-variant:small-caps */
 				}
 
+				.reveal img.with-border {
+					border: 1px solid #586e75 !important;
+					box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+				}
+
+				.reveal li {
+					margin-bottom: 8px;
+				}
+
+				/* For li's that use FontAwesome icons as bullet-point */
+			.reveal ul.fa-ul li {
+				list-style-type: none;
+			}
     </style>
 
     <!-- Printing and PDF exports -->
@@ -216,8 +230,8 @@ Universal
 				</section>
 
 				<section>
-					<h2 class="step-subtitle">The origin</h2>
-					<h1>Classic Web Applications</h1>
+					<h2 class="step-subtitle">In the beginning...</h2>
+					<h1>Classic Web Apps</h1>
 				</section>
 
         <section>
@@ -245,11 +259,10 @@ Universal
         <section>
 						<h3>Classic Web Apps</h3>
 						<h2>...but: UI/UX capabilities are limited</h2>
-						<p>so:</p>
-            <ul class="fragment">
-                <li>Even Classic Web Apps often contain "SPA-like" parts<br/>(for example when using JSF components)
-								<li>Mixing client- and server-side rendering leads to confusing architecture and programming model</li>
-								<li>Real costs of this "mixed" approach getting visible during development (when it's too late...)</li>
+            <ul class="fragment fa-ul">
+                <li><i class="fa-li fa fa-hand-o-right"></i>Even Classic Web Apps often contain "SPA-like" parts<br/>(for example when using JSF components)
+								<li><i class="fa-li fa fa-hand-o-right"></i>Mixing client- and server-side rendering leads to confusing architecture and programming model</li>
+								<li><i class="fa-li fa fa-hand-o-right"></i>Real costs of this "mixed" approach getting visible during development (when it's too late...)</li>
             </ul>
         </section>
 
@@ -258,10 +271,10 @@ Universal
             <h2>Limitations? An Example...</h2>
                 <div>
                     <a href="http://localhost:8080/" target="_blank">
-                        <img src="greeting-app-complex.png" style="height: 350px;">
+                        <img class="with-border" src="greeting-app-complex.png" style="height: 350px;">
                     </a>
                 </div>
-            <p><small>And that's not even <em>that</em> complex...</small></p>
+            <p><small>And our Example is not even <em>that</em> complex...</small></p>
         </section>
 
         <section>
