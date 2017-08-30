@@ -93,6 +93,23 @@
 					text-decoration: underline;
 				}
 
+				.reveal .front-page h1,
+				.reveal .front-page h2 {
+					font-family: "League Gothic";
+					font-style: normal;
+					text-transform: uppercase !important;
+					letter-spacing: 1px;
+				}
+
+				.reveal .front-page h1 {
+					font-size: 2.5em !important;
+				}
+
+				.reveal .highlight {
+					background-color: #D3337B;
+					color: white;
+				}
+
 				.reveal img.with-border {
 					border: 1px solid #586e75 !important;
 					box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
@@ -195,14 +212,13 @@ Universal
             </script>
         </section>
 
-        <section>
-            <h2>Overview of current (JavaScript) frontend architectures</h2>
+        <section class="front-page">
+						<h1>Overview of current (JavaScript) frontend architectures</h1>
             <p><a href="https://2017.javazone.no/program/5ddf7fcd3cdd41d78091f0677eb4eec0" target="_blank">
                 JavaZone, Oslo 2017</a></p>
             <p><small>
                 <a href="http://nilshartmann.net">Nils Hartmann</a> / <a href="http://twitter.com/nilshartmann">@nilshartmann</a>
-            </small></p>
-            <p><small>
+						</small><br><small>
                 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </small></p>
 
@@ -221,36 +237,37 @@ Universal
         </section>
 
         <section>
-            <h2>Central challenge with a complex Web Application</h2>
-            <h3>Best UI/UX opposes requirement for maintainability</h3>
+            <h3 style="font-size: 1.5em; color: #2aa198">Central challenge with a complex Web Application</h3>
+            <h2 style="font-size: 2.2em">Best UI/UX <span >opposes</span> requirement for maintainability</h2>
         </section>
 
         <section>
             <h2>What makes Frontend Architecture so hard?</h2>
-            <h3 class="fragment">The "problem" sits in front of the keyboard!</h3>
+            <h3 class="fragment" style="color: #2aa198">The "problem" sits in front of the keyboard!</h3>
 
             <ul>
-                <li class="fragment">everything should be consistent
+                <li class="fragment">everything should be <span class="highlight">consistent</span>
                     <ul>
-                        <li>consistent Layout (UI)
-                        <li>consistent Behvaior and Interaction (UX)
-                        <li>consistent Disaply of Data in all Components
+                        <li>consistent layout (UI)
+                        <li>consistent behavior and interaction (UX)
+                        <li>consistent display of all data in all components
                     </ul>
                 </li>
-                <li class="fragment">responsive UI even under load
-                <li class="fragment">everything loads without delay
+                <li class="fragment"><span class="highlight">responsive</span> UI even under load
+                <li class="fragment">everything loads <span class="highlight">without delay</span>
             </ul>
-        </section>
+				</section>
 
         <section>
-            <h2>The Flipside: Maintainability</h2>
-            <p class="fragment">Of course (TM) everything shall also be</p>
+						<h2 style="font-size: 1.5em; text-decoration: underline;line-height: 0.5em">The Flipside</h2>
+            <h3 style="color: #2aa198;font-size: 2.2em">Maintainability</h3>
+            <p class="fragment">Of course&#8482; everything shall also be</p>
             <ul>
-                <li class="fragment">fast and cheap to develop
-                <li class="fragment">maintainable for decades
+                <li class="fragment">fast and <span class="highlight">cheap</span> to develop
+                <li class="fragment"><span class="highlight">maintainable</span> for decades
                 <li class="fragment">developed in autonomous teams
-                <li class="fragment">developed having a consistent architectural vision
-                <li class="fragment">matched with skill set of existing developers
+                <li class="fragment">developed having a <span class="highlight">consistent architecture</span>
+                <li class="fragment">matched with <span class="highlight">skill</span> set of existing developers
             </ul>
 				</section>
 
@@ -278,7 +295,7 @@ Universal
 	            <ul class="fragment">
 									<li>Java/C# is the language of choice in the backend anyway</li>
 	                <li>Java/C# and HTTP/HTML are very well known and understood
-	                <li>UI-Improvements (like simple validations, animations) can be implemented on the Client with JavaScript-Snippets (jQuery)
+	                <li>UI improvements (like simple validations, animations) can be implemented on the client with JavaScript snippets (jQuery)
 	                <li>in many cases this might be sufficient
 							</ul>
 						</span>
@@ -302,7 +319,7 @@ Universal
                         <img class="with-border" src="greeting-app-complex.png" style="height: 350px;">
                     </a>
                 </div>
-            <p><small>And our Example is not even <em>that</em> complex...</small></p>
+            <p><small><span class="highlight">And our example is not even <em>that</em> complex... 🤔</span></small></p>
         </section>
 
         <section class="step-subtitle">
@@ -312,28 +329,28 @@ Universal
 
         <section>
 						<h3>Single-Page Applications</h3>
-						<h2 style="font-size: 1.8em">The app runs completely in the browser</h2>
+						<h2 style="font-size: 1.8em;color: #2aa198">The app runs completely in the browser</h2>
 						<img src="webapp-architecture-spa.png" style="max-width: 40%; float: left">
             <ul class="fragment" style="width: 50%; float: right; font-size: 80%">
-                <li>only one (single) HTML page per Application
-                <li>runs without significant Server part
-								<li>Server only receives and sends data (JSON/REST API)</li>
+                <li>only one (single) HTML page that mainly loads JavaScript and CSS
+                <li>runs without significant server part
+								<li>server only receives and sends data (JSON/REST API)</li>
                 <li>can even work offline
-                <li>can be same UI/UX experience as a Desktop App
+                <li>can even have same UI/UX experience as a desktop app
             </ul>
         </section>
 
         <section>
-						<h3>Single-Page Applications</h3>
+						<h3 style="line-height: 1em">Single-Page Applications</h3>
 						<h2>Components with Templates</h2>
-						<p>A SPA is composed of (business) components:</p>
+						<p style="color: #2aa198">A SPA is composed of (business) components:</p>
             <ul class="fragment">
 								<li>Templates still describe the UI of the component
 								<li>But:
 									<ul>
 										<li>Logic is part of the component</li>
 										<li>Logic is a "first-class" citizen and no longer a "loose" snippet (like in jQuery)
-										<li><em>Logic is fully executed on the client</em></li>
+										<li><span class="highlight" >Logic is fully executed on the client</span></li>
 									</ul>
 									<li class="fragment">Prominent Frameworks: React, Angular and Vue</li>
             </ul>
@@ -358,13 +375,13 @@ Universal
         <section>
             <h3>Dumb Components</h3>
             <ul>
-                <li>Can optionally contain own ("transient") state
-                <li>only presentation, contain no logic
-								<li>Usually Dumb Components only contain other Dump Components as children
+                <li>Might contain own ("transient") state
+                <li>only for presentation, no logic
+								<li>children of Dumb Components are usually other Dumb Components
 								(but there are
                     <a target="_blank" href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.z8xy5zvhs">
 											exceptions</a>)
-                <li>have no knowledge or dependencies to their upper components
+                <li>have no knowledge or dependencies to their surrounding components
                 <li>reusable
             </ul>
         </section>
@@ -424,23 +441,24 @@ export class SubComponent {
             </code></pre>
         </section>
 
-        <section>
-            <h3>Grenzen</h3>
-            <p class="fragment"><em>Besonders bei wachsenden und langlebigen Anwendungen</em></p>
-            <ul class="fragment">
-                <li>Tendenz zu "Gottkomponenten": Zustand und Logik wandern langsam nach oben in eine einzige Komponente
-                <li>Vermischung von Framework und UI-Logik (erschwert Austausch das Frameworks)
-                <li>Verteilter, veränderlicher Zustand erschwert Wartbarkeit
+        <section class="next-step">
+					<h3>Smart and Dumb Components</h3>
+            <h2>Limitations</h2>
+            <p class="fragment" style="color: #2aa198">Mainly with growing and long-living applications</p>
+            <ul class="fragment" style="font-size: 80%">
+                <li>"God-like" components: State and logic tend to slowly move up to one single fat component
+                <li>Mash up of framework and UI code (hardens switching the framework)
+                <li>Distributed, mutatable state makes maintainable and understanding hard
                     <ul>
-                        <li>Zustand oft nicht klar zuzuordnen</li>
-                        <li>In welchem Zustand ist die Anwendung?
+                        <li>Where does the state belong to?</li>
+                        <li>In which state is the application?
                     </ul>
                 </li>
-                <li>Architektur immer noch unklar
+                <li>Still open questions regarding the architecture
                     <ul>
-                        <li>Wo ist Nebenläufigkeit erlaubt?
-                        <li>Wie läuft die Initialisierungsphase
-                        <li>Wie testet man die Business Logik?
+                        <li>How to handle asynchronous code?
+                        <li>How to do proper initialization of the application?
+                        <li>How to test the business logic?
                     </ul>
                 </li>
             </ul>
@@ -461,32 +479,34 @@ export class SubComponent {
         <section>
 						<h1>Redux</h1>
 						<ul>
-							<li><b>Central</b> state management: one store for whole app, like a database</li>
-							<li><b>External</b> state management: extract logic from the (UI-)components</li>
+							<li><span class="highlight">Central</span> state management: one store for whole app, like a database</li>
+							<li><span class="highlight">External</span> state management: extract logic from the (UI-)components</li>
 						</ul>
             <em>It's not a framework, it's a pattern (like MVC)<span class="todo">OLLI: so stehen lassen?</span></em>
         </section>
 
         <section>
             <h2>Redux is UI framework independent</h2>
-						<p>Bindings exist for popular UI frameworks</p>
-            <ul>
+						<p style="color: #2aa198">Bindings exist for popular UI frameworks</p>
+            <ul style="font-size: 80%">
                 <li>React: <a href="http://redux.js.org/docs/basics/UsageWithReact.html" target="_blank">
                     http://redux.js.org/docs/basics/UsageWithReact.html
                 </a>
                 <li>Angular: <a href="https://github.com/ngrx/store" target="_blank">https://github.com/ngrx/store</a></li>
-                <li>Vue: <a href="https://github.com/revue/revue" target="_blank">https://github.com/revue/revue</a>
+								<li>Vue: <a href="https://github.com/revue/revue" target="_blank">https://github.com/revue/revue</a>
+									<li>Polymer: <a href="https://github.com/tur-nr/polymer-redux" target=_blank">Polymer</a></li>
             </ul>
 
         </section>
 
         <section>
-            <h2>Redux extrahiert Verwantwortlichkeiten aus UI-Framework</h2>
+						<h3>Redux extracts responsibility out of the UI framework</h3>
             <img src="redux-02-extracting-responsibility.png" style="max-height: 500px; border:0;box-shadow:0 0 0 0"/>
         </section>
 
         <section>
-            <h2>Resultierende Architektur anhand des Redux Musters</h2>
+						<h3>Redux Pattern</h3>
+						<h2>Resulting Architecture</h2>
             <img src="redux-03-resulting-redux-architecture.png" style="max-height: 500px; border:0;box-shadow:0 0 0 0"/>
         </section>
 
@@ -529,29 +549,33 @@ export const loadGreetings = dispatch => {
             <a href="code/schritte/redux/7-redux-complete-app/public" target="_blank">
                 <img src="redux-dev-tools.png" class="with-border" height="500px">
             </a>
-        </section>
+				</section>
+
+				<section>
+					<h2>Redux</h2>
+					<h3>Architectural guidance</h3>
+					<ul>
+							<li>Uni-directional data flow
+							<li>Central and immutable state: store
+									<li>Only reducers are allowed to modify state
+											<li>State moves from Smart Components to store
+							<li>UI logic moves from Smart Components in Action-Creators and Reducer
+							<li>Asynchronous code only in Action-Creators
+							<li>Initializing of the app with central action
+					</ul>
+				</section>
 
         <section>
-            <h3>Wrap Up Redux</h3>
-            <ul class="fragment">
-                <li>A UI patterns for User Interfaces
-                <li>Main Stream Solution
-                <li>Independent of Framework
-                <li>Allows for very easy testing of business logic
+						<h3>Wrap Up Redux</h3>
+						<p  style="color: #2aa198">A UI patterns for User Interfaces</span>
+            <ul class="fragment" style="font-size:80%">
+                <li>Mainstream solution
+                <li>Independent of framework
+                <li>Easy testing of business logic as logic is implemented only in pure functions ("Reducer")
                 <li>Great Debugging because of Dev Tools
                 <li>Works great in large applications with many dependencies between parts / components
-                <li>Gives strong and clear architectural guidance
-                <li>
-                <li>Ein Architektur-Muster für UIs
-                <li>Kontroll-/Datenfluss in eine Richtung
-                <li>Zustand wandert aus Smart Components in zentralen State
-                <li>UI-Logik wandert aus Smart Components in Action-Creators und Reducer
-                <li>Nebenläufigkeit nur in Action-Creators
-                <li>State ist zentral und immutable
-                <li>Business Logik ausschließlich in puren Funktionen - Reducer (beste Testbarkeit)
-                <li>Nur Reducer dürfen State verändern
-                <li>Initialisierung durch initiale Aktion
-            </ul>
+								</ul>
+
         </section>
 
         <section>
@@ -568,8 +592,8 @@ export const loadGreetings = dispatch => {
         <section>
             <h2>Redux vs MobX</h2>
             <p><strong>MobX</strong></p>
-            <ul>
-                <li>Fully embraces idea of Transparent Reactive Programming
+            <ul style="font-size:80%">
+                <li>Fully embraces idea of transparent reactive programming
                 <li>Embraces mutability
                 <li>Allows for more than one store, also supports nested stores
                 <li>Probably closer to what OO programmers are comfortable with
@@ -577,11 +601,11 @@ export const loadGreetings = dispatch => {
                 <li>Works with React only
             </ul>
             <p><strong>Redux</strong></p>
-            <ul>
+            <ul style="font-size:80%">
                 <li>Often overkill for small applications
-                <li>Idea of central state at its core
+								<li>Initially requires a lot of boiler plate code
+								<li>Idea of central state at its core
                 <li>Might be overwhelming for people not familiar with functional ideas
-                <li>Initially produces a lot of boiler plate code
             </ul>
         </section>
 
@@ -615,12 +639,25 @@ export const loadGreetings = dispatch => {
             	<img src="spa-first-page-impression.png"  class="with-border" style="height: 350px;">
             </a>
           </div>
-          <p><em>Even for a simple Application it can take a while to load and bootstrap until the app is responsive</em></p>
+          <p>Even for a simple Application it can <span class="highlight">take a while to load and bootstrap</span> until the app is responsive</p>
         </section>
 
         <section class="step-subtitle">
 					<h2>Next Step</h2>
             <h1>Universal Web Apps</h1>
+        </section>
+        <section>
+						<h3>Universal Rendering</h3>
+						<p class="todo">nils: grafik!</p>
+            <ul class="fragment">
+                <li>First-Page-Impression is rendered on the server
+								<li>Not only the Markup but also the State is returned from the Server
+								<li>(following pages can be rendered on server as well)</li>
+                <li>Links have to be "real" HTML links (no click handlers)
+                <li>Runs without JavaScript (at least partial)
+                <li>Code shared almost 100% between Client and Server
+                <li>Supported by React, Angular and Vue
+            </ul>
         </section>
 				<section>
             <h3>Universal Rendering: First-Page-Impression</h3>
@@ -632,18 +669,6 @@ export const loadGreetings = dispatch => {
 						<div class="todo">Nils / Olli: universal webapp baut nicht im workspace, wg fehlender package.json + dependencies</div>
         </section>
 
-        <section>
-            <h3>Universal Rendering</h3>
-            <ul class="fragment">
-                <li>First-Page-Impression is rendered on the server
-								<li>Not only the Markup but also the State is returned from the Server
-								<li>(following pages can be rendered on server as well)</li>
-                <li>Links have to be "real" HTML links (no click handlers)
-                <li>Runs without JavaScript (at least partial)
-                <li>Code shared almost 100% between Client and Server
-                <li>Supported by React, Angular and Vue
-            </ul>
-        </section>
 
         <!--<section>-->
             <!--<h3>Universal Rendering am Beispiel von React</h3>-->
@@ -661,51 +686,76 @@ export const loadGreetings = dispatch => {
         </section>
 
         <section>
-            <h3>Challenges</h3>
+					<h3>Universal Web Apps</h3>
+            <h2>Challenges</h2>
             <ul class="fragment">
-                <li>Complete State must be available on the Server
-									<ul><li>Need to wait until all async code has been processed</ul>
+                <li>Complete <span class="highlight">State must be available</span> on the Server
+									<ul><li>Need to wait until all async code has been processed!</ul>
 									</li>
-                <li>If returned page is invalid: Flickering due to re-rendering on the Client
+                <li>If returned page is invalid: <span class="highlight">Flickering</span> due to re-rendering on the Client
                     <ul>
                         <li>Different Locales on Server and Client
                         <li>(Rapidly) Changing data (Timestamps, Market Rates)
                     </ul>
                 </li>
-                <li>The Server must be able to run JavaScript (typically it will be <a href="https://nodejs.org" target="_blank">Node.js</a>)
+                <li>The <span class="highlight">Server must run JavaScript</span> (typically it will be <a href="https://nodejs.org" target="_blank">Node.js</a>)
+            </ul>
+				</section>
+
+				<section class="step-subtitle">
+					<h2>Next Step</h2>
+					<h1>Microservices</h1>
+				</section>
+
+        <section>
+						<h1>Patterns for modular development</h1>
+						<p class="todo">Nils: -"Logische" Anwendungen, deren Schnitt nicht unbedingt der MServices im Backend entsprechen muss (remember: it's all about the user!)
+
+							Reihenfolge:
+							- Integration zur Buildzeit via npm Modulen
+							- Integration im Browser via iframe
+							- indepentend applications
+				</section>
+				<section>
+						<h3>Modular development</h3>
+						<h2>Integration at build time</h2>
+						<ul>
+								<li>Split parts of the application into own npm modules</li>
+								<li>Different teams can provide npm modules</li>
+								<li>Other teams can consume the modules</li>
+					</ul>
+			</section>
+
+			<section>
+					<h3>Modular development</h3>
+					<h2>Integration in the browser</h2>
+            <ul>
+                <li>Anwendung ist in logische Module aufgeteilt, die als ganze Anwendung zusammen laufen
+                <li>Pro Seite eine Anwendung, kann Komponenten aus andern Modulen integrieten
+                <!--<li>Nachladen von Modulen on-demand aus einem Build problemlos möglich-->
+                <li>"Echt" getrennte Anwendung über iFrame und EventBus
+						</ul>
+					</section>
+
+					<section>
+							<h3>Modular development</h3>
+							<h2>Independent applications</h2>
+              <ul>
+									<li>Can be used for (strictly) separated parts of the app (e.g. user settings)</li>
+									<li>Link opens a new, own SPA</li>
+									<li>State is not shared between apps</li>
             </ul>
         </section>
 
         <section>
-            <h1 class="todo">Nils</h1>
-            <h3>Integration mit Microservices</h3>
-            <ul>
-                <li class="fragment">Integration im Browser
-                    <ul>
-                        <li>Anwendung ist in logische Module aufgeteilt, die als ganze Anwendung zusammen laufen
-                        <li>Pro Seite eine Anwendung, kann Komponenten aus andern Modulen integrieten
-                        <!--<li>Nachladen von Modulen on-demand aus einem Build problemlos möglich-->
-                        <li>"Echt" getrennte Anwendung über iFrame und EventBus
-                    </ul>
-                </li>
-                <li class="fragment">Split into several indepentend applications
-									                    <ul>
-																					<li>Can be used for (strictly) separated parts of the app (e.g. user settings)</li>
-																					<li>Link opens a new, own SPA</li>
-																				<li>State is not shared between apps</li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
-
-        <section class="step-subtitlep">
-            <h2>Who uses modern SPAs?</h2>
+						<h2>Who uses modern SPAs?</h2>
+						<h3>Is someone really doing this?</h3>
             <ul>
                 <li>Twitter Mobile Client: React with Redux
                 <li>Facebook: React
                 <li>Spotify Web Player: React with Redux
-                <li>JavaZone: React with Redux
-									<li>New York Times: React</li>
+								<li>New York Times: React</li>
+								<li>JavaZone: React with Redux
             </ul>
         </section>
 
