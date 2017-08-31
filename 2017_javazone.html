@@ -393,7 +393,7 @@ Universal
         <section>
             <h2>Code Sample Angular</h2>
             <p>Using rxjs for communication between Smart and Dumb Component</p>
-            <p class="todo">Short Intro rxjs</p>
+						<p class="todo">Short Intro rxjs / @olli: is rxjs intro really necessary? maybe we can explain the code without "background knowledge", because its more about the general idea</p>
         </section>
 
         <section>
@@ -704,17 +704,8 @@ export const loadGreetings = dispatch => {
 
 				<section class="step-subtitle">
 					<h2>Next Step</h2>
-					<h1>Microservices</h1>
-				</section>
+					<h1>Modularizing</h1>
 
-        <section>
-						<h1>Patterns for modular development</h1>
-						<p class="todo">Nils: -"Logische" Anwendungen, deren Schnitt nicht unbedingt der MServices im Backend entsprechen muss (remember: it's all about the user!)
-
-							Reihenfolge:
-							- Integration zur Buildzeit via npm Modulen
-							- Integration im Browser via iframe
-							- indepentend applications
 				</section>
 				<section>
 						<h3>Modular development</h3>
@@ -723,6 +714,7 @@ export const loadGreetings = dispatch => {
 								<li>Split parts of the application into own npm modules</li>
 								<li>Different teams can provide npm modules</li>
 								<li>Other teams can consume the modules</li>
+								<li>Modules can be lazy-loaded at runtime to increase performance</li>
 					</ul>
 			</section>
 
@@ -730,10 +722,10 @@ export const loadGreetings = dispatch => {
 					<h3>Modular development</h3>
 					<h2>Integration in the browser</h2>
             <ul>
-                <li>Anwendung ist in logische Module aufgeteilt, die als ganze Anwendung zusammen laufen
-                <li>Pro Seite eine Anwendung, kann Komponenten aus andern Modulen integrieten
-                <!--<li>Nachladen von Modulen on-demand aus einem Build problemlos möglich-->
-                <li>"Echt" getrennte Anwendung über iFrame und EventBus
+                <li>Teams can build their own components matching their business needs
+									<li>Can be embedded via an iframe into another application</li>
+									<li>therefore they need to "real" apps (but probably small ones)</li>
+									<li>State/communication between apps by using a global EventBus</li>
 						</ul>
 					</section>
 
@@ -742,10 +734,35 @@ export const loadGreetings = dispatch => {
 							<h2>Independent applications</h2>
               <ul>
 									<li>Can be used for (strictly) separated parts of the app (e.g. user settings)</li>
-									<li>Link opens a new, own SPA</li>
+									<li>one team can build a whole app containing backend and frontend</li>
+									<li>an app can match a Microservice at the backend (but don't have to; can talk to multiple Microservices)</li></p>
+									<li>Link opens a new, own SPA (Microapps 😜)</li>
 									<li>State is not shared between apps</li>
-            </ul>
-        </section>
+								</ul>
+				</section>
+
+				<section>
+						<h3 style="font-size: 1em; line-height:0">Wrap up</h3>
+					<h3>Modular development</h3>
+					<ul>
+						<li>Integration at <span class="highlight">build</span> time
+							<ul>
+								<li>New build of the consumer is required for each new version of a module</li>
+								<li><span class="highlight">"Real" SPAs</span> including all their advantages (components, state manangement, universal rendering)</li>
+							</ul>
+							<li>Integration in the <span class="highlight">browser</span>
+								<ul><li>
+										Higher decoupling (team can independently release their apps)</ul>
+									</li>
+									<li>Integration harder, as you deal with a lot of <span class="highlight">"small" SPAs</span> </li>
+									</li>
+							</li>
+					</ul>
+					<p style="color: #2aa198">Remember: it's all about the User (Experience!):
+					<br/>It should feel as <span class="highlight">one</span> app!</p>
+
+				</section>
+
 
         <section>
 						<h2>Who uses modern SPAs?</h2>
@@ -756,6 +773,7 @@ export const loadGreetings = dispatch => {
                 <li>Spotify Web Player: React with Redux
 								<li>New York Times: React</li>
 								<li>JavaZone: React with Redux
+									<li><span class="todo">Olli: more examples?</span></li>
             </ul>
         </section>
 
