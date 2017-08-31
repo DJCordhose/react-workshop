@@ -208,7 +208,7 @@ Universal
 - cd code/architecture/universal
 - npm install
 - npm start
-- Checken, dass localhost:3000 im Browser läuft
+- Checken, dass localhost:3001 im Browser läuft
             </script>
         </section>
 
@@ -572,7 +572,7 @@ export const loadGreetings = dispatch => {
                 <li>Mainstream solution
                 <li>Independent of framework
                 <li>Easy testing of business logic as logic is implemented only in pure functions ("Reducer")
-                <li>Great Debugging because of Dev Tools
+                <li>Great debugging because of dev tools
                 <li>Works great in large applications with many dependencies between parts / components
 								</ul>
 
@@ -622,8 +622,8 @@ export const loadGreetings = dispatch => {
                 <li>First-Page-Impressions
                 <li>Previewing content, for example:
                     <ul>
-                        <li>Preview in Search Result Lists
-                        <li>Sharing of Links in Social Media Apps
+                        <li>Preview in search result lists
+                        <li>Sharing of links in social media apps
                     </ul>
 
                 </li>
@@ -651,22 +651,21 @@ export const loadGreetings = dispatch => {
 						<p class="todo">nils: grafik!</p>
             <ul class="fragment">
                 <li>First-Page-Impression is rendered on the server
-								<li>Not only the Markup but also the State is returned from the Server
+								<li>Not only the markup but also the state is returned from the server
 								<li>(following pages can be rendered on server as well)</li>
                 <li>Links have to be "real" HTML links (no click handlers)
-                <li>Runs without JavaScript (at least partial)
-                <li>Code shared almost 100% between Client and Server
+                <li>Runs without JavaScript on the client (at least partial) after rendered
+                <li>Code shared almost 100% between client and server
                 <li>Supported by React, Angular and Vue
             </ul>
         </section>
 				<section>
             <h3>Universal Rendering: First-Page-Impression</h3>
             <div>
-                <a href="http://localhost:3000/" target="_blank">
+                <a href="http://localhost:3001/" target="_blank">
                     <img src="universal-first-page-impression.png" class="with-border" style="height: 500px;">
                 </a>
 						</div>
-						<div class="todo">Nils / Olli: universal webapp baut nicht im workspace, wg fehlender package.json + dependencies</div>
         </section>
 
 
@@ -689,16 +688,16 @@ export const loadGreetings = dispatch => {
 					<h3>Universal Web Apps</h3>
             <h2>Challenges</h2>
             <ul class="fragment">
-                <li>Complete <span class="highlight">State must be available</span> on the Server
+                <li>Complete <span class="highlight">state must be available</span> on the server
 									<ul><li>Need to wait until all async code has been processed!</ul>
 									</li>
-                <li>If returned page is invalid: <span class="highlight">Flickering</span> due to re-rendering on the Client
+                <li>If returned page is invalid: <span class="highlight">flickering</span> due to re-rendering on the client
                     <ul>
-                        <li>Different Locales on Server and Client
-                        <li>(Rapidly) Changing data (Timestamps, Market Rates)
+                        <li>Different locales on server and client
+                        <li>(Rapidly) changing data (timestamps, market rates)
                     </ul>
                 </li>
-                <li>The <span class="highlight">Server must run JavaScript</span> (typically it will be <a href="https://nodejs.org" target="_blank">Node.js</a>)
+                <li>The <span class="highlight">server must run JavaScript</span> (typically it will be <a href="https://nodejs.org" target="_blank">Node.js</a>)
             </ul>
 				</section>
 
