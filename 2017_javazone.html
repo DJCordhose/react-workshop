@@ -359,6 +359,7 @@ Universal
         <section class="step-subtitle">
 						<h3>Architecture Pattern</h3>
             <h1>Smart and Dumb Components</h1>
+            <h3>Also known as <em>Mediator Pattern</em> with Web Components / Polymer</h3>
         </section>
 
         <section>
@@ -393,7 +394,6 @@ Universal
         <section>
             <h2>Code Sample Angular</h2>
             <p>Using rxjs for communication between Smart and Dumb Component</p>
-						<p class="todo">Short Intro rxjs / @olli: is rxjs intro really necessary? maybe we can explain the code without "background knowledge", because its more about the general idea</p>
         </section>
 
         <section>
@@ -482,19 +482,21 @@ export class SubComponent {
 							<li><span class="highlight">Central</span> state management: one store for whole app, like a database</li>
 							<li><span class="highlight">External</span> state management: extract logic from the (UI-)components</li>
 						</ul>
-            <em>It's not a framework, it's a pattern (like MVC)<span class="todo">OLLI: so stehen lassen?</span></em>
+            <em>It's not a framework, it's a pattern (like MVC)</em>
         </section>
 
         <section>
-            <h2>Redux is UI framework independent</h2>
+            <h2>Redux is independent of UI framework</h2>
 						<p style="color: #2aa198">Bindings exist for popular UI frameworks</p>
             <ul style="font-size: 80%">
                 <li>React: <a href="http://redux.js.org/docs/basics/UsageWithReact.html" target="_blank">
                     http://redux.js.org/docs/basics/UsageWithReact.html
                 </a>
                 <li>Angular: <a href="https://github.com/ngrx/store" target="_blank">https://github.com/ngrx/store</a></li>
-								<li>Vue: <a href="https://github.com/revue/revue" target="_blank">https://github.com/revue/revue</a>
-									<li>Polymer: <a href="https://github.com/tur-nr/polymer-redux" target=_blank">Polymer</a></li>
+                <li>Vue: <a href="https://github.com/revue/revue" target="_blank">https://github.com/revue/revue</a>
+                <li>Web Components (Polymer): Redux is recommended implementation of <em>Global Mediator Pattern</em>,
+                    <a href="https://twitter.com/DJCordhose/status/899943415353311232" target="_blank">https://twitter.com/DJCordhose/status/899943415353311232</a>
+                    <a href="https://tur-nr.github.io/polymer-redux/" target="_blank">https://tur-nr.github.io/polymer-redux/</a>
             </ul>
 
         </section>
@@ -651,8 +653,8 @@ export const loadGreetings = dispatch => {
 						<p class="todo">nils: grafik!</p>
             <ul class="fragment">
                 <li>First-Page-Impression is rendered on the server
-								<li>Not only the markup but also the state is returned from the server
-								<li>(following pages can be rendered on server as well)</li>
+                <li>Not only the markup but also the state is returned from the server
+                <li>(following pages can be rendered on server as well)</li>
                 <li>Links have to be "real" HTML links (no click handlers)
                 <li>Runs without JavaScript on the client (at least partial) after rendered
                 <li>Code shared almost 100% between client and server
@@ -698,6 +700,11 @@ export const loadGreetings = dispatch => {
                     </ul>
                 </li>
                 <li>The <span class="highlight">server must run JavaScript</span> (typically it will be <a href="https://nodejs.org" target="_blank">Node.js</a>)
+                <li>
+                    <a href="https://twitter.com/DJCordhose/status/900328374601740288" target="_blank">
+                        How to do with Web Components? (headless chrome?)</a>
+                <li>Only helps with "Time to first Meaningful Paint", not with "Time to Interactive"
+
             </ul>
 				</section>
 
@@ -772,7 +779,6 @@ export const loadGreetings = dispatch => {
                 <li>Spotify Web Player: React with Redux
 								<li>New York Times: React</li>
 								<li>JavaZone: React with Redux
-									<li><span class="todo">Olli: more examples?</span></li>
             </ul>
         </section>
 
