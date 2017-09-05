@@ -59,7 +59,6 @@ class GreetingDetail extends React.Component {
     }
 
 	updateModel(event) {
-
 		this.setState({ ...this.state, [event.currentTarget.name]: event.currentTarget.value })
     }
 }
