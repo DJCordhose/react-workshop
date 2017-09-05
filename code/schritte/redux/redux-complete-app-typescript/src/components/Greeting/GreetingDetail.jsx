@@ -1,23 +1,19 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { NewGreeting } from "../../types";
-
-import * as actions from "../../actions";
+import {saveGreeting} from "../../actions";
 import {connect} from "react-redux";
 
-type DispatchProps = {
-	onSave: (newGreeting: NewGreeting) => void
-}
+class GreetingDetail extends React.Component {
 
-type State = {
-	name: string;
-	greeting: string;
-}
+    constructor(props) {
+        super(props);
 
-class GreetingDetail extends React.Component<DispatchProps, State> {
-
-	input: HTMLInputElement|null;
+        this.state = {
+            name: '',
+            greeting: ''
+        };
+    }
 
     render() {
         const {name, greeting} = this.state;
@@ -46,15 +42,6 @@ class GreetingDetail extends React.Component<DispatchProps, State> {
             </div>);
     }
 
-    constructor(props: DispatchProps) {
-        super(props);
-
-        this.state = {
-            name: '',
-            greeting: ''
-        };
-    }
-
     reset() {
         this.setState({name: '', greeting: ''});
         if (this.input) {
@@ -71,20 +58,15 @@ class GreetingDetail extends React.Component<DispatchProps, State> {
         });
     }
 
-	updateModel(event: React.SyntheticEvent<HTMLInputElement>) {
-		// DOES NOT WORK WITH TS:
-		// this.setState({ [event.currentTarget.name]: event.currentTarget.value });
-		// see ==>
-		// https://github.com/Microsoft/TypeScript/issues/13948
-		// https://github.com/Microsoft/TypeScript/issues/15534
+	updateModel(event) {
 
 		this.setState({ ...this.state, [event.currentTarget.name]: event.currentTarget.value })
     }
 }
 
-export default connect<{}, DispatchProps, {}>(
+export default connect(
     null,
-    dispatch => ({
-        onSave: (greeting: NewGreeting) => dispatch(actions.saveGreeting(greeting))
-    })
+    {
+        onSave: saveGreeting
+    }
 )(GreetingDetail);
