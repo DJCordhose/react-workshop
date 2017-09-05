@@ -400,9 +400,10 @@ Universal
             <h2>Smart Component</h2>
             <pre><code data-trim>
 @Component({
-  template: `<sub greeting={{greeting}} (onSend)="sent($event)"></sub>`
+  template: `&lt;sub greeting={{greeting}} (onSend)="sent($event)"></sub>`
 })
 export class AppComponent {
+  // component state
   private greeting: string = 'Hiho';
 
   constructor(private greetingService: GreetingService) {
@@ -514,36 +515,50 @@ export class SubComponent {
 
         <section>
             <h2>Code Sample: Reducer</h2>
-            <h3>Independent of UI Framework</h3>
+            <h3>Just a function, thus independent of UI Framework</h3>
             <pre><code data-trim>
-const greetings = (state = [], action) => {
+type Greeting = {
+	greeting: string;
+	name: string;
+}
+
+type SaveGreetingAction = {
+	type: 'ADD_GREETING',
+	greeting: Greeting
+}
+
+function greetingsReducer(state: Greeting[] = [],
+                          action: SaveGreetingAction) {
     switch (action.type) {
-        case ADD_GREETING:
+        case 'ADD_GREETING':
             // immutable operation, creating new state
             return [...state, action.greeting];
         default:
             return state;
     }
-};
+}
             </code></pre>
-            <p>Just a function</p>
+            <p></p>
         </section>
 
         <section>
             <h2>Code Sample: Action Creator</h2>
             <h3>Independent of UI Framework</h3>
             <pre><code data-trim>
-export const loadGreetings = dispatch => {
-    return fetch(BACKEND_URL)
-        .then(response => response.json())
-        .then(json => dispatch({
+async function loadGreetings(dispatch) {
+    try {
+        const response = await fetch(BACKEND_URL);
+        const json = await response.json();
+        dispatch({
             type: SET_GREETINGS,
             greetings: json
-        }))
-        .catch(err => console.error('LOADING GREETINGS FAILED:', err));
-};
+        });
+    } catch (err) {
+        console.error('LOADING GREETINGS FAILED:', err)
+    }
+}
             </code></pre>
-            <p>Again, just a function</p>
+            <p>Again, just a function and the only place where asynchronous operations are allowed</p>
         </section>
 
         <section>
