@@ -226,6 +226,7 @@ Universal
                 http://bit.ly/ui-architecture-javazone</a></p>
         </section>
 
+<!--
         <section>
             <img src="internet-is-for-end-users.png">
 
@@ -236,6 +237,7 @@ Universal
             </a></small></p>
         </section>
 
+-->
         <section>
             <h3 style="font-size: 1.5em; color: #2aa198">Central challenge with a complex Web Application</h3>
             <h2 style="font-size: 2.2em">Best UI/UX <span >opposes</span> requirement for maintainability</h2>
@@ -391,6 +393,7 @@ Universal
             <img src="smart-dumb-properties.png">
         </section>
 
+<!--
         <section>
             <h2>Code Sample Angular</h2>
             <p>Using rxjs for communication between Smart and Dumb Component</p>
@@ -441,6 +444,7 @@ export class SubComponent {
 }
             </code></pre>
         </section>
+-->
 
         <section class="next-step">
 					<h3>Smart and Dumb Components</h3>
@@ -494,7 +498,10 @@ export class SubComponent {
                     http://redux.js.org/docs/basics/UsageWithReact.html
                 </a>
                 <li>Angular: <a href="https://github.com/ngrx/store" target="_blank">https://github.com/ngrx/store</a></li>
-                <li>Vue: <a href="https://github.com/revue/revue" target="_blank">https://github.com/revue/revue</a>
+                <li>Vue:
+                    <a href="https://github.com/vuejs/vuex" target="_blank">https://github.com/vuejs/vuex</a> /
+
+                    <a href="https://github.com/revue/revue" target="_blank">https://github.com/revue/revue</a>
                 <li>Web Components (Polymer): Redux is recommended implementation of <em>Global Mediator Pattern</em>,
                     <a href="https://twitter.com/DJCordhose/status/899943415353311232" target="_blank">https://twitter.com/DJCordhose/status/899943415353311232</a>
                     <a href="https://tur-nr.github.io/polymer-redux/" target="_blank">https://tur-nr.github.io/polymer-redux/</a>
@@ -516,17 +523,19 @@ export class SubComponent {
         <section>
             <h2>Code Sample: Reducer</h2>
             <h3>Just a function, thus independent of UI Framework</h3>
-            <pre><code data-trim>
+            <pre class="fragment"><code data-trim data-num-start="1">
 type Greeting = {
 	greeting: string;
 	name: string;
 }
-
+            </code></pre>
+            <pre class="fragment"><code data-trim data-num-start="5">
 type SaveGreetingAction = {
 	type: 'ADD_GREETING',
 	greeting: Greeting
 }
-
+            </code></pre>
+            <pre><code data-trim data-num-start="9">
 function greetingsReducer(state: Greeting[] = [],
                           action: SaveGreetingAction) {
     switch (action.type) {
@@ -561,6 +570,7 @@ async function loadGreetings(dispatch) {
             <p>Again, just a function and the only place where asynchronous operations are allowed</p>
         </section>
 
+<!--
         <section>
             <h3>Demo: Magic Redux Dev-Tools</h3>
             <a href="code/schritte/redux/7-redux-complete-app/public" target="_blank">
@@ -582,6 +592,7 @@ async function loadGreetings(dispatch) {
 					</ul>
 				</section>
 
+-->
         <section>
 						<h3>Wrap Up Redux</h3>
 						<p  style="color: #2aa198">A UI pattern for User Interfaces</span>
@@ -595,6 +606,7 @@ async function loadGreetings(dispatch) {
 
         </section>
 
+<!--
         <section>
             <h1>MobX</h1>
             <h2>Simple Alternative for State Management</h2>
@@ -626,6 +638,7 @@ async function loadGreetings(dispatch) {
             </ul>
         </section>
 
+-->
         <section>
 					<h3>
 						Single-Page Apps
@@ -653,10 +666,12 @@ async function loadGreetings(dispatch) {
 					<h2>First-Page-Impression</h2>
           <div>
           	<a href="code/architecture/spa/public/index.html" target="_blank">
-            	<img src="spa-first-page-impression.png"  class="with-border" style="height: 350px;">
+            	<img src="spa-first-page-impression.png"  class="with-border" style="height: 280px;">
             </a>
           </div>
-          <p>Even for a simple Application it can <span class="highlight">take a while to load and bootstrap</span> until the app is responsive</p>
+          <p>Even for a simple Application it can <span class="highlight">take a while to load and bootstrap</span>
+              until the app is responsive</p>
+            <p>What comes from Server is an <span class="highlight">empty page</span> </p>
         </section>
 
         <section class="step-subtitle">
@@ -694,12 +709,14 @@ async function loadGreetings(dispatch) {
             <!--</div>-->
         <!--</section>-->
 
+<!--
         <section>
             <a target="_blank"
                href="https://twitter.com/mxstbr/status/776812185276284928">
                 <img src="twitter_universal.png" class="with-border">
             </a>
         </section>
+-->
 
         <section>
 					<h3>Universal Web Apps</h3>
