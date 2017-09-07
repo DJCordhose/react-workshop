@@ -522,7 +522,7 @@ export class SubComponent {
 
         <section>
             <h2>Code Sample: Reducer</h2>
-            <h3>Just a function, thus independent of UI Framework</h3>
+            <p>Just a function, thus independent of UI Framework</p>
             <pre class="fragment"><code data-trim data-num-start="1">
 type Greeting = {
 	greeting: string;
@@ -530,14 +530,13 @@ type Greeting = {
 }
             </code></pre>
             <pre class="fragment"><code data-trim data-num-start="5">
-type SaveGreetingAction = {
+type AddGreetingAction = {
 	type: 'ADD_GREETING',
 	greeting: Greeting
 }
             </code></pre>
             <pre><code data-trim data-num-start="9">
-function greetingsReducer(state: Greeting[] = [],
-                          action: SaveGreetingAction) {
+function greetingsReducer(state: Greeting[] = [], action: AddGreetingAction) {
     switch (action.type) {
         case 'ADD_GREETING':
             // immutable operation, creating new state
@@ -547,12 +546,17 @@ function greetingsReducer(state: Greeting[] = [],
     }
 }
             </code></pre>
-            <p></p>
+            <p>Only part <span  class="highlight">allowed to update state</span></p>
+        </section>
+
+        <section>
+            <h2>Different Types of State</h2>
+            <img src="three-kinds-of-state.png">
         </section>
 
         <section>
             <h2>Code Sample: Action Creator</h2>
-            <h3>Independent of UI Framework</h3>
+            <p>Again, just a function independent of UI Framework</p>
             <pre><code data-trim>
 async function loadGreetings(dispatch) {
     try {
@@ -567,32 +571,32 @@ async function loadGreetings(dispatch) {
     }
 }
             </code></pre>
-            <p>Again, just a function and the only place where asynchronous operations are allowed</p>
+            <p>The only place where <span  class="highlight">asynchronous operations are allowed</span></p>
         </section>
 
-<!--
-        <section>
-            <h3>Demo: Magic Redux Dev-Tools</h3>
-            <a href="code/schritte/redux/7-redux-complete-app/public" target="_blank">
-                <img src="redux-dev-tools.png" class="with-border" height="500px">
-            </a>
-				</section>
+        <!--
+                <section>
+                    <h3>Demo: Magic Redux Dev-Tools</h3>
+                    <a href="code/schritte/redux/7-redux-complete-app/public" target="_blank">
+                        <img src="redux-dev-tools.png" class="with-border" height="500px">
+                    </a>
+                        </section>
 
-				<section>
-					<h2>Redux</h2>
-					<h3>Architectural guidance</h3>
-					<ul>
-							<li>Uni-directional data flow
-							<li>Central and immutable state: store
-									<li>Only reducers are allowed to modify state
-											<li>State moves from Smart Components to store
-							<li>UI logic moves from Smart Components in Action-Creators and Reducer
-							<li>Asynchronous code only in Action-Creators
-							<li>Initializing of the app with central action
-					</ul>
-				</section>
+                        <section>
+                            <h2>Redux</h2>
+                            <h3>Architectural guidance</h3>
+                            <ul>
+                                    <li>Uni-directional data flow
+                                    <li>Central and immutable state: store
+                                            <li>Only reducers are allowed to modify state
+                                                    <li>State moves from Smart Components to store
+                                    <li>UI logic moves from Smart Components in Action-Creators and Reducer
+                                    <li>Asynchronous code only in Action-Creators
+                                    <li>Initializing of the app with central action
+                            </ul>
+                        </section>
 
--->
+        -->
         <section>
 						<h3>Wrap Up Redux</h3>
 						<p  style="color: #2aa198">A UI pattern for User Interfaces</span>
@@ -739,6 +743,7 @@ async function loadGreetings(dispatch) {
 
             </ul>
 				</section>
+<!--
 
 				<section class="step-subtitle">
 					<h2>Next Step</h2>
@@ -802,6 +807,7 @@ async function loadGreetings(dispatch) {
 				</section>
 
 
+-->
         <section>
 						<h2>Who uses modern SPAs?</h2>
 						<h3>Is someone really doing this?</h3>
