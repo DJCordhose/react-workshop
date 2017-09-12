@@ -6,7 +6,7 @@ import store from '../common/store';
 import HelloMessage from '../common/HelloMessage';
 
 function renderFullPage(html, initialData) {
-  return `
+	return `
 <html>
   <body>
     <div id="mount">${html}</div>
@@ -21,13 +21,13 @@ function renderFullPage(html, initialData) {
 </html>`;
 }
 
-export default function(request, reply) {
-  const html =  
-    renderToString(
-        <Provider store={store}>
-            <HelloMessage />
-        </Provider>
-    );
-  reply(renderFullPage(html, store.getState()));
+export default function (request, response) {
+	const html =
+		renderToString(
+			<Provider store={store}>
+				<HelloMessage />
+			</Provider>
+		);
+	response.send(renderFullPage(html, store.getState()));
 };
 

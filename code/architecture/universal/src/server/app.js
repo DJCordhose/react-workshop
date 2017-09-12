@@ -1,35 +1,16 @@
-import Hapi from 'hapi';
-import Inert from 'inert';
+const express = require('express');
+const app = express();
+import fs from 'fs';
 import path from 'path';
 
-const server = new Hapi.Server();
 const publicPath = path.join(__dirname, '/../../public');
 
+// read the mainJs (note: this file can be buit in the 'spa' folder and then copied to public/dist)
+const mainJs = fs.readFileSync(`${publicPath}/dist/main.js`, "utf8");
 import renderRoute from './renderRoute';
 
-server.connection({
-  port: 3001
-});
 
-require('./devServerHapi').setup(server, publicPath);
+app.get("/dist/app.js", (req, res) => res.send(mainJs));
+app.get("/", renderRoute);
 
-server.register(Inert, () => {
-});
-
-server.route({
-    method:  'GET',
-    path:    '/',
-    handler: renderRoute
-});
-
-server.route({
-  method:  'GET',
-  path:    '/{param*}',
-  handler: {
-    directory: {
-      path: publicPath
-    }
-  }
-});
-
-server.start(() => console.log(`Server running at: ${server.info.uri}`));
+const server = app.listen(3001, () => console.log(`Server running at http://localhost:${server.address().port}`));
