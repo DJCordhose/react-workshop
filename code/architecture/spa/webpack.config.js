@@ -1,14 +1,18 @@
 module.exports = {
     entry: "./src/main.js",
     output: {
-        path: __dirname,
-        filename: "public/dist/main.js"
+        path: __dirname + '/public/dist/',
+        filename: "main.js",
+        publicPath: '/dist'
     },
     module: {
-        loaders: [
-            {test: /\.js$/, exclude: /node_modules/,  loader: 'babel'}
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: 'babel-loader'
+            }
         ]
     },
-    devtool: 'source-map'
-
+    // devtool: 'inline-source-map'
 };

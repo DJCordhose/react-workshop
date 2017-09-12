@@ -4,7 +4,8 @@
 const path = require('path');
 const Webpack = require('webpack');
 const WebpackPlugin = require('hapi-webpack-plugin');
-const config = require('../../webpack.config.hot');
+// const config = require('../../webpack.config.hot');
+const config = require('../../webpack.config.prod');
 
 export function setup(server, publicPath) {
   console.log("PublicPath: " + publicPath);
