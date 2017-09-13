@@ -191,7 +191,7 @@ Plan
 
 <!--
 Wer macht was?
-- Intro: Folie 1 - 4 (Olli)
+- Intro: Folie 1 - 4 (Nils)
 - Klassische Web App: 5 - 9, inkl. Demo App (Nils)
 - SPA: 10-17 (Nils)
 - Redux: 18-28 (Olli)
@@ -256,30 +256,32 @@ Universal
             <h2>What makes Frontend Architecture so hard?</h2>
             <h3 class="fragment" style="color: #2aa198">The "problem" sits in front of the keyboard!</h3>
 
-            <ul>
-                <li class="fragment">everything should be <span class="highlight">consistent</span>
+            <ul class="fragment">
+                <li>everything should be <span class="highlight">consistent</span>
                     <ul>
                         <li>consistent layout (UI)
                         <li>consistent behavior and interaction (UX)
                         <li>consistent display of all data in all components
                     </ul>
                 </li>
-                <li class="fragment"><span class="highlight">responsive</span> UI even under load
-                <li class="fragment">everything loads <span class="highlight">without delay</span>
+                <li><span class="highlight">responsive</span> UI even under load
+                <li>everything should load <span class="highlight">without delay</span>
             </ul>
 				</section>
 
         <section>
 						<h2 style="font-size: 1.5em; text-decoration: underline;line-height: 0.5em">The Flipside</h2>
             <h3 style="color: #2aa198;font-size: 2.2em">Maintainability</h3>
-            <p class="fragment">Of course&#8482; everything shall also be</p>
+          <div  class="fragment">
+            <p>Of course&#8482; the application shall also be</p>
             <ul>
-                <li class="fragment">fast and <span class="highlight">cheap</span> to develop
-                <li class="fragment"><span class="highlight">maintainable</span> for decades
-                <li class="fragment">developed in autonomous teams
-                <li class="fragment">developed having a <span class="highlight">consistent architecture</span>
-                <li class="fragment">matched with <span class="highlight">skill</span> set of existing developers
+                <li>fast and <span class="highlight">cheap</span> to develop
+                <li><span class="highlight">maintainable</span> for decades
+                <li>developed in autonomous teams
+                <li>developed having a <span class="highlight">consistent architecture</span>
+                <li>matched with <span class="highlight">skill</span> set of existing developers
             </ul>
+          </div>
 				</section>
 
 				<section class="step-subtitle">
@@ -290,11 +292,12 @@ Universal
         <section>
 						<h2>Classic Web Applications</h2>
 						<img src="webapp-architecture-classic.png" style="max-width: 40%; float: left">
-            <ol class="fragment"  style="max-width: 50%; float: right">
-                <li>Browser sends HTTP Request
-                <li>Content is rendered on the Server
-								<li>HTML is sent back to the Browser</li>
-                <li>Each interaction repeats this round-trip
+            <ol style="max-width: 50%; float: right">
+                <li class="fragment"  >Browser sends HTTP Request
+              <li class="fragment"  >Content is <span class="highlight">rendered on the Server</span>
+								<li class="fragment"  >HTML is sent back to the Browser
+              <li class="fragment"  ><span class="highlight">Browser only shows the page</span> to the user
+                <li class="fragment"  >Each interaction repeats this round-trip
             </ul>
         </section>
 
@@ -304,8 +307,8 @@ Universal
 						<span  style="font-size: 80%">
 							<p>In enterprise projects, Classic Web Apps are often the "natural" beginning:</p>
 	            <ul class="fragment">
-									<li>Java/C# is the language of choice in the backend anyway</li>
-	                <li>Java/C# and HTTP/HTML are very well known and understood
+                <li>Java/C# is the language of choice in the <span class="highlight">backend</span> anyway</li>
+                <li>Java/C# and HTTP/HTML are <span class="highlight">very well known</span> and understood
 	                <li>UI improvements (like simple validations, animations) can be implemented on the client with JavaScript snippets (jQuery)
 	                <li>in many cases this might be sufficient
 							</ul>
@@ -344,7 +347,7 @@ Universal
 						<img src="webapp-architecture-spa.png" style="max-width: 40%; float: left">
             <ul class="fragment" style="width: 50%; float: right; font-size: 80%">
                 <li>only one (single) HTML page that mainly loads JavaScript and CSS
-                <li>runs without significant server part
+              <li>runs without <span class="highlight">significant server part</span> for the UI
 								<li>server only receives and sends data (JSON/REST API)</li>
                 <li>can even work offline
                 <li>can even have same UI/UX experience as a desktop app
@@ -356,8 +359,8 @@ Universal
 						<h2>Components with Templates</h2>
 						<p style="color: #2aa198">A SPA is composed of (business) components:</p>
             <ul class="fragment">
-								<li>Templates still describe the UI of the component
-								<li>But:
+								<li>Templates describe the UI of the component
+								<li>But now:
 									<ul>
 										<li>Logic is part of the component</li>
 										<li>Logic is a "first-class" citizen and no longer a "loose" snippet (like in jQuery)
@@ -374,10 +377,10 @@ Universal
         </section>
 
         <section>
-            <h3>Smart Components</h3>
+          <h3><span class="highlight">Smart</span> Components</h3>
             <ul>
-                <li>Managing (part of) the application state
-								<li>Contain UI logic</li>
+              <li>Managing (part of) the application <span class="highlight">state</span>
+              <li>Contain UI <span class="highlight">logic</span></li>
 								<li>Pass parts of the state as immutable data to subcomponents</li>
 								<li>Pass callbacks to subcomponents for interaction</li>
                 <li>Mostly domain-specific, not intended to be reusable
@@ -385,15 +388,18 @@ Universal
         </section>
 
         <section>
-            <h3>Dumb Components</h3>
+            <h3><span class="highlight">Dumb</span> Components</h3>
             <ul>
-                <li>Might contain own ("transient") state
-                <li>only for presentation, no logic
+              <li>only for <span class="highlight">presentation</span>, no logic
+              <ul>
+                <li>but might contain own ("transient") state
+                </li>
+              </ul>
+              <li>have <span class="highlight">no knowledge or dependencies</span> to their surrounding components
 								<li>children of Dumb Components are usually other Dumb Components
 								(but there are
                     <a target="_blank" href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.z8xy5zvhs">
 											exceptions</a>)
-                <li>have no knowledge or dependencies to their surrounding components
                 <li>reusable
             </ul>
         </section>
@@ -458,17 +464,17 @@ export class SubComponent {
         <section class="next-step">
 					<h3>Smart and Dumb Components</h3>
             <h2>Limitations</h2>
-            <p class="fragment" style="color: #2aa198">Mainly with growing and long-living applications</p>
-            <ul class="fragment" style="font-size: 80%">
-                <li>"God-like" components: State and logic tend to slowly move up to one single fat component
-                <li>Mash up of framework and UI code (hardens switching the framework)
-                <li>Distributed, mutatable state makes maintainable and understanding hard
-                    <ul>
-                        <li>Where does the state belong to?</li>
-                        <li>In which state is the application?
-                    </ul>
-                </li>
-                <li>Still open questions regarding the architecture
+            <p style="color: #2aa198">Mainly with growing and long-living applications</p>
+            <ul>
+              <li class="fragment" style="font-size: 80%">"God-like" components: State and logic tend to slowly move up to a few really fat components
+              <li class="fragment" style="font-size: 80%">Distributed, mutatable state makes maintainable and understanding hard
+                <ul>
+                  <li>Where does the state belong to?</li>
+                  <li>In which state is the application?
+                </ul>
+              </li>
+              <li class="fragment" style="font-size: 80%">Mash up of framework and UI code (hardens switching the framework)
+                <li class="fragment" style="font-size: 80%">Still open questions regarding the architecture
                     <ul>
                         <li>How to handle asynchronous code?
                         <li>How to do proper initialization of the application?
@@ -496,7 +502,7 @@ export class SubComponent {
 							<li><span class="highlight">Central</span> state management: one store for whole app, like a database</li>
 							<li><span class="highlight">External</span> state management: extract logic from the (UI-)components</li>
 						</ul>
-            <em>It's not a framework, it's a pattern (like MVC)</em>
+            <em>It's not only a framework, it's also a pattern (like MVC)</em>
         </section>
 
         <section>
@@ -555,7 +561,7 @@ function greetingsReducer(state: Greeting[] = [], action: AddGreetingAction) {
     }
 }
             </code></pre>
-            <p>Only part <span  class="highlight">allowed to update state</span></p>
+            <p>The only part <span  class="highlight">that is allowed to update state</span></p>
         </section>
 
         <section>
