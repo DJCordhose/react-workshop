@@ -89,6 +89,11 @@ Dauer: bummelig 25 Minuten
             <script type="text/template">
 # Vorbereitung
 - Server Starten (Demos brauchen den)
+- Universal Rendering starten
+    - cd code/universal
+    - npm install
+    - npm start
+    - Checken, dass localhost:3001 im Browser läuft
             </script>
         </section>
 
@@ -115,6 +120,7 @@ Dauer: bummelig 25 Minuten
             <ol>
                 <li><a href="#optimizeruntime">Optimierung (I) - Rendering</a>
                 <li><a href="#optimize-build">Optimierungen (II) - Build</a>
+                <li><a href="#universal">Optimierungen (III) - Universal Rendering</a>
             </ol>
         </section>
 
@@ -245,14 +251,14 @@ updateBox(id, x, y) {
             <h2>Optimierungen (II): Build</h2>
         </section>
 
-        <section>
-            <h3>Kudos an Webpack</h3>
-            <p>Jeder kann ein Sponsor werden</p>
-            <a href="https://opencollective.com/webpack#contributors" target="_blank"><img src="screenshots/olli-webpack-sponsor.png"></a>
-            <p><small><a href="https://opencollective.com/webpack#contributors" target="_blank">
-                https://opencollective.com/webpack#contributors
-            </a></small></p>
-        </section>
+        <!--<section>-->
+            <!--<h3>Kudos an Webpack</h3>-->
+            <!--<p>Jeder kann ein Sponsor werden</p>-->
+            <!--<a href="https://opencollective.com/webpack#contributors" target="_blank"><img src="screenshots/olli-webpack-sponsor.png"></a>-->
+            <!--<p><small><a href="https://opencollective.com/webpack#contributors" target="_blank">-->
+                <!--https://opencollective.com/webpack#contributors-->
+            <!--</a></small></p>-->
+        <!--</section>-->
 
       <section>
         <h3>Produktionsbuild</h3>
@@ -386,6 +392,90 @@ externals: {
         <section>
             <h3>Prod-Build Größe #3: Ohne externe Abhängigkeiten (D3, NVD3)</h3>
             <img src="screenshots/screenshot-dist-minimal.png">
+        </section>
+
+        <section id="universal">
+            <h2>Optimierungen (III): Universal Rendering</h2>
+        </section>
+
+        <section>
+            <h3>Probleme von Single-Page Applications</h3>
+            <ul class="fragment">
+                <li>SEO
+                <li>First-Page-Impressions
+                <li>Preview, z.B.
+                    <ul>
+                        <li>bei der Vorschau von Suchergebnissen
+                        <li> oder dem Teilen von Links durch Social Media
+                    </ul>
+
+                </li>
+                <!--<li>Progressive Enhancement-->
+            </ul>
+        </section>
+
+        <section>
+            <h3>SPA: First-Page-Impression</h3>
+            <div>
+                <a href="code/architecture/spa/public/index.html" target="_blank">
+                    <img src="spa-first-page-impression.png" style="height: 500px;">
+                </a>
+            </div>
+            <p><small>Selbst für eine einfache Web Application kann das Laden und das Aufbauen der Anwendung einige Zeit kosten
+                und was vom Sever kommt ist eine leere Seite</small></p>
+        </section>
+
+        <section>
+            <h3>Universal Rendering: First-Page-Impression</h3>
+            <div>
+                <a href="http://localhost:3001/" target="_blank">
+                    <img src="universal-first-page-impression.png" style="height: 500px;">
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <h3>Universal Rendering</h3>
+            <ul class="fragment">
+                <li>First-Page-Impression wird auf dem Server gerendert
+                <li>Links werden als normale HTML-Links in die Seite gerendert
+                <li>Beliebig viele andere Seiten werden ebenfalls statisch gerendert
+                <li>Läuft dann (zumindest zum Teil) auch ohne JavaScript
+                <li>Code fast 100% geteilt zwischen Client und Server
+                <li>serverseitiges Rendering mit <a href="https://nodejs.org" target="_blank">https://nodejs.org</a>
+                <li>Neben Markup liefert der Browser ebenso Zustand
+                <li>Wird von React unterstützt (in 16 sogar schnell)
+            </ul>
+        </section>
+
+        <section>
+            <h3>Universal Rendering am in React</h3>
+            <div class="fragment">
+                <img src="universal.png" style="height: 500px;">
+                <p><small><a target="_blank" href="http://reactbuch.de/">Copyright 2016, D-Punkt, http://reactbuch.de/</a></small></p>
+            </div>
+        </section>
+
+        <section>
+            <a target="_blank"
+               href="https://twitter.com/mxstbr/status/776812185276284928">
+                <img src="twitter_universal.png">
+            </a>
+        </section>
+
+        <section>
+            <h3>Herausforderungen / Schwächen</h3>
+            <ul class="fragment">
+                <li>Aller Zustand muss beim serverseitigen Rendering komplett vorliegen (oder man rendert statische Platzhalter)
+                <li>Falls First Page Impression ungültig: Flackern bei Neurendering im Client
+                    <ul>
+                        <li>Unterschiedliche Locales auf Server und Client
+                        <li>Zeitliche veränderliche Daten (Timestamp, Börsenkurs)
+                    </ul>
+                </li>
+                <li>Auch auf dem Server muss JavaScript laufen (zumindest für das Rendering Layer)
+                <li>Hilft nur bei "Time to first Meaningful Paint", nicht bei "Time to Interactive"
+            </ul>
         </section>
 
         <section>
