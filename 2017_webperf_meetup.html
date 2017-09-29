@@ -89,6 +89,9 @@ Dauer: bummelig 25 Minuten
             <script type="text/template">
 # Vorbereitung
 - Server Starten (Demos brauchen den)
+- Async Beispiel starten:
+	- cd code/sandbox/code-splitting
+	- npm start
 - Universal Rendering starten
     - cd code/universal
     - npm install
@@ -307,39 +310,53 @@ webpack -p
             </ul>
         </section>
 
-        <!--<section>-->
-        <!--<h2>Beispiel Code</h2>-->
-        <!--<pre><code data-trim>npm install babel-plugin-syntax-dynamic-import &#45;&#45;save</code></pre>-->
-        <!--<pre><code data-trim>-->
-        <!--// .babelrc-->
-        <!--"plugins": ["syntax-dynamic-import", ...]-->
-        <!--</code></pre>-->
-        <!--<pre><code data-trim>-->
-        <!--// calculator.js-->
-        <!--export default function calculator(a, b) {-->
-        <!--return a+b;-->
-        <!--}-->
-        <!--</code></pre>-->
-        <!--<pre><code class="javascript" data-trim>-->
-        <!--import('./calculator')-->
-        <!--.then(calculatorModule => {-->
-        <!--// import calculator from './calculator';-->
-        <!--const calculator => calculatorModule.default-->
-        <!--console.log(calculator(7, 8));-->
-        <!--});-->
-        <!--</code></pre>-->
-        <!--<p><a href="code/sandbox/code-splitting/src/GreetingController.js">Kompletter Code</a></p>-->
-        <!--</section>-->
+        <section>
+				<h2>Beispiel Code</h2>
+				<div>
+				<p>Voraussetzung: Babel Plug-in</p>
+        <pre><code data-trim>npm install babel-plugin-syntax-dynamic-import &#45;&#45;save</code></pre>
+        <pre><code data-trim>
+// .babelrc
+"plugins": ["syntax-dynamic-import", ...]
+				</code></pre>
+			</div>
+			</section>
+			<section>
+				<h2>Beispiel Code</h2>
+				<p>Ein Modul...</p>
+        <pre><code data-trim>
+				// calculator.js
+
+export default function calculator(a, b) {
+  return a+b;
+}
+				</code></pre>
+				<div class="fragment">
+					<p>...dynamisch laden:</p>
+
+        <pre><code class="javascript" data-trim>
+import('./calculator')
+  .then(calculatorModule => {
+    // entspricht: import calculator from './calculator';
+    const calculator => calculatorModule.default
+    console.log(calculator(7, 8));
+  });
+				</code></pre>
+			</div>
+        </section>
 
         <section>
-            <h3>Nachladen von React-Komponenten</h3>
+						<h3>Beispiel: Nachladen von React-Komponenten</h3>
+						<div class="fragment">
             <span style="font-size: 80%">
             <ul>
                 <li>Erfordert die Darstellung von Platzhaltern, bis die eigentliche Komponente da ist
                 <li>Wenn die Komponente da ist, muss die umschließende Komponente neu dargestellt werden
                 <li><em>forceUpdate</em> erzwingt ein Neuladen
             </ul>
-             </span>
+						 </span>
+						</div>
+						 <div  class="fragment">
             <pre><code class="javascript" data-trim>
 class AsyncComponent extends React.Component {
   componentDidMount() {
@@ -355,10 +372,22 @@ class AsyncComponent extends React.Component {
       &lt;this.Component /> : &lt;span>Loading...&lt;/span>;
   }
 }
-            </code></pre>
-          <p>Fertige Lösung: <a href="https://github.com/thejameskyle/react-loadable" target="_blank">React Loadable</a></p>
-        </section>
+						</code></pre>
+						<p><a href="http://localhost:9000/" target="_blank">Demo</a></p>
+						</div>
 
+				</section>
+				<section>
+					<h2>
+						Fertige Lösung für React
+					</h2>
+					<p><a href="https://github.com/thejameskyle/react-loadable" target="_blank">React Loadable</a></p>
+				</section>
+
+				<section>
+					<h3>Nächste Optimierung</h3>
+					<h2>Externals</h2>
+				</section>
         <section>
             <h3>Externals</h3>
             <p>Allgemeine Bibliotheken können von CDNs geladen werden und landen nicht im Webpack build</p>
@@ -392,7 +421,18 @@ externals: {
         <section>
             <h3>Prod-Build Größe #3: Ohne externe Abhängigkeiten (D3, NVD3)</h3>
             <img src="screenshots/screenshot-dist-minimal.png">
-        </section>
+				</section>
+
+				<section>
+					<h3>React 16 vs React 15</h3>
+					<p class="todo">
+						react is 5.3 kb (2.2 kb gzipped), down from 20.7 kb (6.9 kb gzipped).
+						react-dom is 103.7 kb (32.6 kb gzipped), down from 141 kb (42.9 kb gzipped).
+						react + react-dom is 109 kb (34.8 kb gzipped), down from 161.7 kb (49.8 kb gzipped).
+
+						https://facebook.github.io/react/blog/2017/09/26/react-v16.0.html#reduced-file-size
+					</p>
+				</section>
 
         <section id="universal">
             <h2>Optimierungen (III): Universal Rendering</h2>
@@ -514,7 +554,7 @@ externals: {
         }
         // applies to all versions
         $('code').addClass('line-numbers');
-        $('.fragment').removeClass('fragment');
+        // $('.fragment').removeClass('fragment');
     } );
 </script>
 
