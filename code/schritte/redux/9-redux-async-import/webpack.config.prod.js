@@ -19,8 +19,5 @@ module.exports = {
             }
         ]
     },
-    devtool: 'source-map',
-    plugins: [
-        new webpack.optimize.ModuleConcatenationPlugin()
-    ]
+    devtool: 'source-map'
 };

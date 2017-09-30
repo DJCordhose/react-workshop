@@ -8,7 +8,7 @@
     "dist": "npm run clean && npm run dist:dev && npm run dist:prod",
     "dist:dev": "../../../../node_modules/.bin/webpack --config webpack.config.dev.js",
     "dist:prod": "../../../../node_modules/.bin/webpack --config webpack.config.prod.js -p",
-    "devserver": "../../../../node_modules/.bin/webpack-dev-server --content-base public/",
+    "devserver": "../../../../node_modules/.bin/webpack-dev-server --port 9010 --config webpack.config.prod.js  --content-base public/",
     "version": "webpack -v"
   },
   "devDependencies": {

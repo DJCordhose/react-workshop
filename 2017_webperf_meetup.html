@@ -89,9 +89,14 @@ Dauer: bummelig 25 Minuten
             <script type="text/template">
 # Vorbereitung
 - Server Starten (Demos brauchen den)
-- Async Beispiel starten:
+- Async Beispiel 1 starten:
 	- cd code/sandbox/code-splitting
 	- npm start
+  - muss dann auf htt://localhost:9000 laufen
+- Async Beispiel 2 (Greeting-Variante) starten
+  - cd code/schritte/redux/9-redux-async-import
+  - npm start
+  - Beispiel läuft auf http://localhost:9010
 - Universal Rendering starten
     - cd code/universal
     - npm install
@@ -317,6 +322,7 @@ webpack -p
         <pre><code data-trim>npm install babel-plugin-syntax-dynamic-import &#45;&#45;save</code></pre>
         <pre><code data-trim>
 // .babelrc
+"presets": [["es2015", { "modules": false }], ...]
 "plugins": ["syntax-dynamic-import", ...]
 				</code></pre>
 			</div>
@@ -342,7 +348,9 @@ import('./calculator')
     console.log(calculator(7, 8));
   });
 				</code></pre>
-			</div>
+          <p><a href="http://localhost:9000/" target="_blank">Demo</a></p>
+
+        </div>
         </section>
 
         <section>
@@ -373,7 +381,7 @@ class AsyncComponent extends React.Component {
   }
 }
 						</code></pre>
-						<p><a href="http://localhost:9000/" target="_blank">Demo</a></p>
+						<p><a href="http://localhost:9010/" target="_blank">Demo (Greeting App)</a></p>
 						</div>
 
 				</section>

@@ -16,7 +16,7 @@ class AsyncGreetingDetail extends React.Component {
 
     componentDidMount() {
         // setTimeout only to simulate long loading component
-       setTimeout(() => this.loadGreetingDetail(), 1000);
+       setTimeout(() => this.loadGreetingDetail(), 500);
     }
 
     render() {
