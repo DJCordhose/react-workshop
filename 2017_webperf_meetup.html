@@ -13,13 +13,14 @@
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
     <link rel="stylesheet" href="reveal.js/css/reveal.css">
+
     <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
     <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
     <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
-    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+    <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
 
 
-    <!-- Code syntax highlighting -->
+  <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
     <style>
         /*pre code {*/
@@ -54,6 +55,41 @@
             -ms-touch-action: auto !important;
             touch-action: auto !important;
         }
+        .reveal h2,
+        .reveal h3 {
+          letter-spacing: 2px;
+        }
+
+        .reveal h2 {
+          font-family: 'Amiri', serif;
+          /* font-family: 'Times New Roman', Times, serif; */
+          font-weight: bold;
+          font-style: italic;
+          letter-spacing: -2px;
+          text-transform: none !important;
+        }
+
+        .reveal em {
+          font-weight: bold;
+        }
+        .reveal .step-subtitle h1 {
+          letter-spacing: 1px;
+        }
+        .reveal .step-subtitle h2,
+        .reveal .step-subtitle h3 {
+          text-transform: none;
+          font-style: italic;
+          font-weight: normal;
+          /* font-weight: 400; */
+          /* font-family: 'Amiri', serif; */
+          font-family: 'Lobster', serif;
+          letter-spacing: 1px;
+          color: #2aa198;
+          text-decoration: underline;
+        }
+
+
+
 
 
     </style>
@@ -126,14 +162,20 @@ Dauer: bummelig 25 Minuten
         <section>
             <h1>Themen</h1>
             <ol>
-                <li><a href="#optimizeruntime">Optimierung (I) - Rendering</a>
-                <li><a href="#optimize-build">Optimierungen (II) - Build</a>
-                <li><a href="#universal">Optimierungen (III) - Universal Rendering</a>
+                <li><a href="#optimizeruntime">Rendering</a>
+                <li><a href="#optimize-build">Build</a>
+                <li><a href="#universal">Universal Rendering</a>
             </ol>
         </section>
 
-      <section id="optimizeruntime">
-        <h2>Optimierungen (I): Rendering</h2>
+      <section >
+        <h2>In the beginning...</h2>
+        <h1>Classic Web Apps</h1>
+      </section>
+
+      <section id="optimizeruntime" class="step-subtitle">
+        <h2>Optimierungen (1)</h2>
+        <h1>Rendering</h1>
       </section>
 
       <section>
@@ -255,10 +297,10 @@ updateBox(id, x, y) {
         <p><a href="code/sandbox/optimize/src/AppImmutable.js" target="_blank">Kompletter Code</a></p>
       </section>
 
-        <section id="optimize-build">
-            <h2>Optimierungen (II): Build</h2>
-        </section>
-
+      <section id="optimize-build" class="step-subtitle">
+        <h2>Optimierungen (2)</h2>
+        <h1>Build</h1>
+      </section>
         <!--<section>-->
             <!--<h3>Kudos an Webpack</h3>-->
             <!--<p>Jeder kann ein Sponsor werden</p>-->
@@ -269,33 +311,43 @@ updateBox(id, x, y) {
         <!--</section>-->
 
       <section>
-        <h3>Produktionsbuild</h3>
+        <h2>Produktionsbuild I</h2>
             <p>Minifizieren, Optimieren und alle React-Warnungen herauskompilieren:</p>
             <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-webpack --optimize-minimize --define process.env.NODE_ENV=\"'production'\"
+webpack --optimize-minimize
+        --define process.env.NODE_ENV=\"'production'\"
             </code></pre>
-        <p style="font-size:80%">Oder als Kurzform:</p>
+        <p style="font-size:80%">Oder als Kurzform (ab Webpack 2):</p>
         <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
 webpack -p
             </code></pre>
             <p style="font-size:80%">(<a href="http://lisperator.net/uglifyjs/" target="_blank">Nutzt Uglify</a>)</p>
             <p><a href="https://webpack.js.org/guides/production-build/" target="_blank">https://webpack.js.org/guides/production-build/</a></p>
+          <p style="font-size:80%">(Hinweis: <code>NODE_ENV</code> wird in der <code>webpack.config</code> nicht gesetzt!)</p>
+
+      </section>
+      <section>
+        <h2>Produktionsbuild II</h2>
         <p>SourceMaps in eigene Datei schreiben (Webpack Konfiguration):</p>
         <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
           devtool: 'source-map'
         </code></pre>
-
-        </section>
+        <p>...oder ganz ausschalten:</p>
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+          devtool: 'none'
+        </code></pre>
+        <p>(Kein Unterschied hinsichtlich Performance)</p>
+      </section>
 
         <section>
-            <h2>Build-Optimierungen</h2>
-            <em>"Tree Shaking": Entfernt toten Code aus dem generierten JavaScript File</em>
-            <ul>
-                <li class="fragment">Reduziert die Größe der Ausgabedatei</li>
-                <li class="fragment">Verfügbar in Webpack 2.x</li>
-                <li class="fragment">Automatisch eingeschaltet, wenn mit <code>-p</code> aufgerufen</li>
-                <li class="fragment">Arbeitet auf Basis statischer Code-Analyse der ES6 Imports und Exports</li>
-                <li class="fragment">Anpassung in <code>.babelrc</code>: <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+            <h2>Tree Shaking</h2>
+            <p><em>Entfernt toten Code aus dem generierten JavaScript File</em></p>
+            <ul class="fragment"}>
+                <li>Reduziert die Größe der Ausgabedatei</li>
+                <li>Verfügbar ab Webpack 2.x</li>
+                <li>Automatisch eingeschaltet, wenn mit <code>-p</code> aufgerufen</li>
+                <li>Arbeitet auf Basis statischer Code-Analyse der ES6 Imports und Exports</li>
+                <li>Anpassung in <code>.babelrc</code>: <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
 "presets": [["es2015", { "modules": false }]
             </code></pre>
                 </li>
@@ -305,18 +357,20 @@ webpack -p
 
         <section>
             <h2>Code Splitting</h2>
-            <em>Asynchrones Nachladen von Modulen</em>
-            <p><a href="https://webpack.js.org/guides/code-splitting-async/" target="_blank">https://webpack.js.org/guides/code-splitting-async/</a></p>
+            <p><em>Asynchrones Nachladen von Modulen</em></p>
             <ul>
                 <li>Erlaubt das dynamische Nachladen von Code-Teilen
                 <li>So kann am Anfang für eine schnelle Ladezeit nur eine Minimalversion ausgespielt werden
-                <li>Basiert auf <a href="https://github.com/tc39/proposal-dynamic-import">dynamic import</a>, der bereits in Stage 3 ist
                 <li>Weitere Teile können unmittelbar oder erst nach Nutzerinteraktion nachgeladen werden
+              <li>Basiert auf <a href="https://github.com/tc39/proposal-dynamic-import">dynamic import</a>, der bereits in Stage 3 ist
             </ul>
+          <p><a href="https://webpack.js.org/guides/code-splitting-async/" target="_blank">https://webpack.js.org/guides/code-splitting-async/</a></p>
+
         </section>
 
         <section>
-				<h2>Beispiel Code</h2>
+          <h2>Code Splitting</h2>
+				  <h3>Beispiel Code</h3>
 				<div>
 				<p>Voraussetzung: Babel Plug-in</p>
         <pre><code data-trim>npm install babel-plugin-syntax-dynamic-import &#45;&#45;save</code></pre>
@@ -328,7 +382,8 @@ webpack -p
 			</div>
 			</section>
 			<section>
-				<h2>Beispiel Code</h2>
+        <h2>Code Splitting</h2>
+        <h3>Beispiel Code</h3>
 				<p>Ein Modul...</p>
         <pre><code data-trim>
 				// calculator.js
@@ -354,17 +409,23 @@ import('./calculator')
         </section>
 
         <section>
-						<h3>Beispiel: Nachladen von React-Komponenten</h3>
+            <h2>Code Splitting</h2>
+						<h3>Nachladen von React-Komponenten</h3>
 						<div class="fragment">
             <span style="font-size: 80%">
             <ul>
                 <li>Erfordert die Darstellung von Platzhaltern, bis die eigentliche Komponente da ist
                 <li>Wenn die Komponente da ist, muss die umschließende Komponente neu dargestellt werden
                 <li><em>forceUpdate</em> erzwingt ein Neuladen
+              <li>Fertige Lösung für React: <a href="https://github.com/thejameskyle/react-loadable" target="_blank">React Loadable</a></li>
             </ul>
 						 </span>
 						</div>
-						 <div  class="fragment">
+        </section>
+      <section>
+        <h2>Code Splitting</h2>
+        <h3>Beispiel: Nachladen von React-Komponenten</h3>
+        <div>
             <pre><code class="javascript" data-trim>
 class AsyncComponent extends React.Component {
   componentDidMount() {
@@ -386,14 +447,6 @@ class AsyncComponent extends React.Component {
 
 				</section>
 				<section>
-					<h2>
-						Fertige Lösung für React
-					</h2>
-					<p><a href="https://github.com/thejameskyle/react-loadable" target="_blank">React Loadable</a></p>
-				</section>
-
-				<section>
-					<h3>Nächste Optimierung</h3>
 					<h2>Externals</h2>
 				</section>
         <section>
@@ -442,10 +495,10 @@ externals: {
 					</p>
 				</section>
 
-        <section id="universal">
-            <h2>Optimierungen (III): Universal Rendering</h2>
-        </section>
-
+      <section id="universal" class="step-subtitle">
+        <h2>Optimierungen (3)</h2>
+        <h1>Universal Rendering</h1>
+      </section>
         <section>
             <h3>Probleme von Single-Page Applications</h3>
             <ul class="fragment">
