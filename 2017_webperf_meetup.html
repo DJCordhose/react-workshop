@@ -236,7 +236,8 @@ class Box extends React.Component {
       </section>
 
       <section>
-        <h3>Naiver Code für Modifikation einer Box</h3>
+          <h2><small>Naiver Code für Modifikation einer Box</small></h2>
+          <h3>In BoxApp</h3>
         <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
 updateBox(id, x, y) {
     const {boxes} = this.state;
@@ -553,6 +554,30 @@ externals: {
                 <img src="universal.png" style="height: 500px;">
                 <p><small><a target="_blank" href="http://reactbuch.de/">Copyright 2016, D-Punkt, http://reactbuch.de/</a></small></p>
             </div>
+        </section>
+
+        <section>
+            <h3>Wie transferieren wir den Zustand vom Server zum Client?</h3>
+            <pre class="fragment"><code data-trim contenteditable class="javascript  line-numbers">
+&lt!-- server -->
+function renderFullPage(html, initialData) {
+  return `
+&lt;html>
+  &lt;body>
+    &lt;div id="mount">${html}&lt;/div>
+    &lt;/body>
+
+  &lt;script>
+    window.__INITIAL_STATE__ = ${JSON.stringify(initialData)};
+  &lt;/script>
+&lt;/html>
+`;
+}</code></pre>
+            <pre class="fragment"><code data-trim contenteditable class="javascript line-numbers"  data-leftpad>
+// client: init store from complete state
+const initialState = window.__INITIAL_STATE__;
+const store = createStore(..., initialState);
+</code></pre>
         </section>
 
         <section>
