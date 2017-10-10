@@ -23,20 +23,15 @@ export default class Chart extends React.Component {
     }
 
     componentDidMount() {
-        const {data, onSegmentSelected} = this.props;
-
         // http://nvd3.org/examples/pie.html
         nv.addGraph(() => {
             const chart = nv.models.pieChart()
-                .x(function (d) {
-                    return d.label
-                })
-                .y(function (d) {
-                    return d.value
-                })
+                .x(d => d.label)
+                .y(d => d.value)
                 .showLabels(true);
             chart.legend.updateState(false);
 
+            const {data, onSegmentSelected} = this.props;
             this._d3selection = d3.select(this._chart);
             this._d3selection
                 .datum(data)

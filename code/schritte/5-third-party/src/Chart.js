@@ -17,12 +17,9 @@ export default class Chart extends React.Component {
     // will be called even when shouldComponentUpdate returns false
     componentWillReceiveProps(nextProps) {
         const {data} = nextProps;
-
-        if (this._d3selection) {
-            this._d3selection
-                .datum(data)
-                .call(this._nvd3chart);
-        }
+        this._d3selection && this._d3selection
+            .datum(data)
+            .call(this._nvd3chart);
     }
 
     componentWillUnmount() {
@@ -31,8 +28,6 @@ export default class Chart extends React.Component {
     }
 
     componentDidMount() {
-        const {data, onSegmentSelected} = this.props;
-
         // http://nvd3.org/examples/pie.html
         nv.addGraph(() => {
             const chart = nv.models.pieChart()
@@ -41,6 +36,7 @@ export default class Chart extends React.Component {
                 .showLabels(true);
             chart.legend.updateState(false);
 
+            const {data, onSegmentSelected} = this.props;
             this._d3selection = d3.select(this._chart);
 
             this._d3selection
