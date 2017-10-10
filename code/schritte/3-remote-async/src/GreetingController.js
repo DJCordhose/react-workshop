@@ -1,5 +1,6 @@
-import React from 'react';
+require("babel-polyfill");
 
+import React from 'react';
 import GreetingMaster from './GreetingMaster';
 import GreetingDetail from './GreetingDetail';
 
@@ -33,30 +34,16 @@ export default class GreetingController extends React.Component {
         this.loadGreetings();
     }
 
-    loadGreetings() {
-        (async () => {
-            try {
-                const response = await fetch(BACKEND_URL);
-                const json = await response.json();
-                this.setState({greetings: json});
-            } catch (err) {
-                console.error('LOADING GREETINGS FAILED:', err);
-            }
-        })();
-    }
-
-    // should work, but cause error in browser
-
-    // async loadGreetings() {
-    //     try {
-    //         const response = await fetch(BACKEND_URL);
-    //         const json = await response.json();
-    //         this.setState({greetings: json});
-    //         return json;
-    //     } catch (err) {
-    //         console.error('LOADING GREETINGS FAILED:', err);
-    //     }
-    // }
+     async loadGreetings() {
+         try {
+             const response = await fetch(BACKEND_URL);
+             const json = await response.json();
+             this.setState({greetings: json});
+             return json;
+         } catch (err) {
+             console.error('LOADING GREETINGS FAILED:', err);
+         }
+     }
 
     saveGreeting(greetingToBeAdded) {
         (async () => {
