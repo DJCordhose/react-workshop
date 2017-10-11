@@ -3,7 +3,7 @@
 BASE=$PWD
 echo BASE: $BASE
 
-for i in `find ./code/schritte -name package.json`; do
+for i in `find ./code/schritte -name package.json -not -path "*/node_modules/*"`; do
     DIR=`dirname $i`
 
     echo =====================================================================================================
