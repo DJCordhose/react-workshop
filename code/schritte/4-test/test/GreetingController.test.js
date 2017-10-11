@@ -24,6 +24,7 @@ test('it should render greetings received from backend', () => {
     );
 
     return flushPromises().then(() => {
+      tree.update();
         // very simple check to make sure at least the rows are rendered
         expect(tree.find('tbody tr')).toHaveLength(2);
     });
@@ -37,6 +38,7 @@ test('it should open detail view on button click', () => {
     const component = mount(<GreetingController  />);
 
     return flushPromises().then(() => {
+        component.update();
         // on initial render the list with greetings (GreetingMaster)
         // is visible but no GreetingDetail
         expect(component.find(GreetingDetail)).toHaveLength(0);
