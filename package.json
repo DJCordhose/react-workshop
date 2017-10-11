@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
+  "repository": "https://github.com/DJCordhose/react-workshop",
   "scripts": {
     "start": "npm run server",
     "setup": "node setup.js",
