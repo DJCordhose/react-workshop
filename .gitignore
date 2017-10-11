@@ -2,3 +2,5 @@ node_modules
 npm-debug.log
 code/**/package.json
 .idea/
+dist/
+dist-dev/
