@@ -11,6 +11,10 @@ for i in `find ./code/schritte -name package.json`; do
     echo =====================================================================================================
     cd $DIR
     npm run clean
+
+    # Some modules now have their own dependencies defined
+    # so make sure we're installing them
+    npm install
     npm run dist
     cd $BASE
 
