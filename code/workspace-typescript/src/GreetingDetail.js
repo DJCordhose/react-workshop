@@ -1,6 +1,15 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
+// This component is written in JavaScript but is used from components
+// written in TypeScript, thus the following jsdoc is required
+// (note that you could describe your props and state here more precise,
+// but for our usecase here, "any, any" is just fine)
+// see: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18606
+
+/**
+ * @augments {React.Component<any, any>}
+ */
 export default class GreetingDetail extends React.Component {
 
     static propTypes = {
@@ -68,3 +77,4 @@ export default class GreetingDetail extends React.Component {
         this.setState({[event.target.name]: event.target.value});
     }
 }
+

@@ -20,7 +20,7 @@ class Chart extends React.Component<ChartProps, {}> {
 
 	_d3selection: any; // ??? d3.Selection<any,any,any,any>;
 	_nvd3chart: nv.PieChart;
-	_chart: SVGElement;
+	_chart: SVGElement|null;
 
     shouldComponentUpdate() {
         return false;

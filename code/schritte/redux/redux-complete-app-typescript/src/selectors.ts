@@ -8,7 +8,7 @@ export const filterGreetings =
 export const aggregateGreetings = (greetings: Greetings): GreetingChartData => {
 	type NameToValueMap = { [name: string]: number };
     // first create an object as map as it is easier to access
-	const dataAsObjectMap = greetings.reduce((data: NameToValueMap, greeting: Greeting): NameToValueMap => {
+	const dataAsObjectMap: NameToValueMap = greetings.reduce((data: NameToValueMap, greeting: Greeting) => {
         const {name} = greeting;
         if (data[name]) {
             data[name] = data[name] + 1;

@@ -11,17 +11,17 @@ import {rootReducer} from './reducers';
 import {loadGreetings} from './actions';
 
 const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(thunk))
+	rootReducer,
+	composeWithDevTools(applyMiddleware(thunk))
 );
 
 // init
-store.dispatch(loadGreetings);
+store.dispatch(loadGreetings());
 
 const mountNode = document.getElementById('mount');
 ReactDOM.render(
-    <Provider store={store}>
-        <Layout />
-    </Provider>,
-    mountNode
+	<Provider store={store}>
+		<Layout/>
+	</Provider>,
+	mountNode
 );

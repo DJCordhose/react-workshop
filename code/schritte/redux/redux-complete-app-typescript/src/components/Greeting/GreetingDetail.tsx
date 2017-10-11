@@ -85,6 +85,6 @@ class GreetingDetail extends React.Component<DispatchProps, State> {
 export default connect<{}, DispatchProps, {}>(
     null,
     dispatch => ({
-        onSave: (greeting: NewGreeting) => dispatch(actions.saveGreeting(greeting))
+        onSave: (greeting: NewGreeting) => console.log(dispatch) || dispatch(actions.saveGreeting(greeting))
     })
 )(GreetingDetail);
