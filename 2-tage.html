@@ -206,7 +206,7 @@
   render() {
     return &lt;h1 className='title'>Hello, World!&lt;/h1>
   }
-}                
+}
 </code></pre></section>
 
         <section>
@@ -277,10 +277,10 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
     </section>
      <section>
         <h2>Webpack und Babel</h2>
-        <img src="webpack-und-babel.png" style="border:0;box-shadow:0 0 0 0"/>
+        <img src="images/webpack-und-babel.png" style="border:0;box-shadow:0 0 0 0"/>
     </section>
 
-    </section>            
+    </section>
     <section>
       <section>
           <h2>Übung 0: React Hello-World</h2>
@@ -296,7 +296,7 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
               <li><code>node setup</code> (auf oberster Ebene)
               <li><code>cd code/workspace</code>
               <li><code>npm run devserver</code>
-              <li>Öffne <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> im Browser 
+              <li>Öffne <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> im Browser
               <li>Wenn auf der Seite 'Hello, World' steht, ist alles gut
           </ul>
       </section>
@@ -769,7 +769,7 @@ class GreetingDetail extends React.Component {
     }
 
     render() {
-        return &lt;input value={this.state.name} 
+        return &lt;input value={this.state.name}
             onChange={e => this.updateModel(e)} />
     }
    // ...
@@ -778,12 +778,12 @@ class GreetingDetail extends React.Component {
         </section>
         <section>
             <h3>Render Zyklus</h3>
-            <img src="event-zustand-render.png" height="550" style="border:0;box-shadow:0 0 0 0">
+            <img src="images/event-zustand-render.png" height="550" style="border:0;box-shadow:0 0 0 0">
         </section>
 
         <section>
             <h3>Virtual DOM</h3>
-            <img src="virtual-dom.png" style="border:0;box-shadow:0 0 0 0">
+            <img src="images/virtual-dom.png" style="border:0;box-shadow:0 0 0 0">
         </section>
 
         <section>
@@ -903,7 +903,7 @@ const body = greetings.map(greeting =>
 
         <section>
             <h3>Controller und Child-Views</h3>
-            <img src="controller.png" height="600" style="border:0;box-shadow:0 0 0 0">
+            <img src="images/controller.png" height="600" style="border:0;box-shadow:0 0 0 0">
         </section>
 
         <section>
@@ -928,10 +928,10 @@ class GreetingController extends React.Component {
     <section>
         <h3>Properties übergeben mit Object-Spread</h3>
         <ul class="fragment">
-                <li>Übergibt <b>alle</b> Eigenschaften eines Objektes als individuelle Properties</li> 
+                <li>Übergibt <b>alle</b> Eigenschaften eines Objektes als individuelle Properties</li>
         </ul>
         <pre class="fragment"><code class="javascript" contenteditable data-trim>
-class GreetingController extends React.Component { 
+class GreetingController extends React.Component {
 
     const greeting = { name: 'Klaus', greeting: 'Hello' };
 
@@ -981,23 +981,23 @@ GreetingDetail.propTypes = {
             </section>
             <section>
                 <h3>Architektur Beispiel-Anwendung</h3>
-                <img src="greeting-hierarchy.png" style="border:0;box-shadow:0 0 0 0"/>
-            </section> 
+                <img src="ai/greeting-hierarchy.png" style="border:0;box-shadow:0 0 0 0"/>
+            </section>
             <section>
                 <h3>GreetingMaster</h3>
-                <img src="greeting-master.png" style="border:0;box-shadow:0 0 0 0"/>
-            </section> 
+                <img src="images/greeting-master.png" style="border:0;box-shadow:0 0 0 0"/>
+            </section>
             <section>
                 <h3>GreetingDetail</h3>
-                <img src="greeting-detail.png" style="border:0;box-shadow:0 0 0 0"/>
-            </section> 
+                <img src="images/greeting-detail.png" style="border:0;box-shadow:0 0 0 0"/>
+            </section>
         </section>
 
         <section id="t3">
             <h1>Teil III</h1>
             <h2>Testen</h2>
         </section>
-        
+
         <section>
             <h2>Was testen wir überhaupt?</h2>
             <ul>
@@ -1007,7 +1007,7 @@ GreetingDetail.propTypes = {
                 <li class="fragment"><b>Verhalten im Browser</b> (z.B. korrekte Darstellung, Browser-spezifisches JavaScript, Arbeiten mit history, Titelzeile, Scrollbars etc)</li>
                 </ul>
         </section>
-        
+
         <section>
             <h2>React Test Utils</h2>
             <ul>
@@ -1018,7 +1018,7 @@ GreetingDetail.propTypes = {
                 <li>Shallow Renderer</li>
             </ul>
             </section>
-        
+
         <section>
             <h2>Variante 1: Shallow Rendering</h2>
             <ul>
@@ -1032,28 +1032,28 @@ GreetingDetail.propTypes = {
             </section>
         <section>
             <h2>ReactElement</h2>
-            
+
             <div class="fragment">
             <p>Komponente</p>
-            <img src="react-element.png" style="border:0;box-shadow:0 0 0 0"/>
+            <img src="images/react-element.png" style="border:0;box-shadow:0 0 0 0"/>
             </div>
             <div class="fragment">
                 <p style="margin-top:0px">natives HTML Element</p>
-                <img src="react-element-2.png" style="border:0;box-shadow:0 0 0 0"/>
+                <img src="images/react-element-2.png" style="border:0;box-shadow:0 0 0 0"/>
             </div>
         </section>
 
         <section>
             <h2>ReactElement</h2>
             <p>Children</p>
-            <img class="fragment" src="react-element-3.png" style="border:0;box-shadow:0 0 0 0"/>
+            <img class="fragment" src="images/react-element-3.png" style="border:0;box-shadow:0 0 0 0"/>
         </section>
-        
+
         <section>
             <h2>Beispiel: Shallow Rendering</h2>
             <pre><code class="javascript" contenteditable data-trim>
 import ReactTestUtils from 'react-addons-test-utils';
-                
+
 const renderer = ReactTestUtils.createRenderer();
 
 renderer.render(
@@ -1089,7 +1089,7 @@ expect(rows).toEqual([
 ]);
 </code></pre>
             </section>
-            
+
                     <section>
             <h2>Shallow Rendering: Callbacks aufrufen</h2>
             <pre class="fragment"><code class="javascript" contenteditable data-trim>
@@ -1129,9 +1129,9 @@ const component = ReactTestUtils.renderIntoDocument(
         </pre>
         </code>
             <pre class="fragment"><code class="javascript" contenteditable data-trim>
-const [nameInput, greetingInput] = 
+const [nameInput, greetingInput] =
   ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'input');
-const [clearButton, saveButton] = 
+const [clearButton, saveButton] =
   ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'button');
         </pre>
         </code>
@@ -1142,18 +1142,18 @@ expect(clearButton.value).toEqual('');
         </pre>
         </code>
         </section>
-        
+
         <section>
             <h2>Testen</h2>
             <ul>
             <li>React-Anwendungen sind sehr gut testbar, auch ohne Browser
             <li>Ausblick/Alternativen:
-                <a href="https://github.com/airbnb/enzyme" target="_blank"> 
-                airbnb enzyme</a>,  
+                <a href="https://github.com/airbnb/enzyme" target="_blank">
+                airbnb enzyme</a>,
                 <a href="https://github.com/bruderstein/unexpected-react" target="_blank">unexpected react</a></li>
             </ul>
             </section>
-            
+
             <section>
                 <section>
                     <h2>Übung 3: Eine React-Komponente testen</h2>
@@ -1175,9 +1175,9 @@ expect(clearButton.value).toEqual('');
                 </section>
 
             </section>
-                
-                
-        
+
+
+
 
         <!--Master View wäre gutes Beispiel für shallow rendering-->
 
