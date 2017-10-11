@@ -1,12 +1,12 @@
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import { Provider } from 'react-redux';
-import store from '../common/store';
+import React from "react";
+import { renderToString } from "react-dom/server";
+import { Provider } from "react-redux";
+import store from "../common/store";
 
-import HelloMessage from '../common/HelloMessage';
+import HelloMessage from "../common/HelloMessage";
 
 function renderFullPage(html, initialData) {
-	return `
+  return `
 <html>
   <body>
     <div id="mount">${html}</div>
@@ -21,13 +21,11 @@ function renderFullPage(html, initialData) {
 </html>`;
 }
 
-export default function (request, response) {
-	const html =
-		renderToString(
-			<Provider store={store}>
-				<HelloMessage />
-			</Provider>
-		);
-	response.send(renderFullPage(html, store.getState()));
-};
-
+export default function(request, response) {
+  const html = renderToString(
+    <Provider store={store}>
+      <HelloMessage />
+    </Provider>
+  );
+  response.send(renderFullPage(html, store.getState()));
+}

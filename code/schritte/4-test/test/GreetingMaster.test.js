@@ -1,31 +1,25 @@
-import React from 'react';
-import GreetingMaster from '../src/GreetingMaster';
-import renderer from 'react-test-renderer';
+import React from "react";
+import GreetingMaster from "../src/GreetingMaster";
+import renderer from "react-test-renderer";
 
-import {shallow} from 'enzyme';
+import { shallow } from "enzyme";
 
-const someGreetings = [
-    {id: 1, name: 'Klaus', greeting: 'Moin moin'},
-    {id: 2, name: 'Susi', greeting: 'Hello!'}
-];
+const someGreetings = [{ id: 1, name: "Klaus", greeting: "Moin moin" }, { id: 2, name: "Susi", greeting: "Hello!" }];
 
-test('it should render table with all greetings', () => {
-    const onAddMock = jest.fn();
-    const tree = renderer.create(
-        <GreetingMaster greetings={someGreetings} onAdd={onAddMock}/>
-    ).toJSON();
-    expect(tree).toMatchSnapshot();
+test("it should render table with all greetings", () => {
+  const onAddMock = jest.fn();
+  const tree = renderer.create(<GreetingMaster greetings={someGreetings} onAdd={onAddMock} />).toJSON();
+  expect(tree).toMatchSnapshot();
 });
 
-test('on click callback should work', () => {
-    const onAddMock = jest.fn();
-    const component = shallow(<GreetingMaster greetings={someGreetings} onAdd={onAddMock}/>);
+test("on click callback should work", () => {
+  const onAddMock = jest.fn();
+  const component = shallow(<GreetingMaster greetings={someGreetings} onAdd={onAddMock} />);
 
-    // make sure it behaves correctly
-    component.find('button').simulate('click');
-    expect(onAddMock).toHaveBeenCalled();
+  // make sure it behaves correctly
+  component.find("button").simulate("click");
+  expect(onAddMock).toHaveBeenCalled();
 });
-
 
 // http://redux.js.org/docs/recipes/WritingTests.html
 // https://github.com/adriantoine/enzyme-to-json

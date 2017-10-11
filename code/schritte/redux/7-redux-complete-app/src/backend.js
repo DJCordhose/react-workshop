@@ -1,4 +1,4 @@
-const BACKEND_URL = 'http://localhost:7000/greetings';
+const BACKEND_URL = "http://localhost:7000/greetings";
 
 /**
  * Saves a new greeting on the server using an HTTP POST request
@@ -12,39 +12,36 @@ const BACKEND_URL = 'http://localhost:7000/greetings';
  * parameter that contains an error message (string)
  */
 export const saveToServer = (greetingToBeSaved, onSuccess, onFailure) => {
-    // Four potential return "scenarios":
-    // SCENARIO 1: Server responded, HTTP 201 => OK, as expected
-    // SCENARIO 2: Server responded, HTTP != 201 => Server error (e.g. invalid data posted)
-    // SCENARIO 3. Server does NOT respond at all (technical problems etc)
-    // SCENARIO 4: An error occurs during the response handling (=> catch-handler will be invoked)
+  // Four potential return "scenarios":
+  // SCENARIO 1: Server responded, HTTP 201 => OK, as expected
+  // SCENARIO 2: Server responded, HTTP != 201 => Server error (e.g. invalid data posted)
+  // SCENARIO 3. Server does NOT respond at all (technical problems etc)
+  // SCENARIO 4: An error occurs during the response handling (=> catch-handler will be invoked)
 
-    const handleServerResponse = response => response.json()
-        .then(json => response.status === 201 ?
-            /* SCENARIO 1 */ onSuccess(json)
-            :
-            /* SCENARIO 2 */ onFailure(json.error)
-        );
+  const handleServerResponse = response =>
+    response
+      .json()
+      .then(json => (response.status === 201 ? /* SCENARIO 1 */ onSuccess(json) : /* SCENARIO 2 */ onFailure(json.error)));
 
-    /* SCENARIO 3 */
-    const handleServerError = err => onFailure(err.message);
+  /* SCENARIO 3 */
+  const handleServerError = err => onFailure(err.message);
 
-    /* SCENARIO 4
+  /* SCENARIO 4
      * (might be the same as Scenario 3 in real life, just
      * to make it more explicit here as own scenario)
      */
-    const handleUnexpectedError = err => onFailure('Unexpected error: ' + err);
+  const handleUnexpectedError = err => onFailure("Unexpected error: " + err);
 
-    return fetch(BACKEND_URL, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(greetingToBeSaved)
-    })
-        .then(handleServerResponse, handleServerError)
-        .catch(handleUnexpectedError)
-    ;
+  return fetch(BACKEND_URL, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(greetingToBeSaved)
+  })
+    .then(handleServerResponse, handleServerError)
+    .catch(handleUnexpectedError);
 };
 
 /**
@@ -55,13 +52,12 @@ export const saveToServer = (greetingToBeSaved, onSuccess, onFailure) => {
  * with one parameter: a string with an error message
  */
 export const loadFromServer = (onSuccess, onFailure) => {
-    const handleServerResponse = response => response.json()
-        .then(json => response.status === 200 ? onSuccess(json) : onFailure(json.error));
-    const handleServerError = err => onFailure(err.message);
-    const handleUnexpectedError = err => onFailure('Unexpected error: ' + err);
+  const handleServerResponse = response =>
+    response.json().then(json => (response.status === 200 ? onSuccess(json) : onFailure(json.error)));
+  const handleServerError = err => onFailure(err.message);
+  const handleUnexpectedError = err => onFailure("Unexpected error: " + err);
 
-    return fetch(BACKEND_URL)
-        .then(handleServerResponse, handleServerError)
-        .catch(handleUnexpectedError)
-    ;
+  return fetch(BACKEND_URL)
+    .then(handleServerResponse, handleServerError)
+    .catch(handleUnexpectedError);
 };

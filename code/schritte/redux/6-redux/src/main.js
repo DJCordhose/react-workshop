@@ -1,27 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
-import {composeWithDevTools} from 'redux-devtools-extension';
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 
-import GreetingController from './GreetingController';
-import {rootReducer} from './reducers';
-import {loadGreetings} from './actions';
+import GreetingController from "./GreetingController";
+import { rootReducer } from "./reducers";
+import { loadGreetings } from "./actions";
 
-const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(thunk))
-);
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 // init
 store.dispatch(loadGreetings);
 
-const mountNode = document.getElementById('mount');
+const mountNode = document.getElementById("mount");
 ReactDOM.render(
-    <Provider store={store}>
-        <GreetingController />
-    </Provider>,
-    mountNode
+  <Provider store={store}>
+    <GreetingController />
+  </Provider>,
+  mountNode
 );

@@ -1,14 +1,14 @@
-import React from 'react';
-import {inject} from 'mobx-react';
+import React from "react";
+import { inject } from "mobx-react";
 
-const Counter = ({greetingCount, filteredGreetingsCount}) => (
-    <div className="Counter">Showing {filteredGreetingsCount} of {greetingCount} Greetings</div>
+const Counter = ({ greetingCount, filteredGreetingsCount }) => (
+  <div className="Counter">
+    Showing {filteredGreetingsCount} of {greetingCount} Greetings
+  </div>
 );
-Counter.displayName = 'Counter';
+Counter.displayName = "Counter";
 
-export default inject(
-    ({store}) => ({
-        greetingCount: store.greetings.length,
-        filteredGreetingsCount: store.filteredGreetings.length
-    })
-)(Counter);
+export default inject(({ store }) => ({
+  greetingCount: store.greetings.length,
+  filteredGreetingsCount: store.filteredGreetings.length
+}))(Counter);

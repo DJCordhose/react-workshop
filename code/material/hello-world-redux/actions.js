@@ -1,5 +1,5 @@
 export const resetGreeting = () => ({
-    type: 'RESET_GREETING'
+  type: "RESET_GREETING"
 });
 
 /*
@@ -10,10 +10,12 @@ export const updateGreeting = greeting => ({
 */
 
 export const updateGreeting = greeting => dispatch => {
-    setTimeout(() =>
-        dispatch({
-            type: 'UPDATE_GREETING',
-            payload: greeting
-        }), 100);
+  setTimeout(
+    () =>
+      dispatch({
+        type: "UPDATE_GREETING",
+        payload: greeting
+      }),
+    100
+  );
 };
-

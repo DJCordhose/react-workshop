@@ -1,13 +1,13 @@
 type Person = {
-	name: string,
-	lastname: string
-}
+  name: string;
+  lastname: string;
+};
 
 function getGreetingFor(p: Person): string {
-	return `Hello, ${p.name} ${p.lastname}`;
+  return `Hello, ${p.name} ${p.lastname}`;
 }
 
-getGreetingFor({ name: 'Klaus', lastname: 'Mueller' });
+getGreetingFor({ name: "Klaus", lastname: "Mueller" });
 
 // ERROR: Property 'lastname' is missing in type '{ name: string; }'.
 // getGreetingFor({ name: 'Klaus ' });

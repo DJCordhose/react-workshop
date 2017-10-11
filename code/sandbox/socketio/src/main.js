@@ -1,11 +1,11 @@
 // polyfill for IE
-require('es6-promise').polyfill();
-require('whatwg-fetch');
+require("es6-promise").polyfill();
+require("whatwg-fetch");
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import GreetingController from './GreetingController';
+import GreetingController from "./GreetingController";
 
-const mountNode = document.getElementById('mount');
+const mountNode = document.getElementById("mount");
 ReactDOM.render(<GreetingController />, mountNode);

@@ -1,2 +1,2 @@
-import './full';
+import "./full";
 // import './denormalize-sample';

@@ -1,14 +1,14 @@
-type Alias = { num: number }
+type Alias = { num: number };
 interface Interface {
-    num: number;
+  num: number;
 }
 declare function aliased(arg: Alias): Alias;
 declare function interfaced(arg: Interface): Interface;
 
 function foo(arg: Interface): Interface {
-    return {
-        num: 10
-    };
+  return {
+    num: 10
+  };
 }
 
-export {Interface, foo};
+export { Interface, foo };

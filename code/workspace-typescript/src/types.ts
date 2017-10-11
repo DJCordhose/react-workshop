@@ -1,8 +1,8 @@
 export type NewGreeting = {
-    greeting: string;
-    name: string;
-}
+  greeting: string;
+  name: string;
+};
 
 export type Greeting = NewGreeting & {
-    id: number;
-}
+  id: number;
+};

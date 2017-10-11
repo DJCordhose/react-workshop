@@ -1,16 +1,16 @@
 // @flow
 
-import {createStore, combineReducers, applyMiddleware} from 'redux';
-import greetingReducer from './greetingReducer';
-import thunk from 'redux-thunk';
-import {composeWithDevTools} from 'redux-devtools-extension';
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import greetingReducer from "./greetingReducer";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 export type State = {
-    // covariance makes this read-only, effectively
-    // https://flow.org/en/docs/frameworks/redux/
-    // https://flow.org/blog/2016/10/04/Property-Variance/
-    +greeting: string;
-}
+  // covariance makes this read-only, effectively
+  // https://flow.org/en/docs/frameworks/redux/
+  // https://flow.org/blog/2016/10/04/Property-Variance/
+  +greeting: string
+};
 
 // init ok
 // let state: State = {
@@ -22,10 +22,10 @@ export type State = {
 // state.greeting = 'hund';
 
 const store = createStore(
-    combineReducers({
-        greeting: greetingReducer
-    }),
-    composeWithDevTools(applyMiddleware(thunk))
+  combineReducers({
+    greeting: greetingReducer
+  }),
+  composeWithDevTools(applyMiddleware(thunk))
 );
 
 export default store;

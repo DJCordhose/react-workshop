@@ -1,6 +1,6 @@
-import openSocket from 'socket.io-client';
+import openSocket from "socket.io-client";
 
-const BACKEND_URL = 'http://localhost:7000';
+const BACKEND_URL = "http://localhost:7000";
 
 const socket = openSocket(BACKEND_URL);
 
@@ -8,13 +8,13 @@ const subscribeToGreetings = onGreetingsReceivedCallback => {
   // listener for new greetings
   // the greetings object received from server already contains
   // the whole list of greetings
-  socket.on('greetings', onGreetingsReceivedCallback);
+  socket.on("greetings", onGreetingsReceivedCallback);
 
   // subscribe to changes
   // (on server side when a client subscribes, the server
   //  pushes emits 'greetings' event, so that we immediately
   //  also receive the initial list of greetings)
-  socket.emit('subscribeToGreetings');
+  socket.emit("subscribeToGreetings");
 };
 
 const unsubscribeFromGreetings = () => {
@@ -23,18 +23,18 @@ const unsubscribeFromGreetings = () => {
 
 const saveGreeting = greetingToBeAdded => {
   return fetch(`${BACKEND_URL}/greetings`, {
-    method:  'POST',
+    method: "POST",
     headers: {
-      'Accept':       'application/json',
-      'Content-Type': 'application/json'
+      Accept: "application/json",
+      "Content-Type": "application/json"
     },
-    body:    JSON.stringify(greetingToBeAdded)
+    body: JSON.stringify(greetingToBeAdded)
   }).then(response => {
     if (response.status === 201) {
-      return response.json()
+      return response.json();
     }
-    throw new Error('Invalid status code: ' + response.status);
-  })
+    throw new Error("Invalid status code: " + response.status);
+  });
 };
 
 export { subscribeToGreetings, unsubscribeFromGreetings, saveGreeting };
