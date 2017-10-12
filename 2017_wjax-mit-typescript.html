@@ -70,6 +70,30 @@
     <![endif]-->
 </head>
 
+  <!--
+  React und TypeScript Workshop – Moderne Webanwendungen entwickeln
+
+Wenn es um die Entwicklung zeitgemäßer Webanwendungen geht,
+fällt die Wahl mittlerweile immer häufiger auf die JavaScript Bibliothek React,
+die unter anderem auch von Facebook, Netflix und Twitter verwendet wird.
+
+In diesem Workshop lernen Sie, wie Sie mit React moderne Webanwendungen bauen können.
+Dazu werden wir gemeinsam Schritt für Schritt eine Beispielanwendung entwickeln,
+an Hand derer wir uns neben den React-Grundlagen auch ansehen,
+wie Sie z.B. REST-Aufrufe an ein Backend machen.
+
+Um Ansprüchen an Langlebigkeit, Entwicklungskomfort und Wartbarkeit gerecht zu werden,
+nutzen wir zur Entwicklung der Anwendung die Programmiersprache TypeScript.
+
+Voraussetzung für die Teilnahme an dem Workshop sind JavaScript-Kenntnisse.
+Die für React notwendigen neueren JavaScript- und TypeScript-Features werde
+ich Ihnen in dem Workshop Schritt für Schritt vermitteln.Zur Teilnahme an den Übungen
+ ist ein Notebook erforderlich, auf dem Git, die LTS-Version von Node.js und eine IDE
+ (z.B. Visual Studio Code oder WebStorm) installiert sind.
+
+Workshop Short Label: React und TypeScript Workshop
+  -->
+
 <body>
 
 <div class="reveal">
@@ -88,21 +112,50 @@
                 <li>Browser öffnen: <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
                 <li>Wenn dort ein Hello-World-Text erscheint ist alles gut
             </ol>
-            <p>Folien: Im geklonten Verzeichnis <code>2017_typescript.html</code>
+            <p>Folien: Im geklonten Verzeichnis <code>2017_wjax-mit-typescript.html</code>
             </p>
         </section>
 
-        <section>
+      <section>
+        <h4><a href="http://nilshartmann.net" target="_blank">Nils Hartmann</a> / <a href="http://twitter.com/nilshartmann" target="_blank">@nilshartmann</a></h4>
+        <h3>Workshop</h3>
+        <h2><b>Moderne Web-Anwendungen mit React und TypeScript</b></h2>
+        <p style="font-size:70%"><a href="http://bit.ly/wjax2017-react-typescript-workshop" target="_blank">Slides: http://bit.ly/wjax2017-react-typescript-workshop</a></p>
+        <p style="border-top: 2px solid darkgray;margin-top:25px;padding-top:25px;">
+          10. November 2017 | W-JAX München
+        </p>
+      </section>
+
+      <section>
+        <h3><b>Nils Hartmann</b></h3>
+        <p style="font-size:smaller"><a href="mailto:nils@nilshartmann.net">nils@nilshartmann.net</a></p>
+        <h4><a href="https://nilshartmann.net">Programmierer aus Hamburg</a></h4>
+        <p>JavaScript, Java</p>
+        <p>Trainings und Workshops</p>
+        <a href="https://reactbuch.de" target="_blank"><img style="max-height:350px" src="images/reactbuch-de.png" /></a>
+      </section>
+
+      <section>
             <h2>Inhalt</h2>
             <ul>
                 <li><a href="#/t0">Teil 0: React-Einführung und Build-Prozess</a>
                 <li><a href="#/t1">Teil I: React-Komponenten</a>
                 <li><a href="#/t2">Teil II: Komponentenhierarchien</a>
                 <li><a href="#/t3">Teil III: Remote-Calls gegen Server</a>
-								<li><a href="#/t5">Teil IV: React mit TypeScript entwickeln</a>
+								<li><a href="#/t4">Teil IV: React mit TypeScript entwickeln</a>
+            </li></ul>
+          <div style="font-size:80%;width:100%">
+          <p><b>Zugabe:</b></p>
+          <ul>
 									<!-- Als Zusatz nur zeigen: Testen und Routing -->
+              <li><a href="#/t5">Teil V: Testen von React Anwendungen</a>
+              <li><a href="#/t6">Teil VI: Client-seitiges Routing</a>
             </li>
             </ul>
+          </div>
+          <div style="font-size:80%">
+            <p><b>Jederzeit:</b> Fragen und Diskussionen!</p>
+          </div>
         </section>
 
         <section id="example-app">
@@ -117,20 +170,40 @@
 
         <section id="react">
             <h2>React</h2>
+          <p><a href="https://reactjs.org" target="_blank">https://reactjs.org</a></p>
             <ul>
-                <li class="fragment">Framework für Facebook und viele andere
-                <li class="fragment">Komponenten kapseln Template und Logik
-                  <li class="fragment">Deklarativ
-                <li class="fragment">Abstraktion vom DOM: <em>f(model) -> UI</em>
+                <li class="fragment">Framework von und für Facebook (und viele andere)
                 <li class="fragment">Minimales API
-                <li class="fragment">Ein-Weg-Data-Binding: Zustandsänderungen stellen Komponente <b>komplett</b> neu dar
-                <li class="fragment">Kann im Browser und auf dem Server rendern
-                <li class="fragment">wird für komplette Anwendung typischerweise mit weiteren Libs verwendet (Redux, Flux, Router, ...)
-                <li class="fragment">viel Inspiration aus der funktionalen Ecke (Immutable, pure functions, stateless)
+                 <li class="fragment">Minimales Feature Set
+              <ul><li>Ihr könnt/müsst viele Entscheidungen selber treffen</li></ul>
+                <li class="fragment">Bewusste Verstöße gegen Best-Practices
+                <li class="fragment">Zentrales Konzept: Komponenten
             </ul>
         </section>
 
-        <section>
+      <section>
+        <h3>Komponenten in React</h3>
+        <img src="ai/soc.png">
+      </section>
+
+      <section>
+        <h3>React Komponenten</h3>
+        <ul>
+          <li class="fragment">bestehen aus <b>Logik und UI</b>
+          <li class="fragment"><b>keine Templatesprache</b>
+          <li class="fragment">werden <b>deklarativ</b> beschrieben
+          <li class="fragment">werden immer <b>komplett gerendert</b> (kein 2-Wege-Data-Binding)
+          <li class="fragment">werden zu <b>ganzen Anwendungen</b> aggregiert
+          <li class="fragment" style="margin-top:20px">können auf dem <b>Server gerendert</b> werden
+        </ul>
+      </section>
+
+      <section>
+        <h3>React Komponentenhierarchie: Beispiel</h3>
+        <img src="ai/greeting-example-component-hierarchy.png"/>
+      </section>
+
+      <section>
             <h3>React Komponenten</h3>
             <ul>
                 <li class="fragment">Werden als ES6 Klasse oder Funktion implementiert
@@ -144,11 +217,10 @@
 }
 </code></pre>
         </section>
-
-        <section>
-            <h3>Eine erste Komponente: Hello, World!</h3>
-                <a target="_blank" href="code/schritte/0-hello_world/public/index.html">Demo</a>
-        </section>
+      <section data-state="exkurs">
+        <h2>Exkurs</h2>
+        <h1>ES6/ES7</h1>
+      </section>
 
         <section data-state="exkurs">
             <h2>ES6-Referenz</h2>
@@ -207,6 +279,10 @@ console.log(programmer instanceof Person); // true</code></pre>
 const displayInPage = text => document.body.innerHTML += `${text}<br>`;
 </code></pre>
         </section>
+      <section>
+        <h3>Eine erste Komponente: Hello, World!</h3>
+        <a target="_blank" href="code/schritte/0-hello_world/public/index.html">Demo</a>
+      </section>
 
                 <section>
                     <h3>Hello World React</h3>
@@ -266,8 +342,12 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
         <h2>Buildprozess</h2>
         <ul>
             <li>ES6- und JSX-Code muss nach ECMAScript 5 übersetzt werden
+          <ul>
+            <li>Status der ES6 Implementierungen der Browser: <a href="https://kangax.github.io/compat-table/es6/" target="blank">
+              https://kangax.github.io/compat-table/es6/
+            </a></li></ul>
             <li>Typische Werkzeuge
-                <ul><li>Babel (Compiler)
+                <ul><li>Babel oder TypeScript (Compiler)
                     <li>Webpack (Bundler)
                     <li>Webpack Dev Sever (HTTP Server mit Hot Reload)
                     </ul>
@@ -328,8 +408,8 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
 
         <section>
             <h2>Referenz</h2>
-            <p><a href="https://facebook.github.io/react/docs" target="_blank">
-                https://facebook.github.io/react/docs
+            <p><a href="https://reactjs.org/docs/hello-world.html" target="_blank">
+              https://reactjs.org/docs/hello-world.html
             </a>
             </p>
         </section>
@@ -350,7 +430,7 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
                 <p><em>Jede React-Komponente braucht eine <code>render</code>-Methode:</em>
                 <ul>
                     <li>wird aufgerufen beim ersten Rendering und wenn sich der Zustand ändert</li>
-                    <li>liefert genau ein Element (oder keins) zurück</li>
+                  <li>liefert genau <b>ein</b> Element oder <b>null</b> oder <b>ein Array</b>zurück</li>
                     <li>kann HTML-artige JSX-Syntax nutzen</li>
                 </ul>
 <pre class="fragment"><code class="xml" contenteditable data-trim>
@@ -406,20 +486,14 @@ const styles = { marginLeft: '10px', border: '1px solid red' };
                     <li>DOM-Events werden in React-Events verpackt
                     <li>React-Events haben weitgehend selbe API wie DOM-Events
                     <li>Es gibt keine automatische Bindung an Modelle (2-Wege Databinding)
+                    <li>Besonderes Event: <b>onChange</b></li>
                 </ul>
 <pre class="fragment"><code class="xml" contenteditable data-trim>
 class GreetingDetail extends React.Component {
   render() {
     return (
-      <div>
-        &lt;input onChange={event => this.updateModel(event.target.value)}
-               value={this.state.greeting} />
-        <p>{this.state.greeting}, World</p>
-      </div>
+        &lt;input onKeyPress={event => . . .} />
     );
-  }
-  updateModel(greeting) {
-    this.setState({greeting});
   }
   // ...
 }
@@ -618,6 +692,7 @@ class GreetingDetail extends React.Component {
 
         <section>
             <h3>Virtual DOM</h3>
+          <p>"Rendern" hat doppelte Bedeutung!</p>
             <img src="images/virtual-dom.png" style="border:0;box-shadow:0 0 0 0">
         </section>
 
@@ -668,13 +743,23 @@ class HelloMessage extends React.Component {
 
         <section>
             <h2>Thinking in React</h2>
-            <p><a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank">
-                https://facebook.github.io/react/docs/thinking-in-react.html
+            <p><a href="https://reactjs.org/docs/thinking-in-react.html" target="_blank">
+              https://reactjs.org/docs/thinking-in-react.html
             </a>
             </p>
         </section>
 
-        <section>
+      <section>
+        <h3>Herausforderungen</h3>
+        <ul>
+          <li>Wie kommt das neue Greeting zum GreetingMaster?
+          <li>Wie stellen wir Listen von Komponente (Greetings!) dar?
+          <li>Wer steuert den Programmfluss? Vom GreetingMaster zum Detail und zurück?
+        </ul>
+      </section>
+
+
+      <section>
             <h3>Themen</h3>
             <ul>
                 <li>Komponenten als Funktion
@@ -749,18 +834,16 @@ const greetings = [
   { id: 1, name: 'Oma', greeting: 'Hallo' }
 ];
 
-function MyTable({greetings}) {
-  return (
+const MyTable({greetings}) =>
     &lt;table>
-      greetings.map(greeting =>
+      {greetings.map(greeting =>
         &lt;tr key={greeting.id}>
-            &lt;td>{greeting.name}</td>
-            &lt;td>{greeting.greeting}</td>
+            &lt;td>{greeting.name}&lt;/td>
+            &lt;td>{greeting.greeting}&lt;/td>
         &lt;/tr>
-      )
+      )}
     &lt;/table>
-  );
-}
+;
 </code></pre>
         </section>
 
@@ -959,40 +1042,14 @@ fetch(url, {
         <section data-state="exkurs">
             <h2>ES6: Promises</h2>
         </section>
-                <section data-state="exkurs">
-                        <h3>Beispiel: fetch</h3>
-<pre><code class="javascript" contenteditable>const url = `${BACKEND_URL}${path}`;
-
-return fetch(url)
-    .then(response => response.json())
-    .then(json => /* ... */)
-    .catch(ex => console.error('request failed', ex));
-</code></pre>
-                </section>
                     <section data-state="exkurs">
                         <h3>Ein Promise ist ein Versprechen auf einen Wert</h3>
                         <h4 class="fragment">Wird evtl. erst in der Zukunft eingelöst</h4>
                     </section>
 
-                <section data-state="exkurs">
-                        <h3>Erzeugen und asynchron reagieren</h3>
-   <pre class="fragment"><code class="javascript" contenteditable>const promise = new Promise(resolve =>
-    setTimeout(
-        () => resolve('Result from promise'),
-        1000)
-);
-</code></pre>
-    <pre class="fragment"><code class="javascript" contenteditable>promise.then(value => console.log(value));
-// Output after 1 second: Result from promise
-</code></pre>
-                    </section>
                     <section data-state="exkurs">
                         <h3>Verkettete Ausführung</h3>
-   <pre><code class="javascript" contenteditable>const promise = new Promise(resolve =>
-    setTimeout(
-        () => resolve('Result from promise'),
-        1000)
-);
+   <pre><code class="javascript" contenteditable>const promise = . . .;
 </code></pre>
     <pre class="fragment"><code class="javascript" contenteditable>// then returns a new promise
 const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
@@ -1002,7 +1059,7 @@ const promise2 = promise.then(value => `${value} plus stuff`);</code></pre>
                     </section>
             <section data-state="exkurs">
                 <h3>Fehler führen zum Abbruch der Chain</h3>
-                <h4 class="fragment">Allerdings muss man etwas tun, um das mitzubekommen</h4>
+              <h4>Allerdings <b>muss</b> man etwas tun, um das mitzubekommen: catch()</h4>
             </section>
 
                     <section data-state="exkurs">
@@ -1068,15 +1125,19 @@ fetch('http://localhost:7000/api/greetings')
 // as an alternative we could set and render an error msg:
 //  .catch(ex => this.setState({error: ex})
 </code></pre>
+          <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API Doku</a></p>
         </section>
         <section>
             <h3>Initiales Laden von Daten</h3>
-            <ul>
-                <li class="fragment">Komponenten können Lifecycle-Methoden haben: <a href="https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle" target="_blank">
-                        https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle
-                </a> (nur Klassen!)</li>
-                <li class="fragment"><code>componentDidMount</code> wird aufgerufen, wenn Komponente ins DOM gerendert wurde</li>
-                <li class="fragment">Hier werden Daten üblicherweise initial geladen:<pre><code class="javascript" contenteditable data-trim>class GreetingController extends React.Component {
+          <p style="font-size:80%">Komponenten können optionale <a href="https://reactjs.org/docs/react-component.html#the-component-lifecycle" target="_blank">Lifecycle-Methoden</a> haben</p>
+          <img style="max-height: 500px;margin:0" src="images/react-lifecycle-1.png" />
+          <p style="font-size:40%">(c) "React: Die praktische Einführung in React, React Router und Redux", dpunkt 2016</p>
+        </section>
+      <section>
+        <h3>Initiales Laden von Daten</h3>
+                <p><code>componentDidMount</code> wird aufgerufen, wenn Komponente ins DOM gerendert wurde</p>
+        <p>Hier werden Daten üblicherweise initial geladen:</p>
+        <pre><code class="javascript" contenteditable data-trim>class GreetingController extends React.Component {
   constructor(props) {
     // intial state (empty now)
     this.state = { greetings: [] };
@@ -1090,7 +1151,7 @@ fetch('http://localhost:7000/api/greetings')
   }
 }
                 </code></pre>
-            </ul>
+            </p>
         </section>
         <section>
             <h3>Speichern von Daten</h3>
@@ -1115,211 +1176,174 @@ fetch('http://localhost:7000/api/greetings')
                 </code></pre>
         </section>
 
-            <section>
-                <h2>Übung: Laden und Speichern der Daten von/auf einem Server</h2>
-                <ul>
-                <li>Entwickle eine Version vom GreetingController, die die Daten auf dem Server laden und dort wieder speichern kann</li>
-                <li>Der Server ist bereits vorgegeben und kann mit <code>npm start</code> im Root-Verzeichnis gestartet werden. Er ist dann unter Port 7000 erreichbar</li>
-                </ul>
-            </section>
         <section>
-            <h2>Vorbereitung für die Übung</h2>
-            <ol>
-                <li>Kopiere <code>code/material/3-remote/backend.js</code> und <code>code/material/3-remote/main.js</code> in deinen Workspace</li>
-                <li>Du kannst außerdem <code>code/material/3-remote/_GreetingController.js</code> als Template verwenden. Die notwendigen
-                Schritte sind dort als Kommentar markiert.</li>
-
-            </ol>
+          <h2>Übung: Laden und Speichern der Daten von/auf einem Server</h2>
+          <p><em>Entwickle auf Basis von fetch eine Version des GreetingControllers, der die Daten auf dem Server laden und dort wieder speichern kann</em></p>
+          <p>Der Server ist bereits vorgegeben und kann mit <code>npm start</code> im Root-Verzeichnis gestartet werden. Er ist dann unter Port 7000 erreichbar</p>
         </section>
-                <section>
-                    <h2>Stelle den GreetingController um</h2>
-                    <ol>
-                        <li>Importiere <code>loadFromServer</code> und <code>saveToServer</code> aus dem <code>backend</code>-Modul
-                        <li>Füge in der Komponente <code>GreetingController</code> zwei Methoden zum Laden und Speichern der Greetings hinzu
-                        <li>Nach dem Mounten der Komponente in den DOM sollen die Greetings geladen werden (Lifecycle-Methode <code>componentDidMount</code>)
-                        <li>Das <code>onAdd</code>-Callback von <code>GreetingDetail</code> soll die übergebene Greeting speichern und im Erfolgsfall
-                        das gespeicherte Greeting in die Liste aller Greetings zufügen.
-                    </ol>
-                <br>Weitere Details findest du unter:
-                    <a href="code/material/3-remote/AUFGABEN.md" target="_blank">
-                        code/material/3-remote/AUFGABEN.md</a>
-            </section>
+        <section>
+          <h3>Schritte</h3>
+          <ol>
+          <li>Kopiere <code>code/material/3-remote/GreetingController.js</code> in deinen Arbeitsbereich
+          <li>Die Serverzugriffe sollen in <code>loadGreetings</code> und <code>saveGreeting</code> erfolgen</li>
+          <li>Dort sind bereits entsprechende TODOs für dich eingetragen</li>
+          </ol>
+        </section>
+
+      <section>
+        <h2>Exkurs</h2>
+        <h1>Integration von 3rd-Party Libs</h1>
+      </section>
+      <section>
+        <h2>3rd Party Libs?</h2>
+        <div class="fragment">
+          <p>Es gibt eine große Anzahl von sehr praktischen JavaScript-Bibliotheken</p>
+          <p>Viele davon sind aber nicht als React-Komponenten entwickelt worden</p>
+        </div>
+        <div class="fragment">
+          <p><b>Beispiele</b></p>
+          <p><em>jQuery</em> und <em>jQuery</em> Plugins wie z.B. <em>Bootstrap</em></p>
+          <p><em>d3</em> für interaktive SVGs und Chart Bibliotheken wie <em>nvd3</em></p>
+        </div>
+      </section>
+
+      <section>
+        <h3>Unser Beispiel: Verteilung der Grüße</h3>
+        <p>Aufgabe: Einbetten des d3/nvd3 Pie Charts in eine React-Komponente</p>
+        <a href="code/schritte/5-third-party/public/index.html" target="_blank">
+          <img src="images/screenshot-nvd3.png" height="400px">
+        </a>
+        <p style="font-size:75%"><em>nvd3</em> Pie Chart mit <em>d3</em></p>
+      </section>
+
+      <section>
+      <h3>Herausforderungen?</h3>
+      <ol>
+      <li>Wie kommen wir an den DOM Knoten der React-Komponente?
+      <li>Wie sagen wir React, dass nun NVD3 den Rest macht? Also, dass React nicht mehr neu rendern soll.
+      <li>Änderungen des Zustands sollen nach wie vor richtig dargestellt werden
+      <li>Ab welchem Zeitpunkt soll NVD3 das Rendern übernehmen?
+      <li>Wie können wir aus NVD3 heraus auch wieder andere React-Komponenten beeinflussen?
+      <li>Wie räumen wir wieder auf?
+      </ol>
+      </section>
+      <!--<section>-->
+      <!--<h3>Hintergrund: Charts mit NVD3</h3>-->
+      <!--<p>Basiert auf D3.js</p>-->
+      <!--<p>Benötigt svg DOM-Element um sich zu rendern</p>-->
+      <!--<p class="fragment">Stark vereinfachtes Beispiel:</p>-->
+      <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import d3 from 'd3';-->
+      <!--import nv from 'nvd3';-->
+
+      <!--// Chart erzeugen-->
+      <!--const chart = nv.models.pieChart();-->
+      <!--// ...Chart Config ausgelassen ...-->
+
+      <!--// mit d3 rendern und mit Daten versorgen-->
+      <!--const element = document.getElementById('chart');-->
+      <!--d3.select(element)-->
+      <!--.datum(data)-->
+      <!--.call(chart);-->
+
+      <!--// Callbacks registrieren (z.B. bei Klick auf ein Element)-->
+      <!--chart.pie.dispatch.on("elementClick",-->
+      <!--e => console.log(e.data.label));-->
+      <!--</code></pre>-->
+
+      <!--</section>-->
+
+      <!--<section>-->
+      <!--<h3>Übersicht über den Komponenten-Lifecycle</h3>-->
+      <!--<a href="https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle" target="_blank">-->
+      <!--https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle-->
+      <!--</a>-->
+      <!--</section>-->
+      <!--<section>-->
+      <!--<img src="ai/lifecycle-methods-1.png" height="600px"/>-->
+      <!--</section>-->
+      <!--<section>-->
+      <!--<img src="ai/lifecycle-methods-2.png" height="600px" />-->
+      <!--</section>-->
+      <!--<section>-->
+      <!--<h3>React Lifecycle Methoden</h3>-->
+      <!--<ul>-->
+      <!--<li class="fragment"><code><b>componentDidMount()</b></code>: Komponente wurde gerendert, Elemente sind im DOM (einmalig)</li>-->
+      <!--<li class="fragment"><code><b>componentWillReceiveProps(nextProps)</b></code>: An die Komponente wurden neue Properties übergeben. Die neuen Properties-->
+      <!--werden als Parameter übergeben</li>-->
+      <!--<li class="fragment"><code><b>shouldComponentUpdate()</b></code>: Entscheidet, ob Komponente erneut gerendert werden soll (default: <code>true</code>)</li>-->
+      <!--<li class="fragment"><code><b>componentWillUnmount()</b></code>: Wird aufgerufen, bevor Komponente aus dem DOM entfernt wird (einmalig)</li>-->
+      <!--</ul>-->
+
+      <!--</section>-->
+      <section>
+        <h3>Greeting Chart Komponente: Verwendung</h3>
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+&lt;Chart
+  data={...}
+  onSegmentSelect={segment => console.log("Segment Selected", segment)}
+/>
+        </code></pre>
+      </section>
+      <section>
+        <h3>Greeting Chart Komponente #1</h3>
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+class Chart extends React.Component {
+    render() {
+        //  we render an empty svg and
+        //  remember the reference to the DOM node
+        return &lt;svg ref={c => this._chart = c}>&lt;/svg>
+    }
+
+    // called directly after first render
+    componentDidMount() {
+        // once rendered by react we create the nvd3 chart
+        const chart = createNvd3Chart(this._chart, this.props.data);
+
+        // we delegate the label of clicked segment
+        // back to parent component
+        chart.pie.dispatch.on("elementClick",
+                              e => this.props.onSegmentSelected(e.data.label));
+    }
+
+    // ...
+}
+       </code></pre>
+      </section>
+      <section>
+        <h3>Lifecycle-Methoden #2</h3>
+        <img src="ai/lifecycle-methods-2.png" height="600px" />
+      </section>
+      <section>
+        <h3>Greeting Chart Komponent #2</h3>
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+class Chart extends React.Component {
+    // ...
+
+    // if it returns false, component will not be rendered
+    shouldComponentUpdate() {
+        // once rendered react never renders again
+        return false;
+    }
+
+    // called when properties update
+    componentWillReceiveProps(nextProps) {
+        const {data} = nextProps;
+        // we still get updates of properties making it reactive
+        updateNvd3Chart(this._chart, data);
+    }
+
+    // called just before destroying component
+    componentWillUnmount() {
+        this._d3selection.remove();
+    }
+}
+       </code></pre>
+      </section>
+
+
+
         <section id="t4">
             <h1>Teil IV</h1>
-            <h2>Testen (Überblick)</h2>
-            <ul style="font-size:85%">
-                <li><a href="code/schritte/4-test/public/index.html" target="_blank">Ziel-Anwendung</a>
-                <li><a href="code/schritte/4-test/test-report.html">Test Report</a>
-                <li><a href="code/schritte/4-test/coverage/lcov-report/index.html">Coverage Report</a>
-            </ul>
-        </section>
-
-        <section data-transition="slide none">
-            <h2>Was testen wir überhaupt?</h2>
-            <ul>
-                <li class="fragment"><b>UI-unabhängige Logik</b> (z.B. Services, Backend-Calls)</li>
-                <li class="fragment"><b>Rendern</b> (wird meine Greeting-Liste für ein Satz von Greetings korrekt dargestellt)</li>
-                <li class="fragment"><b>Interaktionen</b> (funktionieren meine Event-Listener korrekt)</li>
-                <li class="fragment"><b>Verhalten im Browser</b> (z.B. korrekte Darstellung, Browser-spezifisches JavaScript, Arbeiten mit history, Titelzeile, Scrollbars etc)</li>
-            </ul>
-        </section>
-
-        <section data-transition="none">
-            <h2>Was testen wir überhaupt?</h2>
-            <ul>
-                <li style="color: lightgrey"><b>UI-unabhängige Logik</b></li>
-                <li><b>Rendern</b> (wird meine Greeting-Liste für ein Satz von Greetings korrekt dargestellt) <b>React-spezifisch!</b></li>
-                <li><b>Interaktionen</b> (funktionieren meine Event-Listener korrekt) <b>React-spezifisch!</b></li>
-                <li style="color: lightgrey"><b>Verhalten im Browser</b> (z.B. korrekte Darstellung, Browser-spezifisches JavaScript, Arbeiten mit history, Titelzeile, Scrollbars etc)</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Anforderungen</h2>
-            <ul>
-                <li class="fragment">Komponenten müssen im Test gerendert werden können</li>
-                <li class="fragment">Gerenderte Komponenten/HTML-Elemente müssen gefunden und validiert werden</li>
-                <li class="fragment">Zustand und Properties der Komponenten müssen veränderbar sein</li>
-                <li class="fragment">Events müssen getriggert oder simuliert werden können</li>
-                <li class="fragment">Interaktion mit DOM muss evtl möglich sein</li>
-            </ul>
-        </section>
-
-        <section>
-            <h1>Jest</h1>
-            <p><em>"Painless JavaScript Testing" (<a href="http://facebook.github.io/jest/" target="_blank">http://facebook.github.io/jest/</a>)</em></p>
-            <p class="fragment">Vollständige Test-Lösung, wird von Facebook für Testen von React verwendet:</p>
-            <ul class="fragment">
-                <li class="fragment">Test Runner</li>
-                <li class="fragment">Specs, Assertions, Mocks</li>
-                <li class="fragment">Code Coverage</li>
-                <li class="fragment">Snapshot testing</li>
-            </ul>
-        </section>
-        <section>
-            <h3>Beispiel: Ein einfacher Test</h3>
-            <pre><code class="javascript" contenteditable data-trim>// sum.js
-export const sum = (a,b) => a+b;
-</code></pre>
-<pre class="fragment"><code class="javascript" contenteditable data-trim>// sum.test.js
-import {sum} from '../sum.js';
-
-test('sum of 2 and 2 is 4', () => {
-    expect(sum(2, 2)).toBe(4);
-});
-
-test('sum of 2 and 2 is not 3', () => {
-    expect(sum(2, 2)).not.toBe(3);
-});
-            </code></pre>
-        </section>
-        <section>
-            <h3>React Test Renderer</h3>
-            <p><a href="https://www.npmjs.com/package/react-test-renderer">https://www.npmjs.com/package/react-test-renderer</a></p>
-            <p>Rendert React Komponenten in JSON Objekte (ohne DOM):</p>
-            <pre class="fragment"><code class="javascript" contenteditable data-trim>import renderer from 'react-test-renderer';
-const component = renderer.create(
-        &lt;GreetingMaster greetings={someGreetings} />
-);
-
-console.log(component.toJSON());
-            </code></pre>
-            <pre class="fragment"><code class="javascript" contenteditable data-trim>
-{ type: 'div',
-  props: {},
-  children:  [
-    { type: 'table', props: {}, children: [Object] },
-    { type: 'button', props: [Object], children: [Object] }
-  ]
-}
-            </code></pre>
-
-        </section>
-        <section>
-            <h3>"Snapshot Testing" mit Jest</h3>
-            <p><code>expect(obj).toMatchSnapshot()</code> vergleicht ein JSON-Objekt mit einer gespeicherten Datei:</p>
-            <ul>
-                <li class="fragment">Bei <b>erster</b> Ausführung: legt Snapshot-File an
-                    (<a href="images/jest-snapshot-file.png" target="_blank">Beispiel</a>)
-                    <ul>
-                        <li class="fragment">Snapshotdateien werden in Git versioniert</li>
-                    </ul>
-                </li>
-                <li class="fragment">Bei <b>folgenden</b> Ausführungen: erzeugt neuen Snapshot und vergleicht mit
-                    gespeichtertem Snapshot
-                </li>
-                <li class="fragment">Wenn Snapshots unterschiedlich
-                    <ul>
-                        <li>Fehler samt Diff (<a href="images/jest-snapshot-diff.png" target="_blank">Beispiel</a>)</li>
-                        <li>Im Watch Mode kann Snapshot aktualisiert werden
-                            <img src="images/jest-snapshot-update.png"></li>
-                    </ul>
-                </li>
-
-            </ul>
-        </section>
-
-        <section>
-            <h3>Snapshot Testing mit Jest und React</h3>
-            <pre class="fragment"><code class="javascript" contenteditable data-trim>import renderer from 'react-test-renderer';
-
-test('it should render correctly', () => {
-
-  const someGreetings = [ . . . ];
-
-  const component = renderer.create(
-    &lt;GreetingMaster greetings={someGreetings} />
-  );
-
-  expect(component.toJSON()).toMatchSnapshot();
-});
-            </code></pre>
-            <p class="fragment"><em>Snapshot sagt nicht, ob UI richtig oder falsch gerendert wird, sondern nur, ob sie verändert wurde!</em></p>
-        </section>
-
-        <section>
-            <h3>Enzyme</h3>
-            <p><em>JavaScript Testing utilities for React (<a href="http://airbnb.io/enzyme/" target="_blank">http://airbnb.io/enzyme/</a>)</em></p>
-            <p>Bibliothek mit Funktionen zum Testen von React Komponenten</p>
-            <ul>
-                <li class="fragment">Rendern von Komponenten:
-                    <ul>
-                        <li><b>shallow</b> zum "flachen" Rendern einer Komponente</li>
-                        <li><b>mount</b> zum Rendern einer Komponete in einen (headless) DOM, z.B. jsdom</li>
-                    </ul>
-                </li>
-                <li class="fragment">Navigieren durch den DOM und Suchen von Elementen und Komponenten</li>
-                <li class="fragment">Modifizieren von Komponenten und Auslösen von Events</li>
-            </ul>
-        </section>
-
-        <section>
-            <h3>Testen einer Komponente mit Jest und Enzyme</h3>
-            <pre class="fragment"><code class="javascript" contenteditable data-trim>import {mount} from 'enzyme';
-import GreetingController from '...';
-import GreetingDetail from '...';
-test('it should open detail view on button click', () => {
-    // mount the component into a real dom (implemented by JSDom)
-    const component = mount(&lt;GreetingController  />);
-
-    // on initial render the list with greetings (GreetingMaster)
-    // is visible but no GreetingDetail
-    expect(component.find(GreetingDetail)).toHaveLength(0);
-
-    // find the "add" Button...
-    const addButton = component.find('button');
-
-    // click on the button
-    addButton.simulate('click');
-
-    // now the GreetingDetail should be visible
-    expect(component.find(GreetingDetail)).toHaveLength(1);
-});
-            </code></pre>
-        </section>
-
-        <section id="t5">
-            <h1>Teil V</h1>
             <h2>React mit TypeScript entwickeln</h2>
           <p><a href="code/schritte/4-test-typescript/public/index.html" target="_blank">Ziel-Anwendung</a></p>
         </section>
@@ -1337,16 +1361,6 @@ test('it should open detail view on button click', () => {
         </section>
 
         <section>
-            <h2>Typen-Systeme</h2>
-            <p class="fragment"><em>TypeScript erweitert JavaScript um ein Typen-System</em></p>
-            <p class="fragment">Ein Typen-System ist Voraussetzung für wartbare Projekte:</p>
-            <ul>
-                <li>Erhöht die Verständlichkeit des Codes</li>
-                <li>Erlaubt sicheres Refactoring</li>
-            </ul>
-        </section>
-
-        <section>
         <h3>TypeScript Grundlagen</h3>
             <p>Typ-Angaben werden hinter einen Bezeichner geschrieben</p>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
@@ -1356,7 +1370,7 @@ foo = 'yo';
 // Error: number: This type is incompatible with string
 foo = 10;
                </code></pre>
-            <pre><code class="typescript line-numbers" contenteditable data-trim>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 // Funktionen
 function sayIt(what: string): string {
   return `Saying: ${what}`;
@@ -1367,7 +1381,7 @@ sayIt(10); // error
 </code></pre>
 
 
-        <pre><code class="typescript line-numbers" contenteditable data-trim>
+        <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 // Arrow Funktionen
 const sayIt = (what: string): string => `Saying: ${what}`;
 
@@ -1442,12 +1456,15 @@ const saidItWrong: number = sayIt('Hello TypeScript'); // error!
       </section>
         <section>
             <h2>null und undefined</h2>
+          <div class="fragment">
             <p><code>null</code> muss explizit zugelassen werden (<em>strictNullChecks</em>):</p>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
 let city:string = null; //Type 'null' is not assignable to type 'string'.
 
 let optionalCity:string|null = null; // OK
             </code></pre>
+          </div>
+          <div class="fragment">
             <p>Optionale Parameter können mit ? gekennzeichnet werden (erlauben dann auch <code>undefined</code>)</p>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 function greet(name: string, greeting?: string) {
@@ -1462,7 +1479,7 @@ greet('Klaus'); // Hello, Klaus
 greet('Peter', null); // Argument of type 'null' is not assignable
                       // to parameter of type 'string | undefined'.
             </code></pre>
-
+          </div>
         </section>
 
 
@@ -1486,11 +1503,11 @@ class Sayer {
       </section>
         <section>
             <h2>Eigene Typen</h2>
-            <p>Mit <code>type</code> können eigene Typen defniert werden:</p>
+            <p>Mit <code>interface</code> können eigene Typen defniert werden:</p>
 
             <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
 // Komplexer Typ
-type Person = {
+interface Person {
 	name: string; // Pflicht
 	livesIn?: string; // Optional
 }
@@ -1513,108 +1530,16 @@ const lukas: Person = {
 
         </section>
 
-<!--
-      <section>
-        <h2>Function Types</h2>
-        <p>Funktionen können beschrieben werden, um sicherzustellen, dass sie einer definierten Signatur entsprechen</p>
-        <em>(parameter1: type, parameter-n: type) => returnType</em>
-        <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
-type CalcOperation = (a: number, b: number) => number;
-
-const AddOperation:CalcOperation = function(a,b) { return a + b };
-const DivideOperation:CalcOperation = function(a,b) { return a / b };
-const SqrtOperation = function (a: number) { return Math.sqrt(a) };
-
-function calculator(operation: CalcOperation, a: number, b: number) {
-  operation(a, b);
-}
-
-calculator(AddOperation, 2, 3); // 5
-calculator(SqrtOperation, 9); // ERROR
-        </code></pre>
-
-      </section>
-      <section>
-        <h2>Intersection Types</h2>
-        <p><em>Intersection Types</em> kombinieren zwei oder mehr Typen zu einem neuen:</p>
-        <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
-type Person = { name: string; }
-
-type Musician = Person & {
-  instrument: string;
-}
-
-const klaus: Person = { name: 'Klaus' };
-const hans: Musician = { name: 'Hans',  instrument: 'Guitar' };
-        </code></pre>
-      </section>
-      <section>
-        <h2>Union Types I</h2>
-        <p><em>Union Types</em> beschreiben einen Wert, der <b>einem</b> Typ aus einer Menge von Typen entsprechen muss</p>
-        <p>Verwendet können nur die Eigenschaften, die in <b>allen</b> Typen vorhanden sind:</p>
-        <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
-type Musician = { name: string, instrument: string };
-type Programmer = { name: string, language: string };
-
-function sayHello(who: Musician|Programmer): void {
-  console.log(`Hello, ${who.name}`); // OK
-  console.log(`You play ${who.instrument}`);
-    // ERR: Property 'instrument' does not exist on type 'Musician | Programmer'.
-    // ERR: Property 'instrument' does not exist on type 'Programmer'.
-}
-
-sayHello({name: 'Jimmi', instrument: 'Guitar'}); // OK
-sayHello({name: 'Susi', language: 'TypeScript'}); // OK
-sayHello({name: 'Dieter', city: 'Hamburg'}); // ERROR
-
-        </code></pre>
-      </section>
-    <section>
-      <h2>Union Types II</h2>
-      <p>Union Types erlauben <em>typsichere Unterscheidungen</em>:</p>
-        <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
-type SPEAK_ACTION = { type: 'SPEAK', sentence: string};
-type SING_ACTION = { type: 'SING', song: string };
-
-function runAction(action: SPEAK_ACTION | SING_ACTION): void {
-  if (action.type === 'SPEAK') {
-    console.log(action.sentence); // OK
-    console.log(action.song);
-      // ERROR: Property 'song' does not exist on type 'SPEAK_ACTION'.
-  } else if (action.type === 'SING') {
-    console.log(action.song); // OK;
-  } else if (action.type === 'DANCE') {
-    // ERROR: Property 'type' does not exist on type 'never'
-  }
-
-  if (action.type === 'DANCE') {
-    // ERROR: Operator '===' cannot be applied to
-    // types '"SING"' and '"DANCE"'.
-  }
-}
-
-runAction({type: 'SPEAK', sentence: 'Hello World'}); // OK
-runAction({type: 'SPEAK', song: 'Final countdown'}) // ERROR
-        </code></pre>
-
-      </section>
-      <section>
-        <h2>Advanced Types</h2>
-        <p>TODO? Wirklich rein?</p>
-        <p>ReadOnly</p>
-        <p>Partial</p>
-      </section>
--->
         <section>
             <h2>Typ Kompatibilität</h2>
             <em>Im Gegensatz zu Java ("nominal typing") sind bei TypeScript zwei Typen kompatibel,
                 sofern sie <b>dieselbe Struktur</b> haben ("structural typing")</em>
             <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
-type Book = {
+interface Book {
 	title: string
 }
 
-type Movie = {
+interface Movie {
 	title: string
 }
 
@@ -1626,8 +1551,8 @@ const movie:Movie = book; // OK, obwohl Book !== Movie
             <h2>Generics</h2>
           <p>Generische Typen verwenden</p>
             <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
-type Person = { name: string };
-type Movie = { title: string };
+interface Person { name: string };
+interface Movie { title: string };
 
 let persons:Array&lt;Person&gt; = [];
 let movies:Array&lt;Movie&gt; = [];
@@ -1640,21 +1565,7 @@ persons.push({title: 'Casablanca'}) // error ('title' not in Person)
 persons = movies; // error
 
       </code></pre>
-          <p>Eigene generische Typen</p>
-          <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
-type Nullable&lt;T> = T|null;
-
-const nullPerson:Nullable&lt;Person> = null; // OK
-const peter:Nullable&lt;Person> = {name: 'Peter'}; // OK
-          </code></pre>
         </section>
-<!--
-      <section>
-        <h2>Types vs Interfaces</h2>
-        <p>Vieles, was mit Types geht, geht auch mit Interfaces</p>
-        <p>TODO: wann das eine und wann das andere?</p>
-      </section>
--->
       <section>
         <h2>Arbeiten mit externen Bibliotheken</h2>
         <p>Typings installieren und verwenden</p>
@@ -1675,12 +1586,12 @@ const peter:Nullable&lt;Person> = {name: 'Peter'}; // OK
       <section>
         <h2>Vorraussetzungen</h2>
         <ul>
-        <li>React Type Deklarationen installieren:
+        <li class="fragment">React Type Deklarationen installieren:
         <pre><code data-trim contenteditable class="line-numbers bash" data-leftpad>
 npm install --save @types/react @types/react-dom
         </code></pre>
         </li>
-        <li>(Externe) Module, die kein Default-Export haben müssen mit <code>import *</code> importiert werden:
+        <li class="fragment">(Externe) Module, die kein Default-Export haben müssen mit <code>import *</code> importiert werden:
         <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
 // JavaScript/Babel:
 import React from 'react';
@@ -1689,33 +1600,34 @@ import React from 'react';
 import * as React from 'react';
         </code></pre>
         </li>
-          <li>Dateien, die JSX-Code enthalten, müssen mit <code>.tsx</code> enden</li>
-          <li>Compiliert wird mit TypeScript (statt Babel). Integration in Webpack mit <a href="https://github.com/s-panferov/awesome-typescript-loader" target="_blank"><code>awesome-typescript-loader</code></a></li>
+          <li class="fragment">Dateien, die JSX-Code enthalten, müssen mit <code>.tsx</code> enden</li>
+          <li class="fragment">Compiliert wird mit TypeScript (statt Babel). Integration in Webpack mit <a href="https://github.com/s-panferov/awesome-typescript-loader" target="_blank"><code>awesome-typescript-loader</code></a></li>
         </ul>
       </section>
       <section>
         <h2>Getypte React Komponenten</h2>
         <p><code>React.Component</code> ist eine generische Klasse, die einen Typ für Properties und State erwartet</p>
-            <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+        <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+interface Greeting = {name: string; greeting: string};
 
-class GreetingDetail extends React.Component&lt;Props, State> {
+interface GreetingDetailProps {
+    greeting?: Greeting;
+    onSave: (newGreeting: NewGreeting) => void;
+}
+
+interface GreetingDetailState {
+    name: string;
+    greeting: string;
+}
+            </code></pre>
+
+        <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+
+class GreetingDetail
+  extends React.Component&lt;GreetingDetailProps, GreetingDetailState> {
   // ...
 }
             </code></pre>
-            <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
-type Greeting = {name: string, greeting: string};
-type Props = {
-    greeting?: Greeting,
-    onSave: (newGreeting: NewGreeting) => void
-}
-
-type State = {
-    name: string,
-    greeting: string
-}
-            </code></pre>
-
-
         </section>
       <section>
         <h3>Typsicherheit in React Komponenten</h3>
@@ -1813,6 +1725,183 @@ const GreetingMaster: React.SFC&lt;GreetingMasterProps> = props => {
           </ul>
           </li>
         </ol>
+      </section>
+
+      <section>
+        <h1>Anhang</h1>
+      </section>
+      <section id="t5">
+        <h1>Teil V</h1>
+        <h2>Testen (Überblick)</h2>
+        <ul style="font-size:85%">
+          <li><a href="code/schritte/4-test/public/index.html" target="_blank">Ziel-Anwendung</a>
+          <li><a href="code/schritte/4-test/test-report.html">Test Report</a>
+          <li><a href="code/schritte/4-test/coverage/lcov-report/index.html">Coverage Report</a>
+        </ul>
+      </section>
+
+      <section data-transition="slide none">
+        <h2>Was testen wir überhaupt?</h2>
+        <ul>
+          <li class="fragment"><b>UI-unabhängige Logik</b> (z.B. Services, Backend-Calls)</li>
+          <li class="fragment"><b>Rendern</b> (wird meine Greeting-Liste für ein Satz von Greetings korrekt dargestellt)</li>
+          <li class="fragment"><b>Interaktionen</b> (funktionieren meine Event-Listener korrekt)</li>
+          <li class="fragment"><b>Verhalten im Browser</b> (z.B. korrekte Darstellung, Browser-spezifisches JavaScript, Arbeiten mit history, Titelzeile, Scrollbars etc)</li>
+        </ul>
+      </section>
+
+      <section data-transition="none">
+        <h2>Was testen wir überhaupt?</h2>
+        <ul>
+          <li style="color: lightgrey"><b>UI-unabhängige Logik</b></li>
+          <li><b>Rendern</b> (wird meine Greeting-Liste für ein Satz von Greetings korrekt dargestellt) <b>React-spezifisch!</b></li>
+          <li><b>Interaktionen</b> (funktionieren meine Event-Listener korrekt) <b>React-spezifisch!</b></li>
+          <li style="color: lightgrey"><b>Verhalten im Browser</b> (z.B. korrekte Darstellung, Browser-spezifisches JavaScript, Arbeiten mit history, Titelzeile, Scrollbars etc)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Anforderungen</h2>
+        <ul>
+          <li class="fragment">Komponenten müssen im Test gerendert werden können</li>
+          <li class="fragment">Gerenderte Komponenten/HTML-Elemente müssen gefunden und validiert werden</li>
+          <li class="fragment">Zustand und Properties der Komponenten müssen veränderbar sein</li>
+          <li class="fragment">Events müssen getriggert oder simuliert werden können</li>
+          <li class="fragment">Interaktion mit DOM muss evtl möglich sein</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Jest</h1>
+        <p><em>"Painless JavaScript Testing" (<a href="http://facebook.github.io/jest/" target="_blank">http://facebook.github.io/jest/</a>)</em></p>
+        <p class="fragment">Vollständige Test-Lösung, wird von Facebook für Testen von React verwendet:</p>
+        <ul class="fragment">
+          <li class="fragment">Test Runner</li>
+          <li class="fragment">Specs, Assertions, Mocks</li>
+          <li class="fragment">Code Coverage</li>
+          <li class="fragment">Snapshot testing</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Beispiel: Ein einfacher Test</h3>
+        <pre><code class="javascript" contenteditable data-trim>// sum.js
+export const sum = (a,b) => a+b;
+</code></pre>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>// sum.test.js
+import {sum} from '../sum.js';
+
+test('sum of 2 and 2 is 4', () => {
+    expect(sum(2, 2)).toBe(4);
+});
+
+test('sum of 2 and 2 is not 3', () => {
+    expect(sum(2, 2)).not.toBe(3);
+});
+            </code></pre>
+      </section>
+      <section>
+        <h3>React Test Renderer</h3>
+        <p><a href="https://www.npmjs.com/package/react-test-renderer">https://www.npmjs.com/package/react-test-renderer</a></p>
+        <p>Rendert React Komponenten in JSON Objekte (ohne DOM):</p>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>import renderer from 'react-test-renderer';
+const component = renderer.create(
+        &lt;GreetingMaster greetings={someGreetings} />
+);
+
+console.log(component.toJSON());
+            </code></pre>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
+{ type: 'div',
+  props: {},
+  children:  [
+    { type: 'table', props: {}, children: [Object] },
+    { type: 'button', props: [Object], children: [Object] }
+  ]
+}
+            </code></pre>
+
+      </section>
+      <section>
+        <h3>"Snapshot Testing" mit Jest</h3>
+        <p><code>expect(obj).toMatchSnapshot()</code> vergleicht ein JSON-Objekt mit einer gespeicherten Datei:</p>
+        <ul>
+          <li class="fragment">Bei <b>erster</b> Ausführung: legt Snapshot-File an
+            (<a href="images/jest-snapshot-file.png" target="_blank">Beispiel</a>)
+            <ul>
+              <li class="fragment">Snapshotdateien werden in Git versioniert</li>
+            </ul>
+          </li>
+          <li class="fragment">Bei <b>folgenden</b> Ausführungen: erzeugt neuen Snapshot und vergleicht mit
+            gespeichtertem Snapshot
+          </li>
+          <li class="fragment">Wenn Snapshots unterschiedlich
+            <ul>
+              <li>Fehler samt Diff (<a href="images/jest-snapshot-diff.png" target="_blank">Beispiel</a>)</li>
+              <li>Im Watch Mode kann Snapshot aktualisiert werden
+                <img src="images/jest-snapshot-update.png"></li>
+            </ul>
+          </li>
+
+        </ul>
+      </section>
+
+      <section>
+        <h3>Snapshot Testing mit Jest und React</h3>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>import renderer from 'react-test-renderer';
+
+test('it should render correctly', () => {
+
+  const someGreetings = [ . . . ];
+
+  const component = renderer.create(
+    &lt;GreetingMaster greetings={someGreetings} />
+  );
+
+  expect(component.toJSON()).toMatchSnapshot();
+});
+            </code></pre>
+        <p class="fragment"><em>Snapshot sagt nicht, ob UI richtig oder falsch gerendert wird, sondern nur, ob sie verändert wurde!</em></p>
+      </section>
+
+      <section>
+        <h3>Enzyme</h3>
+        <p><em>JavaScript Testing utilities for React (<a href="http://airbnb.io/enzyme/" target="_blank">http://airbnb.io/enzyme/</a>)</em></p>
+        <p>Bibliothek mit Funktionen zum Testen von React Komponenten</p>
+        <ul>
+          <li class="fragment">Rendern von Komponenten:
+            <ul>
+              <li><b>shallow</b> zum "flachen" Rendern einer Komponente</li>
+              <li><b>mount</b> zum Rendern einer Komponete in einen (headless) DOM, z.B. jsdom</li>
+            </ul>
+          </li>
+          <li class="fragment">Navigieren durch den DOM und Suchen von Elementen und Komponenten</li>
+          <li class="fragment">Modifizieren von Komponenten und Auslösen von Events</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>Testen einer Komponente mit Jest und Enzyme</h3>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>import {mount} from 'enzyme';
+import GreetingController from '...';
+import GreetingDetail from '...';
+test('it should open detail view on button click', () => {
+    // mount the component into a real dom (implemented by JSDom)
+    const component = mount(&lt;GreetingController  />);
+
+    // on initial render the list with greetings (GreetingMaster)
+    // is visible but no GreetingDetail
+    expect(component.find(GreetingDetail)).toHaveLength(0);
+
+    // find the "add" Button...
+    const addButton = component.find('button');
+
+    // click on the button
+    addButton.simulate('click');
+
+    // now the GreetingDetail should be visible
+    expect(component.find(GreetingDetail)).toHaveLength(1);
+});
+            </code></pre>
       </section>
 
         <section id="t6">
@@ -2017,11 +2106,11 @@ import {Link, NavLink} from "react-router-dom";
             Reveal.configure({ controls: false });
         } else {
             // only applies to public version
-            $('.fragment').removeClass('fragment');
+//            $('.fragment').removeClass('fragment');
         }
         // applies to all versions
         $('code').addClass('line-numbers');
-        $('.fragment').removeClass('fragment');
+//        $('.fragment').removeClass('fragment');
     } );
 </script>
 

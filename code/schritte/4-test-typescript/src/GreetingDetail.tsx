@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Greeting, NewGreeting } from "./types";
 
-type GreetingDetailProps = {
+interface GreetingDetailProps  {
   greeting?: Greeting;
   onSave: (newGreeting: NewGreeting) => void;
 };
 
-type GreetingDetailState = {
+interface GreetingDetailState {
   name: string;
   greeting: string;
 };
