@@ -6,8 +6,5 @@
 	"editor.insertSpaces": true,
 	"editor.useTabStops": false,
 	"typescript.tsdk": "./node_modules/typescript/lib",
-	"editor.formatOnPaste": false,
-	"editor.formatOnSave": false,
-	"editor.formatOnType": false,
 	"prettier.printWidth": 130
 }
