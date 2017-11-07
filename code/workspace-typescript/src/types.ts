@@ -1,8 +1,12 @@
-export type NewGreeting = {
+export type GreetingChartData = { label: string; value: number }[];
+
+export interface NewGreeting {
   greeting: string;
   name: string;
-};
+}
 
-export type Greeting = NewGreeting & {
+export interface Greeting extends NewGreeting {
   id: number;
-};
+}
+
+export type Greetings = Greeting[];
