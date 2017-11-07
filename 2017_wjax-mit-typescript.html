@@ -128,10 +128,10 @@ Workshop Short Label: React und TypeScript Workshop
 
       <section>
         <h3><b>Nils Hartmann</b></h3>
-        <p style="font-size:smaller"><a href="mailto:nils@nilshartmann.net">nils@nilshartmann.net</a></p>
-        <h4><a href="https://nilshartmann.net">Programmierer aus Hamburg</a></h4>
+        <h4><a href="https://nilshartmann.net">Programmierer und Architekt aus Hamburg</a></h4>
         <p>JavaScript, Java</p>
         <p>Trainings und Workshops</p>
+        <p style="font-size:smaller">Kontakt: <a href="mailto:nils@nilshartmann.net">nils@nilshartmann.net</a></p>
         <a href="https://reactbuch.de" target="_blank"><img style="max-height:350px" src="images/reactbuch-de.png" /></a>
       </section>
 
@@ -144,15 +144,6 @@ Workshop Short Label: React und TypeScript Workshop
                 <li><a href="#/t3">Teil III: Remote-Calls gegen Server</a>
 								<li><a href="#/t4">Teil IV: React mit TypeScript entwickeln</a>
             </li></ul>
-          <div style="font-size:80%;width:100%">
-          <p><b>Zugabe:</b></p>
-          <ul>
-									<!-- Als Zusatz nur zeigen: Testen und Routing -->
-              <li><a href="#/t5">Teil V: Testen von React Anwendungen</a>
-              <li><a href="#/t6">Teil VI: Client-seitiges Routing</a>
-            </li>
-            </ul>
-          </div>
           <div style="font-size:80%">
             <p><b>Jederzeit:</b> Fragen und Diskussionen!</p>
           </div>
@@ -187,6 +178,13 @@ Workshop Short Label: React und TypeScript Workshop
       </section>
 
       <section>
+				<h3>Komponenten in React</h3>
+				<p style="font-size:smaller">Unser Beispiel in Komponenten</p>
+        <img src="ai/greeting-example-component-hierarchy.png">
+      </section>
+
+
+      <section>
         <h3>React Komponenten</h3>
         <ul>
           <li class="fragment">bestehen aus <b>Logik und UI</b>
@@ -196,11 +194,6 @@ Workshop Short Label: React und TypeScript Workshop
           <li class="fragment">werden zu <b>ganzen Anwendungen</b> aggregiert
           <li class="fragment" style="margin-top:20px">können auf dem <b>Server gerendert</b> werden
         </ul>
-      </section>
-
-      <section>
-        <h3>React Komponentenhierarchie: Beispiel</h3>
-        <img src="ai/greeting-example-component-hierarchy.png"/>
       </section>
 
       <section>
@@ -430,7 +423,7 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
                 <p><em>Jede React-Komponente braucht eine <code>render</code>-Methode:</em>
                 <ul>
                     <li>wird aufgerufen beim ersten Rendering und wenn sich der Zustand ändert</li>
-                  <li>liefert genau <b>ein</b> Element oder <b>null</b> oder <b>ein Array</b>zurück</li>
+                  <li>liefert genau <b>ein</b> Element oder <b>null</b> oder <b>ein Array</b> oder <b>einen String</b> zurück</li>
                     <li>kann HTML-artige JSX-Syntax nutzen</li>
                 </ul>
 <pre class="fragment"><code class="xml" contenteditable data-trim>
@@ -846,7 +839,22 @@ const MyTable({greetings}) =>
 ;
 </code></pre>
         </section>
-
+				<section>
+					<h3>Listen und Keys</h3>
+					<ul class="fragment">
+							<li>Ab React 16 können Arrays in <code>render</code> zurückgegeben werden
+								<li>(Anstatt <b>eines</b> Root Elements)</li>
+							<li>Elemente brauchen trotzdem einen eindeutigen Key
+					</ul>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+const Title = ({title, subtitle}) => {
+	return [
+		&lt;h1 key="title">{title}&lt;/h1>,
+		&lt;h2 key="subtitle">{subtitle&lt;/h2>
+	];
+}
+</code></pre>
+	</section>
         <section>
             <h3>Komponenten in Hierarchien</h3>
             <p>Beispiel: Unsere Anwendung</p>
@@ -854,10 +862,11 @@ const MyTable({greetings}) =>
         </section>
 
         <section>
-            <h3>Controller und Child-Views</h3>
+						<h3>Smart und Dumb Components</h3>
+						<p style="font-size: smaller;margin-bottom:0">(Alternativ: Container und Presentation Components)</p>
             <!--<img src="smart-dumb.jpg">-->
             <!--<img src="smart-dumb.png">-->
-            <img src="images/smart-dumb-w-label.png">
+            <img style="margin-top:0"src="images/component-communication.png">
         </section>
 
         <section>
@@ -948,6 +957,7 @@ class GreetingDetail extends React.Component {
 import PropTypes from 'prop-types';
 
 function HelloMessage(text) { . . . }
+
 HelloMessage.propTypes = {
   text: PropTypes.string.isRequired
 }
@@ -1280,7 +1290,7 @@ fetch('http://localhost:7000/api/greetings')
         <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
 &lt;Chart
   data={...}
-  onSegmentSelect={segment => console.log("Segment Selected", segment)}
+  onSegmentSelect={segment => . . . }
 />
         </code></pre>
       </section>
