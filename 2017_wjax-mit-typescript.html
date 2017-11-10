@@ -535,7 +535,7 @@ class GreetingDetail extends React.Component {
 					<li style="font-size: 80%" class="fragment">Kann pures JavaScript enthalten, eingeschlossen in {}:
 						<pre><code class="xml" contenteditable data-trim>
 const title = 'Hello, World';
-&lt;h1>{title.toUpperCase()&lt;/h1>
+&lt;h1>{title.toUpperCase()}&lt;/h1>
                     </code></pre>
 					</li>
 
@@ -577,12 +577,18 @@ class GreetingDetail extends React.Component {
 			</section>
 			<section data-state="exkurs">
 				<h3>ES6: Erweiterte Objekt-Literale</h3>
-				<pre><code class="javascript" contenteditable>const name = 'Oma';
+				<pre><code class="javascript" contenteditable>const firstName = 'Klaus';
+
+// ES5:
 const person = {
-    // ES5: name: name
-    name
+    firstName: firstName
 };
-console.log(person.name); // Oma
+
+// ES6:
+const person = {
+    firstName
+};
+console.log(person.name); // Klaus
    </code></pre>
 			</section>
 
@@ -599,6 +605,7 @@ class Person {
 export default Person;
    </code></pre>
 				<pre><code class="javascript" contenteditable>// Person.js
+
 // in einer Zeile zusammengefasst
 export default class Person {
   // ...
@@ -627,7 +634,10 @@ export showInfo = msg => window.alert(`Wichtige Info: ${msg}`);
 
 // or
 function displayInPage(text) { . . . }
+
 const showInfo = ...;
+
+// specify exports
 export { displayInPage, showInfo };
    </code></pre>
 				<pre class="fragment"><code class="javascript" contenteditable data-trim>import {displayInPage} from "./util";
@@ -674,6 +684,7 @@ displayInPage('Hello, World');
   email: 'oliver.zeigermann@gmail.com'
 };</code></pre>
 				<pre class="fragment"><code class="javascript" contenteditable>const {name, notThere} = person;
+
 console.log(`name=${name}`);
 // name=Olli
 console.log(`notThere=${notThere}`);
@@ -685,6 +696,7 @@ console.log(`notThere=${notThere}`);
   console.log(`notThere=${notThere}`);
   // notThere=undefined
 }
+
 someFunction(person);
 </code></pre>
 			</section>
@@ -714,18 +726,21 @@ someFunction(person);
 						<code>this.props.children</code> enthält Kind-Elemente</li>
 				</ul>
 				<pre class="fragment"><code class="javascript" contenteditable data-trim>
-class TitleComponent extends React.Component {
+class NavBar extends React.Component {
     constructor(props) {
         super(props);
     }
     render() {
-      return &lt;h1>{this.props.title}&lt;/h1>
+      return &lt;div className="NavBar">
+        <h1>{this.props.title}</h1>
+        {this.props.children}
+        &lt;/div>;
     }
    // ...
 }
 </code></pre>
 				<pre class="fragment"><code class="javascript" contenteditable data-trim>
-  &lt;TitleComponent title='Hello World' />
+	&lt;NavBar title="Navigation">&lt;a href=""> ... &lt;/a>&lt;/NavBar>
 </code></pre>
 
 			</section>
@@ -963,7 +978,7 @@ const MyTable({greetings}) =>
 const Title = ({title, subtitle}) => {
 	return [
 		&lt;h1 key="title">{title}&lt;/h1>,
-		&lt;h2 key="subtitle">{subtitle&lt;/h2>
+		&lt;h2 key="subtitle">{subtitle}&lt;/h2>
 	];
 }
 </code></pre>
@@ -2391,45 +2406,45 @@ import {Link, NavLink} from "react-router-dom";
 
 	<script>
 
-				// Full list of configuration options available at:
-				// https://github.com/hakimel/reveal.js#configuration
-				Reveal.initialize({
-					controls: true,
-					progress: true,
-					history: true,
-					center: true,
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
 
-					transition: 'slide', // none/fade/slide/convex/concave/zoom
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-					// Optional reveal.js plugins
-					dependencies: [
-						{
-							src: 'reveal.js/lib/js/classList.js', condition: function () {
-								return !document.body.classList;
-							}
-						},
-						{
-							src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
-								return !!document.querySelector('[data-markdown]');
-							}
-						},
-						{
-							src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
-								return !!document.querySelector('[data-markdown]');
-							}
-						},
-						{
-							src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
-								return !!document.querySelector('pre code');
-							}, callback: function () {
-								hljs.initHighlightingOnLoad();
-							}
-						},
-						{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
-						{ src: 'reveal.js/plugin/notes/notes.js', async: true },
-						{ src: 'lib/js/line-numbers.js' }
-					]
-				});
+			// Optional reveal.js plugins
+			dependencies: [
+				{
+					src: 'reveal.js/lib/js/classList.js', condition: function () {
+						return !document.body.classList;
+					}
+				},
+				{
+					src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+						return !!document.querySelector('[data-markdown]');
+					}
+				},
+				{
+					src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+						return !!document.querySelector('[data-markdown]');
+					}
+				},
+				{
+					src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+						return !!document.querySelector('pre code');
+					}, callback: function () {
+						hljs.initHighlightingOnLoad();
+					}
+				},
+				{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: 'reveal.js/plugin/notes/notes.js', async: true },
+				{ src: 'lib/js/line-numbers.js' }
+			]
+		});
 
 	</script>
 
