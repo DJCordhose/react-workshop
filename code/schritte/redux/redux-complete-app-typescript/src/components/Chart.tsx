@@ -18,7 +18,8 @@ type ChartProps = {
 class Chart extends React.Component<ChartProps, {}> {
   _d3selection: any; // ??? d3.Selection<any,any,any,any>;
   _nvd3chart: nv.PieChart;
-  _chart: SVGElement | null;
+  // _chart: SVGElement | null;
+    _chart: any;
 
   shouldComponentUpdate() {
     return false;
