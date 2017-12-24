@@ -29,7 +29,7 @@ export type SetModeAction = {
 };
 
 // Thunk actions: https://github.com/gaearon/redux-thunk/issues/103#issuecomment-298533925
-export const loadGreetings = (): ThunkAction<Promise<SetGreetingsAction | void>, AppState, null> => dispatch =>
+export const loadGreetings = (): ThunkAction<Promise<SetGreetingsAction | void>, AppState, null> => (dispatch, getState) => {
   loadGreetingsFromServer()
     .then(greetings =>
       dispatch({
@@ -38,7 +38,7 @@ export const loadGreetings = (): ThunkAction<Promise<SetGreetingsAction | void>,
       } as SetGreetingsAction)
     )
     .catch(err => console.error("LOADING GREETINGS FAILED:", err));
-
+};
 export const saveGreeting = (
   newGreeting: NewGreeting
 ): ThunkAction<Promise<SaveGreetingAction | void>, AppState, null> => dispatch =>
