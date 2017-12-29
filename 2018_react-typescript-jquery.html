@@ -153,9 +153,9 @@
                   <li>
                     <a href="#/t4">Teil IV: Arbeiten mit 3rd-Party-Libs (jquery)</a>
                     <li>
-                      <a href="#/t5">Teil V: Immutability</a>
+                      <a href="#/t5">Teil V: TypeScript</a>
                       <li>
-                        <a href="#/t6">Teil VI: TypeScript</a>
+                        <a href="#/t6">Exkurs/Ausblick: Immutability</a>
                       </li>
         </ul>
         <div style="font-size:80%">
@@ -1686,24 +1686,11 @@ class Chart extends React.Component {
       </section>
 
 
-
       <section id="t5">
         <h1>Teil V</h1>
-        <h2>Immutability</h2>
-        <p>
-          <a href="code/schritte/5-third-party-typescript/public/index.html" target="_blank">TODO: Ziel-Anwendung</a>
-        </p>
-        <p class="TODO">
-          PureComponents: https://reactjs.org/docs/optimizing-performance.html#avoid-reconciliation http://reactkungfu.com/2015/08/pros-and-cons-of-using-immutability-with-react-js/
-
-        </p>
-      </section>
-
-      <section id="t6">
-        <h1>Teil VI</h1>
         <h2>React mit TypeScript entwickeln</h2>
         <p>
-          <a href="code/schritte/5-third-party-typescript/public/index.html" target="_blank">Ziel-Anwendung</a>
+          <a href="code/schritte/5-third-party-jquery-typescript/public/index.html" target="_blank">Ziel-Anwendung</a>
         </p>
       </section>
 
@@ -1718,6 +1705,21 @@ class Chart extends React.Component {
           <li>Mittels des TypeScript Compilers wird aus TS Code JavaScript Code</li>
           <li>Entwickelt von Microsoft (!)</li>
           <li>Unterstützung in vielen IDEs (z.B. Anzeige von Fehlern, Refactoring, ...) </li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>Wichtige Unterschiede zu Java/C#</h3>
+        <ul>
+          <li>Typ-Informationen sind nach dem compilieren weg (keine Reflection API etc)
+            <ul>
+              <li>Das gilt auch für Sichtbarkeiten und readonly Felder</li>
+            </ul>
+          </li>
+          <li>Es wird auch JavaScript-Code erzeugt, selbst wenn es einen Compile-Fehler gibt</li>
+          <li>Im Gegensatz zu Java/C# sind bei TypeScript zwei Typen kompatibel, sofern sie
+            <b>dieselbe Struktur</b> haben</em>
+          </li>
         </ul>
       </section>
 
@@ -1826,8 +1828,8 @@ const saidItWrong: number = sayIt('Hello TypeScript'); // error!
         <h2>null und undefined</h2>
         <div class="fragment">
           <p>
-            <code>null</code> muss explizit zugelassen werden (
-            <em>strictNullChecks</em>):</p>
+            <code>null</code> muss explizit zugelassen werden
+            <em>(strictNullChecks</em>):</p>
           <pre><code class="typescript line-numbers" contenteditable data-trim>
 let city:string = null; //Type 'null' is not assignable to type 'string'.
 
@@ -1872,6 +1874,60 @@ class Sayer {
 
 </code></pre>
       </section>
+
+      <section>
+        <h2>Klassen (Sichtbarkeiten)</h2>
+        <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+class Sayer {
+  // Erlaubte Sichtbarkeiten: private | protected | public
+  private what: string; 
+
+  constructor(what: string) { 
+    this.what = what;
+  }
+
+  sayIt(): string {
+    return `Saying: ${this.what}`;
+  }
+}
+
+const sayer = new Sayer("Susi");
+sayer.what = ""; // ERROR: Property 'greeting' is private
+
+</code></pre>
+      </section>
+      <section>
+        <h2>Klassen (Parameter Properties)</h2>
+        <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+class Sayer {
+  // identisch zu vorherigem Beispiel
+  constructor(private what: string) {
+  }
+
+  sayIt(): string {
+    return `Saying: ${this.what}`;
+  }
+}
+</code></pre>
+      </section>
+      <section>
+        <h2>Klassen (readonly Felder)</h2>
+        <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+class Sayer {
+
+  readonly what: string; 
+
+  // Alternativ:
+  constructor(readonly public what: string) {
+  }
+
+  setWhat(newWhat: string) {
+    this.what = newWhat; // ERR Cannot assign to 'what' 
+                         // because it is a read-only property.
+  }
+}
+</code></pre>
+      </section>
       <section>
         <h2>Eigene Typen</h2>
         <p>Mit
@@ -1904,7 +1960,7 @@ const lukas: Person = {
 
       <section>
         <h2>Typ Kompatibilität</h2>
-        <em>Im Gegensatz zu Java ("nominal typing") sind bei TypeScript zwei Typen kompatibel, sofern sie
+        <em>Im Gegensatz zu Java/C# ("nominal typing") sind bei TypeScript zwei Typen kompatibel, sofern sie
           <b>dieselbe Struktur</b> haben ("structural typing")</em>
         <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
 interface Book {
@@ -1948,6 +2004,22 @@ persons = movies; // error
                 <li>Typen können über
                   <a href="https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/" target="_blank">npm</a> installiert werden und sind dann ohne weiter Schritte nutzbar (z.B.
                   <em>npm install @types/react --save</em>)
+        </ul>
+      </section>
+
+      <section>
+        <h2>Arbeiten mit externen Bibliotheken</h2>
+        <p>Typings selber beschreiben</p>
+        <ul>
+          <li>Workaround, wenn keine Typings vorhanden sind
+
+            <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+                  // declarations.d.ts
+                    
+                  // TODO
+                    
+                          </code></pre>
+          </li>
         </ul>
       </section>
 
@@ -2121,6 +2193,19 @@ const GreetingMaster: React.SFC&lt;GreetingMasterProps> = props => {
             </ul>
           </li>
         </ol>
+      </section>
+
+
+      <section id="t6">
+        <h1>Exkurs</h1>
+        <h2>Immutability</h2>
+        <p>
+          <a href="code/schritte/5-third-party-typescript/public/index.html" target="_blank">TODO: Ziel-Anwendung</a>
+        </p>
+        <p class="TODO">
+          PureComponents: https://reactjs.org/docs/optimizing-performance.html#avoid-reconciliation http://reactkungfu.com/2015/08/pros-and-cons-of-using-immutability-with-react-js/
+
+        </p>
       </section>
 
       <section>
