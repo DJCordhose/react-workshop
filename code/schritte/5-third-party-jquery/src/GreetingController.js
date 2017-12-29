@@ -1,6 +1,5 @@
-require("babel-polyfill");
-
 import React from "react";
+
 import GreetingMaster from "./GreetingMaster";
 import GreetingDetail from "./GreetingDetail";
 
@@ -11,8 +10,9 @@ const MODE_DETAIL = "MODE_DETAIL";
 export default class GreetingController extends React.Component {
 	render() {
 		const { mode, greetings } = this.state;
+
 		return (
-			<div>
+			<div className="Main">
 				{mode === MODE_MASTER ? (
 					<GreetingMaster greetings={greetings} onAdd={() => this.setState({ mode: MODE_DETAIL })} />
 				) : (
@@ -34,32 +34,29 @@ export default class GreetingController extends React.Component {
 		this.loadGreetings();
 	}
 
-	async loadGreetings() {
-		try {
-			const response = await fetch(BACKEND_URL);
-			const json = await response.json();
-			this.setState({ greetings: json });
-			return json;
-		} catch (err) {
-			console.error("LOADING GREETINGS FAILED:", err);
-		}
+	loadGreetings() {
+		return fetch(BACKEND_URL)
+			.then(response => response.json())
+			.then(json => this.setState({ greetings: json }))
+			.catch(err => console.error("LOADING GREETINGS FAILED:", err));
 	}
 
 	saveGreeting(greetingToBeAdded) {
-		(async () => {
-			try {
-				const response = await fetch(BACKEND_URL, {
-					method: "POST",
-					headers: {
-						Accept: "application/json",
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify(greetingToBeAdded)
-				});
-				if (response.status !== 201) {
-					throw new Error("Invalid status code: " + response.status);
+		fetch(BACKEND_URL, {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(greetingToBeAdded)
+		})
+			.then(response => {
+				if (response.status === 201) {
+					return response.json();
 				}
-				const json = await response.json();
+				throw new Error("Invalid status code: " + response.status);
+			})
+			.then(json => {
 				// the server responded with the id of the new Greeting
 				const newGreetingId = json.id;
 				// create a new Greeting object that contains the received id
@@ -76,9 +73,8 @@ export default class GreetingController extends React.Component {
 					greetings: newGreetings,
 					mode: MODE_MASTER
 				});
-			} catch (err) {
-				console.error("LOADING GREETINGS FAILED:", err);
-			}
-		})();
+
+				return newGreeting;
+			});
 	}
 }
