@@ -2,66 +2,69 @@ import * as React from "react";
 import { Greeting, NewGreeting } from "./types";
 
 interface GreetingDetailProps {
-  greeting?: Greeting;
-  onSave: (newGreeting: NewGreeting) => void;
+	greeting?: Greeting;
+	onSave: (newGreeting: NewGreeting) => void;
 }
 
 interface GreetingDetailState {
-  name: string;
-  greeting: string;
+	name: string;
+	greeting: string;
 }
 
 export default class GreetingDetail extends React.Component<GreetingDetailProps, GreetingDetailState> {
-  input?: HTMLInputElement | null;
+	input?: HTMLInputElement | null;
 
-  render() {
-    const { name, greeting } = this.state;
-    const saveDisabled = !(name && greeting);
+	render() {
+		const { name, greeting } = this.state;
+		const saveDisabled = !(name && greeting);
 
-    return (
-      <div>
-        <input
-          ref={input => (this.input = input)}
-          onChange={event => this.updateModel(event)}
-          name="name"
-          value={name}
-          placeholder="Name"
-        />
-        <input onChange={event => this.updateModel(event)} name="greeting" value={greeting} placeholder="Greeting" />
-        <button onClick={() => this.reset()}>Clear</button>
-        <button disabled={saveDisabled} onClick={() => this.save()}>
-          Save
-        </button>
-      </div>
-    );
-  }
+		return (
+			<div>
+				<input
+					ref={input => (this.input = input)}
+					onChange={event => this.updateModel(event)}
+					name="name"
+					value={name}
+					placeholder="Name"
+				/>
+				<input onChange={event => this.updateModel(event)} name="greeting" value={greeting} placeholder="Greeting" />
+				<button onClick={() => this.reset()}>Clear</button>
+				<button disabled={saveDisabled} onClick={() => this.save()}>
+					Save
+				</button>
+			</div>
+		);
+	}
 
-  constructor(props: GreetingDetailProps) {
-    super(props);
-    const { name, greeting } = this.props.greeting || { name: "", greeting: "" };
-    this.state = {
-      name,
-      greeting
-    };
-  }
+	constructor(props: GreetingDetailProps) {
+		super(props);
+		const { name, greeting } = this.props.greeting || { name: "", greeting: "" };
+		this.state = {
+			name,
+			greeting
+		};
+	}
 
-  reset() {
-    this.setState({ name: "", greeting: "" });
-    if (this.input) {
-      this.input.focus();
-    }
-  }
+	reset() {
+		this.setState({ name: "", greeting: "" });
+		if (this.input) {
+			this.input.focus();
+		}
+	}
 
-  save() {
-    const { onSave } = this.props;
-    const { name, greeting } = this.state;
-    onSave({
-      name,
-      greeting
-    });
-  }
+	save() {
+		const { onSave } = this.props;
+		const { name, greeting } = this.state;
+		onSave({
+			name,
+			greeting
+		});
+	}
 
-  updateModel(event: React.SyntheticEvent<HTMLInputElement>) {
-    this.setState({ [event.currentTarget.name as any]: event.currentTarget.value });
-  }
+	updateModel(event: React.SyntheticEvent<HTMLInputElement>) {
+		// Hier ist ein Beispiel, warum currentTarget "richtiger" als target ist
+		// (und wir in TypeScript auch currentTarget verwenden muessen):
+		// https://github.com/DefinitelyTyped/DefinitelyTyped/issues/11508#issuecomment-256045682
+		this.setState({ [event.currentTarget.name as any]: event.currentTarget.value });
+	}
 }
