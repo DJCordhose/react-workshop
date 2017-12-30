@@ -65,6 +65,8 @@ export default class GreetingDetail extends React.Component<GreetingDetailProps,
 		// Hier ist ein Beispiel, warum currentTarget "richtiger" als target ist
 		// (und wir in TypeScript auch currentTarget verwenden muessen):
 		// https://github.com/DefinitelyTyped/DefinitelyTyped/issues/11508#issuecomment-256045682
-		this.setState({ [event.currentTarget.name as any]: event.currentTarget.value });
+
+		// @ts-ignore
+		this.setState({ [event.currentTarget.name]: event.currentTarget.value });
 	}
 }

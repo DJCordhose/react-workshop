@@ -2106,17 +2106,34 @@ render() {
       </section>
       <section>
         <h2>React Events in TypeScript</h2>
-        <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+        <span class="fragment">
+          <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
 class GreetingDetail extends React.Component&lt;Props, State> {
   // . . .
   updateModel(event: React.SyntheticEvent&lt;HTMLInputElement>) {
     // 'currentTarget' anstatt 'target' verwenden:
     const { name, value } = event.currentTarget;
     // . . .
+
+    // Compile error! 
+    this.setState({[name]}: value);
+
+    // typechecking ausschalten
+    this.setState({[name as any]: value});
+
+    // @ts-ignore (alternative, seit TS 2.6)
+    this.setState({[name]}: value);
   }
 }
 
         </code></pre>
+          <p>
+            <a href="https://github.com/DefinitelyTyped/DefinitelyTyped/issues/11508#issuecomment-256045682" target="_blank">
+              <code>target</code> vs
+              <code>currentTarget</code>
+            </a>
+          </p>
+        </span>
 
       </section>
       <section>
@@ -2157,7 +2174,7 @@ const GreetingMaster: React.SFC&lt;GreetingMasterProps> = props => {
         <div style="font-size: 80%">
           <p>
             <b>Hinweis: </b> Bitte arbeite dazu in dem neuen Workspace
-            <code>code/workspace-typescript</code>:</p>
+            <code>code/workspace-jquery-typescript</code>:</p>
           <ul>
             <li>Dieses Verzeichnis enthält die Anwendung aus unserem letzten Schritt, aber in TypeScript implementiert</li>
             <li>Lediglich das
@@ -2171,13 +2188,10 @@ const GreetingMaster: React.SFC&lt;GreetingMasterProps> = props => {
       <section>
         <h2>Schritte</h2>
         <ol style="font-size:80%">
-          <li>Benenne
-            <code>GreetingDetail.js</code> in
-            <code>GreetingDetail.tsx</code> um (danach Webpack neu starten)</li>
           <li>Definiere einen Typen für die Properties und den State und passe die
             <code>GreetingDetail</code>-Klasse an</li>
-          <li>Füge der Komponente die
-            <code>input</code>-Variable hinzu (Typ:
+          <li>Füge der Komponente das
+            <code>input</code>-Property hinzu (Type:
             <code>HTMLInputElement</code>)</li>
           <li>Experimentiere (optional):
             <ul>
