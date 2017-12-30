@@ -1503,7 +1503,7 @@ class Chart extends React.Component {
         <h1>Teil VI</h1>
         <h2>Arbeiten mit 3rd-Party-Libs (jquery)</h2>
         <p>
-          <a href="code/schritte/5-third-party-typescript/public/index.html" target="_blank">TODO: Ziel-Anwendung</a>
+          <a href="code/schritte/5-third-party-jquery/public/index.html" target="_blank">Ziel-Anwendung mit jquery Spinner</a>
         </p>
       </section>
 
@@ -1528,37 +1528,27 @@ class Chart extends React.Component {
           </p>
         </div>
       </section>
-      <section>
-        <pre>
-        Idee jQuery Spinner:
-        - Es gibt einen zweiten Filter unterhalb des Diagramms
-        - Über den Spinner kann eingestellt werden, wieviele Grüße angezeigt werden
-          (alternativ: Personen mit mehr als X Grüßen)
-        - über das „Reset“ im Diagramm und/oder der Tabelle wird der Filter wieder entfernt
-        - Alternativ: Diagramm raus und Spinner nur als Filter für Tabelle verwenden)
-        - Zeigen an isoliertem Beispiel außerhalb der Anwendung (filterable Table)
-          - dann in Anwendung integrieren?
-        </pre>
-      </section>
+
 
       <section>
         <h3>Wo kommen die Libs her</h3>
         <ul>
-          <li>einbinden als js datei in index.html (dann webpack auch anpassen)</li>
-          <li>installieren als npm modul (mittlerweile sehr hohe verbreitung)</li>
+          <li>einbinden als JS datei in index.html (wie in "herkömmlicher" Web Anwendung)</li>
+          <li>installieren als npm Modul (mittlerweile sehr hohe Verbreitung)</li>
         </ul>
       </section>
 
       <section>
-        <h3>Unser Beispiel: Verteilung der Grüße</h3>
-        <p>Aufgabe: Einbetten des d3/nvd3 Pie Charts in eine React-Komponente</p>
-        <a href="code/schritte/5-third-party/public/index.html" target="_blank">
-          <img src="images/screenshot-nvd3.png" height="400px">
+        <p>Unser Beispiel:</p>
+        <h3>Limitieren der Einträge in der Tabelle</h3>
+        <a href="code/schritte/5-third-party-jquery/public/index.html" target="_blank">
+          <img src="images/master-with-jquery-spinner.png" height="400px">
         </a>
-        <p style="font-size:75%">
-          <em>nvd3</em> Pie Chart mit
-          <em>d3</em>
-        </p>
+        <p>Aufgabe: Einbetten des jQuery UI Spinner Widgets in eine React-Komponente</p>
+      </section>
+      <section>
+        <h3>React Spinner</h3>
+        <p>TODO: Ergebnis zeigen, Aufruf der Spinner Komponente</p>
       </section>
 
       <section>
