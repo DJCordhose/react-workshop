@@ -144,19 +144,28 @@
         <ul>
           <li>
             <a href="#/t0">Teil 0: React-Einführung und Build-Prozess</a>
-            <li>
-              <a href="#/t1">Teil I: React-Komponenten</a>
-              <li>
-                <a href="#/t2">Teil II: Komponentenhierarchien</a>
-                <li>
-                  <a href="#/t3">Teil III: Daten lesen und schreiben vom Server</a>
-                  <li>
-                    <a href="#/t4">Teil IV: Arbeiten mit 3rd-Party-Libs (jquery)</a>
-                    <li>
-                      <a href="#/t5">Teil V: TypeScript</a>
-                      <li>
-                        <a href="#/t6">Exkurs/Ausblick: Immutability</a>
-                      </li>
+          </li>
+          <li>
+            <a href="#/t1">Teil I: React-Komponenten</a>
+          </li>
+          <li>
+            <a href="#/t2">Teil II: Komponentenhierarchien</a>
+          </li>
+          <li>
+            <a href="#/t3">Teil III: Daten lesen und schreiben vom Server</a>
+          </li>
+          <li>
+            <a href="#/t4">Teil IV: Arbeiten mit 3rd-Party-Libs (jquery)</a>
+          </li>
+          <li>
+            <a href="#/t5">Teil V: TypeScript</a>
+          </li>
+          <li>
+            <a href="#/t6">TODO: Exkurs/Ausblick: External State Management</a>
+          </li>
+          <li>
+            <a href="#/t6">TODO: Exkurs/Ausblick: Immutability</a>
+          </li>
         </ul>
         <div style="font-size:80%">
           <p>
@@ -167,7 +176,7 @@
       <section id="example-app">
         <h2>Beispiel-Anwendung</h2>
         <a target="_blank" href="code/schritte/5-third-party-typescript/public/index.html">
-          <img src="images/greeting-app.png" style="border:0;box-shadow:0 0 0 0;max-width: 80%" />
+          <img src="images/greeting-master-and-detail.png" style="border:0;box-shadow:0 0 0 0" />
         </a>
       </section>
 
@@ -1337,167 +1346,7 @@ fetch('http://localhost:7000/api/greetings')
         </ol>
       </section>
 
-      <section>
-        <h2>Exkurs</h2>
-        <h1>Integration von 3rd-Party Libs</h1>
-      </section>
-      <section>
-        <h2>3rd Party Libs?</h2>
-        <div class="fragment">
-          <p>Es gibt eine große Anzahl von sehr praktischen JavaScript-Bibliotheken</p>
-          <p>Viele davon sind aber nicht als React-Komponenten entwickelt worden</p>
-        </div>
-        <div class="fragment">
-          <p>
-            <b>Beispiele</b>
-          </p>
-          <p>
-            <em>jQuery</em> und
-            <em>jQuery</em> Plugins wie z.B.
-            <em>Bootstrap</em>
-          </p>
-          <p>
-            <em>d3</em> für interaktive SVGs und Chart Bibliotheken wie
-            <em>nvd3</em>
-          </p>
-        </div>
-      </section>
 
-      <section>
-        <h3>Unser Beispiel: Verteilung der Grüße</h3>
-        <p>Aufgabe: Einbetten des d3/nvd3 Pie Charts in eine React-Komponente</p>
-        <a href="code/schritte/5-third-party/public/index.html" target="_blank">
-          <img src="images/screenshot-nvd3.png" height="400px">
-        </a>
-        <p style="font-size:75%">
-          <em>nvd3</em> Pie Chart mit
-          <em>d3</em>
-        </p>
-      </section>
-
-      <section>
-        <h3>Herausforderungen?</h3>
-        <ol>
-          <li>Wie kommen wir an den DOM Knoten der React-Komponente?
-            <li>Wie sagen wir React, dass nun NVD3 den Rest macht? Also, dass React nicht mehr neu rendern soll.
-              <li>Änderungen des Zustands sollen nach wie vor richtig dargestellt werden
-                <li>Ab welchem Zeitpunkt soll NVD3 das Rendern übernehmen?
-                  <li>Wie können wir aus NVD3 heraus auch wieder andere React-Komponenten beeinflussen?
-                    <li>Wie räumen wir wieder auf?
-        </ol>
-      </section>
-      <!--<section>-->
-      <!--<h3>Hintergrund: Charts mit NVD3</h3>-->
-      <!--<p>Basiert auf D3.js</p>-->
-      <!--<p>Benötigt svg DOM-Element um sich zu rendern</p>-->
-      <!--<p class="fragment">Stark vereinfachtes Beispiel:</p>-->
-      <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import d3 from 'd3';-->
-      <!--import nv from 'nvd3';-->
-
-      <!--// Chart erzeugen-->
-      <!--const chart = nv.models.pieChart();-->
-      <!--// ...Chart Config ausgelassen ...-->
-
-      <!--// mit d3 rendern und mit Daten versorgen-->
-      <!--const element = document.getElementById('chart');-->
-      <!--d3.select(element)-->
-      <!--.datum(data)-->
-      <!--.call(chart);-->
-
-      <!--// Callbacks registrieren (z.B. bei Klick auf ein Element)-->
-      <!--chart.pie.dispatch.on("elementClick",-->
-      <!--e => console.log(e.data.label));-->
-      <!--</code></pre>-->
-
-      <!--</section>-->
-
-      <!--<section>-->
-      <!--<h3>Übersicht über den Komponenten-Lifecycle</h3>-->
-      <!--<a href="https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle" target="_blank">-->
-      <!--https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle-->
-      <!--</a>-->
-      <!--</section>-->
-      <!--<section>-->
-      <!--<img src="ai/lifecycle-methods-1.png" height="600px"/>-->
-      <!--</section>-->
-      <!--<section>-->
-      <!--<img src="ai/lifecycle-methods-2.png" height="600px" />-->
-      <!--</section>-->
-      <!--<section>-->
-      <!--<h3>React Lifecycle Methoden</h3>-->
-      <!--<ul>-->
-      <!--<li class="fragment"><code><b>componentDidMount()</b></code>: Komponente wurde gerendert, Elemente sind im DOM (einmalig)</li>-->
-      <!--<li class="fragment"><code><b>componentWillReceiveProps(nextProps)</b></code>: An die Komponente wurden neue Properties übergeben. Die neuen Properties-->
-      <!--werden als Parameter übergeben</li>-->
-      <!--<li class="fragment"><code><b>shouldComponentUpdate()</b></code>: Entscheidet, ob Komponente erneut gerendert werden soll (default: <code>true</code>)</li>-->
-      <!--<li class="fragment"><code><b>componentWillUnmount()</b></code>: Wird aufgerufen, bevor Komponente aus dem DOM entfernt wird (einmalig)</li>-->
-      <!--</ul>-->
-
-      <!--</section>-->
-      <section>
-        <h3>Greeting Chart Komponente: Verwendung</h3>
-        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-&lt;Chart
-  data={...}
-  onSegmentSelect={segment => . . . }
-/>
-        </code></pre>
-      </section>
-      <section>
-        <h3>Greeting Chart Komponente #1</h3>
-        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-class Chart extends React.Component {
-    render() {
-        //  we render an empty svg and
-        //  remember the reference to the DOM node
-        return &lt;svg ref={c => this._chart = c}>&lt;/svg>
-    }
-
-    // called directly after first render
-    componentDidMount() {
-        // once rendered by react we create the nvd3 chart
-        const chart = createNvd3Chart(this._chart, this.props.data);
-
-        // we delegate the label of clicked segment
-        // back to parent component
-        chart.pie.dispatch.on("elementClick",
-                              e => this.props.onSegmentSelected(e.data.label));
-    }
-
-    // ...
-}
-       </code></pre>
-      </section>
-      <section>
-        <h3>Lifecycle-Methoden #2</h3>
-        <img src="ai/lifecycle-methods-2.png" height="600px" />
-      </section>
-      <section>
-        <h3>Greeting Chart Komponent #2</h3>
-        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-class Chart extends React.Component {
-    // ...
-
-    // if it returns false, component will not be rendered
-    shouldComponentUpdate() {
-        // once rendered react never renders again
-        return false;
-    }
-
-    // called when properties update
-    componentWillReceiveProps(nextProps) {
-        const {data} = nextProps;
-        // we still get updates of properties making it reactive
-        updateNvd3Chart(this._chart, data);
-    }
-
-    // called just before destroying component
-    componentWillUnmount() {
-        this._d3selection.remove();
-    }
-}
-       </code></pre>
-      </section>
 
       <section id="t4">
         <h1>Teil VI</h1>
@@ -1533,146 +1382,274 @@ class Chart extends React.Component {
       <section>
         <h3>Wo kommen die Libs her</h3>
         <ul>
-          <li>einbinden als JS datei in index.html (wie in "herkömmlicher" Web Anwendung)</li>
-          <li>installieren als npm Modul (mittlerweile sehr hohe Verbreitung)</li>
+          <li>Einbinden als JS Datei in index.html (wie in "herkömmlicher" Web Anwendung)</li>
+          <li>Installieren als npm Modul (mittlerweile sehr hohe Verbreitung)</li>
         </ul>
       </section>
 
       <section>
-        <p>Unser Beispiel:</p>
-        <h3>Limitieren der Einträge in der Tabelle</h3>
+        <h4>Unser Beispiel: Limitieren der Einträge in der Tabelle</h4>
         <a href="code/schritte/5-third-party-jquery/public/index.html" target="_blank">
           <img src="images/master-with-jquery-spinner.png" height="400px">
         </a>
-        <p>Aufgabe: Einbetten des jQuery UI Spinner Widgets in eine React-Komponente</p>
+        <h4>Aufgabe: Einbetten des jQuery UI Spinner Widgets in eine React-Komponente</h4>
       </section>
       <section>
-        <h3>React Spinner</h3>
-        <p>TODO: Ergebnis zeigen, Aufruf der Spinner Komponente</p>
+        <h3>Ziel: React Spinner</h3>
+
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+&lt;Spinner
+	label="Number of Greetings to show"
+	value={limitValue}
+	onValueChange={newValue => doSomething(newValue)}
+/>
+      </code></pre>
       </section>
 
       <section>
-        <h3>Herausforderungen?</h3>
+        <h3>Hintergrund: jQuery (UI)</h3>
+        <ul>
+          <li>jQuery ist als globale Funktion
+            <code>$</code> definiert</li>
+          <li>jQuery benötigt ein DOM Element, auf dem es arbeitet</li>
+          <li>Die Funktion erwartet als Parameter u.a. ein DOM Element, auf dem jQuery dann arbeitet</li>
+          <li>Der Spinner wird mit
+            <code>$(element).spinner()</code> erzeugt
+            <ul>
+              <li>
+                <code>element</code> muss dabei ein HTML
+                <code>input</code> Element sein</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>Beispiel: jQuery UI Spinner</h3>
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+  &lt;!-- Im HTML Code --&gt;
+  &lt;input placeholder="..." id="mySpinner" /&gt;
+  
+  &lt;!-- JavaScript Code --&gt;
+  // Spinner erzeugen
+  $("#mySpinner")
+    .spinner({
+      stop() {
+        const newValue = $(this).spinner("value");
+        console.log("new sprinner value: ", newValue)
+      }
+    });
+    
+  // Einen Wert setzen  
+  $("#mySpinner").val(10);
+  
+                      </code></pre>
+      </section>
+
+      <section>
+        <h3>Herausforderungen</h3>
         <ol>
-          <li>Wie kommen wir an den DOM Knoten der React-Komponente?
-            <li>Wie sagen wir React, dass nun NVD3 den Rest macht? Also, dass React nicht mehr neu rendern soll.
-              <li>Änderungen des Zustands sollen nach wie vor richtig dargestellt werden
-                <li>Ab welchem Zeitpunkt soll NVD3 das Rendern übernehmen?
-                  <li>Wie können wir aus NVD3 heraus auch wieder andere React-Komponenten beeinflussen?
-                    <li>Wie räumen wir wieder auf?
+          <li class="fragment">Wie kommen wir an den DOM Knoten der React-Komponente?</li>
+          <li class="fragment">Wie sagen wir React, dass ab dieses Knotens jQuery für das Rendering zuständig ist? (So dass React nicht mehr neu
+            rendert)
+          </li>
+          </li>
+          <li class="fragment">Änderungen des Zustands an der React-Komponente sollen aber nach wie vor richtig dargestellt werden
+            <ul>
+              <li>
+                <code>&lt;Spinner value={newValue} /&gt;</code>
+              </li>
+            </ul>
+          </li>
+          <li class="fragment">Wie können wir aus jQuery heraus auch wieder andere React-Komponenten beeinflussen?
+            <ul>
+              <li>Wert im Spinner ändert sich, also Tabelle neu filtern</li>
+            </ul>
+          </li>
+          <li class="fragment">Wie räumen wir wieder auf?
         </ol>
       </section>
-      <!--<section>-->
-      <!--<h3>Hintergrund: Charts mit NVD3</h3>-->
-      <!--<p>Basiert auf D3.js</p>-->
-      <!--<p>Benötigt svg DOM-Element um sich zu rendern</p>-->
-      <!--<p class="fragment">Stark vereinfachtes Beispiel:</p>-->
-      <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import d3 from 'd3';-->
-      <!--import nv from 'nvd3';-->
 
-      <!--// Chart erzeugen-->
-      <!--const chart = nv.models.pieChart();-->
-      <!--// ...Chart Config ausgelassen ...-->
-
-      <!--// mit d3 rendern und mit Daten versorgen-->
-      <!--const element = document.getElementById('chart');-->
-      <!--d3.select(element)-->
-      <!--.datum(data)-->
-      <!--.call(chart);-->
-
-      <!--// Callbacks registrieren (z.B. bei Klick auf ein Element)-->
-      <!--chart.pie.dispatch.on("elementClick",-->
-      <!--e => console.log(e.data.label));-->
-      <!--</code></pre>-->
-
-      <!--</section>-->
-
-      <!-- <section>-->
-      <!--<h3>Übersicht über den Komponenten-Lifecycle</h3>-->
-      <!--<a href="https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle" target="_blank">-->
-      <!--https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle-->
-      <!--</a>-->
-      <!--</section>-->
-      <!--<section>-->
-      <!--<img src="ai/lifecycle-methods-1.png" height="600px"/>-->
-      <!--</section>-->
-      <!--<section>-->
-      <!--<img src="ai/lifecycle-methods-2.png" height="600px" />-->
-      <!--</section>-->
-      <!--<section>-->
-      <!--<h3>React Lifecycle Methoden</h3>-->
-      <!--<ul>-->
-      <!--<li class="fragment"><code><b>componentDidMount()</b></code>: Komponente wurde gerendert, Elemente sind im DOM (einmalig)</li>-->
-      <!--<li class="fragment"><code><b>componentWillReceiveProps(nextProps)</b></code>: An die Komponente wurden neue Properties übergeben. Die neuen Properties-->
-      <!--werden als Parameter übergeben</li>-->
-      <!--<li class="fragment"><code><b>shouldComponentUpdate()</b></code>: Entscheidet, ob Komponente erneut gerendert werden soll (default: <code>true</code>)</li>-->
-      <!--<li class="fragment"><code><b>componentWillUnmount()</b></code>: Wird aufgerufen, bevor Komponente aus dem DOM entfernt wird (einmalig)</li>-->
-      <!--</ul> -->
-
-      <!--</section>-->
       <section>
-        <h3>Greeting Chart Komponente: Verwendung</h3>
-        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-&lt;Chart
-  data={...}
-  onSegmentSelect={segment => . . . }
-/>
-        </code></pre>
+        <h3>Hintergrund: React Komponenten Lifecycle</h3>
+
+        <p style="font-size: small">
+          <a href="https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle" target="_blank">
+            https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle
+          </a>
+        </p>
       </section>
       <section>
-        <h3>Greeting Chart Komponente #1</h3>
+        <img src="ai/lifecycle-methods-1.png" height="600px" />
+      </section>
+      <!-- <section>
+        <h3>React Lifecycle Methoden</h3>
+        <ul>
+          <li class="fragment">
+            <code><b>componentDidMount()</b></code>: Komponente wurde gerendert, Elemente sind im DOM (einmalig)</li>
+          <li class="fragment">
+            <code><b>componentWillReceiveProps(nextProps)</b></code>: An die Komponente wurden neue Properties übergeben. Die neuen Properties werden als Parameter übergeben</li>
+          <li class="fragment">
+            <code><b>shouldComponentUpdate()</b></code>: Entscheidet, ob Komponente erneut gerendert werden soll (default:
+            <code>true</code>)</li>
+          <li class="fragment">
+            <code><b>componentWillUnmount()</b></code>: Wird aufgerufen, bevor Komponente aus dem DOM entfernt wird (einmalig)</li>
+        </ul>
+
+      </section> -->
+      <section>
+        <h3>Spinner Komponente #1</h3>
+        <p>Erzeugen der jquery Komponente</p>
         <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-class Chart extends React.Component {
+class Spinner extends React.Component {
     render() {
-        //  we render an empty svg and
-        //  remember the reference to the DOM node
-        return &lt;svg ref={c => this._chart = c}>&lt;/svg>
+        // render the input and remember the reference to the DOM node
+        return &lt;input ref={el => this.spinnerElement = el}>&lt;/input>
     }
 
     // called directly after first render
     componentDidMount() {
-        // once rendered by react we create the nvd3 chart
-        const chart = createNvd3Chart(this._chart, this.props.data);
+      // create the jquery wrapper using the reference saved in render()
+      const jquerySpinner = $(this.spinnerElement);
 
-        // we delegate the label of clicked segment
-        // back to parent component
-        chart.pie.dispatch.on("elementClick",
-                              e => this.props.onSegmentSelected(e.data.label));
+      jquerySpinner
+        .spinner( /* configuration here */) 
+        .val(this.props.value); // set initial value
     }
 
     // ...
 }
        </code></pre>
       </section>
+      <section>
+        <h3>Spinner Komponente #2</h3>
+        <p>Zustandsänderungen nach außen propagieren</p>
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+  class Spinner extends React.Component {
+      // . . .
+      componentDidMount() {
+        const jquerySpinner = $(this.spinnerElement);
+  
+        jquerySpinner
+          .spinner({
+            // "stop" event is fired by jquery after 
+            // the spinner value has changed
+            stop: () => {
+              const newValue = jquerySpinner.spinner("value");
+
+              // run callback function with new value from spinner
+              this.props.onValueChange(newValue);
+            }
+          })
+          .val(this.props.value); 
+      }
+  
+      // ...
+  }
+         </code></pre>
+      </section>
+
       <section>
         <h3>Lifecycle-Methoden #2</h3>
         <img src="ai/lifecycle-methods-2.png" height="600px" />
       </section>
       <section>
-        <h3>Greeting Chart Komponent #2</h3>
+        <h3>Spinner Komponente #3</h3>
+        <p>Neu rendern durch React unterbinden</p>
         <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-class Chart extends React.Component {
+class Spinner extends React.Component {
     // ...
 
     // if it returns false, component will not be rendered
     shouldComponentUpdate() {
-        // once rendered react never renders again
+        // once rendered, React never renders again
         return false;
     }
 
-    // called when properties update
-    componentWillReceiveProps(nextProps) {
-        const {data} = nextProps;
-        // we still get updates of properties making it reactive
-        updateNvd3Chart(this._chart, data);
-    }
-
-    // called just before destroying component
-    componentWillUnmount() {
-        this._d3selection.remove();
-    }
+    // ...
 }
        </code></pre>
+      </section>
+
+      <section>
+        <h3>Spinner Komponente #4</h3>
+        <p>Auf Änderungen von außen reagieren</p>
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+  class Spinner extends React.Component {
+      // ...
+  
+      // called when React props update 
+      // (even when shouldComponentUpdate returned false)
+      componentWillReceiveProps(nextProps) {
+          // set new value from React props to the spinner 
+          $(this.spinnerElement).val(nextProps.value)
+      }
+  }
+         </code></pre>
+      </section>
+
+      <section>
+        <h3>Spinner Komponente #5</h3>
+        <p>Aufräumen sobald Komponente aus dem DOM entfernt wird</p>
+        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+    class Spinner extends React.Component {
+        // ...
+
+        // called just before destroying component
+        componentWillUnmount() {
+            $(this.spinnerElement).spinner("destroy")
+        }
+    }
+           </code></pre>
+      </section>
+
+      <section>
+        <h3>Zusammenfassung #1</h3>
+        <ol>
+          <li>Wie kommen wir an den DOM Knoten der React-Komponente?
+            <ul style="list-style-type: none">
+              <li style="margin:0">Über den
+                <code>ref</code>-Callback beim rendern der Komponente</code>
+              </li>
+            </ul>
+          </li>
+          <li>Wie sagen wir React, dass ab diesem Knoten jQuery für das Rendering zuständig ist? (So dass React nicht mehr neu
+            rendert)
+            <ul style="list-style-type: none">
+              <li style="margin:0">Lifecycle-Methode
+                <code>shouldComponentUpdate</code> implementieren</code>
+              </li>
+            </ul>
+          </li>
+          <li>Änderungen des Zustands an der React-Komponente sollen aber nach wie vor richtig dargestellt werden
+            <ul style="list-style-type: none">
+              <li>
+                In
+                <code>componentWillReceiveProps(nextProps)</code> neue Properties an jQuery Komponente weitergeben
+              </li>
+            </ul>
+          </li>
+
+        </ol>
+      </section>
+
+      <section>
+        <h3>Zusammenfassung #2</h3>
+        <ol start="4">
+          <li>Wie können wir aus jQuery heraus auch wieder andere React-Komponenten beeinflussen?
+            <ul style="list-style-type: none">
+              <li>Auf jQuery Events horchen und dann entsprechende Callback-Funktion aufrufen, die der React Komponente als Property
+                übergeben wurde
+              </li>
+            </ul>
+          </li>
+          <li>Wie räumen wir wieder auf?
+            <ul style="list-style-type: none">
+              <li>In der Lifecycle-Methode
+                <code>componentWillUnmount</code> kann entsprechender Code ausgeführt werden.
+              </li>
+            </ul>
+        </ol>
       </section>
 
 
@@ -1693,7 +1670,7 @@ class Chart extends React.Component {
           <li>Erweitert JavaScript um ein Typen System</li>
           <li>Jeder gültige JavaScript Code ist auch gültiger TypeScript Code</li>
           <li>Mittels des TypeScript Compilers wird aus TS Code JavaScript Code</li>
-          <li>Entwickelt von Microsoft (!)</li>
+          <li>Entwickelt von Microsoft</li>
           <li>Unterstützung in vielen IDEs (z.B. Anzeige von Fehlern, Refactoring, ...) </li>
         </ul>
       </section>
@@ -2018,14 +1995,14 @@ persons = movies; // error
         <em>State und Properties von Komponenten werden mit Typen beschrieben</em>
       </section>
       <section>
-        <h2>Vorraussetzungen</h2>
+        <h2>Voraussetzungen</h2>
         <ul>
           <li class="fragment">React Type Deklarationen installieren:
             <pre><code data-trim contenteditable class="line-numbers bash" data-leftpad>
 npm install --save @types/react @types/react-dom
         </code></pre>
           </li>
-          <li class="fragment">(Externe) Module, die kein Default-Export haben müssen mit
+          <li class="fragment">(Externe) Module, die kein Default-Export haben, müssen mit
             <code>import *</code> importiert werden:
             <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
 // JavaScript/Babel:
