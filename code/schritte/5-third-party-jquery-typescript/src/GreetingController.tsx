@@ -11,38 +11,38 @@ const MODE_DETAIL = "MODE_DETAIL";
 interface GreetingControllerProps {}
 
 interface GreetingControllerState {
-	mode: typeof MODE_MASTER | typeof MODE_DETAIL;
-	greetings: Greeting[];
-	filter: string | null;
+  mode: typeof MODE_MASTER | typeof MODE_DETAIL;
+  greetings: Greeting[];
+  filter: string | null;
 }
 
 export default class GreetingController extends React.Component<GreetingControllerProps, GreetingControllerState> {
-	render() {
-		const { mode, greetings, filter } = this.state;
+  render() {
+    const { mode, greetings, filter } = this.state;
 
-		return (
-			<div className="Main">
-				{mode === MODE_MASTER ? (
-					<GreetingMaster greetings={greetings} onAdd={() => this.setState({ mode: MODE_DETAIL })} />
-				) : (
-					<GreetingDetail onSave={greeting => this.saveGreeting(greeting)} />
-				)}
-			</div>
-		);
-	}
+    return (
+      <div className="Main">
+        {mode === MODE_MASTER ? (
+          <GreetingMaster greetings={greetings} onAdd={() => this.setState({ mode: MODE_DETAIL })} />
+        ) : (
+          <GreetingDetail onSave={greeting => this.saveGreeting(greeting)} />
+        )}
+      </div>
+    );
+  }
 
-	constructor(props: GreetingControllerProps) {
-		super(props);
-		this.state = {
-			greetings: [],
-			mode: MODE_MASTER,
-			filter: null
-		};
-	}
+  constructor(props: GreetingControllerProps) {
+    super(props);
+    this.state = {
+      greetings: [],
+      mode: MODE_MASTER,
+      filter: null
+    };
+  }
 
-	componentDidMount() {
-		this.loadGreetings();
-	}
+  componentDidMount() {
+    this.loadGreetings();
+  }
 
 	loadGreetings() {
 		return fetch(BACKEND_URL)

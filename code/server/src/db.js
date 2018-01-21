@@ -43,7 +43,7 @@ class Db extends EventEmitter {
 
     this.emit("insert");
 
-    return newGreeting.id;
+    return newGreeting;
   }
 }
 

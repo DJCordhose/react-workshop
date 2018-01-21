@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 module.exports = {
-	entry: "./src/main.tsx",
+	entry: ["babel-polyfill", "./src/main.tsx"],
 	output: {
 		path: __dirname + "/public/dist/",
 		filename: "main.js",

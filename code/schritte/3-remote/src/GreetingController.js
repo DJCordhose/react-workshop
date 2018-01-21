@@ -55,12 +55,7 @@ export default class GreetingController extends React.Component {
         }
         throw new Error("Invalid status code: " + response.status);
       })
-      .then(json => {
-        // the server responded with the id of the new Greeting
-        const newGreetingId = json.id;
-        // create a new Greeting object that contains the received id
-        // (create a new object for immutability)
-        const newGreeting = { ...greetingToBeAdded, id: newGreetingId };
+      .then(newGreeting => {
         // add the new greetings to the list of all greetings
         // (create a new array for immutability)
         const newGreetings = [...this.state.greetings, newGreeting];

@@ -30,6 +30,9 @@ export default class Chart extends React.Component<ChartProps> {
   }
 
   componentDidMount() {
+    if (!this._chart) {
+      return;
+    }
     // http://nvd3.org/examples/pie.html
     nv.addGraph(() => {
       const chart = nv.models
@@ -40,6 +43,8 @@ export default class Chart extends React.Component<ChartProps> {
       chart.legend.updateState(false);
 
       const { data, onSegmentSelected } = this.props;
+
+      // @ts-ignore
       this._d3selection = d3.select(this._chart);
 
       this._d3selection.datum(data).call(chart);

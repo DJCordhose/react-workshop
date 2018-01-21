@@ -1,4 +1,5 @@
 import React from "react";
+
 import GreetingMaster from "./GreetingMaster";
 import GreetingDetail from "./GreetingDetail";
 
@@ -33,22 +34,29 @@ export default class GreetingController extends React.Component {
   }
 
   async loadGreetings() {
-    let greetings = null;
+    let greetings;
+
     try {
-      const response = await fetch(BACKEND_URL);
-      greetings = await response.json();
+      // TODO:
+      // 1. Mit fetch Serverzugriff machen
+      // 2. Aus der Antwort das JSON-Objekt auslesen (zuweisen an 'greetings')
+      //   (Die gelesene Antwort entspricht unserem Greetings-Array)
     } catch (err) {
       console.error("LOADING GREETINGS FAILED:", err);
       return;
     }
 
-    this.setState({ greetings });
+    // 3. setze die gelesenen Greetings (=> Antwort vom Server)
+    // als State neu
   }
 
   async saveGreeting(greetingToBeAdded) {
     let newGreeting;
+
     try {
-      const response = await fetch(BACKEND_URL, {
+      // TODO:
+      // 1. Vervollständige den fetch-Aufruf
+      fetch(BACKEND_URL, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -56,24 +64,22 @@ export default class GreetingController extends React.Component {
         },
         body: JSON.stringify(greetingToBeAdded)
       });
-      if (response.status !== 201) {
-        throw new Error("Invalid status code: " + response.status);
-      }
-      newGreeting = await response.json();
+
+      // (1b Optional: wirf einen Error wenn der Resonse Status nicht 201 ist)
+
+      // 2. Lies aus der Antwort das JSON Objekt aus (zuweisen an 'newGreeting')
+      //    (Die Antwort entspricht dem neuen Greeting + einer Id, die auf dem
+      //     Server erzeugt wurde)
     } catch (err) {
       console.error("LOADING GREETINGS FAILED:", err);
     }
-    // add the new greetings to the list of all greetings
-    // (create a new array for immutability)
 
-    const newGreetings = [...this.state.greetings, newGreeting];
+    // 3. Erzeuge eine neue Liste mit Greetings
+    //    (bestehende Liste aus dem State ('greetings') und das eben
+    //    gelesene Greeting ('newGreeting'))
 
-    // set the new list of greetings as our new state
-    // also set 'MODE_MASTER' to make sure the master-View is
-    // displayed now
-    this.setState({
-      greetings: newGreetings,
-      mode: MODE_MASTER
-    });
+    // 4. Setze den Zustand neu:
+    //    - 'greetings' mit den neuen Greetings
+    //    - 'mode' auf MODE_MASTER, um den Master-View wieder anzuzeigen
   }
 }

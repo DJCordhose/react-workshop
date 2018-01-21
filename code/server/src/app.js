@@ -52,8 +52,8 @@ const createApp = db => {
       return res.status(400).json({ error: "greeting.greeting must be defined" });
     }
 
-    const newId = db.insert(req.body);
-    return res.status(201).json({ id: newId });
+    const newGreeting = db.insert(req.body);
+    return res.status(201).json(newGreeting);
   });
 
   return app;
