@@ -611,7 +611,7 @@ const styles = { marginLeft: '10px', border: '1px solid red' };
 const counter = &lt;Counter label="..." />
                     </code></pre>
           </li>
-          <li style="font-size: 80%" class="fragment">Fragmente (rendern selber kein Element in den DOM, aber ihre Kind-Elemente schon):
+          <li style="font-size: 80%" class="fragment">Fragmente (rendern selber kein Element in den DOM, nur ihre Kind-Elemente):
             <pre><code class="xml" contenteditable data-trim>
 render() { 
   return &lt;React.Fragment&gt;
@@ -634,29 +634,6 @@ render() {
           </li>
 
         </ul>
-      </section>
-      <section>
-        <h3>React: Rendering und Data Binding</h3>
-        <p>
-          <em>Es gibt keine automatische Bindung an Modelle (2-Wege Databinding)</em>
-        </p>
-        <ul class="fragment">
-          <li>DOM-Events werden in React-Events verpackt
-            <li>React-Events haben weitgehend selbe API wie DOM-Events
-              <li>Besonderes Event:
-                <b>onChange</b>
-              </li>
-        </ul>
-        <pre class="fragment"><code class="xml" contenteditable data-trim>
-class GreetingDetail extends React.Component {
-  render() {
-    return (
-        &lt;input onKeyPress={event => . . .} />
-    );
-  }
-  // ...
-}
-</code></pre>
       </section>
       <section data-state="exkurs">
         <h3>ES6: Erweiterte Objekt-Literale</h3>
@@ -824,6 +801,30 @@ class GreetingDetail extends React.Component {
 </code></pre>
       </section>
       <section>
+        <h3>React: Events und Data Binding</h3>
+        <p>
+          <em>Es gibt keine automatische Bindung an Modelle (2-Wege Databinding)</em>
+        </p>
+        <ul class="fragment">
+          <li>DOM-Events werden in React-Events verpackt
+            <li>React-Events haben weitgehend selbe API wie DOM-Events
+              <li>Besonderes Event:
+                <b>onChange</b>
+              </li>
+        </ul>
+        <pre class="fragment"><code class="xml" contenteditable data-trim>
+class GreetingDetail extends React.Component {
+  render() {
+    return (
+        &lt;input onKeyPress={event => . . .} />
+    );
+  }
+  // ...
+}
+</code></pre>
+      </section>
+
+      <section>
         <h3>Render Zyklus</h3>
         <img src="images/event-zustand-render.png" height="550" style="border:0;box-shadow:0 0 0 0">
       </section>
@@ -952,17 +953,17 @@ export default Greet;
       </section>
       <section>
         <h3>PropTypes</h3>
-        <ul>
-          <li class="fragment">Eine Komponente kann deklarieren, welche Properties sie erwartet
-            <li class="fragment">Auch der Typ kann angegeben werden (
+        <ul class="fragment">
+          <li>Eine Komponente kann deklarieren, welche Properties sie erwartet
+            <li>Auch der Typ kann angegeben werden (
               <a href="https://facebook.github.io/react/docs/typechecking-with-proptypes.html" target="_blank">Mögliche Typen</a>)
-              <li class="fragment">Fehlende / falsche Properties führen zu Laufzeitfehlern
-                <li class="fragment">Ab React 15.5 eigenes npm modul:
+              <li>Fehlende / falsche Properties führen zu Laufzeitfehlern
+                <li>Ab React 15.5 eigenes npm modul:
                   <a href="https://www.npmjs.com/package/prop-types" target="_blank">
                     <code>prop-types</code>
                   </a>
                 </li>
-                <li class="fragment">Alternative: Typsystem (
+                <li>Alternative: Typsystem (
                   <a href="https://flow.org" target="_blank">Flow</a> oder
                   <a href="https://typescriptlang.org" target="_blank">TypeScript</a>)
         </ul>
@@ -1053,12 +1054,20 @@ const MyTable({greetings}) =>
         <h3>Listen und Keys</h3>
         <ul class="fragment">
           <li>Ab React 16 können Arrays in
-            <code>render</code> zurückgegeben werden
-            <li>(Anstatt
-              <b>eines</b> Root Elements)</li>
+            <code>render</code> zurückgegeben werden (anstatt
+            <b>eines</b> Root Elements)
             <li>Elemente brauchen trotzdem einen eindeutigen Key
         </ul>
         <pre class="fragment"><code class="javascript" contenteditable data-trim>
+// Beispiel: statische Elemente          
+const Choices = () => { return [
+  &lt;td key="yes">Yes&lt;/td>,
+  &lt;td key="no">No&lt;/td>
+]};
+          </code></pre>
+
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
+// Beispiel: dynamisches Array          
 const GreetingRows = ({greetings}) => {
 
   // map liefert ein Array zurück!
@@ -1072,9 +1081,182 @@ const GreetingRows = ({greetings}) => {
 </code></pre>
       </section>
       <section>
+        <h2>Anwendungen und Komponentenhierarchien</h2>
+      </section>
+      <section>
+        <h3>Problem: Kommunikation zwischen Komponenten</h3>
+        <p>#1: Welche Komponente soll angezeigt werden (Master oder Detail?)</p>
+        <img src="ai/component-hierarchy-problems-01-views.png" style="height:550px" />
+      </section>
+      <section>
+        <h3>Problem: Kommunikation zwischen Komponenten</h3>
+        <p>#2: Wo wird der State (Greetings) verwaltet?</p>
+        <img src="ai/component-hierarchy-problems-02-greeting.png" style="height:550px" />
+      </section>
+      <section>
+        <h3>Problem #1</h3>
+        <h2>Welche Komponente soll angezeigt werden?</h2>
+        <p>Master oder Detail?</p>
+      </section>
+      <section>
+        <h3>Controller Komponente #1</h3>
+        <p>Verwaltet den Zustand (u.a. welche Komponente sichtbar ist)</p>
+        <img src="ai/greeting-hierarchy-mode.png" style="height:550px" />
+      </section>
+      <section>
+        <h3>Controller Komponente #2</h3>
+        <p>Rendering der Children</p>
+        <pre><code class="javascript" contenteditable data-trim>
+class GreetingController extends React.Component {
+  constructor() {
+    this.state = { mode: 'MASTER' }
+  }
+
+  render() {
+    if (this.state.mode === 'MASTER') {
+      return &lt;GreetingMaster />;
+    } 
+    return &lt;GreetingDetail />;
+  }
+}            
+            </code></pre>
+      </section>
+
+      <section>
+        <h3>Controller Komponente</h3>
+        <p class="fragment">Wie wird zwischen den Komponenten kommuniziert?</p>
+        <p class="fragment">Callback-Funktionen als Properties #1</p>
+        <img class="fragment" src="ai/greeting-hierarchy-mode-callback.png" style="height:550px" />
+      </section>
+
+      <section>
+        <h3>Controller Komponente</h3>
+        <p>Kommunikation mit Children: Callback-Funktionen als Properties #2</p>
+        <pre><code class="javascript" contenteditable data-trim>
+  class GreetingController extends React.Component {
+    constructor() { . . . }
+  
+    render() {
+      if (this.state.mode === 'MASTER') {
+        return &lt;GreetingMaster 
+          onAdd={() => this.setState({mode: 'DETAIL'}) } />;
+      } 
+      return &lt;GreetingDetail 
+          onSave={() => this.setState({mode: 'MASTER'}) } />;
+    }
+  }      
+</code></pre>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
+  class GreetingMaster extends React.Component {
+    render() {
+      return (
+        ...
+        &lt;button onClick={this.props.onAdd}>Add&lt;/button>
+      )
+    }
+  }            
+              </code></pre>
+      </section>
+
+      <section>
+        <h3>Problem #2</h3>
+        <h2>Wo wird der State (Greetings) verwaltet?</h2>
+        <p>Wie kommen neue Greetings (GreetingDetail) in die Liste (GreetingMaster)?</p>
+      </section>
+      <section>
+        <h3>Controller Komponente</h3>
+        <p class="fragment">Verwaltet den "globalen" State</p>
+        <p class="fragment">State wird als Property an Children übergeben</p>
+        <img class="fragment" src="ai/greeting-hierarchy-greetings.png" style="height:550px" />
+      </section>
+      <section>
+        <h3>Controller Komponente</h3>
+        <p>State wird als Property an Children übergeben #2</p>
+        <pre><code class="javascript" contenteditable data-trim>
+class GreetingController extends React.Component {
+  constructor() { 
+    this.state = {
+      mode: 'MASTER',
+      greetings: . . .
+    }        
+  }  
+    
+  render() {
+    if (this.state.mode === 'MASTER') {
+      return &lt;GreetingMaster
+        greetings={this.state.greetings} 
+        onAdd={() => this.setState({mode: 'DETAIL'}) } 
+      />;
+    }
+    . . . 
+  }
+}      
+  </code></pre>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
+class GreetingMaster extends React.Component {
+  render() {
+    const greetings = this.props.greetings;
+    return (
+      &lt;table>
+        { greetings.map(g => &lt;tr>...&lt;/tr>) }
+      &lt;/table>
+      &lt;button onClick={this.props.onAdd}>Add&lt;/button>
+    )
+  }
+}            
+                </code></pre>
+      </section>
+      <section>
+        <h3>Controller Komponente</h3>
+        <p class="fragment">Verwaltet den "globalen" State</p>
+        <div class="fragment">
+          <span style="color: #9D4493">Neues Greeting</span> wird per Callback-Funktion zurück gegeben</p>
+          <img src="ai/greeting-hierarchy-onsave.png" style="height:550px" />
+        </div>
+      </section>
+      <section>
+        <h3>Controller Komponente</h3>
+        <p>Neues Greeting wird per Callback-Funktion übergeben #2</p>
+        <pre><code class="javascript" contenteditable data-trim>
+  class GreetingController extends React.Component {
+    constructor() { . . . }
+      
+    render() {
+      if (this.state.mode === 'MASTER') {
+        . . .
+      }
+      return &lt;GreetingDetail 
+        onSave={(newGreeting) => this.setState({
+          greetings: [...this.state.greetings, newGreeting],
+          mode: 'MASTER'}) 
+        } 
+      />;
+    }
+  }      
+    </code></pre>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
+  class GreetingDetail extends React.Component {
+    render() {
+      return (
+        &lt;input name="name" . . . />
+        &lt;input name="greeting" . . . />
+        &lt;button onClick={() => this.props.onSave({
+          name: this.state.name,
+          greeting: this.state.greeting
+          })
+          }>Add&lt;/button>
+      )
+    }
+  }            
+                  </code></pre>
+      </section>
+
+
+
+      <section>
         <h3>Komponenten in Hierarchien</h3>
-        <p>Beispiel: Unsere Anwendung</p>
-        <img src="ai/greeting-hierarchy-without-callbacks.png" />
+        <p>Beispiel: Unsere Anwendung (Zusammenfassung)</p>
+        <img src="ai/greeting-hierarchy.png" style="height:550px" />
       </section>
 
       <section>
@@ -1154,10 +1336,6 @@ class GreetingController extends React.Component {
         </ol>
       </section>
       <section>
-        <h3>Architektur Beispiel-Anwendung</h3>
-        <img src="ai/greeting-hierarchy.png" style="border:0;box-shadow:0 0 0 0" />
-      </section>
-      <section>
         <h3>GreetingMaster</h3>
         <img src="images/greeting-master.png" style="border:0;box-shadow:0 0 0 0" />
       </section>
@@ -1176,7 +1354,7 @@ class GreetingController extends React.Component {
         <h3>Herausforderungen</h3>
         <ul>
           <li>Wie machen wir das Laden und Speichern technisch?
-            <li>Wo steht der Code zum initialen Laden der Grüße?
+            <li>Wo steht der Code zum initialen Laden der Grüße? (beim Start der Anwendung)
               <li>Wo speichern wir?
                 <li>Wie funktioniert asynchrone Verarbeitung in React?
         </ul>
@@ -1204,25 +1382,46 @@ class GreetingController extends React.Component {
       </section>
       <section>
         <h3>Beispiel: fetch</h3>
-
+        <p> Daten lesen per GET</p>
         <pre><code class="javascript" contenteditable data-trim>
-// GET
+// Für GET Zugriff reicht es, die URL anzugeben:
+
 fetch('http://localhost:7000/api/greetings')
   .then(response => response.json())
   .then(json => /* ... */)
   .catch(ex => console.error('request failed', ex));
-
-// PUT
+</code></pre>
+      </section>
+      <section>
+        <h3>Beispiel #2: fetch</h3>
+        <p>Daten lesen per POST</p>
+        <div class="fragment">
+          <p>
+            <code>fetch</code> erwartet als zweiten Parameter ein Objekt mit Konfigurationsparametern, u.a:
+            <ul>
+              <li>
+                <code>method</code>: gibt die HTTP Methode an (
+                <code>PUT</code>,
+                <code>POST</code>,
+                <code>DELETE</code>, ...)</li>
+              <li>
+                <code>headers</code>: Objekt mit HTTP Headern für den Request</li>
+              <li>
+                <code>body</code>: Der Request-Payload (als String)</li>
+            </ul>
+          </p>
+        </div>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
 fetch(url, {
-    method: 'PUT',
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(payload)
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(payload)
 })
   .then(...)
-</code></pre>
+    </code></pre>
       </section>
 
 
@@ -1318,6 +1517,180 @@ fetch('http://localhost:7000/api/greetings')
         </p>
       </section>
       <section>
+        <h3>fetch mit async/await</h3>
+
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
+async function loadGreetings() {          
+  try {
+    const response = await fetch('http://localhost:7000/api/greetings');
+    const json = await response.json();
+    this.setState({greetings: json});
+  } catch (err) {
+    console.error("Loading failed: ", ex);
+    // Alternative (set error message as state):
+    // this.setState({error: err})
+  }
+}
+  </code></pre>
+        <span class="fragment">
+          <ul>
+            <li>Empfehlung: async/await statt Promise-Ansatz verwenden</li>
+            <li>Insbesondere bei komplexen Abläufen oder mehreren fetch-Aufrufen viel einfacher</li>
+          </ul>
+        </span>
+
+      </section>
+
+      <section data-state="exkurs">
+        <h3>Alternative zu Promises</h3>
+        <h2>async / await</h2>
+        <p>Erlauben es, asynchronen Code "linear" hinzuschreiben</p>
+        <ul class="fragment">
+          <li>Seit ECMASCript 2017 Standard</li>
+          <li>Babel und TypeScript können nach ES5 compilieren</li>
+          <li>Promise Polyfill für ältere Browser verwenden</li>
+        </ul>
+      </section>
+
+      <section data-state="exkurs">
+        <h3>async / await</h3>
+        <ul>
+          <li class="fragment">
+            <code>aync</code> definiert "async functions"</li>
+          <li class="fragment">
+            <code>aync</code> functions liefern&nbsp;
+            <b>immer</b> ein Promise zurück:
+            <pre><code class="javascript" contenteditable data-trim>
+async function greet(name) {
+  return `Hello, ${name}`;
+}
+
+const greeting = greet('Klaus');
+
+// greeting ist ein Promise!
+console.log(greeting instanceof Promise); // => true
+console.log(greeting) // => Promise {&lt;resolved>: "Hello, Klaus"}
+                </code></pre>
+          </li>
+          <li class="fragment">
+            <code>aync</code> function als Fat Arrow function:
+            <pre><code class="javascript" contenteditable data-trim>
+const greet = async (name) => `Hello, ${name}`;                
+  
+const greeting = greet('Klaus');
+  
+// greeting ist ein Promise!
+console.log(greeting instanceof Promise); // => true
+console.log(greeting) // => Promise {&lt;resolved>: "Hello, Klaus"}
+                  </code></pre>
+          </li>
+          <li class="fragment">
+            Nur in
+            <b>async functions</b> kann
+            <code>await</code> verwendet werden!</li>
+        </ul>
+      </section>
+
+      <section data-state="exkurs">
+        <h3>async / await</h3>
+        <p>
+          <code>await</code> wartet auf erfüllte Promises</p>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
+async function greet(name) {
+  return `Hello, ${name}`;
+}
+
+// oder:
+function greet(name) { return new Promise(...); }
+
+async function sayWhat(name) {
+  const greeting = await greet(name);
+
+  // ...Achtung! Hier zwischen kann Zeit vergehen...
+
+  // greeting ist ein String!
+  console.log(greeting); // => Hello, ...
+}
+                  </code></pre>
+      </section>
+      <section data-state="exkurs">
+        <h3>async / await</h3>
+        <p>Statt
+          <code>then</code> bzw
+          <code>catch</code> werden mehrere
+          <code>await</code> Statements bzw Exception Handling verwendet:</p>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
+// Liefert ein Promise zurück
+async function loadUser(username) { . . . };
+async function loadProfileDate(userId) { . . .};
+
+async function loadData() {
+  try {
+    const user = loadUser('klaus');
+    const profile = loadProfileData(user.userId);
+  } catch (e) {
+    console.error("Something failed")
+  }
+}
+                    </code></pre>
+      </section>
+      <section data-state="exkurs">
+        <h3>async / await</h3>
+        <p>Auf mehrere Promises parallel warten</p>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
+// Liefert ein Promise zurück
+async function loadUser(userId) { . . . };
+async function loadProfileDate(userId) { . . .};
+  
+async function loadData(userId) {
+  try {
+    const userAndProfileData = await Promise.all([
+      loadUser(userId),
+      loadProfileData(userId)
+    ]);
+
+    // userAndProfileData[0] === user
+    // userAndProfileData[1] === profileData  
+
+  } catch (e) {
+
+    // wenn mind einer Aufrufe schief geht
+    console.error("Something failed")
+  }
+}
+                      </code></pre>
+      </section>
+      <section data-state="exkurs">
+        <h3>async / await</h3>
+        <p>Auf mehrere Promises parallel warten #2</p>
+        <p>Mit
+          <em>Array Destructuring</em>
+        </p>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
+  // Liefert ein Promise zurück
+  async function loadUser(userId) { . . . };
+  async function loadProfileDate(userId) { . . .};
+    
+  async function loadData(userId) {
+    try {
+      const [user, profileData] = await Promise.all([
+        loadUser(userId),
+        loadProfileData(userId)
+      ]);
+
+      . . .
+    } catch (e) {
+  
+      // wenn mind einer Aufrufe schief geht
+      console.error("Something failed")
+    }
+  }
+                        </code></pre>
+      </section>
+      <section>
+        <h3>Wann werden Daten gelesen und geschrieben?</h3>
+      </section>
+      <section>
         <h3>Initiales Laden von Daten</h3>
         <p style="font-size:80%">Komponenten können optionale
           <a href="https://reactjs.org/docs/react-component.html#the-component-lifecycle" target="_blank">Lifecycle-Methoden</a> haben</p>
@@ -1334,16 +1707,19 @@ fetch('http://localhost:7000/api/greetings')
     // intial state (empty now)
     this.state = { greetings: [] };
   }
-  componentDidMount() {
-    fetch('/api/greetings')
-      .then(response =&gt; response.json())
-      .then(json =&gt; this.setState({greetings: json})
-      .catch(. . .)
-    ;
+
+  // 'async' wegen 'await' notwendig (sonst ohne 'async' hinschreiben)
+  async componentDidMount() {
+    try {
+      const response = await fetch('/api/greetings');
+      const json = await response.json();
+      this.setState({ greetings: json});
+    } catch (error) { . . .}
   }
 }
                 </code></pre>
-        </p>
+        <p class="fragment">
+          <em>Empfehlung:</em> Zugriffe auf Server in externes Modul auslagern (besser test- bzw mockbar)</p>
       </section>
       <section>
         <h3>Speichern von Daten</h3>
@@ -1354,15 +1730,19 @@ fetch('http://localhost:7000/api/greetings')
       &lt;GreetingDetail onAdd={greeting => this.saveGreeting(greeting)} />
     ...
   }
-  saveGreeting(greetingToBeSaved) {
-    fetch('/api/greetings', {
-      method: 'POST',
-      headers: ...,
-      body: JSON.stringify(greetingToBeSaved)
-    })
-      .then(response =&gt; response.json())
-      .then(json =&gt; ...)
-      .catch(. . .);
+  async saveGreeting(greetingToBeSaved) {
+    try {
+      const response = fetch('/api/greetings', {
+        method: 'POST',
+        headers: ...,
+        body: JSON.stringify(greetingToBeSaved)
+      });
+      const newGreeting = response.json();
+
+      // Neuen Gruss an bestehende Liste anfuegen und State neu setzen
+      const newGreetings = [ ...this.state.greetings, newGreeting ];
+      this.setState({greetings: newGreetings});
+    } catch (err) { . . . }
   }
 }
                 </code></pre>
