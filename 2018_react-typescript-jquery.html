@@ -48,6 +48,10 @@
       color: lightcoral;
     }
 
+    .reveal pre {
+      max-width: 980px;
+    }
+
     .reveal pre code {
       max-height: 1000px !important;
     }
@@ -146,10 +150,10 @@
             <a href="#/t0">Teil 0: React-Einführung und Build-Prozess</a>
           </li>
           <li>
-            <a href="#/t1">Teil I: React-Komponenten</a>
+            <a href="#/t1">Teil I: React-Komponenten (Grundlagen)</a>
           </li>
           <li>
-            <a href="#/t2">Teil II: Komponentenhierarchien</a>
+            <a href="#/t2">Teil II: React-Komponenten und -Anwendungen</a>
           </li>
           <li>
             <a href="#/t3">Teil III: Daten lesen und schreiben vom Server</a>
@@ -263,7 +267,7 @@
         <p>Template Strings werden in Backticks (``) geschrieben und können Ausdrücke (in
           <code>${}</code>) enthalten:</p>
 
-        <pre class="fragment"><code class="javascript" contenteditable>const name = "Susi";
+        <pre><code class="javascript" contenteditable>const name = "Susi";
 const greeting = `Hello, ${name}`; // Hello, Susi
 
 const four = `Two and two is: ${2+2}` // Two and two is: 4
@@ -297,7 +301,63 @@ console.log(programmer.code());
 console.log(programmer instanceof Programmer); // true
 console.log(programmer instanceof Person); // true</code></pre>
       </section>
-
+      <section data-state="exkurs">
+        <h2>ES6: Module, Importe und Exporte</h2>
+      </section>
+      <section data-state="exkurs">
+        <h3>ES6: Export einer einzigen Klasse</h3>
+        <pre><code class="javascript" contenteditable>// Person.js
+  class Person {
+    // ...
+  }
+  export default Person;
+     </code></pre>
+        <pre><code class="javascript" contenteditable>// Person.js
+  
+  // in einer Zeile zusammengefasst
+  export default class Person {
+    // ...
+  }
+     </code></pre>
+      </section>
+      <section data-state="exkurs">
+        <h3>ES6: Import</h3>
+        <pre><code class="javascript" contenteditable>// Programmer.js
+  import Person from './Person';
+  
+  export default class Programmer extends Person {
+    // ...
+  }
+     </code></pre>
+      </section>
+      <section data-state="exkurs">
+        <h3>ES6: Benannte Exporte</h3>
+        <pre><code class="javascript" contenteditable data-trim>// util.js
+  export function displayInPage(text) {
+      document.body.innerHTML +=
+          `${text}<br>` ;
+  }
+  
+  export showInfo = msg => window.alert(`Wichtige Info: ${msg}`);
+  
+  // or
+  function displayInPage(text) { . . . }
+  
+  const showInfo = ...;
+  
+  // specify exports
+  export { displayInPage, showInfo };
+     </code></pre>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>import {displayInPage} from "./util";
+  displayInPage('Hello, World');
+     </code></pre>
+        <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import {displayInPage as display} from "./util";-->
+        <!--display('Hello, World');-->
+        <!--</code></pre>-->
+        <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import * as util from "./util";-->
+        <!--util.displayInPage('Hello, World');-->
+        <!--</code></pre>-->
+      </section>
       <section data-state="exkurs">
         <h3>ES6: Arrow Functions</h3>
         <pre><code class="javascript" contenteditable>const displayInPage = (text) => {
@@ -367,11 +427,16 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
         <a target="_blank" href="code/schritte/0-hello_world/public/index.html">Run</a>
       </section>
 
+      <section>
+        <h2>Hintergrund</h2>
+        <h1>Buildprozess</h1>
+      </section>
+
 
       <section>
         <h2>Buildprozess</h2>
         <ul>
-          <li>ES6- und JSX-Code muss nach ECMAScript 5 übersetzt werden
+          <li>ES6ff- und JSX-Code muss nach ECMAScript 5 übersetzt werden
             <ul>
               <li>Status der ES6 Implementierungen der Browser:
                 <a href="https://kangax.github.io/compat-table/es6/" target="blank">
@@ -447,7 +512,7 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
 
       <section id="t1">
         <h1>Teil I</h1>
-        <h2>React-Komponenten</h2>
+        <h2>React-Komponenten (Grundlagen)</h2>
         <a href="code/schritte/1-detail/public/index.html" target="_blank">Ziel-Anwendung</a>
       </section>
 
@@ -478,12 +543,14 @@ ReactDOM.render(&lt;HelloMessage greeting="Hello"/>, mountNode);
               <code>render</code>-Methode:</em>
             <ul>
               <li>wird aufgerufen beim ersten Rendering und wenn sich der Zustand ändert</li>
+              <li>kann HTML-artige JSX-Syntax nutzen</li>
               <li>liefert genau
                 <b>ein</b> Element oder
                 <b>null</b> oder
+                <b>ein Boolean</b> oder
                 <b>ein Array</b> oder
+                <b>ein Fragment</b> oder
                 <b>einen String</b> zurück</li>
-              <li>kann HTML-artige JSX-Syntax nutzen</li>
             </ul>
             <pre class="fragment"><code class="xml" contenteditable data-trim>
 class GreetingDetail extends React.Component {
@@ -509,7 +576,7 @@ class GreetingDetail extends React.Component {
 &lt;div>&lt;input type="text"/>&lt;/div>
                     </code></pre>
           </li>
-          <li style="font-size: 80%" class="fragment">Attribute, die keine Strings sind, müssen in {} eingechlossen werden:
+          <li style="font-size: 80%" class="fragment">Attribute, die keine Strings sind, müssen in {} eingeschlossen werden:
             <pre><code class="xml" contenteditable data-trim>
 &lt;Counter label="Count" count={7} showValues={true} />
                     </code></pre>
@@ -537,14 +604,48 @@ const styles = { marginLeft: '10px', border: '1px solid red' };
         </ul>
       </section>
       <section>
-        <h3>React: Rendering #2</h3>
+        <h3>React: JSX #2</h3>
+        <ul>
+          <li style="font-size: 80%" class="fragment">Zuweisen an Variablen
+            <pre><code class="xml" contenteditable data-trim>
+const counter = &lt;Counter label="..." />
+                    </code></pre>
+          </li>
+          <li style="font-size: 80%" class="fragment">Fragmente (rendern selber kein Element in den DOM, aber ihre Kind-Elemente schon):
+            <pre><code class="xml" contenteditable data-trim>
+render() { 
+  return &lt;React.Fragment&gt;
+    &lt;li>Yes&lt;/li> 
+    &lt;li>No&lt;/li>
+  &lt/React.Fragment>              
+}  
+                    </code></pre>
+          </li>
+          <li style="font-size: 80%" class="fragment">null, oder boolean, um nichts zu rendern:
+            <pre><code class="xml" contenteditable data-trim>
+render() {
+  if (!someCondition) {
+    return null;
+  }
+
+  return ...;
+}              
+                    </code></pre>
+          </li>
+
+        </ul>
+      </section>
+      <section>
+        <h3>React: Rendering und Data Binding</h3>
+        <p>
+          <em>Es gibt keine automatische Bindung an Modelle (2-Wege Databinding)</em>
+        </p>
         <ul class="fragment">
           <li>DOM-Events werden in React-Events verpackt
             <li>React-Events haben weitgehend selbe API wie DOM-Events
-              <li>Es gibt keine automatische Bindung an Modelle (2-Wege Databinding)
-                <li>Besonderes Event:
-                  <b>onChange</b>
-                </li>
+              <li>Besonderes Event:
+                <b>onChange</b>
+              </li>
         </ul>
         <pre class="fragment"><code class="xml" contenteditable data-trim>
 class GreetingDetail extends React.Component {
@@ -559,79 +660,26 @@ class GreetingDetail extends React.Component {
       </section>
       <section data-state="exkurs">
         <h3>ES6: Erweiterte Objekt-Literale</h3>
-        <pre><code class="javascript" contenteditable>const firstName = 'Klaus';
+        <pre><code class="javascript" contenteditable>
 
 // ES5:
+const firstName = 'Klaus';
 const person = {
     firstName: firstName
 };
+console.log(person.firstName); // Klaus
 
 // ES6:
+const firstName = 'Klaus';
 const person = {
     firstName
 };
-console.log(person.name); // Klaus
+console.log(person.firstName); // Klaus
    </code></pre>
       </section>
 
 
-      <section data-state="exkurs">
-        <h2>ES6: Module, Importe und Exporte</h2>
-      </section>
-      <section data-state="exkurs">
-        <h3>ES6: Export einer einzigen Klasse</h3>
-        <pre><code class="javascript" contenteditable>// Person.js
-class Person {
-  // ...
-}
-export default Person;
-   </code></pre>
-        <pre><code class="javascript" contenteditable>// Person.js
 
-// in einer Zeile zusammengefasst
-export default class Person {
-  // ...
-}
-   </code></pre>
-      </section>
-      <section data-state="exkurs">
-        <h3>ES6: Import</h3>
-        <pre><code class="javascript" contenteditable>// Programmer.js
-import Person from './Person';
-
-export default class Programmer extends Person {
-  // ...
-}
-   </code></pre>
-      </section>
-      <section data-state="exkurs">
-        <h3>ES6: Benannte Exporte</h3>
-        <pre><code class="javascript" contenteditable data-trim>// util.js
-export function displayInPage(text) {
-    document.body.innerHTML +=
-        `${text}<br>` ;
-}
-
-export showInfo = msg => window.alert(`Wichtige Info: ${msg}`);
-
-// or
-function displayInPage(text) { . . . }
-
-const showInfo = ...;
-
-// specify exports
-export { displayInPage, showInfo };
-   </code></pre>
-        <pre class="fragment"><code class="javascript" contenteditable data-trim>import {displayInPage} from "./util";
-displayInPage('Hello, World');
-   </code></pre>
-        <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import {displayInPage as display} from "./util";-->
-        <!--display('Hello, World');-->
-        <!--</code></pre>-->
-        <!--<pre class="fragment"><code class="javascript" contenteditable data-trim>import * as util from "./util";-->
-        <!--util.displayInPage('Hello, World');-->
-        <!--</code></pre>-->
-      </section>
       <!--<section>-->
       <!--<h2>Neuerungen und Verbesserungen in ES6</h2>-->
       <!--</section>-->
@@ -662,21 +710,20 @@ displayInPage('Hello, World');
       <section data-state="exkurs">
         <h3>ES6: Destructuring von Objekten</h3>
         <pre><code class="javascript" contenteditable>const person = {
-  name: 'Olli',
-  email: 'oliver.zeigermann@gmail.com'
+  fistName: 'Klaus',
+  lastName: 'Mueller',
+  age: 42
 };</code></pre>
-        <pre class="fragment"><code class="javascript" contenteditable>const {name, notThere} = person;
+        <pre class="fragment"><code class="javascript" contenteditable>const {firstName, age, notThere} = person;
 
-console.log(`name=${name}`);
-// name=Olli
-console.log(`notThere=${notThere}`);
-// notThere=undefined
+console.log(firstName); // Klaus
+console.log(age); // 42
+console.log(notThere); // undefined
 </code></pre>
-        <pre class="fragment"><code class="javascript" contenteditable>function someFunction({name, notThere}) {
-  console.log(`name=${name}`);
-  // name=Olli
-  console.log(`notThere=${notThere}`);
-  // notThere=undefined
+        <pre class="fragment"><code class="javascript" contenteditable>function someFunction({firstName, age, notThere}) {
+  console.log(firstName); // Klaus
+  console.log(age); // 42
+  console.log(notThere); // undefined
 }
 
 someFunction(person);
@@ -833,53 +880,36 @@ class HelloMessage extends React.Component {
 
       <section id="t2">
         <h1>Teil II</h1>
-        <h2>Komponentenhierarchien</h2>
-        <h3>Komplette Anwendung aus Komponenten bauen</h3>
+        <h2>React-Komponenten und -Anwendungen</h2>
         <a href="code/schritte/2-hierarchy/public/index.html" target="_blank">Ziel-Anwendung</a>
       </section>
 
       <section>
-        <h2>Thinking in React</h2>
-        <p>
-          <a href="https://reactjs.org/docs/thinking-in-react.html" target="_blank">
-            https://reactjs.org/docs/thinking-in-react.html
-          </a>
-        </p>
-      </section>
-
-      <section>
-        <h3>Herausforderungen</h3>
-        <ul>
-          <li>Wie kommt das neue Greeting zum GreetingMaster?
-            <li>Wie stellen wir Listen von Komponente (Greetings!) dar?
-              <li>Wer steuert den Programmfluss? Vom GreetingMaster zum Detail und zurück?
-        </ul>
-      </section>
-
-
-      <section>
         <h3>Themen</h3>
         <ul>
-          <li>Komponenten als Funktion
-            <li>Darstellung von Listen und Keys
-              <li>Architektur-Idee: Controller-Komponente und View-Komponente
-                <li>Durchreichen von Zustand und Callbacks
-                  <li>PropTypes
+          <li>Komponenten als Funktionen</li>
+          <li>PropTypes</li>
+          <li>Darstellung von Listen</li>
+          <li>Architektur-Idee: Controller-Komponente und View-Komponente</li>
+          <li>Durchreichen von Zustand und Callbacks</li>
         </ul>
       </section>
+
 
       <section>
         <h3>Komponenten als Funktion</h3>
         <ul class="fragment">
+          <li>Alternative zu Klassen</li>
           <li>Komponente ist eine einfache Funktion</li>
           <li>entspricht der
-            <code>render</code>-Methode</li>
-          <li>Properties werden als Object per Parameter übergeben</li>
+            <code>render</code>-Methode</li> einer
+          <code>React.Component</code>
+          <li>Properties werden per Parameter übergeben (als Objekt)</li>
           <li>Zurzeit nur ohne Zustand und ohne Lifecycle-Methoden</li>
-          <li>Empfehlung: Funktionen statt Klassen verwenden (wenn möglich)</li>
         </ul>
         <pre class="fragment"><code class="javascript" contenteditable data-trim>
 import React from 'react';
+
 export default function Greet(props) {
   return (
       <div>
@@ -920,16 +950,86 @@ export default Greet;
 </code></pre>
 
       </section>
-
       <section>
-        <h3>Listen und Keys</h3>
-        <ul class="fragment">
-          <li>JSX bietet nichts für Listen
-            <li>Ausgabe typischerweise über
-              <code>Array.map</code>
-              <li>Elemente einer Liste brauchen einen eindeutigen Key
+        <h3>PropTypes</h3>
+        <ul>
+          <li class="fragment">Eine Komponente kann deklarieren, welche Properties sie erwartet
+            <li class="fragment">Auch der Typ kann angegeben werden (
+              <a href="https://facebook.github.io/react/docs/typechecking-with-proptypes.html" target="_blank">Mögliche Typen</a>)
+              <li class="fragment">Fehlende / falsche Properties führen zu Laufzeitfehlern
+                <li class="fragment">Ab React 15.5 eigenes npm modul:
+                  <a href="https://www.npmjs.com/package/prop-types" target="_blank">
+                    <code>prop-types</code>
+                  </a>
+                </li>
+                <li class="fragment">Alternative: Typsystem (
+                  <a href="https://flow.org" target="_blank">Flow</a> oder
+                  <a href="https://typescriptlang.org" target="_blank">TypeScript</a>)
         </ul>
         <pre class="fragment"><code class="javascript" contenteditable data-trim>
+  import PropTypes from 'prop-types';
+  
+  class GreetingDetail extends React.Component { . . . };
+  
+  GreetingDetail.propTypes = {
+      greeting: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        greeting: PropTypes.string.isRequired
+      }),
+      onAdd: PropTypes.func.isRequired
+  };
+  </code></pre>
+      </section>
+      <section>
+        <h3>PropTypes</h3>
+        <p>Mit statischen Properties (
+          <code>static</code> noch kein JS Standard!)</p>
+        <pre><code class="javascript" contenteditable data-trim>
+  import PropTypes from 'prop-types';
+  
+  class GreetingDetail extends React.Component {
+    static propTypes = {
+      greeting: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        greeting: PropTypes.string.isRequired
+      }),
+      onAdd: PropTypes.func.isRequired
+    };
+  
+    render() { . . . }
+  };
+              </code></pre>
+      </section>
+      <section>
+        <h3>PropTypes</h3>
+        <p>Für Komponenten als Funktionen</p>
+        <pre><code class="javascript" contenteditable data-trim>
+  import PropTypes from 'prop-types';
+  
+  function HelloMessage(text) { . . . }
+  
+  HelloMessage.propTypes = {
+    text: PropTypes.string.isRequired
+  }
+              </code></pre>
+      </section>
+
+      <section>
+        <div style="display: flex">
+          <div style="flex: 1">
+            <img src="images/greeting-master-table.png" style="max-width:100%" />
+          </div>
+          <div style="flex: 1">
+            <h3>Listen</h3>
+            <div class="fragment" style="display: flex; flex-direction: column; justify-content: center;align-items: center">
+              <p>JSX bietet nichts für Listen</p>
+              <p>Ausgabe typischerweise über
+                <code>Array.map()</code>
+              </p>
+              <p>Elemente einer Liste brauchen einen eindeutigen Key</p>
+
+
+              <pre class="fragment"><code class="javascript" contenteditable data-trim>
 const greetings = [
   { id: 0, name: 'Olli', greeting: 'Huhu' },
   { id: 1, name: 'Oma', greeting: 'Hallo' }
@@ -945,7 +1045,9 @@ const MyTable({greetings}) =>
       )}
     &lt;/table>
 ;
-</code></pre>
+</code></pre> </div>
+          </div>
+        </div>
       </section>
       <section>
         <h3>Listen und Keys</h3>
@@ -957,12 +1059,16 @@ const MyTable({greetings}) =>
             <li>Elemente brauchen trotzdem einen eindeutigen Key
         </ul>
         <pre class="fragment"><code class="javascript" contenteditable data-trim>
-const Title = ({title, subtitle}) => {
-	return [
-		&lt;h1 key="title">{title}&lt;/h1>,
-		&lt;h2 key="subtitle">{subtitle}&lt;/h2>
-	];
-}
+const GreetingRows = ({greetings}) => {
+
+  // map liefert ein Array zurück!
+  return greetings.map(greeting =>
+    &lt;tr key={greeting.id}>
+      &lt;td>{greeting.name}&lt;/td>
+      &lt;td>{greeting.greeting}&lt;/td>
+    &lt;/tr>
+  ;
+)
 </code></pre>
       </section>
       <section>
@@ -1019,69 +1125,6 @@ class GreetingController extends React.Component {
         </code></pre>
       </section>
 
-      <section>
-        <h3>PropTypes</h3>
-        <ul>
-          <li class="fragment">Eine Komponente kann deklarieren, welche Properties sie erwartet
-            <li class="fragment">Auch der Typ kann angegeben werden (
-              <a href="https://facebook.github.io/react/docs/typechecking-with-proptypes.html" target="_blank">Mögliche Typen</a>)
-              <li class="fragment">Fehlende / falsche Properties führen zu Laufzeitfehlern
-                <li class="fragment">Ab React 15.5 eigenes npm modul:
-                  <a href="https://www.npmjs.com/package/prop-types" target="_blank">
-                    <code>prop-types</code>
-                  </a>
-                </li>
-                <li class="fragment">Alternative: Typsystem (
-                  <a href="https://flow.org" target="_blank">Flow</a> oder
-                  <a href="https://typescriptlang.org" target="_blank">TypeScript</a>)
-        </ul>
-        <pre class="fragment"><code class="javascript" contenteditable data-trim>
-import PropTypes from 'prop-types';
-
-class GreetingDetail extends React.Component { . . . };
-
-GreetingDetail.propTypes = {
-    greeting: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      greeting: PropTypes.string.isRequired
-    }),
-    onAdd: PropTypes.func.isRequired
-};
-</code></pre>
-      </section>
-      <section>
-        <h3>PropTypes</h3>
-        <p>Mit statischen Properties (
-          <code>static</code> noch kein JS Standard!)</p>
-        <pre><code class="javascript" contenteditable data-trim>
-import PropTypes from 'prop-types';
-
-class GreetingDetail extends React.Component {
-  static propTypes = {
-    greeting: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      greeting: PropTypes.string.isRequired
-    }),
-    onAdd: PropTypes.func.isRequired
-  };
-
-  render() { . . . }
-};
-            </code></pre>
-      </section>
-      <section>
-        <h3>PropTypes</h3>
-        <p>Für Komponenten als Funktionen</p>
-        <pre><code class="javascript" contenteditable data-trim>
-import PropTypes from 'prop-types';
-
-function HelloMessage(text) { . . . }
-
-HelloMessage.propTypes = {
-  text: PropTypes.string.isRequired
-}
-            </code></pre>
-      </section>
 
 
       <section>
@@ -2229,6 +2272,9 @@ const GreetingMaster: React.SFC&lt;GreetingMasterProps> = props => {
       progress: true,
       history: true,
       center: true,
+
+      width: '100%',
+      height: '100%',
 
       transition: 'slide', // none/fade/slide/convex/concave/zoom
 
