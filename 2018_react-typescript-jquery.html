@@ -1818,9 +1818,16 @@ async function loadData(userId) {
         <h4>Aufgabe: Einbetten des jQuery UI Spinner Widgets in eine React-Komponente</h4>
       </section>
       <section>
-        <h3>Ziel: React Spinner</h3>
+        <h3>Ziel: React Spinner Komponente</h3>
 
-        <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+        <ul>
+          <li class="fragment">Eine React-Komponent, die das jquery UI Spinner Widget kapselt</li>
+          <li class="fragment">Für den Verwender soll es transparent sein, dass jQuery verwendet wird (Implementierungsdetail)</li>
+          <li class="fragment">Soll sich wie eine "normale" React-Komponente für Verwender verhalten (Properties, Callbacks etc)</li>
+        </ul>
+        <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
+
+// Beispielhafte Verwendung:          
 &lt;Spinner
 	label="Number of Greetings to show"
 	value={limitValue}
@@ -1894,15 +1901,7 @@ async function loadData(userId) {
       </section>
 
       <section>
-        <h3>Hintergrund: React Komponenten Lifecycle</h3>
-
-        <p style="font-size: small">
-          <a href="https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle" target="_blank">
-            https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle
-          </a>
-        </p>
-      </section>
-      <section>
+        <h3>Erinnerung: React Komponenten Lifecycle</h3>
         <img src="ai/lifecycle-methods-1.png" height="600px" />
       </section>
       <!-- <section>
@@ -1947,17 +1946,18 @@ class Spinner extends React.Component {
       <section>
         <h3>Spinner Komponente #2</h3>
         <p>Zustandsänderungen nach außen propagieren</p>
+        <p>Callback wird per Property an React-Komponente übergeben</p>
+        <p>Nach jQuery Event wird Callback aufgerufen</p>
         <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
   class Spinner extends React.Component {
-      // . . .
       componentDidMount() {
-        const jquerySpinner = $(this.spinnerElement);
+        // . . .
   
         jquerySpinner
           .spinner({
-            // "stop" event is fired by jquery after 
-            // the spinner value has changed
             stop: () => {
+              // "stop" event is fired by jquery after 
+              // the spinner value has changed
               const newValue = jquerySpinner.spinner("value");
 
               // run callback function with new value from spinner
@@ -1970,6 +1970,9 @@ class Spinner extends React.Component {
       // ...
   }
          </code></pre>
+      </section>
+      <section>
+        <h3>Aktualisieren und Aufräumen</h3>
       </section>
 
       <section>
@@ -2209,10 +2212,24 @@ const saidItWrong: number = sayIt('Hello TypeScript'); // error!
             </ul>
           </li>
           <li>Empfehlung: für neue Projekte einschalten, sonst Schrittweise</li>
-          <p>
-            <a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html" target="_blank">https://www.typescriptlang.org/docs/handbook/compiler-options.html</a>
-          </p>
         </ul>
+        <p>
+          <a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html" target="_blank">https://www.typescriptlang.org/docs/handbook/compiler-options.html</a>
+        </p>
+      </section>
+      <section>
+        <h2>Type Check ausschalten</h2>
+        <p>Mit
+          <code>@ts-ignore</code> (als Kommentar) kann wird die Überprüfung der nächsten Zeile ausgeschaltet:</p>
+        <pre><code class="typescript line-numbers" contenteditable data-trim>
+let city:string = "Hamburg";
+
+city = 20259; // error: [ts] Type '20259' is not assignable to type 'string'.
+
+// @ts-ignore
+city = 20259; // ok                
+</code></pre>
+        <p class="fragment">Nützlich in corner cases, die nur schwer mit TypeScript abbildbar sind oder bei Migration</p>
       </section>
       <section>
         <h2>null und undefined</h2>
@@ -2404,10 +2421,12 @@ persons = movies; // error
           <li>Workaround, wenn keine Typings vorhanden sind
 
             <pre><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
-                  // declarations.d.ts
-                    
-                  // TODO
-                    
+declare module 'jquery';
+
+declare module 'module-with-default-export' {
+  let str: string;
+  export default str;
+}
                           </code></pre>
           </li>
         </ul>
