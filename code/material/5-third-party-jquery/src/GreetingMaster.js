@@ -26,8 +26,7 @@ export default class GreetingMaster extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      limitValue: "",
-      showSpinner: true
+      limitValue: ""
     };
   }
 
@@ -45,26 +44,30 @@ export default class GreetingMaster extends React.Component {
 
   render() {
     const { greetings, onAdd } = this.props;
-    const { limitValue, showSpinner } = this.state;
+    const { limitValue } = this.state;
 
     const limitedGreetings = limitValue > 0 ? greetings.slice(0, limitValue) : greetings;
 
     return (
       <div>
-        {this.state.showSpinner && (
-          <Spinner
-            label="Number of Greetings to show"
-            value={limitValue}
-            onValueChange={newValue => this.onLimitChange(newValue)}
-          />
-        )}
+        {/* TODO
+        
+        Setze hier die Spinner Komponente ein
+        - Properties:
+        - 'label': irgendeine Bezeichnung
+        - value: limitValue aus dem State
+        - onValueChange: callback-Funktion, die mit dem übergebenen
+                         neuen Wert die Methode 'this.onLimitChange'
+                         aufrufen soll
+
+        <Spinner
+          . . .
+        />
+        
+        */}
 
         <div>
-          Showing {limitedGreetings.length} of {greetings.length} greetings &nbsp;<a
-            onClick={() => this.setState({ showSpinner: !showSpinner })}
-          >
-            {showSpinner ? "Hide Spinner" : "Show Spinner"}
-          </a>
+          Showing {limitedGreetings.length} of {greetings.length} greetings
         </div>
         <GreetingTable greetings={limitedGreetings} />
         <button onClick={onAdd}>Add</button>
