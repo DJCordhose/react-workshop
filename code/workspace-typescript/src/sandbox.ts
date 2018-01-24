@@ -11,4 +11,6 @@ function foo(arg: Interface): Interface {
   };
 }
 
+const person = { name: "Klaus", age: 37 };
+
 export { Interface, foo };

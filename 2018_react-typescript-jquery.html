@@ -153,7 +153,7 @@
             <a href="#/t1">Teil I: React-Komponenten (Grundlagen)</a>
           </li>
           <li>
-            <a href="#/t2">Teil II: React-Komponenten und -Anwendungen</a>
+            <a href="#/t2">Teil II: React-Komponenten: Details, Hierarchien und Anwendungen</a>
           </li>
           <li>
             <a href="#/t3">Teil III: Daten lesen und schreiben vom Server</a>
@@ -164,11 +164,11 @@
           <li>
             <a href="#/t5">Teil V: TypeScript</a>
           </li>
-          <li>
-            <a href="#/t6">TODO: Exkurs/Ausblick: External State Management</a>
+          <li style="margin-top: 30px">
+            <a href="#/t6">Ausblick/Diskussion: Immutability</a>
           </li>
           <li>
-            <a href="#/t6">TODO: Exkurs/Ausblick: Immutability</a>
+            <a href="#/t7">Ausblick/Diskussion: External State Management</a>
           </li>
         </ul>
         <div style="font-size:80%">
@@ -881,7 +881,7 @@ class HelloMessage extends React.Component {
 
       <section id="t2">
         <h1>Teil II</h1>
-        <h2>React-Komponenten und -Anwendungen</h2>
+        <h2>React-Komponenten: Details, Hierarchien und Anwendungen</h2>
         <a href="code/schritte/2-hierarchy/public/index.html" target="_blank">Ziel-Anwendung</a>
       </section>
 
@@ -1772,7 +1772,7 @@ async function loadData(userId) {
 
 
       <section id="t4">
-        <h1>Teil VI</h1>
+        <h1>Teil IV</h1>
         <h2>Arbeiten mit 3rd-Party-Libs (jquery)</h2>
         <p>
           <a href="code/schritte/5-third-party-jquery/public/index.html" target="_blank">Ziel-Anwendung mit jquery Spinner</a>
@@ -2641,15 +2641,231 @@ const GreetingMaster: React.SFC&lt;GreetingMasterProps> = props => {
 
       <section id="t6">
         <h1>Exkurs</h1>
-        <h2>Immutability</h2>
+        <h2>Immutability / Performance</h2>
         <p>
-          <a href="code/schritte/5-third-party-typescript/public/index.html" target="_blank">TODO: Ziel-Anwendung</a>
+          <a href="code/sandbox/performance-immutable/public/index.html" target="_blank">Ziel-Anwendung</a>
         </p>
         <p class="TODO">
           PureComponents: https://reactjs.org/docs/optimizing-performance.html#avoid-reconciliation http://reactkungfu.com/2015/08/pros-and-cons-of-using-immutability-with-react-js/
-
         </p>
       </section>
+
+      <section>
+        <h2>Große Tabelle mit Eingabefeld</h2>
+
+        <img src="ai/many-greetings-table.png" style="height: 550px" />
+      </section>
+      <section>
+        <h2>Rendering aller Komponenten</h2>
+        <img src="ai/many-greetings-table-2.png" style="height: 550px" />
+      </section>
+
+      <section>
+        <h2>Change Detection auf der Ebene des Virtual DOM</h2>
+        <p>bei jedem Tastendruck wird auch
+          <b>die gesamte Tabelle</b> gerendert</p>
+        <p>Nicht direkt im DOM, sondern in einer leichtgewichtigen Datenstruktur (Virtual DOM)</p>
+        <p>Änderungen im echten DOM werden aus Änderungen im Virtual DOM errechnet</p>
+      </section>
+
+      <section>
+        <h2>Change Detection auf der Ebene des Models</h2>
+        <p>
+          <strong>shouldComponentUpdate</strong> ist eine Lifecycle-Methode einer Komponente die diese Prozedur abkürzen kann</p>
+        <p>das alte Modell kann mit dem neuen verglichen werden</p>
+        <p>Das reduziert das Neu-Rendering auf genau die
+          <strong>notwendigen Elemente</strong>
+        </p>
+        <p>Macht nur Sinn, wenn der Check auf Modell-Änderung sehr billig ist, typischerweise
+          <em>
+            <strong>===</strong>
+          </em>
+        </p>
+      </section>
+      <section>
+        <h2>Beispiele</h2>
+        <ol>
+          <li>Rendern der kompletten Tabelle im
+            <code>GreetingMaster</code>
+          </li>
+          <li>Rendern der einzelnen Zeile in
+            <code>GreetingRow</code>
+          </li>
+        </ol>
+      </section>
+      <section>
+        <p>Beispiele</p>
+        <h2>Immutability mit ES6</h2>
+      </section>
+      <section>
+        <h3>Arrays #1</h3>
+        <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+const anArray = [ 1, 2, 3];
+
+// NICHT Immutable => verändert das original Array
+anArray.push(4);
+
+// Immutable: gibt neues Array zurück:
+const newArray = anArray.concat(5);
+
+// Alternativ mit Spread Operator:
+const modifiedArray = [ -3, ...anArray, 10];
+
+// "Nur" kopieren:
+const aCopy = [ ...anArray ]; // unveränderte Kopie
+// aCopy !== anArray
+                    </code></pre>
+
+      </section>
+      <section>
+        <h3>Arrays #2</h3>
+        <p>Transformieren eines Arrays</p>
+        <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+const anArray = [ 1, 2, 3];
+
+const double = anArray.map(element => element * 2);
+// [2, 4, 6]
+// double !== anArray
+
+// Zweiter Parameter von map-Callback ist der Index, falls relevant:
+const doubleFirst = anArray
+               .map((element, ix) => ix === 0 ? element * 2 : element);
+// [2, 2, 3]
+// doubleFirst !== anArray
+                      </code></pre>
+      </section>
+
+      <section>
+        <h3>Objekte</h3>
+        <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+  const person = { name: 'Klaus', age: 37};
+
+// NICHT immutable:
+const antiPerson = person.city = 'Hamburg';
+// person === antiPerson !
+
+// Kopieren:
+const newPerson = { ... person};
+  
+// Kopieren und verändern: (hintere Parameter überschreiben vordere)
+const newPerson = { ...person, age: 73 }
+// newPerson !== person
+// newPerson.name = Klaus, newPerson.age = 73
+
+// Geht auch mit mehreren Objekten:
+const address = { city: 'Hamburg', street: 'Reeperbahn' }
+const stpauliPerson = { ...person, ...address}
+// stpauliPerson.city = 'Hamburg', .street = Reeperbahn
+
+// Achtung! address wird hier nicht "gespreadet":
+const anotherPerson = { ...person, address }
+// anotherPerson.name = 'Klaus', .age=37, address={ ... }
+
+
+                        </code></pre>
+      </section>
+
+      <section>
+        <h3>Objekte</h3>
+        <p>Spread-Operator kopiert nur flach</p>
+        <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+const person = { name: 'Klaus', age: 37, address: { city: 'hamburg' }};
+
+const copy = { ... person};
+// copy !== person
+// copy.address === person.address !
+                          </code></pre>
+
+        <div class="fragment">
+          <p>Geht beliebig komplex:</p>
+          <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+const person = { name: 'Klaus', age: 37, address: { city: 'hamburg' }};
+
+const copy = { ... person, address: { ...person.address } };
+// copy !== person
+// copy.address !== person.address 
+          </code></pre>
+        </div>
+        <div class="fragment">
+          <p>Zur Erinnerung: computed properties</p>
+          <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+// Zur Erinnerung: computed properties
+const person = { name: 'Klaus', age: 37, address: { city: 'hamburg' }};
+                            
+const copy = { [person.name]: person };
+// copy.Klaus = {name = 'Klaus', age: 37}
+                                                    </code></pre>
+
+        </div>
+      </section>
+      <section>
+        <h3>Objekte</h3>
+        <p>ES5: Object.assign()</p>
+        <pre class="fragment"><code data-trim contenteditable class="line-numbers typescript" data-leftpad>
+const person = { name: 'Klaus', age: 37, address: { city: 'hamburg' }};
+  
+const copy = Object.assign({}, person);
+// copy !== person
+// copy.address === person.address !
+
+const update = Object.assign({}, person, { age: 73 });
+// update.age = 73
+                            </code></pre>
+      </section>
+
+      <section>
+        <p>
+          PureComponents: https://reactjs.org/docs/optimizing-performance.html#avoid-reconciliation http://reactkungfu.com/2015/08/pros-and-cons-of-using-immutability-with-react-js/
+        </p>
+      </section>
+
+      <section id="t7">
+        <h1>Exkurs</h1>
+        <h2>External State Management</h2>
+        <p>
+          <a href="code/schritte/redux/7-redux-complete-app/public/index.html" target="_blank">TODO: Ziel-Anwendung</a>
+        </p>
+
+      </section>
+      <section>
+        <h3>Warum External State Management?</h3>
+        <img src="images/component-hierarchies-greeting-app.png" />
+      </section>
+      <section>
+        <h3>Warum External State Management?</h3>
+        <ul>
+          <li class="fragment" style="font-size: 80%">"Gott-ähnliche" Komponenten: State und Logik wandern in immer größere Komponenten</li>
+          <li class="fragment" style="font-size: 80%">Trotz allem haben wir immer noch verteilten und veränderlichen Zustanden
+            <ul>
+              <li>Wo gehört der Zustand hin</li>
+              <li>In welchen "Gesamtzustand" ist die Anwendung?
+            </ul>
+            </li>
+            <li class="fragment" style="font-size: 80%">Framework (React) und fachlicher Code wird gemischt (schwer React auszutauschen)
+              <li class="fragment" style="font-size: 80%">Weitere Fragen:
+                <ul>
+                  <li>Wie wird die Anwendung initialisiert (wenn zB mehr als eine Komponente Daten benötigt)
+                    <li>Wie wird der fachliche Code getestet?
+                </ul>
+                </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Mögliche Ansätze</h2>
+        <ul>
+          <li>Redux:
+            <b>das</b> State Management Tool und -Pattern schlecht hin, funktional geprägt</li>
+          <li>MobX: Prominente Alternative, insb für OO-Entwickler gewohnte Konzepte</li>
+          <li>Was eigenes</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Was eigenes</h2>
+        <h3>Diskussion: wie kann das aussehen?</h3>
+      </section>
+
 
       <section>
         <h2>Geschafft ;-)</h2>

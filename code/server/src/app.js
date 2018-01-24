@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const createApp = db => {
+const createApp = (db, largedata) => {
   const app = express();
 
   app.use(bodyParser.json());
@@ -27,6 +27,10 @@ const createApp = db => {
     }
 
     return res.json(greeting);
+  });
+
+  app.get("/manygreetings", (req, res) => {
+    return res.json(largedata);
   });
 
   app.get("/servererror", (req, res) => {

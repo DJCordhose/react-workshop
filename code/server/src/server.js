@@ -1,8 +1,9 @@
 const db = require("./db");
-const app = require("./app")(db);
+const largeData = require("./largedata");
+const app = require("./app")(db, largeData);
 
 // clear console
-process.stdout.write(process.platform === "win32" ? "\x1Bc" : "\x1B[2J\x1B[3J\x1B[H");
+// process.stdout.write(process.platform === "win32" ? "\x1Bc" : "\x1B[2J\x1B[3J\x1B[H");
 
 const port = process.env.SERVER_PORT || 7000;
 
