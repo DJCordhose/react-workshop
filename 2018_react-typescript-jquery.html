@@ -1264,7 +1264,7 @@ class GreetingMaster extends React.Component {
         <p style="font-size: smaller;margin-bottom:0">(Alternativ: Container und Presentation Components)</p>
         <!--<img src="smart-dumb.jpg">-->
         <!--<img src="smart-dumb.png">-->
-        <img style="margin-top:0" src="images/component-communication.png">
+        <img style="margin-top:0;max-height:600px" src="images/component-communication.png">
       </section>
 
       <section>
@@ -1344,6 +1344,52 @@ class GreetingController extends React.Component {
         <img src="images/greeting-detail.png" style="border:0;box-shadow:0 0 0 0" />
       </section>
 
+      <section>
+        <h3>Portals</h3>
+        <p>Erlauben, außerhalb des "Root-React-Elements" zu rendern (zB für modale Dialoge)</p>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
+class GreetingController extends React.Component {
+  render() {
+    return
+      React.createPortal(
+        &lt;ModalDialog title="...">...&lt/ModalDialog>, 
+        document.getElementById("portalRoot")
+      );
+  }
+}
+                      </code></pre>
+        <pre class="fragment"><code data-trim contenteditable>
+    // index.html
+    &lt;html>
+      &lt;body>
+        &lt;div id="portalRoot"&lt;/div>
+        &lt;div id="mount">&lt;/div>
+      &lt;/body>
+      &lt;script src="dist/main.js">&lt;/script>
+    &lt;/html>
+    </code></pre>
+      </section>
+      <section>
+        <h3>Error Boundaries</h3>
+        <p>Fehler während des Renders abfangen (statt try/catch)</p>
+        <pre class="fragment"><code class="javascript" contenteditable data-trim>
+  class GreetingController extends React.Component {
+    componentDidCatch(error, info) {
+      this.setState({hasError: true});
+    }
+
+    render() {
+      if (this.state.hasError) {
+        return &lt;ErrorDialog 
+          onClick={() =&gt; this.setState({hasError: false})}>Fehler!/&lt;ErrorDialog>
+      }
+
+      return &lt;GreetingMaster />
+    }
+  }
+                        </code></pre>
+        <p class="fragment">Fängt nur Fehler der Unterkomponenten, nicht Fehler der eigenen render-Methode!</p>
+      </section>
       <section id="t3">
         <h1>Teil III</h1>
         <h2>Daten lesen und schreiben vom Server</h2>
