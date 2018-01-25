@@ -63,11 +63,11 @@ export default class GreetingMaster extends React.Component<GreetingMasterProps,
 
     return (
       <div>
-        {/* <Spinner
-					label="Number of Greetings to show"
-					value={limitValue}
-					onValueChange={newValue => this.onLimitChange(newValue)}
-				/> */}
+        <Spinner
+          label="Number of Greetings to show"
+          value={limitValue}
+          onValueChange={newValue => this.onLimitChange(newValue)}
+        />
 
         <GreetingTable greetings={limitedGreetings} />
         <button onClick={onAdd}>Add</button>
