@@ -1773,12 +1773,12 @@ async function loadData(userId) {
         <pre class="fragment"><code class="javascript" contenteditable data-trim>class GreetingController extends React.Component {
   render() {
     ...
-      &lt;GreetingDetail onAdd={greeting => this.saveGreeting(greeting)} />
+      &lt;GreetingDetail onSave={greeting => this.saveGreeting(greeting)} />
     ...
   }
   async saveGreeting(greetingToBeSaved) {
     try {
-      const response = fetch('/api/greetings', {
+      const response = await fetch('/api/greetings', {
         method: 'POST',
         headers: ...,
         body: JSON.stringify(greetingToBeSaved)
